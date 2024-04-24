@@ -1,0 +1,584 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Navigation Menu Unit Test View renders correctly 1`] = `
+initialize {
+  "0": Node {
+    "attribs": Object {
+      "class": "nav-menu-container",
+    },
+    "children": Array [
+      Node {
+        "attribs": Object {
+          "aria-controls": "header-nav-mobile",
+          "aria-label": "string",
+          "class": "ms-header__nav-icon msc-btn",
+          "data-bi-id": "12345",
+          "data-m": "{\\"id\\":\\"12345\\",\\"key1\\":\\"val1\\"}\\"",
+          "title": "string",
+          "type": "button",
+        },
+        "children": Array [],
+        "name": "button",
+        "namespace": "http://www.w3.org/1999/xhtml",
+        "next": Node {
+          "attribs": Object {
+            "class": "ms-header__collapsible-hamburger collapse",
+          },
+          "children": Array [
+            Node {
+              "attribs": Object {
+                "aria-label": "Menu",
+                "class": "ms-nav ms-nav__disable-top-menu",
+                "data-m-t": "mock-type",
+                "id": "",
+                "role": "navigation",
+              },
+              "children": Array [
+                Node {
+                  "attribs": Object {
+                    "class": "ms-nav__list",
+                    "tabindex": "-1",
+                  },
+                  "children": Array [
+                    Node {
+                      "attribs": Object {
+                        "class": "ms-nav__list__item",
+                      },
+                      "children": Array [
+                        Node {
+                          "attribs": Object {
+                            "aria-expanded": "true",
+                            "aria-haspopup": "false",
+                            "class": "ms-nav__list__item__button",
+                          },
+                          "children": Array [],
+                          "name": "button",
+                          "namespace": "http://www.w3.org/1999/xhtml",
+                          "next": null,
+                          "parent": [Circular],
+                          "prev": null,
+                          "type": "tag",
+                          "x-attribsNamespace": Object {
+                            "aria-expanded": undefined,
+                            "aria-haspopup": undefined,
+                            "class": undefined,
+                          },
+                          "x-attribsPrefix": Object {
+                            "aria-expanded": undefined,
+                            "aria-haspopup": undefined,
+                            "class": undefined,
+                          },
+                        },
+                      ],
+                      "name": "li",
+                      "namespace": "http://www.w3.org/1999/xhtml",
+                      "next": Node {
+                        "attribs": Object {
+                          "class": "ms-nav-close-button",
+                        },
+                        "children": Array [
+                          Node {
+                            "attribs": Object {
+                              "aria-label": "Close",
+                              "class": "btn nav-menu-close",
+                            },
+                            "children": Array [],
+                            "name": "button",
+                            "namespace": "http://www.w3.org/1999/xhtml",
+                            "next": null,
+                            "parent": [Circular],
+                            "prev": null,
+                            "type": "tag",
+                            "x-attribsNamespace": Object {
+                              "aria-label": undefined,
+                              "class": undefined,
+                            },
+                            "x-attribsPrefix": Object {
+                              "aria-label": undefined,
+                              "class": undefined,
+                            },
+                          },
+                        ],
+                        "name": "div",
+                        "namespace": "http://www.w3.org/1999/xhtml",
+                        "next": null,
+                        "parent": [Circular],
+                        "prev": [Circular],
+                        "type": "tag",
+                        "x-attribsNamespace": Object {
+                          "class": undefined,
+                        },
+                        "x-attribsPrefix": Object {
+                          "class": undefined,
+                        },
+                      },
+                      "parent": [Circular],
+                      "prev": null,
+                      "type": "tag",
+                      "x-attribsNamespace": Object {
+                        "class": undefined,
+                      },
+                      "x-attribsPrefix": Object {
+                        "class": undefined,
+                      },
+                    },
+                    Node {
+                      "attribs": Object {
+                        "class": "ms-nav-close-button",
+                      },
+                      "children": Array [
+                        Node {
+                          "attribs": Object {
+                            "aria-label": "Close",
+                            "class": "btn nav-menu-close",
+                          },
+                          "children": Array [],
+                          "name": "button",
+                          "namespace": "http://www.w3.org/1999/xhtml",
+                          "next": null,
+                          "parent": [Circular],
+                          "prev": null,
+                          "type": "tag",
+                          "x-attribsNamespace": Object {
+                            "aria-label": undefined,
+                            "class": undefined,
+                          },
+                          "x-attribsPrefix": Object {
+                            "aria-label": undefined,
+                            "class": undefined,
+                          },
+                        },
+                      ],
+                      "name": "div",
+                      "namespace": "http://www.w3.org/1999/xhtml",
+                      "next": null,
+                      "parent": [Circular],
+                      "prev": Node {
+                        "attribs": Object {
+                          "class": "ms-nav__list__item",
+                        },
+                        "children": Array [
+                          Node {
+                            "attribs": Object {
+                              "aria-expanded": "true",
+                              "aria-haspopup": "false",
+                              "class": "ms-nav__list__item__button",
+                            },
+                            "children": Array [],
+                            "name": "button",
+                            "namespace": "http://www.w3.org/1999/xhtml",
+                            "next": null,
+                            "parent": [Circular],
+                            "prev": null,
+                            "type": "tag",
+                            "x-attribsNamespace": Object {
+                              "aria-expanded": undefined,
+                              "aria-haspopup": undefined,
+                              "class": undefined,
+                            },
+                            "x-attribsPrefix": Object {
+                              "aria-expanded": undefined,
+                              "aria-haspopup": undefined,
+                              "class": undefined,
+                            },
+                          },
+                        ],
+                        "name": "li",
+                        "namespace": "http://www.w3.org/1999/xhtml",
+                        "next": [Circular],
+                        "parent": [Circular],
+                        "prev": null,
+                        "type": "tag",
+                        "x-attribsNamespace": Object {
+                          "class": undefined,
+                        },
+                        "x-attribsPrefix": Object {
+                          "class": undefined,
+                        },
+                      },
+                      "type": "tag",
+                      "x-attribsNamespace": Object {
+                        "class": undefined,
+                      },
+                      "x-attribsPrefix": Object {
+                        "class": undefined,
+                      },
+                    },
+                  ],
+                  "name": "ul",
+                  "namespace": "http://www.w3.org/1999/xhtml",
+                  "next": null,
+                  "parent": [Circular],
+                  "prev": null,
+                  "type": "tag",
+                  "x-attribsNamespace": Object {
+                    "class": undefined,
+                    "tabindex": undefined,
+                  },
+                  "x-attribsPrefix": Object {
+                    "class": undefined,
+                    "tabindex": undefined,
+                  },
+                },
+              ],
+              "name": "nav",
+              "namespace": "http://www.w3.org/1999/xhtml",
+              "next": null,
+              "parent": [Circular],
+              "prev": null,
+              "type": "tag",
+              "x-attribsNamespace": Object {
+                "aria-label": undefined,
+                "class": undefined,
+                "data-m-t": undefined,
+                "id": undefined,
+                "role": undefined,
+              },
+              "x-attribsPrefix": Object {
+                "aria-label": undefined,
+                "class": undefined,
+                "data-m-t": undefined,
+                "id": undefined,
+                "role": undefined,
+              },
+            },
+          ],
+          "name": "div",
+          "namespace": "http://www.w3.org/1999/xhtml",
+          "next": null,
+          "parent": [Circular],
+          "prev": [Circular],
+          "type": "tag",
+          "x-attribsNamespace": Object {
+            "class": undefined,
+          },
+          "x-attribsPrefix": Object {
+            "class": undefined,
+          },
+        },
+        "parent": [Circular],
+        "prev": null,
+        "type": "tag",
+        "x-attribsNamespace": Object {
+          "aria-controls": undefined,
+          "aria-label": undefined,
+          "class": undefined,
+          "data-bi-id": undefined,
+          "data-m": undefined,
+          "title": undefined,
+          "type": undefined,
+        },
+        "x-attribsPrefix": Object {
+          "aria-controls": undefined,
+          "aria-label": undefined,
+          "class": undefined,
+          "data-bi-id": undefined,
+          "data-m": undefined,
+          "title": undefined,
+          "type": undefined,
+        },
+      },
+      Node {
+        "attribs": Object {
+          "class": "ms-header__collapsible-hamburger collapse",
+        },
+        "children": Array [
+          Node {
+            "attribs": Object {
+              "aria-label": "Menu",
+              "class": "ms-nav ms-nav__disable-top-menu",
+              "data-m-t": "mock-type",
+              "id": "",
+              "role": "navigation",
+            },
+            "children": Array [
+              Node {
+                "attribs": Object {
+                  "class": "ms-nav__list",
+                  "tabindex": "-1",
+                },
+                "children": Array [
+                  Node {
+                    "attribs": Object {
+                      "class": "ms-nav__list__item",
+                    },
+                    "children": Array [
+                      Node {
+                        "attribs": Object {
+                          "aria-expanded": "true",
+                          "aria-haspopup": "false",
+                          "class": "ms-nav__list__item__button",
+                        },
+                        "children": Array [],
+                        "name": "button",
+                        "namespace": "http://www.w3.org/1999/xhtml",
+                        "next": null,
+                        "parent": [Circular],
+                        "prev": null,
+                        "type": "tag",
+                        "x-attribsNamespace": Object {
+                          "aria-expanded": undefined,
+                          "aria-haspopup": undefined,
+                          "class": undefined,
+                        },
+                        "x-attribsPrefix": Object {
+                          "aria-expanded": undefined,
+                          "aria-haspopup": undefined,
+                          "class": undefined,
+                        },
+                      },
+                    ],
+                    "name": "li",
+                    "namespace": "http://www.w3.org/1999/xhtml",
+                    "next": Node {
+                      "attribs": Object {
+                        "class": "ms-nav-close-button",
+                      },
+                      "children": Array [
+                        Node {
+                          "attribs": Object {
+                            "aria-label": "Close",
+                            "class": "btn nav-menu-close",
+                          },
+                          "children": Array [],
+                          "name": "button",
+                          "namespace": "http://www.w3.org/1999/xhtml",
+                          "next": null,
+                          "parent": [Circular],
+                          "prev": null,
+                          "type": "tag",
+                          "x-attribsNamespace": Object {
+                            "aria-label": undefined,
+                            "class": undefined,
+                          },
+                          "x-attribsPrefix": Object {
+                            "aria-label": undefined,
+                            "class": undefined,
+                          },
+                        },
+                      ],
+                      "name": "div",
+                      "namespace": "http://www.w3.org/1999/xhtml",
+                      "next": null,
+                      "parent": [Circular],
+                      "prev": [Circular],
+                      "type": "tag",
+                      "x-attribsNamespace": Object {
+                        "class": undefined,
+                      },
+                      "x-attribsPrefix": Object {
+                        "class": undefined,
+                      },
+                    },
+                    "parent": [Circular],
+                    "prev": null,
+                    "type": "tag",
+                    "x-attribsNamespace": Object {
+                      "class": undefined,
+                    },
+                    "x-attribsPrefix": Object {
+                      "class": undefined,
+                    },
+                  },
+                  Node {
+                    "attribs": Object {
+                      "class": "ms-nav-close-button",
+                    },
+                    "children": Array [
+                      Node {
+                        "attribs": Object {
+                          "aria-label": "Close",
+                          "class": "btn nav-menu-close",
+                        },
+                        "children": Array [],
+                        "name": "button",
+                        "namespace": "http://www.w3.org/1999/xhtml",
+                        "next": null,
+                        "parent": [Circular],
+                        "prev": null,
+                        "type": "tag",
+                        "x-attribsNamespace": Object {
+                          "aria-label": undefined,
+                          "class": undefined,
+                        },
+                        "x-attribsPrefix": Object {
+                          "aria-label": undefined,
+                          "class": undefined,
+                        },
+                      },
+                    ],
+                    "name": "div",
+                    "namespace": "http://www.w3.org/1999/xhtml",
+                    "next": null,
+                    "parent": [Circular],
+                    "prev": Node {
+                      "attribs": Object {
+                        "class": "ms-nav__list__item",
+                      },
+                      "children": Array [
+                        Node {
+                          "attribs": Object {
+                            "aria-expanded": "true",
+                            "aria-haspopup": "false",
+                            "class": "ms-nav__list__item__button",
+                          },
+                          "children": Array [],
+                          "name": "button",
+                          "namespace": "http://www.w3.org/1999/xhtml",
+                          "next": null,
+                          "parent": [Circular],
+                          "prev": null,
+                          "type": "tag",
+                          "x-attribsNamespace": Object {
+                            "aria-expanded": undefined,
+                            "aria-haspopup": undefined,
+                            "class": undefined,
+                          },
+                          "x-attribsPrefix": Object {
+                            "aria-expanded": undefined,
+                            "aria-haspopup": undefined,
+                            "class": undefined,
+                          },
+                        },
+                      ],
+                      "name": "li",
+                      "namespace": "http://www.w3.org/1999/xhtml",
+                      "next": [Circular],
+                      "parent": [Circular],
+                      "prev": null,
+                      "type": "tag",
+                      "x-attribsNamespace": Object {
+                        "class": undefined,
+                      },
+                      "x-attribsPrefix": Object {
+                        "class": undefined,
+                      },
+                    },
+                    "type": "tag",
+                    "x-attribsNamespace": Object {
+                      "class": undefined,
+                    },
+                    "x-attribsPrefix": Object {
+                      "class": undefined,
+                    },
+                  },
+                ],
+                "name": "ul",
+                "namespace": "http://www.w3.org/1999/xhtml",
+                "next": null,
+                "parent": [Circular],
+                "prev": null,
+                "type": "tag",
+                "x-attribsNamespace": Object {
+                  "class": undefined,
+                  "tabindex": undefined,
+                },
+                "x-attribsPrefix": Object {
+                  "class": undefined,
+                  "tabindex": undefined,
+                },
+              },
+            ],
+            "name": "nav",
+            "namespace": "http://www.w3.org/1999/xhtml",
+            "next": null,
+            "parent": [Circular],
+            "prev": null,
+            "type": "tag",
+            "x-attribsNamespace": Object {
+              "aria-label": undefined,
+              "class": undefined,
+              "data-m-t": undefined,
+              "id": undefined,
+              "role": undefined,
+            },
+            "x-attribsPrefix": Object {
+              "aria-label": undefined,
+              "class": undefined,
+              "data-m-t": undefined,
+              "id": undefined,
+              "role": undefined,
+            },
+          },
+        ],
+        "name": "div",
+        "namespace": "http://www.w3.org/1999/xhtml",
+        "next": null,
+        "parent": [Circular],
+        "prev": Node {
+          "attribs": Object {
+            "aria-controls": "header-nav-mobile",
+            "aria-label": "string",
+            "class": "ms-header__nav-icon msc-btn",
+            "data-bi-id": "12345",
+            "data-m": "{\\"id\\":\\"12345\\",\\"key1\\":\\"val1\\"}\\"",
+            "title": "string",
+            "type": "button",
+          },
+          "children": Array [],
+          "name": "button",
+          "namespace": "http://www.w3.org/1999/xhtml",
+          "next": [Circular],
+          "parent": [Circular],
+          "prev": null,
+          "type": "tag",
+          "x-attribsNamespace": Object {
+            "aria-controls": undefined,
+            "aria-label": undefined,
+            "class": undefined,
+            "data-bi-id": undefined,
+            "data-m": undefined,
+            "title": undefined,
+            "type": undefined,
+          },
+          "x-attribsPrefix": Object {
+            "aria-controls": undefined,
+            "aria-label": undefined,
+            "class": undefined,
+            "data-bi-id": undefined,
+            "data-m": undefined,
+            "title": undefined,
+            "type": undefined,
+          },
+        },
+        "type": "tag",
+        "x-attribsNamespace": Object {
+          "class": undefined,
+        },
+        "x-attribsPrefix": Object {
+          "class": undefined,
+        },
+      },
+    ],
+    "name": "div",
+    "namespace": "http://www.w3.org/1999/xhtml",
+    "next": null,
+    "parent": Node {
+      "children": Array [
+        [Circular],
+      ],
+      "name": "root",
+      "next": null,
+      "parent": null,
+      "prev": null,
+      "type": "root",
+    },
+    "prev": null,
+    "type": "tag",
+    "x-attribsNamespace": Object {
+      "class": undefined,
+    },
+    "x-attribsPrefix": Object {
+      "class": undefined,
+    },
+  },
+  "_root": [Circular],
+  "length": 1,
+  "options": Object {
+    "decodeEntities": true,
+    "xml": false,
+  },
+}
+`;
+
+exports[`Navigation Menu Unit Test View renders correctly without submenu 1`] = `ReactWrapper {}`;

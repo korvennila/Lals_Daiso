@@ -1,0 +1,20 @@
+@import "../common/00-settings/responsive-breakpoints.scss";
+
+$rtl-product-specification-drawer-details-right: 6px;
+
+[dir="rtl"] {
+    .ms-product-specification__accordion {
+        .ms-product-details {
+            padding-right: $rtl-product-specification-drawer-details-right;
+        }
+
+        .drawer__buttontext {
+            float: right;
+        }
+
+        .ms-product-specification__drawer-close,
+        .ms-product-specification__drawer-open {
+            float: left;
+        }
+    }
+}

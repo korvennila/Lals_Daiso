@@ -1,0 +1,161 @@
+@import "../common/00-settings/colors.scss";
+@import "../common/00-settings/icons.scss";
+@import "../common/00-settings/responsive-breakpoints.scss";
+
+$buybox-addtocart-margin-left: 8px;
+$buybox-addtocart-margin-right: 0;
+$media-gallary-padding-left: 18px;
+$media-gallary-padding-right: 0;
+$msv-buybox-content-width: 30%;
+$msv-icon-margin-left: 8px;
+$msv-buybox-minmax-label-text-before-padding-left: 5px;
+$msv-buybox-msi-exclamation-triangle-before-padding-left: 5px;
+$msv-buybox-pickup-option-before-padding-left: 5px;
+$msv-buybox-shopsimilarlooks-padding-left: 24px;
+$msv-buybox-shopsimilardescriptions-padding-right: 24px;
+$rtl-msv-buybox-add-to-wishlist-icon-margin-left: 10px;
+$msv-buybox-media-gallery-padding-left: 33px;
+$msv-buybox-media-gallery-margin-right: 20px;
+
+[dir="rtl"] {
+    .ms-buybox {
+        .msc-buybox__bulk-purchase-section {
+            .ms-buybox__bulk-purchase-anchor {
+                &::before {
+                    margin-right: 0;
+                    margin-left: 11px;
+                }
+            }
+        }
+
+        &__media-gallery {
+            padding-left: $media-gallary-padding-left;
+            padding-right: $media-gallary-padding-right;
+            margin-top: 48px;
+
+            @media (min-width: $msv-breakpoint-m) and (max-width: $msv-breakpoint-l) {
+                padding-left: 0;
+            }
+        }
+
+        &__content {
+            min-width: $msv-buybox-content-width;
+
+            .msc-buybox__pickup-options {
+                .ms-buybox__find-in-store-pickup {
+                    .ms-buybox__find-in-store-pickup-option::before {
+                        padding-left: $msv-buybox-pickup-option-before-padding-left;
+                        padding-right: 0;
+                    }
+                }
+            }
+        }
+
+        .product-add-to-cart {
+            .msc-add-to-cart {
+                margin-left: $buybox-addtocart-margin-left;
+                margin-right: $buybox-addtocart-margin-right;
+            }
+        }
+
+        .msc-ss-carousel-vert-strip img {
+            display: inline-block;
+        }
+
+        .ms-buybox__key_in_price_custom-amount__input {
+            text-align: right;
+        }
+
+        &__minmax_label_text {
+            .msi-InfoCircle {
+                margin-left: $msv-icon-margin-left;
+            }
+        }
+
+        &__quantity {
+            .quantity_text_message {
+                .ms-buybox__minmax_label_text::before {
+                    padding-left: $msv-buybox-minmax-label-text-before-padding-left;
+                    padding-right: 0;
+                }
+            }
+        }
+
+        &__add-to-wishlist-container {
+            .msc-add-to-wishlist::before {
+                margin-right: 0;
+                margin-left: $rtl-msv-buybox-add-to-wishlist-icon-margin-left;
+            }
+        }
+
+        .msc-alert {
+            .msc-alert__header {
+                .msi-exclamation-triangle::before {
+                    padding-left: $msv-buybox-msi-exclamation-triangle-before-padding-left;
+                    padding-right: 0;
+                }
+            }
+        }
+
+        .ms-buybox__shopsimilarlooks {
+            padding-left: $msv-buybox-shopsimilarlooks-padding-left;
+            padding-right: 0;
+        }
+
+        .ms-buybox__shopsimilardescriptions {
+            padding-right: $msv-buybox-shopsimilardescriptions-padding-right;
+            border-right: 0.5px solid $msv-gray-50;
+            padding-left: 0;
+            border-left: none;
+        }
+
+        @media (min-width: ($msv-breakpoint-l)+1) {
+            &__media-gallery {
+                padding-left: $msv-buybox-media-gallery-padding-left;
+                padding-right: 0;
+                margin-left: 0;
+
+                .ms-media-gallery {
+                    &.vertical {
+                        .msc-ss-carousel-vert-slide {
+                            .ms-media-gallery__thumbnail-item {
+                                margin-left: 0;
+
+                                &:nth-of-type(2n) {
+                                    margin-left: 0;
+                                    margin-right: $msv-buybox-media-gallery-margin-right;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    @media (max-width: $msv-breakpoint-l) {
+        .ms-media-gallery {
+            .msc-carousel {
+                &__control {
+                    &__prev__icon {
+                        @include add-icon($msv-ChevronRight);
+                        margin-left: 0;
+                    }
+
+                    &__next__icon {
+                        @include add-icon($msv-ChevronLeft);
+                        margin-right: 0;
+                    }
+                }
+            }
+        }
+    }
+
+    @media (max-width: $msv-breakpoint-m) {
+        .ms-buybox__media-gallery {
+            padding-left: 0;
+            padding-right: 0;
+            margin-left: 0;
+        }
+    }
+}

@@ -1,0 +1,88 @@
+@import "../00-settings/index.scss";
+@import "../01-tools/index.scss";
+@import "../02-generic/index.scss";
+
+// msc-action-menu-action-toggle
+$msc-action-menu-action-toggle-height: 82px;
+$msc-action-menu-action-toggle-width: 48px;
+// msc-action-menu-actions-container
+$msc-action-menu-actions-container-border-radius: 4px;
+// msc-action-menu-actions-container-button
+$msc-action-menu-actions-container-button-height: 52px;
+$msc-action-menu-actions-container-button-padding: 0 8px;
+$msc-action-menu-actions-container-button-margin-right: 12px;
+
+.msc-action-menu {
+    &__action-toggle {
+        @include add-icon($msv-Ellipses-V);
+        background: none;
+        height: $msc-action-menu-action-toggle-height;
+        width: $msc-action-menu-action-toggle-width;
+        border: none;
+        cursor: pointer;
+
+        &-active,
+        &:active {
+            background-color: $msv-blue;
+
+            &::before {
+                color: $msv-white;
+            }
+        }
+
+        &:hover {
+            background-color: $msv-blue-10;
+        }
+
+        @media screen and (max-width: $msv-breakpoint-l - 1) {
+            outline: none;
+        }
+    }
+
+    &__actions-container {
+        align-items: flex-start;
+        background: $msv-white;
+        border-radius: $msc-action-menu-actions-container-border-radius;
+        box-shadow: 0 3.2px 7.2px rgba(0, 0, 0, 0.132), 0 0.6px 1.8px rgba(0, 0, 0, 0.108);
+        flex-direction: column;
+        height: auto;
+        padding-left: 0;
+        position: absolute;
+        right: 0;
+        z-index: 10;
+
+        @media screen and (max-width: $msv-breakpoint-l - 1) {
+            left: 0;
+            width: 100%;
+        }
+
+        .msc-btn {
+            background: none;
+            border: none;
+            height: $msc-action-menu-actions-container-button-height;
+            padding: $msc-action-menu-actions-container-button-padding;
+            text-align: left;
+            width: 100%;
+            display: flex;
+            align-items: center;
+            text-decoration: none;
+
+            @include font-body-regular-s();
+
+            &::before {
+                margin-right: $msc-action-menu-actions-container-button-margin-right;
+                font-size: $msv-font-size-ml;
+                color: $msv-blue;
+            }
+
+            &:hover {
+                background-color: $msv-white-20;
+                text-decoration: none;
+            }
+
+            &:disabled, &[disabled] {
+                color: $msv-gray-50;
+            }
+        }
+    }
+}

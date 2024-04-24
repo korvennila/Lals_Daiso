@@ -1,0 +1,1 @@
+import './account-profile-page.scss';

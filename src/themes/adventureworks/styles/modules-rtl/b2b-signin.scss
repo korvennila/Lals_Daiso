@@ -1,0 +1,168 @@
+@import "../common/00-settings/colors.scss";
+@import "../common/00-settings/responsive-breakpoints.scss";
+
+$rtl-b2b-sign-in-content-quotes-margin: 40px;
+$rtl-b2b-sign-in-banner-details-padding-right: 80px;
+$rtl-b2b-sign-in-doublequotes-margin: 20px;
+$rtl-b2b-sign-in-container-desktop-width: 350px;
+$rtl-b2b-sign-in-container-desktop-left-space: 50px;
+$rtl-b2b-sign-in-container-ldesktop-width: 550px;
+$rtl-b2b-sign-in-container-ldesktop-left-space: 103px;
+$rtl-b2b-signin-tablet-signup-section-padding-left: 30px;
+
+[dir="rtl"] {
+    .b2bsignin {
+        .signin-container {
+            .ms-sign-in {
+                right: unset;
+
+                &__sign-in-section {
+                    border-left: none;
+                    padding-left: 0;
+
+                    .ms-sign-in__sign-in-heading {
+                        text-align: right;
+                    }
+
+                    .ms-sign-in__account-items {
+                        text-align: right;
+                    }
+
+                    .ms-sign-in__forget-password {
+                        margin-left: auto;
+                    }
+
+                    .ms-sign-in__sign-in-disclaimer {
+                        text-align: right;
+                    }
+                }
+
+                .ms-sign-in__sign-up-section {
+                    margin-right: 0;
+
+                    .ms-sign-in__sign-up-link {
+                        justify-content: right;
+                    }
+                }
+            }
+        }
+
+        @media (min-width: $msv-breakpoint-m) and (max-width: $msv-breakpoint-l) {
+            .signin-container {
+                .ms-sign-in {
+                    .ms-sign-in__container {
+                        .ms-sign-in__sign-up-section {
+                            margin-right: auto;
+                            padding-right: 0;
+                            padding-left: $rtl-b2b-signin-tablet-signup-section-padding-left;
+                        }
+                    }
+                }
+            }
+        }
+
+        .adventurework-container {
+            .ms-content-block {
+                &__text {
+                    .left-doublequotes {
+                        margin-right: 0;
+                        margin-left: $rtl-b2b-sign-in-content-quotes-margin;
+                    }
+
+                    .right-doublequotes {
+                        margin-left: 0;
+                        margin-right: $rtl-b2b-sign-in-content-quotes-margin;
+                    }
+                }
+
+                &__details__additional-content {
+                    &__paragraph {
+                        padding-left: 0;
+                        padding-right: 0;
+                    }
+
+                    &-cta {
+                        &-links {
+                            &:nth-child(1) {
+                                border-right: 1px solid $msv-gray-940;
+                                border-left: none;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        .b2bsignin-hero-banner {
+            .ms-content-block__details {
+                text-align: right;
+                padding-left: 0;
+                padding-right: $rtl-b2b-sign-in-banner-details-padding-right;
+
+                .ms-content-block__title {
+                    text-align: right;
+                }
+
+                .ms-content-block__text {
+                    text-align: right;
+                }
+
+                .ms-content-block__details__additional-content {
+                    text-align: right;
+                }
+            }
+        }
+
+        @media (min-width: $msv-breakpoint-lg) {
+            .signin-container {
+                .ms-sign-in {
+                    width: $rtl-b2b-sign-in-container-ldesktop-width;
+                    left: $rtl-b2b-sign-in-container-ldesktop-left-space;
+                }
+            }
+        }
+
+        @media (min-width: $msv-breakpoint-l) and (max-width: $msv-breakpoint-lg) {
+            .signin-container {
+                .ms-sign-in {
+                    width: $rtl-b2b-sign-in-container-desktop-width;
+                    left: $rtl-b2b-sign-in-container-desktop-left-space;
+                }
+            }
+        }
+
+        @media (max-width: $msv-breakpoint-l) {
+            .signin-container {
+                .ms-content-block__details.withImage {
+                    padding-right: $rtl-b2b-sign-in-content-quotes-margin;
+
+                    .ms-content-block__title {
+                        text-align: right;
+                    }
+
+                    .ms-content-block__text {
+                        text-align: right;
+                    }
+
+                    .ms-content-block__details__additional-content {
+                        text-align: right;
+                    }
+                }
+            }
+
+            .ms-sign-in__container .ms-sign-in__sign-in-section .ms-sign-in__sign-in-disclaimer {
+                text-align: right;
+            }
+
+            .adventurework-container .ms-content-block__details .ms-content-block__text .left-doublequotes {
+                margin-right: 0;
+                margin-left: $rtl-b2b-sign-in-doublequotes-margin;
+            }
+
+            .adventurework-container .ms-content-block__details .ms-content-block__text .right-doublequotes {
+                margin-left: 0;
+                margin-right: $rtl-b2b-sign-in-doublequotes-margin;
+            }
+        }
+    }
+}

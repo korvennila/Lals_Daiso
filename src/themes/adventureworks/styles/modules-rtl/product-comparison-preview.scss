@@ -1,0 +1,35 @@
+@import "../common/00-settings/responsive-breakpoints.scss";
+
+[dir="rtl"] {
+    .ms-product-comparison-preview {
+        &__container {
+            &__main-container {
+                &__header__go-to-comparison {
+                    margin-right: unset;
+                    margin-left: auto;
+                }
+
+                &__table {
+                    &__product-row {
+                        &__remove {
+                            left: 0;
+                            right: unset;
+                            margin-left: 11px;
+
+                            @media (max-width: $msv-breakpoint-m) {
+                                margin-right: unset;
+                                margin-left: 5px;
+                            }
+                        }
+                    }
+
+                    tr {
+                        td {
+                            text-align: right;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

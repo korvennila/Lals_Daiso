@@ -1,0 +1,12 @@
+[dir="rtl"] {
+    .ms-breadcrumb {
+        &_list, &_item {
+            float: right;
+        }
+
+        &_item {
+            padding-right: unset;
+            padding-left: 5px;
+        }
+    }
+}

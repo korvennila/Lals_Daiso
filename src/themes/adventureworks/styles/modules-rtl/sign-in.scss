@@ -1,0 +1,62 @@
+@import "../common/00-settings/responsive-breakpoints.scss";
+@import "../common/00-settings/colors.scss";
+
+[dir="rtl"] {
+    .ms-sign-in {
+        &__sign-up-section {
+            margin-right: 122px;
+            border-left: none;
+            padding-left: 0;
+        }
+
+        &__sign-in-section {
+            border-left: 0.5px solid $msv-gray-50;
+            padding-left: 121px;
+            margin-right: 0;
+        }
+
+        &__item-error[aria-hidden="false"] {
+            + input {
+                border-left: 0.5px solid $msv-gray-50;
+                border-right: 4px solid var(--msv-form-error-font-color);
+            }
+
+            &::before {
+                margin-right: 0;
+                margin-left: 10px;
+            }
+        }
+
+        &__page-error[aria-hidden="false"] {
+            .ms-sign-in__page-error-text::before {
+                margin-right: 0;
+                margin-left: 10px;
+            }
+        }
+
+        &__social-account {
+            .ms-sign-in__social-account-text::before {
+                margin-right: 0;
+                margin-left: 12px;
+            }
+        }
+    }
+
+    @media (max-width: $msv-breakpoint-l) {
+        .ms-sign-in {
+            &__sign-up-section {
+                margin-right: auto;
+            }
+
+            &__sign-in-section {
+                padding-left: 0;
+                border-left: none;
+                text-align: right;
+            }
+
+            &__sign-in-heading {
+                text-align: right;
+            }
+        }
+    }
+}

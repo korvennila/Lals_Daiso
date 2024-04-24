@@ -1,0 +1,13 @@
+{
+    "$type": "definitionExtension",
+    "resources":{
+        "b2bSignUpButtonAriaLabel": {
+            "value": "Create an account",
+            "comment": "signUp button aria label."
+        },
+        "b2bSignUpButtonText": {
+            "value": "Create an account",
+            "comment": "signUp button text."
+        }
+    }
+}

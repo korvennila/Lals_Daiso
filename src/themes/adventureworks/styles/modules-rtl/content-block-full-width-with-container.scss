@@ -1,0 +1,39 @@
+@import "../common/00-settings/responsive-breakpoints.scss";
+@import "../common/00-settings/colors.scss";
+@import "../common/02-generic/image.scss";
+
+$rtl-content-block-without-image-padding: 5px 0 0 80px;
+$msv-content-details-tablet-padding-left: 40px;
+
+[dir="rtl"] {
+    .ms-content-block {
+        &[data-m-layout="full-width-with-container"] {
+            @include image(100%);
+
+            .ms-content-block__details.withoutImage {
+                padding-right: 0;
+
+                @media (min-width: $msv-breakpoint-l) {
+                    padding: $rtl-content-block-without-image-padding;
+                }
+            }
+
+            .ms-content-block__details {
+                padding-right: 0;
+                padding-left: $msv-content-details-tablet-padding-left;
+
+                @media screen and (max-width: $msv-breakpoint-l) {
+                    padding: 0;
+                }
+
+                .ms-content-block__title {
+                    text-align: right;
+                }
+
+                .ms-content-block__text {
+                    text-align: right;
+                }
+            }
+        }
+    }
+}

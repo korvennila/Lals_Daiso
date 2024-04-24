@@ -1,0 +1,33 @@
+@import "../common/00-settings/responsive-breakpoints.scss";
+
+$msv-checkout-rtl-radio-margin-left: 20px;
+$msv-checkout-delivery-options-error-title-icon-margin-left: 22px;
+$msv-checkout-delivery-options-error-message-padding-right: 20px;
+$msv-checkout-delivery-options-error-message-padding-left: 64px;
+
+[dir="rtl"] {
+    .ms-checkout-delivery-options {
+        &__input-radio {
+            margin-left: $msv-checkout-rtl-radio-margin-left;
+        }
+
+        &__option {
+            @media screen and (max-width: $msv-breakpoint-m) {
+                margin-left: 20px;
+                margin-right: 0;
+            }
+        }
+
+        &__error-title {
+            &::before {
+                margin-right: 0;
+                margin-left: $msv-checkout-delivery-options-error-title-icon-margin-left;
+            }
+        }
+
+        &__error-message {
+            padding-right: $msv-checkout-delivery-options-error-message-padding-right;
+            padding-left: $msv-checkout-delivery-options-error-message-padding-left;
+        }
+    }
+}

@@ -1,0 +1,3686 @@
+{
+    "$type": "styleDefinition",
+    "name": "adventureworks",
+    "friendlyName": "Adventure works",
+    "description": "This is adventure works style preset",
+    "global": {
+        "msv-accent-brand-color": {
+            "friendlyName": "Brand accent",
+            "description": "Brand accent is the accent color used to represent the brand. Its typically used on primary buttons.",
+            "type": "string",
+            "format": "color",
+            "default": "#2C262D",
+            "group": "Colors"
+        },
+        "msv-accent-brand-alt-color": {
+            "friendlyName": "Brand accent hover color",
+            "description": "Brand accent alternate is the accent hover color. Its typically used on primary buttons.",
+            "type": "string",
+            "format": "color",
+            "default": " #100E11",
+            "group": "Colors"
+        },
+        "msv-accent-secondary-btn": {
+            "friendlyName": "Brand accent button hover",
+            "description": "Brand accent secondary is the accent hover color. Its typically used on secondary buttons.",
+            "type": "string",
+            "format": "color",
+            "default": "#F5F5F5",
+            "group": "Colors"
+        },
+        "msv-bg-color": {
+            "friendlyName": "Background",
+            "description": "Background color is used for page and module background such as buybox, carousel, cart etc.",
+            "type": "string",
+            "format": "color",
+            "default": "#FFFFFF",
+            "group": "Colors"
+        },
+        "msv-body-bg-color": {
+            "friendlyName": "Body background",
+            "description": "Body background color is used for page.",
+            "type": "string",
+            "format": "color",
+            "default": "#FFFFFF",
+            "group": "Colors"
+        },
+        "msv-font-primary-color": {
+            "friendlyName": "Text default",
+            "description": "Text default is the default color used for text.",
+            "type": "string",
+            "format": "color",
+            "default": "#2C262D",
+            "group": "Colors"
+        },
+        "msv-font-secondary-color": {
+            "friendlyName": "Text secondary",
+            "description": "It is the secondary color used for text.",
+            "type": "string",
+            "format": "color",
+            "default": "#FFFFFF",
+            "group": "Colors"
+        },
+        "msv-primary-btn-light-font-color": {
+            "friendlyName": "Primary button font color for light theme",
+            "description": "It is the font color for primary button on light theme.",
+            "type": "string",
+            "format": "color",
+            "default": "#FFFFFF",
+            "group": "Colors"
+        },
+        "msv-primary-btn-light-bg-color": {
+            "friendlyName": "Primary button background color for light theme",
+            "description": "It is the background color used for primary button on light theme.",
+            "type": "string",
+            "format": "color",
+            "default": "#2C262D",
+            "group": "Colors"
+        },
+        "msv-primary-btn-light-border-color": {
+            "friendlyName": "Primary button border color for light theme",
+            "description": "It is the border color used for primary button on light theme.",
+            "type": "string",
+            "format": "color",
+            "default": "#FFFFFF",
+            "group": "Colors"
+        },
+        "msv-primary-btn-light-hover-bg-color": {
+            "friendlyName": "Primary button background color for light theme on hover",
+            "description": "It is the background color used for primary button on light theme on hover.",
+            "type": "string",
+            "format": "color",
+            "default": "#201C21",
+            "group": "Colors"
+        },
+        "msv-primary-btn-light-focus-bg-color": {
+            "friendlyName": "Primary button background color for light theme on focus",
+            "description": "It is the background color used for primary button on light theme on focus.",
+            "type": "string",
+            "format": "color",
+            "default": "#201C21",
+            "group": "Colors"
+        },
+        "msv-primary-btn-light-focus-border-color": {
+            "friendlyName": "Primary button border color for light theme on focus",
+            "description": "It is the border color used for primary button on light theme on focus.",
+            "type": "string",
+            "format": "color",
+            "default": "#4083FF",
+            "group": "Colors"
+        },
+        "msv-primary-btn-light-pressed-bg-color": {
+            "friendlyName": "Primary button background color for light theme on pressed",
+            "description": "It is the background color used for primary button on light theme on pressed.",
+            "type": "string",
+            "format": "color",
+            "default": "#161316",
+            "group": "Colors"
+        },
+        "msv-primary-btn-light-disabled-bg-color": {
+            "friendlyName": "Primary button background color for light theme when disabled",
+            "description": "It is the background color used for primary button on light theme when disabled.",
+            "type": "string",
+            "format": "color",
+            "default": "#C4C4C4",
+            "group": "Colors"
+        },
+        "msv-secondary-btn-light-font-color": {
+            "friendlyName": "Secondary button font color for light theme",
+            "description": "It is the font color used for secondary button on light theme.",
+            "type": "string",
+            "format": "color",
+            "default": "#2C262D",
+            "group": "Colors"
+        },
+        "msv-secondary-btn-light-bg-color": {
+            "friendlyName": "Secondary button background color for light theme",
+            "description": "It is the background color used for secondary button on light theme.",
+            "type": "string",
+            "format": "color",
+            "default": "#FFFFFF",
+            "group": "Colors"
+        },
+        "msv-secondary-btn-light-border-color": {
+            "friendlyName": "Secondary button border color for light theme",
+            "description": "It is the border color used for secondary button on light theme.",
+            "type": "string",
+            "format": "color",
+            "default": "#2C262D",
+            "group": "Colors"
+        },
+        "msv-secondary-btn-light-hover-bg-color": {
+            "friendlyName": "Secondary button background color for light theme on hover",
+            "description": "It is the background color used for secondary button on light theme on hover.",
+            "type": "string",
+            "format": "color",
+            "default": "#F5F5F5",
+            "group": "Colors"
+        },
+        "msv-secondary-btn-light-focus-bg-color": {
+            "friendlyName": "Secondary button background color for light theme on focus",
+            "description": "It is the background color used for secondary button on light theme on focus.",
+            "type": "string",
+            "format": "color",
+            "default": "#F5F5F5",
+            "group": "Colors"
+        },
+        "msv-secondary-btn-light-focus-border-color": {
+            "friendlyName": "Secondary button border color for light theme on focus",
+            "description": "It is the border color used for secondary button on light theme on focus.",
+            "type": "string",
+            "format": "color",
+            "default": "#2266E3",
+            "group": "Colors"
+        },
+        "msv-secondary-btn-light-pressed-bg-color": {
+            "friendlyName": "Secondary button background color for light theme on pressed",
+            "description": "It is the background color used for secondary button on light theme on pressed.",
+            "type": "string",
+            "format": "color",
+            "default": "#EBEBEB",
+            "group": "Colors"
+        },
+        "msv-secondary-btn-light-disabled-bg-color": {
+            "friendlyName": "Secondary button background color for light theme when disabled",
+            "description": "It is the background color used for secondary button on light theme when disabled.",
+            "type": "string",
+            "format": "color",
+            "default": "#C4C4C4",
+            "group": "Colors"
+        },
+        "msv-secondary-btn-light-disabled-font-color": {
+            "friendlyName": "Secondary button font color for light theme when disabled",
+            "description": "It is the font color used for secondary button on light theme when disabled.",
+            "type": "string",
+            "format": "color",
+            "default": "#FFFFFF",
+            "group": "Colors"
+        },
+        "msv-primary-btn-dark-font-color": {
+            "friendlyName": "Primary button font color for dark theme",
+            "description": "It is the font color used for primary button on dark theme.",
+            "type": "string",
+            "format": "color",
+            "default": "#2C262D",
+            "group": "Colors"
+        },
+        "msv-primary-btn-dark-bg-color": {
+            "friendlyName": "Primary button background color for dark theme",
+            "description": "It is the background color used for primary button on dark theme.",
+            "type": "string",
+            "format": "color",
+            "default": "#FFFFFF",
+            "group": "Colors"
+        },
+        "msv-primary-btn-dark-border-color": {
+            "friendlyName": "Primary button border color for dark theme",
+            "description": "It is the border color used for primary button on dark theme.",
+            "type": "string",
+            "format": "color",
+            "default": "#2C262D",
+            "group": "Colors"
+        },
+        "msv-primary-btn-dark-hover-bg-color": {
+            "friendlyName": "Primary button background color for dark theme on hover",
+            "description": "It is the background color used for primary button on dark theme on hover.",
+            "type": "string",
+            "format": "color",
+            "default": "#F5F5F5",
+            "group": "Colors"
+        },
+        "msv-primary-btn-dark-focus-bg-color": {
+            "friendlyName": "Primary button background color for dark theme on focus",
+            "description": "It is the background color used for primary button on dark theme on focus.",
+            "type": "string",
+            "format": "color",
+            "default": "#F5F5F5",
+            "group": "Colors"
+        },
+        "msv-primary-btn-dark-focus-border-color": {
+            "friendlyName": "Primary button border color for dark theme on focus",
+            "description": "It is the border color used for primary button on dark theme on focus.",
+            "type": "string",
+            "format": "color",
+            "default": "#4083FF",
+            "group": "Colors"
+        },
+        "msv-primary-btn-dark-pressed-bg-color": {
+            "friendlyName": "Primary button border color for dark theme on pressed",
+            "description": "It is the border color used for primary button on dark theme on pressed.",
+            "type": "string",
+            "format": "color",
+            "default": "#EBEBEB",
+            "group": "Colors"
+        },
+        "msv-primary-btn-dark-disabled-bg-color": {
+            "friendlyName": "Primary button background color for dark theme when disabled",
+            "description": "It is the background color used for primary button on dark theme when disabled.",
+            "type": "string",
+            "format": "color",
+            "default": "#C4C4C4",
+            "group": "Colors"
+        },
+        "msv-primary-btn-dark-disabled-font-color": {
+            "friendlyName": "Primary button font color for dark theme when disabled",
+            "description": "It is the font color used for primary button on dark theme when disabled.",
+            "type": "string",
+            "format": "color",
+            "default": "#595959",
+            "group": "Colors"
+        },
+        "msv-secondary-btn-dark-font-color": {
+            "friendlyName": "Secondary button font color for dark theme",
+            "description": "It is the font color used for secondary button on dark theme.",
+            "type": "string",
+            "format": "color",
+            "default": "#FFFFFF",
+            "group": "Colors"
+        },
+        "msv-secondary-btn-dark-bg-color": {
+            "friendlyName": "Secondary button background color for dark theme",
+            "description": "It is the background color used for secondary button on dark theme.",
+            "type": "string",
+            "format": "color",
+            "default": "#2C262D",
+            "group": "Colors"
+        },
+        "msv-secondary-btn-dark-border-color": {
+            "friendlyName": "Secondary button border color for dark theme",
+            "description": "It is the border color used for secondary button on dark theme.",
+            "type": "string",
+            "format": "color",
+            "default": "#FFFFFF",
+            "group": "Colors"
+        },
+        "msv-secondary-btn-dark-hover-bg-color": {
+            "friendlyName": "Secondary button background color for dark theme on hover",
+            "description": "It is the background color used for secondary button on dark theme on hover.",
+            "type": "string",
+            "format": "color",
+            "default": "#201C21",
+            "group": "Colors"
+        },
+        "msv-secondary-btn-dark-focus-bg-color": {
+            "friendlyName": "Secondary button background color for dark theme on focus",
+            "description": "It is the background color used for secondary button on dark theme on focus.",
+            "type": "string",
+            "format": "color",
+            "default": "#201C21",
+            "group": "Colors"
+        },
+        "msv-secondary-btn-dark-focus-border-color": {
+            "friendlyName": "Secondary button border color for dark theme on focus",
+            "description": "It is the border color used for secondary button on dark theme on focus.",
+            "type": "string",
+            "format": "color",
+            "default": "#4083FF",
+            "group": "Colors"
+        },
+        "msv-secondary-btn-dark-pressed-bg-color": {
+            "friendlyName": "Secondary button border color for dark theme on pressed",
+            "description": "It is the border color used for secondary button on dark theme on pressed.",
+            "type": "string",
+            "format": "color",
+            "default": "#161316",
+            "group": "Colors"
+        },
+        "msv-secondary-btn-dark-disabled-bg-color": {
+            "friendlyName": "Secondary button background color for dark theme when disabled",
+            "description": "It is the background color used for Secondary button on dark theme when disabled.",
+            "type": "string",
+            "format": "color",
+            "default": "#C4C4C4",
+            "group": "Colors"
+        },
+        "msv-secondary-btn-dark-disabled-font-color": {
+            "friendlyName": "Secondary button font color for dark theme when disabled",
+            "description": "It is the font color used for secondary button on dark theme when disabled.",
+            "type": "string",
+            "format": "color",
+            "default": "#595959",
+            "group": "Colors"
+        },
+        "msv-button-primary-rest-color": {
+            "friendlyName": "Primary button color",
+            "description": "It is the color used for primary button.",
+            "type": "string",
+            "format": "color",
+            "default": "#2C262D",
+            "group": "Colors"
+        },
+        "msv-button-primary-hover-color": {
+            "friendlyName": "Primary button color on hover",
+            "description": "It is the color used for primary button on hover.",
+            "type": "string",
+            "format": "color",
+            "default": "#201C21",
+            "group": "Colors"
+        },
+        "msv-button-primary-pressed-color": {
+            "friendlyName": "Primary button color when active",
+            "description": "It is the color used for primary button when active.",
+            "type": "string",
+            "format": "color",
+            "default": "#161316",
+            "group": "Colors"
+        },
+        "msv-button-primary-disabled-color": {
+            "friendlyName": "Primary button color when disabled",
+            "description": "It is the color used for primary button when disabled.",
+            "type": "string",
+            "format": "color",
+            "default": "#C4C4C4",
+            "group": "Colors"
+        },
+        "msv-button-secondary-rest-color": {
+            "friendlyName": "Secondary button color",
+            "description": "It is the color used for secondary button.",
+            "type": "string",
+            "format": "color",
+            "default": "#FFFFFF",
+            "group": "Colors"
+        },
+        "msv-button-secondary-hover-color": {
+            "friendlyName": "Secondary button color on hover",
+            "description": "It is the color used for secondary button on hover.",
+            "type": "string",
+            "format": "color",
+            "default": "#F5F5F5",
+            "group": "Colors"
+        },
+        "msv-button-secondary-pressed-color": {
+            "friendlyName": "Secondary button color when active",
+            "description": "It is the color used for secondary button when active.",
+            "type": "string",
+            "format": "color",
+            "default": "#EBEBEB",
+            "group": "Colors"
+        },
+        "msv-button-secondary-disabled-color": {
+            "friendlyName": "Secondary button color when disabled",
+            "description": "It is the color used for secondary button when disabled.",
+            "type": "string",
+            "format": "color",
+            "default": "#FFFFFF",
+            "group": "Colors"
+        },
+        "msv-link-font-color": {
+            "friendlyName": "Link font color",
+            "description": "It is the font color used for links.",
+            "type": "string",
+            "format": "color",
+            "default": "#2C262D",
+            "group": "Colors"
+        },
+        "msv-link-font-size-m": {
+            "friendlyName": "Link font size medium",
+            "description": "It is the medium font size used for links.",
+            "type": "string",
+            "group": "Typography",
+            "default": "16px"
+        },
+        "msv-link-font-size-s": {
+            "friendlyName": "Link font size small",
+            "description": "It is the small font size used for links.",
+            "type": "string",
+            "group": "Typography",
+            "default": "14px"
+        },
+        "msv-link-font-size-xs": {
+            "friendlyName": "Link font size extra small",
+            "description": "It is the extra small font size used for links.",
+            "type": "string",
+            "group": "Typography",
+            "default": "12px"
+        },
+        "msv-link-line-height-m": {
+            "friendlyName": "Link line height medium",
+            "description": "It is the medium line height used for links.",
+            "type": "string",
+            "group": "Typography",
+            "default": "24px"
+        },
+        "msv-link-line-height-s": {
+            "friendlyName": "Link line height small",
+            "description": "It is the small line height used for links.",
+            "type": "string",
+            "group": "Typography",
+            "default": "20px"
+        },
+        "msv-link-line-height-xs": {
+            "friendlyName": "Link line height extra small",
+            "description": "It is the extra small line height used for links.",
+            "type": "string",
+            "group": "Typography",
+            "default": "16px"
+        },
+        "msv-feature-link-light-font-color": {
+            "friendlyName": "Feature link light font color",
+            "description": "It is the font color used for feature link with light theme.",
+            "type": "string",
+            "format": "color",
+            "default": "#2C262D",
+            "group": "Colors"
+        },
+        "msv-feature-link-light-disabled-font-color": {
+            "friendlyName": "Feature link light font color when disabled",
+            "description": "It is the font color used for disabled feature link with light theme.",
+            "type": "string",
+            "format": "color",
+            "default": "#C4C4C4",
+            "group": "Colors"
+        },
+        "msv-feature-link-light-underline-bg-color": {
+            "friendlyName": "Feature link light underline color",
+            "description": "It is the color used for feature link underline with light theme.",
+            "type": "string",
+            "format": "color",
+            "default": "#2266E3",
+            "group": "Colors"
+        },
+        "msv-feature-link-light-border-color": {
+            "friendlyName": "Feature link light border color",
+            "description": "It is the border color used for light feature link.",
+            "type": "string",
+            "format": "color",
+            "default": "#2266E3",
+            "group": "Colors"
+        },
+        "msv-feature-link-light-focus-underline-bg-color": {
+            "friendlyName": "Feature link light underline color on focus",
+            "description": "It is the color used for feature link underline with light theme on focus.",
+            "type": "string",
+            "format": "color",
+            "default": "#0B53CE",
+            "group": "Colors"
+        },
+        "msv-feature-link-light-hover-underline-bg-color": {
+            "friendlyName": "Feature link light underline color on hover",
+            "description": "It is the color used for feature link underline with light theme on hover.",
+            "type": "string",
+            "format": "color",
+            "default": "#0B53CE",
+            "group": "Colors"
+        },
+        "msv-feature-link-light-active-underline-bg-color": {
+            "friendlyName": "Feature link light underline color on active",
+            "description": "It is the color used for feature link underline with light theme on active.",
+            "type": "string",
+            "format": "color",
+            "default": "#0742AB",
+            "group": "Colors"
+        },
+        "msv-feature-link-light-disabled-underline-bg-color": {
+            "friendlyName": "Feature link light underline color when disabled",
+            "description": "It is the color used for disabled feature link underline with light theme.",
+            "type": "string",
+            "format": "color",
+            "default": "#1F6CF9",
+            "group": "Colors"
+        },
+        "msv-feature-link-dark-font-color": {
+            "friendlyName": "Feature link dark font color",
+            "description": "It is the font color used for feature link with dark theme.",
+            "type": "string",
+            "format": "color",
+            "default": "#FFFFFF",
+            "group": "Colors"
+        },
+        "msv-feature-link-dark-disabled-font-color": {
+            "friendlyName": "Feature link dark font color when disabled",
+            "description": "It is the font color used for disabled feature link with dark theme.",
+            "type": "string",
+            "format": "color",
+            "default": "#595959",
+            "group": "Colors"
+        },
+        "msv-feature-link-dark-underline-bg-color": {
+            "friendlyName": "Feature link dark underline color",
+            "description": "It is the color used for feature link underline with dark theme.",
+            "type": "string",
+            "format": "color",
+            "default": "#4083FF",
+            "group": "Colors"
+        },
+        "msv-feature-link-dark-border-color": {
+            "friendlyName": "Feature link dark border color",
+            "description": "It is the border color used for dark feature link.",
+            "type": "string",
+            "format": "color",
+            "default": "#2266E3",
+            "group": "Colors"
+        },
+        "msv-feature-link-dark-focus-underline-bg-color": {
+            "friendlyName": "Feature link dark underline color on focus",
+            "description": "It is the color used for feature link underline with dark theme on focus.",
+            "type": "string",
+            "format": "color",
+            "default": "#538FFF",
+            "group": "Colors"
+        },
+        "msv-feature-link-dark-hover-underline-bg-color": {
+            "friendlyName": "Feature link dark underline color on hover",
+            "description": "It is the color used for feature link underline with dark theme on hover.",
+            "type": "string",
+            "format": "color",
+            "default": "#538FFF",
+            "group": "Colors"
+        },
+        "msv-feature-link-dark-active-underline-bg-color": {
+            "friendlyName": "Feature link dark underline color on active",
+            "description": "It is the color used for feature link underline with dark theme on active.",
+            "type": "string",
+            "format": "color",
+            "default": "#6EA1FF",
+            "group": "Colors"
+        },
+        "msv-feature-link-dark-disabled-underline-bg-color": {
+            "friendlyName": "Feature link dark underline color when disabled",
+            "description": "It is the color used for disabled feature link underline with dark theme.",
+            "type": "string",
+            "format": "color",
+            "default": "#595959",
+            "group": "Colors"
+        },
+        "msv-card-button-bg-color": {
+            "friendlyName": "Card button background color",
+            "description": "It is the background color used for card buttons.",
+            "type": "string",
+            "format": "color",
+            "default": "#000000",
+            "group": "Colors"
+        },
+        "msv-card-button-font-color": {
+            "friendlyName": "Card button font color",
+            "description": "It is the font color used for card buttons.",
+            "type": "string",
+            "format": "color",
+            "default": "#FFFFFF",
+            "group": "Colors"
+        },
+        "msv-card-button-disabled-font-color": {
+            "friendlyName": "Card button font color when disabled",
+            "description": "It is the font color used for card buttons when disabled.",
+            "type": "string",
+            "format": "color",
+            "default": "#595959",
+            "group": "Colors"
+        },
+        "msv-card-button-focus-border-color": {
+            "friendlyName": "Card button border color on focus",
+            "description": "It is the border color used for card buttons on focus.",
+            "type": "string",
+            "format": "color",
+            "default": "#4083FF",
+            "group": "Colors"
+        },
+        "msv-icon-button-light-font-color": {
+            "friendlyName": "Icon button light font color",
+            "description": "It is the font color used for icon light buttons.",
+            "type": "string",
+            "format": "color",
+            "default": "#2C262D",
+            "group": "Colors"
+        },
+        "msv-icon-button-light-bg-color": {
+            "friendlyName": "Icon button light background color",
+            "description": "It is the background color used for icon light buttons.",
+            "type": "string",
+            "format": "color",
+            "default": "transparent",
+            "group": "Colors"
+        },
+        "msv-icon-button-dark-font-color": {
+            "friendlyName": "Icon button dark font color",
+            "description": "It is the font color used for icon dark buttons.",
+            "type": "string",
+            "format": "color",
+            "default": "#FFFFFF",
+            "group": "Colors"
+        },
+        "msv-icon-button-dark-bg-color": {
+            "friendlyName": "Icon button dark background color",
+            "description": "It is the background color used for icon dark buttons.",
+            "type": "string",
+            "format": "color",
+            "default": "transparent",
+            "group": "Colors"
+        },
+        "msv-icon-button-light-focus-border-color": {
+            "friendlyName": "Icon button light focus border color",
+            "description": "It is the focus border color used for icon light buttons.",
+            "type": "string",
+            "format": "color",
+            "default": "#2266E3",
+            "group": "Colors"
+        },
+        "msv-icon-button-dark-focus-border-color": {
+            "friendlyName": "Icon button dark focus border color",
+            "description": "It is the focus border color used for icon dark buttons.",
+            "type": "string",
+            "format": "color",
+            "default": "#4083FF",
+            "group": "Colors"
+        },
+        "msv-carousel-flipper-rest-bg-color": {
+            "friendlyName": "Flipper background on rest",
+            "description": "Background color of carousel flippers on rest state.",
+            "type": "string",
+            "format": "color",
+            "default": "#FFFFFF",
+            "group": "Colors"
+        },
+        "msv-carousel-flipper-hover-bg-color": {
+            "friendlyName": "Flipper background on hover",
+            "description": "Background color of carousel flippers on hover state.",
+            "type": "string",
+            "format": "color",
+            "default": "#FFFFFF",
+            "group": "Colors"
+        },
+        "msv-carousel-flipper-focus-bg-color": {
+            "friendlyName": "Flipper background on focus",
+            "description": "Background color of carousel flippers on focus state.",
+            "type": "string",
+            "format": "color",
+            "default": "#FFFFFF",
+            "group": "Colors"
+        },
+        "msv-carousel-flipper-active-bg-color": {
+            "friendlyName": "Flipper background on pressed",
+            "description": "Background color of carousel flippers on pressed state.",
+            "type": "string",
+            "format": "color",
+            "default": "#F5F5F5",
+            "group": "Colors"
+        },
+        "msv-carousel-flipper-border-color": {
+            "friendlyName": "Flipper border",
+            "description": "Border color of carousel flippers.",
+            "type": "string",
+            "format": "color",
+            "default": "#2266E3",
+            "group": "Colors"
+        },
+        "msv-quantity-controls-content-bg-color": {
+            "friendlyName": "Quantity selector background color",
+            "description": "It is the background color of quantity selector.",
+            "type": "string",
+            "format": "color",
+            "default": "#FFFFFF",
+            "group": "Colors"
+        },
+        "msv-quantity-border-color": {
+            "friendlyName": "Quantity selector border color",
+            "description": "It is the border color of quantity selector.",
+            "type": "string",
+            "format": "color",
+            "default": "#C4C4C4",
+            "group": "Colors"
+        },
+        "msv-quantity-btn-font-color": {
+            "friendlyName": "Quantity selector font color",
+            "description": "It is the font color of quantity selector.",
+            "type": "string",
+            "format": "color",
+            "group": "Colors"
+        },
+        "msv-quantity-control-disable-background-color": {
+            "friendlyName": "Quantity selector background color when disabled",
+            "description": "It is the background color used for quantity selector when disabled.",
+            "type": "string",
+            "format": "color",
+            "default": "#FFFFFF",
+            "group": "Colors"
+        },
+        "msv-quantity-controls-disable-color": {
+            "friendlyName": "Quantity selector font color when disabled",
+            "description": "It is the font color used for quantity selector when disabled.",
+            "type": "string",
+            "format": "color",
+            "default": "#C4C4C4",
+            "group": "Colors"
+        },
+        "msv-callout-font-size-l": {
+            "friendlyName": "Special callouts font size large",
+            "description": "This is the default font size for Special callouts or hero for dektop view",
+            "type": "string",
+            "group": "Typography",
+            "default": "48px"
+        },
+        "msv-callout-font-size-m": {
+            "friendlyName": "Special callouts font size medium",
+            "description": "This is the default font size for Special callouts or hero for tablet view",
+            "type": "string",
+            "group": "Typography",
+            "default": "48px"
+        },
+        "msv-callout-font-size-s": {
+            "friendlyName": "Special callouts font size small",
+            "description": "This is the default font size for Special callouts or hero for mobile view",
+            "type": "string",
+            "group": "Typography",
+            "default": "48px"
+        },
+        "msv-callout-line-height-l": {
+            "friendlyName": "Special callouts line height large",
+            "description": "This is the default line height for Special callouts or hero for dektop view",
+            "type": "string",
+            "group": "Typography",
+            "default": "48px"
+        },
+        "msv-callout-line-height-m": {
+            "friendlyName": "Special callouts line height medium",
+            "description": "This is the default line height for Special callouts or hero for tablet view",
+            "type": "string",
+            "group": "Typography",
+            "default": "48px"
+        },
+        "msv-callout-line-height-s": {
+            "friendlyName": "Special callouts line height small",
+            "description": "This is the default line height for Special callouts or hero for mobile view",
+            "type": "string",
+            "group": "Typography",
+            "default": "48px"
+        },
+        "msv-h1-font-size-l": {
+            "friendlyName": "H1 heading font size large",
+            "description": "This is the default font size for h1 headings for dektop view",
+            "type": "string",
+            "group": "Typography",
+            "default": "48px"
+        },
+        "msv-h1-font-size-m": {
+            "friendlyName": "H1 heading font size medium",
+            "description": "This is the default font size for h1 headings for tablet view",
+            "type": "string",
+            "group": "Typography",
+            "default": "48px"
+        },
+        "msv-h1-font-size-s": {
+            "friendlyName": "H1 heading font size small",
+            "description": "This is the default font size for h1 headings for mobile view",
+            "type": "string",
+            "group": "Typography",
+            "default": "36px"
+        },
+        "msv-h1-line-height-l": {
+            "friendlyName": "H1 heading line height large",
+            "description": "This is the default line height for h1 headings for dektop view",
+            "type": "string",
+            "group": "Typography",
+            "default": "56px"
+        },
+        "msv-h1-line-height-m": {
+            "friendlyName": "H1 heading line height medium",
+            "description": "This is the default line height for h1 headings for tablet view",
+            "type": "string",
+            "group": "Typography",
+            "default": "56px"
+        },
+        "msv-h1-line-height-s": {
+            "friendlyName": "H1 heading line height small",
+            "description": "This is the default line height for h1 headings for mobile view",
+            "type": "string",
+            "group": "Typography",
+            "default": "48px"
+        },
+        "msv-h2-font-size-l": {
+            "friendlyName": "H2 heading font size large",
+            "description": "This is the default font size for h2 headings for dektop view",
+            "type": "string",
+            "group": "Typography",
+            "default": "36px"
+        },
+        "msv-h2-font-size-m": {
+            "friendlyName": "H2 heading font size medium",
+            "description": "This is the default font size for h2 headings for tablet view",
+            "type": "string",
+            "group": "Typography",
+            "default": "32px"
+        },
+        "msv-h2-font-size-s": {
+            "friendlyName": "H2 heading font size small",
+            "description": "This is the default font size for h2 headings for mobile view",
+            "type": "string",
+            "group": "Typography",
+            "default": "32px"
+        },
+        "msv-h2-line-height-l": {
+            "friendlyName": "H2 heading line height large",
+            "description": "This is the default line height for h2 headings for dektop view",
+            "type": "string",
+            "group": "Typography",
+            "default": "44px"
+        },
+        "msv-h2-line-height-m": {
+            "friendlyName": "H2 heading line height medium",
+            "description": "This is the default line height for h2 headings for tablet view",
+            "type": "string",
+            "group": "Typography",
+            "default": "40px"
+        },
+        "msv-h2-line-height-s": {
+            "friendlyName": "H2 heading line height small",
+            "description": "This is the default line height for h2 headings for mobile view",
+            "type": "string",
+            "group": "Typography",
+            "default": "40px"
+        },
+        "msv-h3-font-size-l": {
+            "friendlyName": "H3 heading font size large",
+            "description": "This is the default font size for h3 headings for dektop view",
+            "type": "string",
+            "group": "Typography",
+            "default": "24px"
+        },
+        "msv-h3-font-size-m": {
+            "friendlyName": "H3 heading font size medium",
+            "description": "This is the default font size for h3 headings for tablet view",
+            "type": "string",
+            "group": "Typography",
+            "default": "24px"
+        },
+        "msv-h3-font-size-s": {
+            "friendlyName": "H3 heading font size small",
+            "description": "This is the default font size for h3 headings for mobile view",
+            "type": "string",
+            "group": "Typography",
+            "default": "24px"
+        },
+        "msv-h3-line-height-l": {
+            "friendlyName": "H3 heading line height large",
+            "description": "This is the default line height for h3 headings for dektop view",
+            "type": "string",
+            "group": "Typography",
+            "default": "28px"
+        },
+        "msv-h3-line-height-m": {
+            "friendlyName": "H3 heading line height medium",
+            "description": "This is the default line height for h3 headings for tablet view",
+            "type": "string",
+            "group": "Typography",
+            "default": "28px"
+        },     
+        "msv-h3-line-height-s": {
+            "friendlyName": "H3 heading line height small",
+            "description": "This is the default line height for h3 headings for mobile view",
+            "type": "string",
+            "group": "Typography",
+            "default": "28px"
+        },
+        "msv-h4-font-size-l": {
+            "friendlyName": "H4 heading font size large",
+            "description": "This is the default font size for h4 headings for dektop view",
+            "type": "string",
+            "group": "Typography",
+            "default": "24px"
+        },
+        "msv-h4-font-size-m": {
+            "friendlyName": "H4 heading font size medium",
+            "description": "This is the default font size for h4 headings for tablet view",
+            "type": "string",
+            "group": "Typography",
+            "default": "24px"
+        },
+        "msv-h4-font-size-s": {
+            "friendlyName": "H4 heading font size small",
+            "description": "This is the default font size for h4 headings for mobile view",
+            "type": "string",
+            "group": "Typography",
+            "default": "24px"
+        },
+        "msv-h4-line-height-l": {
+            "friendlyName": "H4 heading line height large",
+            "description": "This is the default line height for h4 headings for dektop view",
+            "type": "string",
+            "group": "Typography",
+            "default": "28px"
+        },
+        "msv-h4-line-height-m": {
+            "friendlyName": "H4 heading line height medium",
+            "description": "This is the default line height for h4 headings for tablet view",
+            "type": "string",
+            "group": "Typography",
+            "default": "28px"
+        },     
+        "msv-h4-line-height-s": {
+            "friendlyName": "H4 heading line height small",
+            "description": "This is the default line height for h4 headings for mobile view",
+            "type": "string",
+            "group": "Typography",
+            "default": "28px"
+        },
+        "msv-h5-font-size-l": {
+            "friendlyName": "H5 heading font size large",
+            "description": "This is the default font size for h5 headings for dektop view",
+            "type": "string",
+            "group": "Typography",
+            "default": "20px"
+        },
+        "msv-h5-font-size-m": {
+            "friendlyName": "H5 heading font size medium",
+            "description": "This is the default font size for h5 headings for tablet view",
+            "type": "string",
+            "group": "Typography",
+            "default": "20px"
+        },
+        "msv-h5-font-size-s": {
+            "friendlyName": "H5 heading font size small",
+            "description": "This is the default font size for h5 headings for mobile view",
+            "type": "string",
+            "group": "Typography",
+            "default": "20px"
+        },
+        "msv-h5-line-height-l": {
+            "friendlyName": "H5 heading line height large",
+            "description": "This is the default line height for h5 headings for dektop view",
+            "type": "string",
+            "group": "Typography",
+            "default": "24px"
+        },
+        "msv-h5-line-height-m": {
+            "friendlyName": "H5 heading line height medium",
+            "description": "This is the default line height for h5 headings for tablet view",
+            "type": "string",
+            "group": "Typography",
+            "default": "24px"
+        },     
+        "msv-h5-line-height-s": {
+            "friendlyName": "H5 heading line height small",
+            "description": "This is the default line height for h5 headings for mobile view",
+            "type": "string",
+            "group": "Typography",
+            "default": "24px"
+        },
+        "msv-h6-font-size-l": {
+            "friendlyName": "H6 heading font size large",
+            "description": "This is the default font size for h6 headings for dektop view",
+            "type": "string",
+            "group": "Typography",
+            "default": "16px"
+        },
+        "msv-h6-font-size-m": {
+            "friendlyName": "H6 heading font size medium",
+            "description": "This is the default font size for h6 headings for tablet view",
+            "type": "string",
+            "group": "Typography",
+            "default": "16px"
+        },
+        "msv-h6-font-size-s": {
+            "friendlyName": "H6 heading font size small",
+            "description": "This is the default font size for h6 headings for mobile view",
+            "type": "string",
+            "group": "Typography",
+            "default": "16px"
+        },
+        "msv-h6-line-height-l": {
+            "friendlyName": "H6 heading line height large",
+            "description": "This is the default line height for h6 headings for dektop view",
+            "type": "string",
+            "group": "Typography",
+            "default": "24px"
+        },
+        "msv-h6-line-height-m": {
+            "friendlyName": "H6 heading line height medium",
+            "description": "This is the default line height for h6 headings for tablet view",
+            "type": "string",
+            "group": "Typography",
+            "default": "24px"
+        },     
+        "msv-h6-line-height-s": {
+            "friendlyName": "H6 heading line height small",
+            "description": "This is the default line height for h6 headings for mobile view",
+            "type": "string",
+            "group": "Typography",
+            "default": "24px"
+        },
+        "msv-body-font-color": {
+            "friendlyName": "Body text default font color",
+            "description": "It is the font color used body text.",
+            "type": "string",
+            "format": "color",
+            "default": "#2C262D",
+            "group": "Colors"
+        },
+        "msv-body-font-size-xs": {
+            "friendlyName": "Body font size extra small",
+            "description": "This is the extra small sized default font size of body text.",
+            "type": "string",
+            "group": "Typography",
+            "default": "12px"
+        },
+        "msv-body-line-height-xs": {
+            "friendlyName": "Body line height extra small",
+            "description": "This is the extra small sized default line height of body text.",
+            "type": "string",
+            "group": "Typography",
+            "default": "16px"
+        },
+        "msv-body-font-size-s": {
+            "friendlyName": "Body font size small",
+            "description": "This is the small sized default font size of body text.",
+            "type": "string",
+            "group": "Typography",
+            "default": "14px"
+        },
+        "msv-body-line-height-s": {
+            "friendlyName": "Body line height small",
+            "description": "This is the small sized default line height of body text.",
+            "type": "string",
+            "group": "Typography",
+            "default": "20px"
+        },
+        "msv-body-font-size-m": {
+            "friendlyName": "Body font size medium",
+            "description": "This is the medium sized default font size of body text.",
+            "type": "string",
+            "group": "Typography",
+            "default": "16px"
+        },
+        "msv-body-line-height-m": {
+            "friendlyName": "Body line height medium",
+            "description": "This is the medium sized default line height of body text.",
+            "type": "string",
+            "group": "Typography",
+            "default": "24px"
+        },
+        "msv-toggle-button-color": {
+            "friendlyName": "Toggle button color",
+            "description": "It is the color used for toggle buttons.",
+            "type": "string",
+            "format": "color",
+            "default": "#2266E3",
+            "group": "Colors"
+        },
+        "msv-toggle-button-disabled-color": {
+            "friendlyName": "Toggle button disabled color",
+            "description": "It is the color used for toggle button disabled.",
+            "type": "string",
+            "format": "color",
+            "default": "#C4C4C4",
+            "group": "Colors"
+        },
+        "msv-toggle-button-focus-border-color": {
+            "friendlyName": "Toggle button focus border color",
+            "description": "It is the color used for toggle button focus border.",
+            "type": "string",
+            "format": "color",
+            "default": "#2266E3",
+            "group": "Colors"
+        }, 
+        "msv-form-dropdown-border-color": {
+            "friendlyName": "Dropdown border color",
+            "description": "It is the color used for form dropdown border.",
+            "type": "string",
+            "format": "color",
+            "default": "#C4C4C4",
+            "group": "Colors"
+        }, 
+        "msv-form-dropdown-focus-border-color": {
+            "friendlyName": "Dropdown focus border color",
+            "description": "It is the color used for form dropdown focus border.",
+            "type": "string",
+            "format": "color",
+            "default": "#2266E3",
+            "group": "Colors"
+        }, 
+        "msv-form-dropdown-font-color": {
+            "friendlyName": "Dropdown font color",
+            "description": "It is the color used for form dropdown font.",
+            "type": "string",
+            "format": "color",
+            "default": "#2C262D",
+            "group": "Colors"
+        }, 
+        "msv-form-dropdown-bg-color": {
+            "friendlyName": "Dropdown background color",
+            "description": "It is the color used for form dropdown background.",
+            "type": "string",
+            "format": "color",
+            "default": "#FFFFFF",
+            "group": "Colors"
+        }
+    },
+    "modules": {
+        "header": {
+            "msv-header-bg": {
+                "friendlyName": "Background",
+                "description": "This is the background color for the module",
+                "type": "string",
+                "format": "color",
+                "group": "Color"
+            },
+            "msv-header-font-color": {
+                "friendlyName": "Header text",
+                "description": "Header text color",
+                "type": "string",
+                "format": "color",
+                "group": "Color"
+            },
+            "msv-header-icon-font-size": {
+                "friendlyName": "Header icon font size",
+                "description": "This is the icon font default size for header elements such as Sign-in",
+                "type": "string",
+                "group": "Typography",
+                "default": "20px"
+            }
+        },
+        "carousel": {
+            "msv-carousel-indicator-fill-color": {
+                "friendlyName": "Background",
+                "description": "This is the background color for the carousel indicator",
+                "type": "string",
+                "format": "color",
+                "group": "Color"
+            },
+            "msv-carousel-indicator-color": {
+                "friendlyName": "Border",
+                "description": "This is the border color for carousel indicator",
+                "type": "string",
+                "format": "color",
+                "group": "Color"
+            },
+            "msv-carousel-flipper-color": {
+                "friendlyName": "Flipper",
+                "description": "This is the color of flippers on the carousel",
+                "type": "string",
+                "default": "#616365",
+                "format": "color",
+                "group": "Color"
+            },
+            "msv-carousel-flipper-hover-color": {
+                "friendlyName": "Flipper icon on hover",
+                "description": "This is the hover color of flipper icon on the carousel",
+                "type": "string",
+                "format": "color",
+                "group": "Color"
+            }
+        },
+        "search": {
+            "msv-search-bg": {
+                "friendlyName": "Background",
+                "description": "This is the background color for the module",
+                "type": "string",
+                "format": "color",
+                "group": "Color"
+            },
+            "msv-search-font-color": {
+                "friendlyName": "Search text",
+                "description": "Search text color",
+                "type": "string",
+                "format": "color",
+                "group": "Color"
+            },
+            "msv-search-form-bg": {
+                "friendlyName": "Form background",
+                "description": "Search form background color",
+                "type": "string",
+                "format": "color",
+                "default": "#F8F7F6",
+                "group": "Color"
+            },
+            "msv-search-form-search-btn-color": {
+                "friendlyName": "Search button",
+                "description": "Search form search button color",
+                "type": "string",
+                "format": "color",
+                "default": "#4C833A",
+                "group": "Color"
+            },
+            "msv-search-form-cancel-btn-color": {
+                "friendlyName": "Cancel button",
+                "description": "Search form cancel button color",
+                "type": "string",
+                "format": "color",
+                "group": "Color"
+            },
+            "msv-search-font-size": {
+                "friendlyName": "Text",
+                "description": "This is the text size for content displayed in Search",
+                "type": "string",
+                "group": "Typography"
+            },
+            "ms-search-autosuggest-font-color": {
+                "friendlyName": "Search autosuggest color",
+                "description": "Search autosuggest font color",
+                "type": "string",
+                "format": "color",
+                "group": "Color"
+            },
+            "ms-search-autosuggest-background-color": {
+                "friendlyName": "Autosuggest background",
+                "description": "Search autosuggest background color",
+                "type": "string",
+                "format": "color",
+                "group": "Color"
+            },
+            "ms-search-autosuggest-results-font-color": {
+                "friendlyName": "Search autosuggest results color",
+                "description": "Search autosuggest results font color",
+                "type": "string",
+                "format": "color",
+                "group": "Color"
+            },
+            "msv-list-scrollbar-background": {
+                "friendlyName": "Autosuggest scroll background",
+                "description": "Autosuggest scroll background color",
+                "type": "string",
+                "format": "color",
+                "group": "Color"
+            },
+            "msv-list-scrollbar-thumb-background": {
+                "friendlyName": "Autosuggest scroll-thumb background",
+                "description": "Autosuggest scroll-thumb background color",
+                "type": "string",
+                "format": "color",
+                "group": "Color"
+            },
+            "msv-search-form-placeholder-color": {
+                "friendlyName": "Search form placeholder color",
+                "description": "This is the search form placeholder text color",
+                "type": "string",
+                "format": "color",
+                "group": "Color"
+            }
+        },
+        "promo-banner": {
+            "msv-promo-banner-bg": {
+                "friendlyName": "Background",
+                "description": "This is promo banner background color",
+                "type": "string",
+                "format": "color",
+                "default": "#2266E3",
+                "group": "Color"
+            },
+            "msv-promo-banner-font-color": {
+                "friendlyName": "Banner text",
+                "description": "This is the color for banner text",
+                "type": "string",
+                "format": "color",
+                "group": "Color"
+            },
+            "msv-promo-banner-font-size": {
+                "friendlyName": "Banner text size",
+                "description": "This is the text size for banner messages",
+                "type": "string",
+                "group": "Typography"
+            },
+            "msv-promo-banner-font-size-mobile": {
+                "friendlyName": "Banner text size for mobile viewport",
+                "description": "This is the text size for banner messages on mobile viewport",
+                "type": "string",
+                "group": "Typography"
+            }
+        },
+        "navigation-menu": {
+            "msv-nav-bg": {
+                "friendlyName": "Background",
+                "description": "This is the navigation menu background color",
+                "type": "string",
+                "format": "color",
+                "group": "Color"
+            },
+            "msv-nav-border": {
+                "friendlyName": "Border",
+                "description": "This is the navigation menu border color",
+                "type": "string",
+                "format": "color",
+                "default": "transparent",
+                "group": "Color"
+            },
+            "msv-nav-dropdown-border": {
+                "friendlyName": "Menu border",
+                "description": "This is the navigation menu dropdown/list border color",
+                "type": "string",
+                "format": "color",
+                "default": "transparent",
+                "group": "Color"
+            },
+            "msv-nav-carot-color": {
+                "friendlyName": "Carot",
+                "description": "This is the navigation menu carot color",
+                "type": "string",
+                "format": "color",
+                "group": "Color"
+            },
+            "msv-nav-font-color": {
+                "friendlyName": "Menu text",
+                "description": "This is the navigation menu text color",
+                "type": "string",
+                "format": "color",
+                "group": "Color"
+            },
+            "msv-nav-font-size": {
+                "friendlyName": "Menu text size",
+                "description": "This is the navigation menu text size",
+                "type": "string",
+                "group": "Typography"
+            },
+            "msv-nav-close-icon-font-size": {
+                "friendlyName": "Icon size",
+                "description": "Navigation menu close icon size",
+                "type": "string",
+                "group": "Typography"
+            }
+        },
+        "footer-category": {
+            "msv-footer-bg-color": {
+                "friendlyName": "Background",
+                "description": "This is post footer background color",
+                "type": "string",
+                "format": "color",
+                "default": "#FFFFFF",
+                "group": "Color"
+            },
+            "msv-post-footer-bg-color": {
+                "friendlyName": "Background",
+                "description": "This is post footer background color",
+                "type": "string",
+                "format": "color",
+                "default": "#000000",
+                "group": "Color"
+            },
+            "msv-footer-font-color-secondary": {
+                "friendlyName": "Background",
+                "description": "This is footer item text color",
+                "type": "string",
+                "format": "color",
+                "default": "#FFFFFF",
+                "group": "Color"
+            },
+            "msv-accordion-item-drawer-color": {
+                "friendlyName": "Accordion drawer color",
+                "description": "This is the drawer for accordion section",
+                "type": "string",
+                "format": "color",
+                "group": "Color"
+            },
+            "msv-footer-border-bottom-color": {
+                "friendlyName": "Border",
+                "description": "This is the border color for main footer",
+                "type": "string",
+                "format": "color",
+                "group": "Color"
+            },
+            "msv-footer-heading-font-color": {
+                "friendlyName": "Footer heading text",
+                "description": "Footer heading text color",
+                "type": "string",
+                "format": "color",
+                "group": "Color"
+            },
+            "msv-footer-link-font-color": {
+                "friendlyName": "Footer item text",
+                "description": "Footer item text",
+                "type": "string",
+                "format": "color",
+                "group": "Color"
+            }
+        },
+        "active-image": {
+            "msv-active-image-wrapper-background-color": {
+                "friendlyName": "Background",
+                "description": "Active image wrapper background color",
+                "type": "string",
+                "format": "color",
+                "default": "#FFFFFF",
+                "group": "Color"
+            },
+            "msv-active-image-overlay-background-color": {
+                "friendlyName": "Background",
+                "description": "Active image overlay background color",
+                "type": "string",
+                "format": "color",
+                "default": "#000000",
+                "group": "Color"
+            },
+            "msv-active-image-border-color": {
+                "friendlyName": "Form border",
+                "description" : "Active image product card border color",
+                "type": "string",
+                "format": "color",
+                "default": "#000000",
+                "group": "Color" 
+            },
+            "msv-active-image-button-border-color": {
+                "friendlyName": "Button border",
+                "description" : "Active image see more button border color",
+                "type": "string",
+                "format": "color",
+                "default": "#463D48",
+                "group": "Color" 
+            },
+            "msv-active-image-details-color": {
+                "friendlyName": "Details text color",
+                "description": "Details text color",
+                "type": "string",
+                "format": "color",
+                "group": "Color"
+            },
+            "msv-active-image-text-color": {
+                "friendlyName": "Details text(paragraph) color",
+                "description": "Details text(paragraph) color",
+                "type": "string",
+                "format": "color",
+                "group": "Color"
+            },
+            "msv-active-image-textheme-dark": {
+                "friendlyName": "Theme dark",
+                "description": "Active image dark theme text color",
+                "type": "string",
+                "format": "color",
+                "group": "Color"
+            },
+            "msv-active-image-textheme-light": {
+                "friendlyName": "Theme light",
+                "description": "Active image light theme text color",
+                "type": "string",
+                "format": "color",
+                "group": "Color"
+            }
+        },
+        "media-gallery": {
+            "msv-media-gallery-bg": {
+                "friendlyName": "Indicator",
+                "description": "Media gallery indicator color",
+                "type": "string",
+                "format": "color",
+                "group": "Color"
+            },
+            "msv-media-gallery-thumbnail-flipper-bg": {
+                "friendlyName": "Flipper background",
+                "description": "Media gallery thumbnail flipper button background color",
+                "type": "string",
+                "format": "color",
+                "group": "Color"
+            },
+            "msv-media-gallery-thumbnail-flipper-border": {
+                "friendlyName": "Flipper border",
+                "description": "Media gallery thumbnail flipper button border color",
+                "type": "string",
+                "format": "color",
+                "group": "Color"
+            },
+            "msv-media-gallery-thumbnail-flipper-font-color": {
+                "friendlyName": "Flipper",
+                "description": "Media gallery thumbnail flipper button text color",
+                "type": "string",
+                "format": "color",
+                "default": "#616365",
+                "group": "Color"
+            },
+            "msv-media-gallery-indicator-bg-color": {
+                "friendlyName": "Background",
+                "description": "This is media gallery carouselindicator background color",
+                "type": "string",
+                "format": "color",
+                "default": "#2C262D",
+                "group": "Color"
+            },
+            "msv-media-gallery-controls-bg-color": {
+                "friendlyName": "Background",
+                "description": "This is media gallery carousel control background color",
+                "type": "string",
+                "format": "color",
+                "default": "#F5F5F5",
+                "group": "Color"
+            },
+            "msv-footer-item-font-size": {
+                "friendlyName": "Media gallery carousel control font",
+                "description": "This is the text default size for media gallery carousel controls",
+                "type": "string",
+                "group": "Typography",
+                "default": "36px"
+            },
+            "msv-media-gallery-magnifying-glass-border-color": {
+                "friendlyName": "Border",
+                "description": "This is the magnifying glass border color for media gallery",
+                "type": "string",
+                "format": "color",
+                "group": "Color"
+            },
+            "msv-media-gallery-zoom-lens-border-color": {
+                "friendlyName": "Border",
+                "description": "This is zoom lens border color for media gallery",
+                "type": "string",
+                "format": "color",
+                "group": "Color"
+            },
+            "msv-media-gallery-zoom-container-result-border": {
+                "friendlyName": "Border",
+                "description": "This is zoom lens container result border color",
+                "type": "string",
+                "format": "color",
+                "group": "Color"
+            },
+            "msv-media-gallery-image-focus-border-color": {
+                "friendlyName": "Border",
+                "description": "This is border color for focus state for media gallery images",
+                "type": "string",
+                "format": "color",
+                "group": "Color"
+            }
+        },
+        "content-block": {
+            "msv-content-block-heading-font-color": {
+                "friendlyName": "Heading",
+                "description": "Content block heading color",
+                "type": "string",
+                "format": "color",
+                "group": "Color"
+            },
+            "msv-content-block-textheme-dark": {
+                "friendlyName": "Theme dark",
+                "description": "Content block dark theme text color",
+                "type": "string",
+                "format": "color",
+                "group": "Color"
+            },
+            "msv-content-block-textheme-light": {
+                "friendlyName": "Theme light",
+                "description": "Content block light theme text color",
+                "type": "string",
+                "format": "color",
+                "group": "Color"
+            },
+            "msv-content-block-primary-btn-border": {
+                "friendlyName": "Button border",
+                "description": "Content block button border color",
+                "type": "string",
+                "format": "color",
+                "group": "Color"
+            },
+            "msv-content-block-primary-btn-font-color": {
+                "friendlyName": "Button",
+                "description": "Content block button text color",
+                "type": "string",
+                "format": "color",
+                "group": "Color"
+            },
+            "msv-content-block-heading-font-size": {
+                "friendlyName": "Heading size",
+                "description": "Content block heading text size",
+                "type": "string",
+                "group": "Typography"
+            },
+            "msv-content-block-heading-font-size-s": {
+                "friendlyName": "Heading small ",
+                "description": "Content block heading small size",
+                "type": "string",
+                "group": "Typography"
+            },
+            "msv-content-block-text-font-size": {
+                "friendlyName": "Text size",
+                "description": "Content block text text size",
+                "type": "string",
+                "group": "Typography"
+            },
+            "msv-content-block-link-color": {
+                "friendlyName": "Link",
+                "description": "Content block link color",
+                "type": "string",
+                "format": "color",
+                "group": "Color"
+            },
+            "msv-content-block-primary-btn-bg": {
+                "friendlyName": "Button background",
+                "description": "Content block button background color",
+                "type": "string",
+                "format": "color",
+                "group": "Color"
+            },
+            "msv-content-block-link-font-size": {
+                "friendlyName": "Link size",
+                "description": "Content block tile text size",
+                "type": "string",
+                "group": "Typography"
+            },
+            "msv-additional-content-text-font-size": {
+                "friendlyName": "Additional content text size",
+                "description": "Content block additional content text size",
+                "type": "string",
+                "group": "Typography"
+            },
+            "msv-content-block-slim-hero-heading-font-color": {
+                "friendlyName": "Slim hero heading text color",
+                "description": "Content block slim hero heading text color",
+                "type": "string",
+                "format": "color",
+                "group": "Color"
+            },
+            "msv-content-block-font-color": {
+                "friendlyName": "Slim hero text color",
+                "description": "Content block slim hero text color",
+                "type": "string",
+                "format": "color",
+                "group": "Color"
+            },
+            "msv-content-block-error-textheme-dark": {
+                "friendlyName": "Hero error theme dark",
+                "description": "Content block dark theme text color",
+                "type": "string",
+                "format": "color",
+                "group": "Color"
+            },
+            "msv-content-block-error-textheme-light": {
+                "friendlyName": "Hero error theme light",
+                "description": "Content block light theme text color",
+                "type": "string",
+                "format": "color",
+                "group": "Color"
+            },
+            "msv-content-block-full-width-heading-font-size": {
+                "friendlyName": "Content block full width heading size",
+                "description": "Content block full width heading font size",
+                "type": "string",
+                "group": "Typography"
+            }
+        },
+        "product-collection": {
+            "msv-product-collection-heading-font-color": {
+                "friendlyName": "Heading",
+                "description": "This is a heading color",
+                "type": "string",
+                "format": "color",
+                "group": "Color"
+            },
+            "msv-product-collection-text-color": {
+                "friendlyName": "Text",
+                "description": "This is a text color",
+                "type": "string",
+                "format": "color",
+                "group": "Color"
+            },
+            "msv-product-collection-rating-star": {
+                "friendlyName": "Rating star",
+                "description": "This is a rating star color",
+                "type": "string",
+                "format": "color",
+                "group": "Color"
+            },
+            "msv-product-collection-flipper-bg": {
+                "friendlyName": "Flipper Background",
+                "description": "Product collection flipper background color",
+                "type": "string",
+                "format": "color",
+                "default": "transparent",
+                "group": "Color"
+            },
+            "msv-product-collection-flipper-font-color": {
+                "friendlyName": "Flipper",
+                "description": "Product collection flipper text color",
+                "type": "string",
+                "format": "color",
+                "group": "Color"
+            },
+            "msv-product-collection-flipper-font-size": {
+                "friendlyName": "Text",
+                "description": "Product collection flipper text size",
+                "type": "string",
+                "group": "Typography"
+            },
+            "msv-product-collection-flipper-font-size-desktop": {
+                "friendlyName": "Text",
+                "description": "Product collection flipper text size (Desktop)",
+                "type": "string",
+                "group": "Typography"
+            },
+            "msv-product-collection-flipper-border": {
+                "friendlyName": "Flipper border",
+                "description": "Product collection flipper border color",
+                "type": "string",
+                "format": "color",
+                "default": "transparent",
+                "group": "Color"
+            },
+            "msv-product-collection-heading-font-size": {
+                "friendlyName": "Heading size",
+                "description": "This is a text size for heading",
+                "type": "string",
+                "group": "Typography"
+            },
+            "msv-product-collection-text-size": {
+                "friendlyName": "Text",
+                "description": "Product collection text size",
+                "type": "string",
+                "group": "Typography"
+            },
+            "msv-product-collection-font-family": {
+                "friendlyName": "Font family",
+                "description": "Product collection font family",
+                "type": "string",
+                "group": "Product collection"
+            }
+        },
+        "buybox": {
+            "msv-buybox-btn-bg": {
+                "friendlyName": "Button Background",
+                "description": "This is background color button in buybox",
+                "type": "string",
+                "format": "color",
+                "group": "Color"
+            },
+            "msv-buybox-btn-font-color": {
+                "friendlyName": "Button text",
+                "description": "Buybox button text",
+                "type": "string",
+                "format": "color",
+                "group": "Color"
+            },
+            "msv-buybox-btn-border-color": {
+                "friendlyName": "Border button",
+                "description": "Buybox button border color",
+                "type": "string",
+                "format": "color",
+                "group": "Color"
+            },
+            "msv-buybox-rating-star": {
+                "friendlyName": "Rating star",
+                "description": "Buybox rating star color",
+                "type": "string",
+                "format": "color",
+                "group": "Color"
+            },
+            "msv-buybox-btn-wishlist-color": {
+                "friendlyName": "Wishlist button",
+                "description": "Buybox wishlist button color",
+                "type": "string",
+                "format": "color",
+                "group": "Color"
+            },
+            "msv-buybox-title-font-color": {
+                "friendlyName": "Title text",
+                "description": "Buybox title text",
+                "type": "string",
+                "format": "color",
+                "group": "Color"
+            },
+            "msv-buybox-text-font-color": {
+                "friendlyName": "Text",
+                "description": "This is a buybox text color",
+                "type": "string",
+                "format": "color",
+                "group": "Color"
+            },
+            "msv-buybox-primary-btn-bg": {
+                "friendlyName": "Primary button background ",
+                "description": "This is a primary button background color",
+                "type": "string",
+                "format": "color",
+                "group": "Color"
+            },
+            "msv-buybox-primary-btn-border": {
+                "friendlyName": "Primary button border",
+                "description": "This is a primary button border color",
+                "type": "string",
+                "format": "color",
+                "group": "Color"
+            },
+            "msv-buybox-primary-btn-font-color": {
+                "friendlyName": "Primary button text",
+                "description": "This is a  primary button text color",
+                "type": "string",
+                "format": "color",
+                "group": "Color"
+            },
+            "msv-buybox-secondary-btn-bg": {
+                "friendlyName": "Secondary button background",
+                "description": "This is a secondary button background color",
+                "type": "string",
+                "format": "color",
+                "group": "Color"
+            },
+            "msv-buybox-secondary-btn-border": {
+                "friendlyName": "Secondary button border",
+                "description": "Buybox secondary button border color",
+                "type": "string",
+                "format": "color",
+                "group": "Color"
+            },
+            "msv-buybox-secondary-btn-font-color": {
+                "friendlyName": "Secondary button text",
+                "description": "Buybox secondary button font color",
+                "type": "string",
+                "format": "color",
+                "group": "Color"
+            },
+            "msv-buybox-btn-font-size": {
+                "friendlyName": "Button text size",
+                "description": "Buybox button text size",
+                "type": "string",
+                "group": "Typography"
+            },
+            "msv-buybox-title-font-size": {
+                "friendlyName": "Title size",
+                "description": "Buybox title text size",
+                "type": "string",
+                "group": "Typography"
+            },
+            "msv-buybox-text-font-size": {
+                "friendlyName": "Text",
+                "description": "Buybox text size",
+                "type": "string",
+                "group": "Typography"
+            },
+            "msv-buybox-content-bg-color": {
+                "friendlyName": "Button Background",
+                "description": "This is background color for Buybox content",
+                "type": "string",
+                "format": "color",
+                "group": "Color"
+            },
+            "msv-buybox-text-font-size-title": {
+                "friendlyName": "Text",
+                "description": "Buybox title text size",
+                "type": "string",
+                "group": "Typography"
+            },
+            "msv-buybox-text-font-size-description": {
+                "friendlyName": "Text",
+                "description": "Buybox description text size",
+                "type": "string",
+                "group": "Typography"
+            },
+            "msv-buybox-quantity-controls-disable-color": {
+                "friendlyName": "Quantity controls",
+                "description": "This is disable color for quantity control",
+                "type": "string",
+                "format": "color",
+                "group": "Color"
+            },
+            "msv-buybox-quantity-control-disable-background-color": {
+                "friendlyName": "Quantity controls background",
+                "description": "This is disable background color for quantity control",
+                "type": "string",
+                "format": "color",
+                "group": "Color"
+            },
+            "msv-buybox-quantity-text-color": {
+                "friendlyName": "Buybox quantity",
+                "description": "This is text color for buybox quantity",
+                "type": "string",
+                "format": "color",
+                "group": "Color"
+            },
+            "msv-buybox-selected-button-color": {
+                "friendlyName": "Buybox button",
+                "description": "This is color for buybox selected button",
+                "type": "string",
+                "format": "color",
+                "group": "Color"
+            },
+            "msv-buybox-border-color": {
+                "friendlyName": "Buybox button",
+                "description": "This is color for buybox border",
+                "type": "string",
+                "format": "color",
+                "group": "Color"
+            },
+            "msv-buybox-depth-color": {
+                "friendlyName": "Buybox depth",
+                "description": "This is depth color for buybox",
+                "type": "string",
+                "format": "color",
+                "group": "Color"
+            },
+            "msv-buybox-msc-alert-color": {
+                "friendlyName": "Buybox alert",
+                "description": "This is color for buybox alert",
+                "type": "string",
+                "format": "color",
+                "group": "Color"
+            },
+            "msv-buybox-msc-inventory-available-text-color": {
+                "friendlyName": "Buybox inventory",
+                "description": "This is text color for buybox inventory available",
+                "type": "string",
+                "format": "color",
+                "group": "Color"
+            }, 
+            "msv-buybox-msc-add-wishlist-icon": {
+                "friendlyName": "wishlist icon color",
+                "description": "This is color of add to wishlist icon",
+                "type": "string",
+                "format": "color",
+                "group": "Color"
+            }
+        },
+        "quickview": {
+            "msv-quickView-btn-bg": {
+                "friendlyName": "Button Background",
+                "description": "This is background color button in quickview",
+                "type": "string",
+                "format": "color",
+                "group": "Color"
+            },
+            "msv-quickView-btn-font-color": {
+                "friendlyName": "Button text color",
+                "description": "This is font color of button text used in quickview",
+                "type": "string",
+                "format": "color",
+                "group": "Color"
+            },
+            "msv-quickView-rating-star": {
+                "friendlyName": "Rating star",
+                "description": "quickview rating star color",
+                "type": "string",
+                "format": "color",
+                "group": "Color"
+            },
+            "msv-quickView-title-font-color": {
+                "friendlyName": "Title text",
+                "description": "quickview title font color",
+                "type": "string",
+                "format": "color",
+                "group": "Color"
+            },
+            "msv-quickView-text-font-color": {
+                "friendlyName": "Text",
+                "description": "This is a quickview text color",
+                "type": "string",
+                "format": "color",
+                "group": "Color"
+            },
+            "msv-quickview-carousel-indicator-fill-color": {
+                "friendlyName": "Background",
+                "description": "This is the background color for the quickview carousel",
+                "type": "string",
+                "format": "color",
+                "group": "Color"
+            },
+            "msv-quickview-carousel-indicator-active-fill-color": {
+                "friendlyName": "Background",
+                "description": "This is the active background color for the quickview carousel",
+                "type": "string",
+                "format": "color",
+                "group": "Color"
+            },
+            "msv-quickview-carousel-flipper-color": {
+                "friendlyName": "Flipper color",
+                "description": "This is the color of flippers on the quickview carousel",
+                "type": "string",
+                "default": "#616365",
+                "format": "color",
+                "group": "Color"
+            },
+            "msv-quickview-carousel-flipper-hover-color": {
+                "friendlyName": "Flipper icon color on hover",
+                "description": "This is the hover color of flipper icon on the quickview carousel",
+                "type": "string",
+                "format": "color",
+                "group": "Color"
+            },
+            "msv-carousel-flipper-hover-bg": {
+                "friendlyName": "Flippers background color on hover",
+                "description": "This is the hover background color on the flippers",
+                "type": "string",
+                "default": "#616365",
+                "format": "color",
+                "group": "Color"
+            },
+            "msv-quickView-bg": {
+                "friendlyName": "background color",
+                "description": "This is the background color for the quickview",
+                "type": "string",
+                "format": "color",
+                "group": "Color"
+            },
+            "msv-quickView-btn-font-size": {
+                "friendlyName": "button text",
+                "description": "quickview button text size",
+                "type": "string",
+                "group": "Typography"
+            },
+            "msv-quickView-btn-extra-actions-color": {
+                "friendlyName": "extra actions color",
+                "description": "This is the color for the quickview extra actions",
+                "type": "string",
+                "format": "color",
+                "group": "Color"
+            },
+            "msv-carousel-indicator-active-fill-color": {
+                "friendlyName": "carousel active color",
+                "description": "This is the color for the quickview carousel active",
+                "type": "string",
+                "format": "color",
+                "group": "Color"
+            },
+            "msv-carousel-flipper-color": {
+                "friendlyName": "Flipper",
+                "description": "This is the color of flippers on the carousel",
+                "type": "string",
+                "format": "color",
+                "group": "Color"
+            },
+            "msv-quickview-dimenion-text-color": {
+                "friendlyName": "Dimension text",
+                "description": "This is the text color of quickview dimensions",
+                "type": "string",
+                "format": "color",
+                "group": "Color"
+            },
+            "msv-quickview-selected-button-color": {
+                "friendlyName": "Dimesnion button",
+                "description": "This is the button color of quickview dimesnions",
+                "type": "string",
+                "format": "color",
+                "group": "Color"
+            },
+            "msv-quickview-msc-alert-color": {
+                "friendlyName": "Alert",
+                "description": "This is the alert color of quickview",
+                "type": "string",
+                "format": "color",
+                "group": "Color"
+            },
+            "msv-quickview-msc-inventory-available-text-color": {
+                "friendlyName": "Invenotry available text",
+                "description": "This is the text color of quickview invenotry available",
+                "type": "string",
+                "format": "color",
+                "group": "Color"
+            }
+        },
+        "quickOrder": {
+            "msv-quickOrder-btn-bg": {
+                "friendlyName": "Button background",
+                "description": "Quick order button background color",
+                "type": "string",
+                "format": "color",
+                "group": "Color"
+            },
+            "msv-quickOrder-btn-font-color": {
+                "friendlyName": "quickOrder color",
+                "description": "quickOrder button font color",
+                "type": "string",
+                "format": "color",
+                "group": "Color"
+            },
+            "msv-quickOrder-btn-border-color": {
+                "friendlyName": "Border button",
+                "description": "quickOrder button border color",
+                "type": "string",
+                "format": "color",
+                "group": "Color"
+            },
+            "msv-quickOrder-btn-font-size": {
+                "friendlyName": "Button text size",
+                "description": "quickOrder button text size",
+                "type": "string",
+                "group": "Typography"
+            },
+            "msv-cart-line-group-border-color": {
+                "friendlyName": "Cart line group border color",
+                "description": "Cart line group border color",
+                "type": "string",
+                "format": "color",
+                "group": "Color"
+            },
+            "msv-quickOrder-title-font-size": {
+                "friendlyName": "Title size",
+                "description": "quickOrder title text size",
+                "type": "string",
+                "group": "Typography"
+            },
+            "msv-quickOrder-title-font-color": {
+                "friendlyName": "quickOrder title",
+                "description": " quickOrder title text color",
+                "type": "string",
+                "format": "color",
+                "group": "Color"
+            },
+            "msv-quickOrder-desc-text-font-size": {
+                "friendlyName": "Text",
+                "description": "quickOrder description text size",
+                "type": "string",
+                "group": "Typography"
+            },
+            "msv-quickOrder-text-font-size": {
+                "friendlyName": "Text",
+                "description": "quickOrder text size",
+                "type": "string",
+                "group": "Typography"
+
+            },
+            "msv-quickOrder-text-font-color": {
+                "friendlyName": "Text",
+                "description": "quickOrder text color",
+                "type": "string",
+                "group": "Typography"
+            },
+            "msv-quickOrder-primary-btn-bg": {
+                "friendlyName": "Button background",
+                "description": "quickOrder primary button background color",
+                "type": "string",
+                "format": "color",
+                "group": "Color"
+            },
+            "msv-quickOrder-primary-btn-font-color": {
+                "friendlyName": "quick Order color",
+                "description": "quickOrder primary button font color",
+                "type": "string",
+                "format": "color",
+                "group": "Color"
+            },
+            "msv-quickOrder-primary-btn-border": {
+                "friendlyName": "Button border",
+                "description": "quickOrder primary button border color",
+                "type": "string",
+                "format": "color",
+                "group": "Color"
+            }
+        },
+        "video-player": {
+            "msv-video-player-width": {
+                "friendlyName": "Width",
+                "description": "This is the width of the video player",
+                "type": "string",
+                "default": "100%",
+                "group": "Size"
+            },
+            "msv-video-player-details-color": {
+                "friendlyName": "Details text color",
+                "description": "Details text color",
+                "type": "string",
+                "format": "color",
+                "group": "Color"
+            },
+            "msv-video-player-background-color": {
+                "friendlyName": "Details background color",
+                "description": "Details background color at mobile and tablet view",
+                "type": "string",
+                "format": "color",
+                "group": "Color"
+            }
+        },
+        "cookie-compliance": {
+            "msv-cookie-compliance-bg-color": {
+                "friendlyName": "Background Color",
+                "description": "Cookie compliance background color",
+                "type": "string",
+                "format": "color",
+                "default": "#FFFFFF",
+                "group": "Color"
+            },
+            "msv-cookie-compliance-border-color": {
+                "friendlyName": "Border Color",
+                "description": "Cookie compliance border color",
+                "type": "string",
+                "format": "color",
+                "default": "#C4C4C4",
+                "group": "Color"
+            },
+            "msv-cookie-compliance-font-color": {
+                "friendlyName": "Font color",
+                "description": "Cookie compliance font color",
+                "type": "string",
+                "format": "color",
+                "group": "Color"
+            },
+            "msv-cookie-compliance-font-size": {
+                "friendlyName": "Font size",
+                "description": "This is the text default size",
+                "type": "string",
+                "group": "Typography",
+                "default": "16px"
+            }
+        },
+        "product-specification": {
+            "msv-product-specification-accordion-font-size": {
+                "friendlyName": "Product specification accordion text",
+                "description": "Product specification accordion text size",
+                "type": "string",
+                "group": "Typography"
+            },
+            "msv-product-details-font-size": {
+                "friendlyName": "Product specification product details text",
+                "description": "Product specification product details text text size",
+                "type": "string",
+                "group": "Typography"
+            },
+            "msv-product-specification-accordion-bg-color": {
+                "friendlyName": "Product specification accordion color",
+                "description": "Product specification accordion background color",
+                "type": "string",
+                "default": "#ffffff",
+                "group": "Color"
+            },
+            "msv-product-specification-accordion-text-font-color": {
+                "friendlyName": "Product specification accordion text",
+                "description": "Product specification accordion text font color",
+                "type": "string",
+                "default": "#595959",
+                "group": "Color"
+            },
+            "msv-product-details-text-font-color": {
+                "friendlyName": "Product specification product details text",
+                "description": "Product specification product details text font color",
+                "type": "string",
+                "default": "#2C262D",
+                "group": "Color"
+            },
+            "msv-product-specification-accordion-border": {
+                "friendlyName": "Border",
+                "description": "Product specification accordion border color",
+                "type": "string",
+                "format": "color",
+                "default": "#2266E3",
+                "group": "Color"
+            }
+        },
+        "subscribe": {
+            "msv-subscribe-background-color": {
+                "friendlyName": "Background",
+                "description": "This is subscribe background color",
+                "type": "string",
+                "format": "color",
+                "default": "#2C262D",
+                "group": "Color"
+            },
+            "msv-subscribe-text-color": {
+                "friendlyName": "Background",
+                "description": "This is subscribe text color",
+                "type": "string",
+                "format": "color",
+                "default": "#FFFFFF",
+                "group": "Color"
+            },
+            "msv-subscribe-input-border-color": {
+                "friendlyName": "Form border",
+                "description": "Subscribe button border color",
+                "type": "string",
+                "format": "color",
+                "default": "#FFFFFF",
+                "group": "Color"
+            },
+            "msv-subscribe-placeholder-color": {
+                "friendlyName": "Background",
+                "description": "This is subscribe emmail placeholder text color",
+                "type": "string",
+                "format": "color",
+                "default": "#C4C4C4",
+                "group": "Color"
+            }
+        },
+        "store-selector": {
+            "msv-store-select-title-font-color": {
+                "friendlyName": "Store title",
+                "description": "Store selector title text color",
+                "type": "string",
+                "format": "color",
+                "group": "Color"
+            },
+            "msv-store-select-background-color": {
+                "friendlyName": "Store background color",
+                "description": "Store selector background color",
+                "type": "string",
+                "format": "color",
+                "group": "Color"
+            },
+            "msv-store-select-text-font-color": {
+                "friendlyName": "Store sub text",
+                "description": "Store selector text color",
+                "type": "string",
+                "format": "color",
+                "group": "Color"
+            },
+            "msv-store-select-distance-color": {
+                "friendlyName": "Store distance",
+                "description": "Store distance (in miles) text color",
+                "type": "string",
+                "format": "color",
+                "group": "Color"
+            },
+            "msv-store-select-form-input-color": {
+                "friendlyName": "Input text",
+                "description": "Store selector input text color",
+                "type": "string",
+                "format": "color",
+                "group": "Color"
+            },
+            "msv-store-select-form-input-border": {
+                "friendlyName": "Input border",
+                "description": "Store selector input border color",
+                "type": "string",
+                "format": "color",
+                "group": "Color"
+            },
+            "msv-store-select-link-color": {
+                "friendlyName": "Link",
+                "description": "Store selector link color",
+                "type": "string",
+                "format": "color",
+                "group": "Color"
+            },
+            "msv-store-select-divider-color": {
+                "friendlyName": "Divider",
+                "description": "Store selector border color",
+                "type": "string",
+                "format": "color",
+                "default": "#1D1D1D",
+                "group": "Color"
+            },
+            "msv-store-select-form-bg": {
+                "friendlyName": "Form input background",
+                "description": "Store selector form input background color",
+                "type": "string",
+                "format": "color",
+                "default": "#fff",
+                "group": "Color"
+            },
+            "msv-store-select-text-font-size": {
+                "friendlyName": "Text size",
+                "description": "Store selector text text size",
+                "type": "string",
+                "group": "Typography"
+            },
+            "msv-store-select-link-size": {
+                "friendlyName": "Link size",
+                "description": "Store selector link size",
+                "type": "string",
+                "group": "Typography"
+            },
+            "msv-store-locate-divider-color": {
+                "friendlyName": "Border color",
+                "description": "Store locator border color",
+                "type": "string",
+                "format": "color",
+                "default": "#D1D1D1",
+                "group": "Color"
+            }
+        },
+        "text-block": {
+            "msv-text-block-font-color": {
+                "friendlyName": "Text block text color",
+                "description": "Text block text font color",
+                "type": "string",
+                "format": "color",
+                "group": "Color"
+            },
+            "msv-text-block-font-size-s": {
+                "friendlyName": "Text block text small size",
+                "description": "Text block text small font size",
+                "type": "string",
+                "group": "Typography"
+            },
+            "msv-text-block-font-size-m": {
+                "friendlyName": "Text block text medium size",
+                "description": "Text block text medium font size",
+                "type": "string",
+                "format": "color",
+                "group": "Color"
+            },
+            "msv-text-block-font-size-l": {
+                "friendlyName": "Text block text large size",
+                "description": "Text block text large font size",
+                "type": "string",
+                "group": "Typography"
+            },
+            "msv-text-block-font-size-xl": {
+                "friendlyName": "Text block text extra large size",
+                "description": "Text block text extra large font size",
+                "type": "string",
+                "group": "Typography"
+            }
+        },
+        "mini-cart": {
+            "msv-mini-cart-bg": {
+                "friendlyName": "Minicart background color",
+                "description": "Minicart background color",
+                "type": "string",
+                "format": "color",
+                "group": "Color"
+            },
+            "msv-mini-cart-product-title-color": {
+                "friendlyName": "Minicart flyout title color",
+                "description": "Minicart flyout title color",
+                "type": "string",
+                "format": "color",
+                "group": "Color"
+            },
+            "msv-mini-cart-count-color": {
+                "friendlyName": "Minicart count color",
+                "description": "Minicart count color",
+                "type": "string",
+                "format": "color",
+                "group": "Color"
+            },
+            "msv-mini-cart-icon-header-border-color": {
+                "friendlyName": "Minicart header border color",
+                "description": "Minicart header border color",
+                "type": "string",
+                "format": "color",
+                "group": "Color"
+            },
+            "msv-mini-cart-promo-content-bg-color": {
+                "friendlyName": "Minicart promo content background color",
+                "description": "Minicart promo content background color",
+                "type": "string",
+                "format": "color",
+                "group": "Color"
+            },
+            "msv-mini-cart-promo-content-link-bg-color": {
+                "friendlyName": "Minicart promo content link background color",
+                "description": "Minicart promo content link background color",
+                "type": "string",
+                "format": "color",
+                "group": "Color"
+            }
+        },
+        "password-reset-verification": {
+            "msv-password-reset-verification-font-color": {
+                "friendlyName": "Text",
+                "description": "Password reset verification text color",
+                "type": "string",
+                "format": "color",
+                "default": "#2C262D",
+                "group": "Color"
+            },
+            "msv-password-reset-verification-heading-font-color": {
+                "friendlyName": "Heading",
+                "description": "Password reset verification heading text color",
+                "type": "string",
+                "format": "color",
+                "group": "Color"
+            },
+            "msv-password-reset-verification-success-alert-bg": {
+                "friendlyName": "Success background",
+                "description": "Password reset verification success alert background color",
+                "type": "string",
+                "format": "color",
+                "default": "#DFF6DD",
+                "group": "Color"
+            },
+            "msv-password-reset-verification-success-alert-border": {
+                "friendlyName": "Success border",
+                "description": "Password reset verification success alert border color",
+                "type": "string",
+                "format": "color",
+                "group": "Color"
+            },
+            "msv-password-reset-verification-success-alert-font-color": {
+                "friendlyName": "Success",
+                "description": "Password reset verification success alert text color",
+                "type": "string",
+                "format": "color",
+                "group": "Color"
+            },
+            "msv-password-reset-verification-form-input-border": {
+                "friendlyName": "Input form border",
+                "description": "Password reset verification input form border color",
+                "type": "string",
+                "format": "color",
+                "group": "Color"
+            }
+        },
+        "password-reset": {
+            "msv-password-reset-font-color": {
+                "friendlyName": "Text",
+                "description": "Password reset text color",
+                "type": "string",
+                "format": "color",
+                "default": "#2C262D",
+                "group": "Color"
+            },
+            "msv-password-reset-heading-font-color": {
+                "friendlyName": "Heading",
+                "description": "Password reset heading text color",
+                "type": "string",
+                "format": "color",
+                "group": "Color"
+            },
+            "msv-password-reset-success-alert-bg": {
+                "friendlyName": "Success background",
+                "description": "Password reset success alert background color",
+                "type": "string",
+                "format": "color",
+                "default": "#DFF6DD",
+                "group": "Color"
+            },
+            "msv-password-reset-success-alert-border": {
+                "friendlyName": "Success border",
+                "description": "Password reset success alert border color",
+                "type": "string",
+                "format": "color",
+                "group": "Color"
+            },
+            "msv-password-reset-success-alert-font-color": {
+                "friendlyName": "Success",
+                "description": "Password reset success alert text color",
+                "type": "string",
+                "format": "color",
+                "group": "Color"
+            },
+            "msv-password-reset-form-input-border": {
+                "friendlyName": "Input form border",
+                "description": "Password reset input form border color",
+                "type": "string",
+                "format": "color",
+                "group": "Color"
+            }
+        },
+        "order-history": {
+            "msv-order-history-view-modes-background-color": {
+                "friendlyName": "View mode Background",
+                "description": "This is background color for view modes in order history",
+                "type": "string",
+                "format": "color",
+                "group": "Color"
+            },
+            "msv-order-history-actions-container-background-color": {
+                "friendlyName": "Action container Background",
+                "description": "This is background color for action container in order history",
+                "type": "string",
+                "format": "color",
+                "group": "Color"
+            },
+            "msv-order-history-button-background-color": {
+                "friendlyName": "Button Background",
+                "description": "This is background color for buttons in order history",
+                "type": "string",
+                "format": "color",
+                "group": "Color"
+            },
+            "msv-order-history-view-mode-btn-color": {
+                "friendlyName": "View mode Button",
+                "description": "View mode button color in order history",
+                "type": "string",
+                "format": "color",
+                "group": "Color"
+            },
+            "msv-order-order-information-font-color": {
+                "friendlyName": "Order information font",
+                "description": "Order information font color",
+                "type": "string",
+                "format": "color",
+                "group": "Color"
+            },
+            "msv-order-history-border-color": {
+                "friendlyName": "Border",
+                "description": "Order history border color",
+                "type": "string",
+                "format": "color",
+                "default": "#C4C4C4",
+                "group": "Color"
+            },
+            "msv-order-history-heading-font-color": {
+                "friendlyName": "Heading",
+                "description": "Order history heading text color",
+                "type": "string",
+                "format": "color",
+                "group": "Color"
+            },
+            "msv-order-history-title-font-color": {
+                "friendlyName": "Text Color",
+                "description": "Order history title font color",
+                "type": "string",
+                "format": "color",
+                "group": "Color"
+            },
+            "msv-order-history-text-font-color": {
+                "friendlyName": "Text color",
+                "description": "Order history text font color",
+                "type": "string",
+                "format": "color",
+                "group": "Color"
+            },
+            "msv-order-history-text-font-size": {
+                "friendlyName": "Text size",
+                "description": "Order history text font size",
+                "type": "string",
+                "group": "Typography"
+            },
+            "msv-order-history-view-mode-btn-hover-color": {
+                "friendlyName": "View mode hover color",
+                "description": "Order details grid and list view mode hover color",
+                "type": "string",
+                "format": "color",
+                "group": "Color"
+            },
+            "msv-order-history-list-view-mode-btn-color": {
+                "friendlyName": "List view mode button color",
+                "description": "Order details grid and list view mode hover color",
+                "type": "string",
+                "format": "color",
+                "group": "Color"
+            }
+        },
+        "checkout": {
+            "msv-checkout-border": {
+                "friendlyName": "Border",
+                "description": "checkout border color",
+                "type": "string",
+                "format": "color",
+                "default": "#000000",
+                "group": "Color"
+            },
+            "msv-checkout-shoppingbag-border": {
+                "friendlyName": "Border",
+                "description": "shoppingbag border color",
+                "type": "string",
+                "format": "color",
+                "group": "Color"
+            },
+            "msv-checkout-side-bg": {
+                "friendlyName": "Background Color",
+                "description": "Checkout side background color",
+                "type": "string",
+                "format": "color",
+                "group": "Color"
+            },
+            "msv-checkout-font-size": {
+                "friendlyName": "Checkout font size",
+                "description": "Checkout font size",
+                "type": "string",
+                "group": "Typography"
+            },
+            "msv-checkout-address-heading-font-color": {
+                "friendlyName": "Checkout address heading color",
+                "description": "Checkout address heading color",
+                "type": "string",
+                "format": "color",
+                "group": "Color"
+            },
+            "msv-checkout-error-message-bg": {
+                "friendlyName": "Checkout error background color",
+                "description": "Checkout error background color",
+                "type": "string",
+                "format": "color",
+                "group": "Color"
+            },
+            "msv-checkout-error-message-border": {
+                "friendlyName": "Checkout error border color",
+                "description": "Checkout error border color",
+                "type": "string",
+                "format": "color",
+                "group": "Color"
+            },
+            "msv-checkout-error-message-color": {
+                "friendlyName": "Checkout error message color",
+                "description": "Checkout error message color",
+                "type": "string",
+                "format": "color",
+                "group": "Color"
+            },
+            "msv-checkout-line-heading-font-color": {
+                "friendlyName": "Checkout line heading color",
+                "description": "Checkout line heading color",
+                "type": "string",
+                "format": "color",
+                "group": "Color"
+            },
+            "msv-checkout-line-title-font-color": {
+                "friendlyName": "Checkout line title color",
+                "description": "Checkout line title color",
+                "type": "string",
+                "format": "color",
+                "group": "Color"
+            },
+            "msv-checkout-line-text-font-color": {
+                "friendlyName": "Checkout line text color",
+                "description": "Checkout line text color",
+                "type": "string",
+                "format": "color",
+                "group": "Color"
+            },
+            "msv-checkout-line-text-font-size": {
+                "friendlyName": "Checkout line text size",
+                "description": "Checkout line text size",
+                "type": "string",
+                "group": "Typography"
+            }
+        },
+        "cart": {
+            "msv-cart-line-wrapper-border-color": {
+                "friendlyName": "Cart back to shopping button background color",
+                "description": "Cart back to shopping button background color",
+                "type": "string",
+                "format": "color",
+                "group": "Color"
+            },
+            "msv-cart-button-bg-color": {
+                "friendlyName": "Cart button background color",
+                "description": "Cart button background color",
+                "type": "string",
+                "format": "color",
+                "group": "Color"
+            },
+            "msv-cart-button-border-color": {
+                "friendlyName": "Cart button border color",
+                "description": "Cart button border color",
+                "type": "string",
+                "format": "color",
+                "group": "Color"
+            },
+            "msv-cart-checkout-button-border-color": {
+                "friendlyName": "Cart checkout button border color",
+                "description": "Cart checkout button border color",
+                "type": "string",
+                "format": "color",
+                "group": "Color"
+            },
+            "msv-cart-checkout-button-color": {
+                "friendlyName": "Cart checkout button color",
+                "description": "Cart checkout button color",
+                "type": "string",
+                "format": "color",
+                "group": "Color"
+            },
+            "msv-empty-cart-border-color": {
+                "friendlyName": "Empty cart border color",
+                "description": "Empty cart border color",
+                "type": "string",
+                "format": "color",
+                "group": "Color"
+            },
+            "msv-cart-promotion-backgroung-color": {
+                "friendlyName": "Cart promotion background color",
+                "description": "Cart promotion background color",
+                "type": "string",
+                "format": "color",
+                "group": "Color"
+            },
+            "msv-cart-promotional-link-color": {
+                "friendlyName": "Cart promotional link color",
+                "description": "Cart promotional link color",
+                "type": "string",
+                "format": "color",
+                "group": "Color"
+            },
+            "msv-cart-promotional-link-bg-color": {
+                "friendlyName": "Cart promotional link background color",
+                "description": "Cart promotional link background color",
+                "type": "string",
+                "format": "color",
+                "group": "Color"
+            },
+            "msv-checkout-order-summary-border-color": {
+                "friendlyName": "Cart checkout order summary border color",
+                "description": "Cart checkout order summary border color",
+                "type": "string",
+                "format": "color",
+                "group": "Color"
+            },
+            "msv-cart-line-group-border-color": {
+                "friendlyName": "Cart line group border color",
+                "description": "Cart line group border color",
+                "type": "string",
+                "format": "color",
+                "group": "Color"
+            }
+        },
+        "form": {
+            "msv-form-control-box-color": {
+                "friendlyName": "Form control box color",
+                "description": "Form control box shadow color",
+                "type": "string",
+                "format": "color",
+                "group": "Color"
+            }
+        },
+        "checkout-delivery-options": {
+            "msv-checkout-delivery-options-font-color": {
+                "friendlyName": "Text color for checkout delivery options",
+                "description": "Checkout delivery options text color",
+                "type": "string",
+                "format": "color",
+                "group": "Color"
+            },
+            "msv-checkout-delivery-options-error-bg": {
+                "friendlyName": "Checkout delivery options error background color",
+                "description": "Background color for checkout delivery options error",
+                "type": "string",
+                "format": "color",
+                "group": "Color"
+            },
+            "msv-checkout-delivery-options-error-font-color": {
+                "friendlyName": "Checkout delivery options error font color",
+                "description": "Font color for checkout delivery options error",
+                "type": "string",
+                "format": "color",
+                "group": "Color"
+            }
+        },
+        "checkout-guest-profile": {
+            "msv-contact-form-error-font-color": {
+                "friendlyName": "Text",
+                "description": "Checkout guest profile error text color",
+                "type": "string",
+                "format": "color",
+                "group": "Color"
+            },
+            "msv-contact-form-error-border-color": {
+                "friendlyName": "Text",
+                "description": "Checkout guest profile error border color",
+                "type": "string",
+                "format": "color",
+                "group": "Color"
+            }
+        },
+        "account-management-address": {
+            "msv-address-border": {
+                "friendlyName": "Border",
+                "description": "Address border color",
+                "type": "string",
+                "format": "color",
+                "default": "#D1D1D1",
+                "group": "Color"
+            },
+            "msv-checkout-shipping-address-font-color": {
+                "friendlyName": "Text",
+                "description": "Address text color",
+                "type": "string",
+                "format": "color",
+                "group": "Color"
+            },
+            "msv-address-heading-font-color": {
+                "friendlyName": "Heading",
+                "description": "Address heading text color",
+                "type": "string",
+                "format": "color",
+                "group": "Color"
+            },
+            "msv-address-primary-heading-font-color": {
+                "friendlyName": "Primary address heading",
+                "description": "Primary address heading text color",
+                "type": "string",
+                "format": "color",
+                "group": "Color"
+            },
+            "msv-address-form-error-font-color": {
+                "friendlyName": "Text",
+                "description": "Checkout guest profile error text color",
+                "type": "string",
+                "format": "color",
+                "group": "Color"
+            },
+            "msv-address-form-error-border-color": {
+                "friendlyName": "Text",
+                "description": "Checkout guest profile error border color",
+                "type": "string",
+                "format": "color",
+                "group": "Color"
+            }
+        },
+        "breadcrumb": {
+            "msv-breadcrumb-item-font-color": {
+                "friendlyName": "Link",
+                "description": "Breadcrumb link color",
+                "type": "string",
+                "format": "color",
+                "group": "Color"
+            }
+        },
+        "checkout-billing-address": {
+            "msv-checkout-billing-address-heading-font-size": {
+                "friendlyName": "Header font size",
+                "description": "This is the header font size for the module",
+                "type": "string",
+                "group": "Typography"
+            },
+            "msv-checkout-billing-address-heading-font-color": {
+                "friendlyName": "Header font color",
+                "description": "This is the header font color for the module",
+                "type": "string",
+                "format": "color",
+                "group": "Colors"
+            },
+            "msv-checkout-billing-address-font-size": {
+                "friendlyName": "Font size",
+                "description": "This is the font size for the module",
+                "type": "string",
+                "group": "Typography"
+            },
+            "msv-checkout-billing-address-font-color": {
+                "friendlyName": "Font color",
+                "description": "This is the font color for the module",
+                "type": "string",
+                "format": "color",
+                "group": "Colors"
+            }
+        },
+        "checkout-gift-card": {
+            "msv-checkout-gift-card-font-color": {
+                "friendlyName": "Font color",
+                "description": "Checkout gift card text color",
+                "type": "string",
+                "format": "color",
+                "group": "Color"
+            },
+            "msv-checkout-gift-card-font-size": {
+                "friendlyName": "Text size",
+                "description": "Checkout gift card text size",
+                "type": "string",
+                "group": "Typography"
+            }
+        },
+        "gift-card-balance-check": {
+            "msv-gift-card-balance-check-font-color": {
+                "friendlyName": "Font color",
+                "description": "Gift card balance check text color",
+                "type": "string",
+                "format": "color",
+                "group": "Color"
+            },
+            "msv-gift-card-balance-check-font-size": {
+                "friendlyName": "Text size",
+                "description": "Gift card balance check text size",
+                "type": "string",
+                "group": "Typography"
+            },
+            "msv-gift-card-balance-error-color": {
+                "friendlyName": "Font color",
+                "description": "Gift card balance check error color",
+                "type": "string",
+                "format": "color",
+                "group": "Color"
+            },
+            "msv-gift-card-balance-error-bg": {
+                "friendlyName": "Error background color",
+                "description": "Gift card balance check error background color",
+                "type": "string",
+                "format": "color",
+                "group": "Color"
+            },
+            "msv-gift-card-balance-error-border": {
+                "friendlyName": "Error border color",
+                "description": "Gift card balance check error border color",
+                "type": "string",
+                "format": "color",
+                "group": "Color"
+            }
+        },
+        "checkout-loyalty": {
+            "msv-checkout-loyalty-font-color": {
+                "friendlyName": "Text",
+                "description": "Checkout loyalty text color",
+                "type": "string",
+                "format": "color",
+                "group": "Color"
+            },
+            "msv-checkout-loyalty-heading-font-color": {
+                "friendlyName": "Heading",
+                "description": "Checkout loyalty heading text color",
+                "type": "string",
+                "format": "color",
+                "group": "Color"
+            },
+            "msv-checkout-loyalty-title-font-color": {
+                "friendlyName": "Title",
+                "description": "Checkout loyalty title color",
+                "type": "string",
+                "format": "color",
+                "group": "Color"
+            },
+            "msv-checkout-loyalty-link-color": {
+                "friendlyName": "Link ",
+                "description": "Checkout loyalty link text color",
+                "type": "string",
+                "format": "color",
+                "group": "Color"
+            },
+            "msv-checkout-loyalty-heading-ready-font-size": {
+                "friendlyName": "Heading ready size",
+                "description": "Checkout loyalty heading ready font size",
+                "type": "string",
+                "group": "Typography"
+            }
+        },
+        "checkout-terms-and-conditions": {
+            "msv-checkout-terms-and-conditions-font-color": {
+                "friendlyName": "Text",
+                "description": "Checkout terms and conditions font color",
+                "type": "string",
+                "format": "color",
+                "group": "Color"
+            },
+            "msv-checkout-terms-and-conditions-font-size": {
+                "friendlyName": "Text size",
+                "description": "Checkout terms and conditions text size",
+                "type": "string",
+                "group": "Typography"
+            },
+            "msv-checkout-terms-and-conditions-error-message-bg": {
+                "friendlyName": "Terms background color",
+                "description": "Checkout terms and conditions error background color",
+                "type": "string",
+                "format": "color",
+                "group": "Color"
+            },
+            "msv-checkout-terms-and-conditions-error-message-border": {
+                "friendlyName": "Terms error border color",
+                "description": "Checkout terms and conditions error border color",
+                "type": "string",
+                "format": "color",
+                "group": "Color"
+            },
+            "msv-checkout-terms-and-conditions-error-message-color": {
+                "friendlyName": "Terms error message color",
+                "description": "Checkout terms and conditions error message color",
+                "type": "string",
+                "format": "color",
+                "group": "Color"
+            },
+            "msv-checkout-terms-and-conditions-primary-btn-bg": {
+                "friendlyName": "Terms primary button background color",
+                "description": "Checkout terms and conditions primary button background color",
+                "type": "string",
+                "format": "color",
+                "group": "Color"
+            },
+            "msv-checkout-terms-and-conditions-primary-btn-font-color": {
+                "friendlyName": "Terms primary button text color",
+                "description": "Checkout terms and conditions primary button text color",
+                "type": "string",
+                "format": "color",
+                "group": "Color"
+            },
+            "msv-checkout-terms-and-conditions-primary-btn-border": {
+                "friendlyName": "Terms primary button border color",
+                "description": "Checkout terms and conditions primary button border color",
+                "type": "string",
+                "format": "color",
+                "group": "Color"
+            },
+            "msv-checkout-terms-and-conditions-secondary-btn-bg": {
+                "friendlyName": "Terms secondary button background color",
+                "description": "Checkout terms and conditions secondary button background color",
+                "type": "string",
+                "format": "color",
+                "group": "Color"
+            },
+            "msv-checkout-terms-and-conditions-secondary-btn-font-color": {
+                "friendlyName": "Terms secondary button text color",
+                "description": "Checkout terms and conditions secondary button text color",
+                "type": "string",
+                "format": "color",
+                "group": "Color"
+            },
+            "msv-checkout-terms-and-conditions-secondary-btn-border": {
+                "friendlyName": "Terms secondary button border color",
+                "description": "Checkout terms and conditions secondary button border color",
+                "type": "string",
+                "format": "color",
+                "group": "Color"
+            }
+        },
+        "order-details": {
+            "msv-order-details-view-modes-background-color": {
+                "friendlyName": "View mode Background",
+                "description": "This is background color for view modes in order details",
+                "type": "string",
+                "format": "color",
+                "group": "Color"
+            },
+            "msv-order-details-actions-container-background-color": {
+                "friendlyName": "Action container Background",
+                "description": "This is background color for action container in order details",
+                "type": "string",
+                "format": "color",
+                "group": "Color"
+            },
+            "msv-order-details-qr-code-bg-color": {
+                "friendlyName": "QR code background",
+                "description": "Order details QR code background color",
+                "type": "string",
+                "format": "color",
+                "default": "#FFFFFF",
+                "group": "Color"
+            },
+            "msv-order-details-border": {
+                "friendlyName": "Border",
+                "description": "Order details border color",
+                "type": "string",
+                "format": "color",
+                "default": "#D1D1D1",
+                "group": "Color"
+            },
+            "msv-order-details-heading-font-color": {
+                "friendlyName": "Heading",
+                "description": "Order details heading text color",
+                "type": "string",
+                "format": "color",
+                "group": "Color"
+            },
+            "msv-order-details__order-information-channel-reference-id-color": {
+                "friendlyName": "Channel id text color",
+                "description": "Channel id heading text color",
+                "type": "string",
+                "format": "color",
+                "group": "Color"
+            },
+            "msv-order-details__group-delivery-total-items-color": {
+                "friendlyName": "Group delivery total text color",
+                "description": "Group delivery total text color",
+                "type": "string",
+                "format": "color",
+                "group": "Color"
+            },
+            "msv-order-details-msc-cart-line__product-variant-value-color": {
+                "friendlyName": "Product variant value text color",
+                "description": "Product variant value text color",
+                "type": "string",
+                "format": "color",
+                "group": "Color"
+            },
+            "msv-order-details-msc-cart-line__product-variant-label-color": {
+                "friendlyName": "Product variant label text color",
+                "description": "Product variant label text color",
+                "type": "string",
+                "format": "color",
+                "group": "Color"
+            },
+            "msv-order-details-cart-line__product-discount-color": {
+                "friendlyName": "Cart line discount text color",
+                "description": "Cart line discount text color",
+                "type": "string",
+                "format": "color",
+                "group": "Color"
+            },
+            "msv-order-details-price__strikethrough-color": {
+                "friendlyName": "Strike through text color",
+                "description": "Strike through price text color",
+                "type": "string",
+                "format": "color",
+                "group": "Color"
+            },
+            "msv-order-details-title-font-color": {
+                "friendlyName": "Title",
+                "description": "Order details title text color",
+                "type": "string",
+                "format": "color",
+                "group": "Color"
+            },
+            "msv-order-details-text-font-color": {
+                "friendlyName": "Text",
+                "description": "Order details text color",
+                "type": "string",
+                "format": "color",
+                "group": "Color"
+            },
+            "msv-order-details-buy-again-background-color": {
+                "friendlyName": "Text",
+                "description": "Order details buy again table list icon background color",
+                "type": "string",
+                "format": "color",
+                "group": "Color"
+            },
+            "msv-order-details-view-mode-btn-hover-color": {
+                "friendlyName": "View mode hover color",
+                "description": "Order details grid and list view mode hover color",
+                "type": "string",
+                "format": "color",
+                "group": "Color"
+            },
+            "msv-order-details-list-view-mode-btn-color": {
+                "friendlyName": "List view mode button color",
+                "description": "Order details grid and list view mode hover color",
+                "type": "string",
+                "format": "color",
+                "group": "Color"
+            },
+            "msv-order-details-detailed-view-mode-btn-color": {
+                "friendlyName": "Detailed view mode button color",
+                "description": "Order details grid and list view mode hover color",
+                "type": "string",
+                "format": "color",
+                "group": "Color"
+            },
+            "msv-order-details-list-view-buy-again-shopping-bag-color": {
+                "friendlyName": "List view mode shopping bag color",
+                "description": "Order details list view mode buy again shopping bag color",
+                "type": "string",
+                "format": "color",
+                "group": "Color"
+            },
+            "msv-order-details-checkbox-checked-icon-border": {
+                "friendlyName": "Checkbox border color when checked",
+                "description": "This is a border color for checkbox when it is checked",
+                "type": "string",
+                "format": "color",
+                "group": "Color"
+            },
+            "msv-order-details-checkbox-checked-background-color": {
+                "friendlyName": "Checkbox background color when checked",
+                "description": "This is a background color for checkbox when it is checked",
+                "type": "string",
+                "format": "color",
+                "group": "Color"
+            },
+            "msv-order-details-checkbox-control-hover-background-color": {
+                "friendlyName": "Checkbox control background color when hovered",
+                "description": "This is a background color for checkbox control when it is hovered",
+                "type": "string",
+                "format": "color",
+                "group": "Color"
+            },
+            "msv-order-details-checkbox-control-selected-focus-background-color": {
+                "friendlyName": "Checkbox control background color when selected or focused",
+                "description": "This is a background color for checkbox control when it is selected or focused",
+                "type": "string",
+                "format": "color",
+                "group": "Color"
+            },
+            "msv-order-details-alert-color": {
+                "friendlyName": "Unavailable product alert font color",
+                "description": "This is a font color for unavailable product alert",
+                "type": "string",
+                "format": "color",
+                "group": "Color"
+            } 
+        },
+        "wishlist-items": {
+            "msv-wishlist-title-font-color": {
+                "friendlyName": "Text",
+                "description": "Wishlist text color",
+                "type": "string",
+                "format": "color",
+                "group": "Color"
+            },
+            "msv-wishlist-error-border": {
+                "friendlyName": "Error border",
+                "description": "Wishlist error border color",
+                "type": "string",
+                "format": "color",
+                "group": "Color"
+            },
+            "msv-wishlist-error-bg": {
+                "friendlyName": "Error background",
+                "description": "Wishlist error background color",
+                "type": "string",
+                "format": "color",
+                "group": "Color"
+            },
+            "msv-wishlist-error-font-color": {
+                "friendlyName": "Error",
+                "description": "Wishlist error text color",
+                "type": "string",
+                "format": "color",
+                "group": "Color"
+            },
+            "msv-wishlist-link-color": {
+                "friendlyName": "Link",
+                "description": "Wishlist link color",
+                "type": "string",
+                "format": "color",
+                "group": "Color"
+            }
+        },
+        "search-result-container": {
+            "msv-search-result-product-title-font-color": {
+                "friendlyName": "Product title color",
+                "description": "Search result product title font color",
+                "type": "string",
+                "format": "color",
+                "group": "Color"
+            },
+            "msv-search-result-product-rating-font-color": {
+                "friendlyName": "Product rating color",
+                "description": "Search result product rating font color",
+                "type": "string",
+                "format": "color",
+                "group": "Color"
+            },
+            "msv-search-result-product-rating-count-font-color": {
+                "friendlyName": "Product rating count color",
+                "description": "Search result product rating count font color",
+                "type": "string",
+                "format": "color",
+                "group": "Color"
+            },
+            "msv-search-result-pagination-color": {
+                "friendlyName": "Search result pagination color",
+                "description": "Search result pagination font color",
+                "type": "string",
+                "format": "color",
+                "group": "Color"
+            },
+            "msv-refiner-values-font-color": {
+                "friendlyName": "Search result refiner values color",
+                "description": "Search result refiner values color",
+                "type": "string",
+                "format": "color",
+                "group": "Color"
+            },
+            "msv-refiner-rating-font-color": {
+                "friendlyName": "Search result refiner rating color",
+                "description": "Search result refiner rating font color",
+                "type": "string",
+                "format": "color",
+                "group": "Color"
+            },
+            "msv-search-result-sort-font-color": {
+                "friendlyName": "Search result sort color",
+                "description": "Search result sort font color",
+                "type": "string",
+                "format": "color",
+                "group": "Color"
+            }
+        },
+        "order-template": {
+            "msv-order-template-font-size": {
+                "friendlyName": "Default text size for order template",
+                "description": "Default text size for order template",
+                "type": "string",
+                "group": "Typography"
+            },
+            "msv-order-template-heading-font-color": {
+                "friendlyName": "Order template heading font color",
+                "description": "Font color for order template heading",
+                "type": "string",
+                "format": "color",
+                "group": "Color"
+            },
+            "msv-order-template-alert-bg": {
+                "friendlyName": "Order template error background color",
+                "description": "Background color for order template errors",
+                "type": "string",
+                "format": "color",
+                "group": "Color"
+            },
+            "msv-order-template-alert-border": {
+                "friendlyName": "Order template error border color",
+                "description": "Border color for order template errors",
+                "type": "string",
+                "format": "color",
+                "group": "Color"
+            },
+            "msv-order-template-alert-color": {
+                "friendlyName": "Order template error font color",
+                "description": "Font color for order template errors",
+                "type": "string",
+                "format": "color",
+                "group": "Color"
+            },
+            "msv-order-template-link-color": {
+                "friendlyName": "Order template link font color",
+                "description": "Font color for order template links",
+                "type": "string",
+                "format": "color",
+                "group": "Color"
+            },
+            "msv-order-template-primary-btn-bg": {
+                "friendlyName": "Order template primary button background color",
+                "description": "Background color for order template primary buttons",
+                "type": "string",
+                "format": "color",
+                "group": "Color"
+            },
+            "msv-order-template-disabled-btn-color": {
+                "friendlyName": "Order template disabled button font color",
+                "description": "Font color for order template disabled buttons",
+                "type": "string",
+                "format": "color",
+                "group": "Color"
+            },
+            "msv-order-template-alert-size": {
+                "friendlyName": "Order template error font size",
+                "description": "Text size for order template errors",
+                "type": "string",
+                "group": "Typography"
+            },
+            "msv-order-template-modal-search-font-size": {
+                "friendlyName": "Order template modal search font size",
+                "description": "Text size for order template modal search",
+                "type": "string",
+                "group": "Typography"
+            }
+        },
+        "sign-up": {
+            "msv-sign-up-font-color": {
+                "friendlyName": "Text",
+                "description": "Sign-up text color",
+                "type": "string",
+                "format": "color",
+                "default": "#1D1D1D",
+                "group": "Color"
+            },
+            "msv-sign-up-heading-font-color": {
+                "friendlyName": "Heading",
+                "description": "Sign-up heading text color",
+                "type": "string",
+                "format": "color",
+                "group": "Color"
+            }
+        },
+        "sign-in": {
+            "msv-sign-in-font-color": {
+                "friendlyName": "Text",
+                "description": "Sign-in text color",
+                "type": "string",
+                "format": "color",
+                "default": "#1D1D1D",
+                "group": "Color"
+            },
+            "msv-sign-in-heading-font-color": {
+                "friendlyName": "Heading",
+                "description": "Sign-in heading text color",
+                "type": "string",
+                "format": "color",
+                "group": "Color"
+            }
+        },
+        "edit-profile": {
+            "msv-profile-edit-heading-font-color": {
+                "friendlyName": "Heading",
+                "description": "Edit profile heading text color",
+                "type": "string",
+                "format": "color",
+                "group": "Color"
+            }
+        },
+        "business-sign-up": {
+            "msv-business-sign-up-heading-font-color": {
+                "friendlyName": "Heading",
+                "description": "Business sign-up heading text color",
+                "type": "string",
+                "format": "color",
+                "group": "Color"
+            },
+            "msv-business-sign-up-error-alert-bg": {
+                "friendlyName": "Error background",
+                "description": "Business sign-up error alert background color",
+                "type": "string",
+                "format": "color",
+                "default": "#DFF6DD",
+                "group": "Color"
+            },
+            "msv-business-sign-up-error-alert-border": {
+                "friendlyName": "Error border",
+                "description": "Business sign-up error alert border color",
+                "type": "string",
+                "format": "color",
+                "group": "Color"
+            },
+            "msv-business-sign-up-error-alert-font-color": {
+                "friendlyName": "Error font color",
+                "description": "Business sign-up error alert text color",
+                "type": "string",
+                "format": "color",
+                "group": "Color"
+            },
+            "msv-business-sign-up-error-color": {
+                "friendlyName": "Error font color",
+                "description": "Business sign-up error text color",
+                "type": "string",
+                "format": "color",
+                "group": "Color"
+            }
+        },
+        "ratings-histogram": {
+            "msv-histogram-ratings-heading-color": {
+                "friendlyName": "Rating histogram heading",
+                "description": "Rating histogram heading text color",
+                "type": "string",
+                "format": "color",
+                "group": "Color"
+            }
+        },
+        "quick-order": {
+            "msv-quickOrderGrid-btn-bg": {
+                "friendlyName": "Background Color",
+                "description": "This is background color Quick order",
+                "type": "string",
+                "format": "color",
+                "group": "Color"
+            },
+            "msv-cart-line-group-border-color": {
+                "friendlyName": "Cart line group border color",
+                "description": "This is the border color for quick order cart line group",
+                "type": "string",
+                "format": "color",
+                "group": "Color"
+            },
+            "msv-quick-order-grid-heading-font-color": {
+                "friendlyName": "Heading font color",
+                "description": "This is the quick order heading font color",
+                "type": "string",
+                "format": "color",
+                "group": "Color"
+            },
+            "msv-quick-order-disabled-color": {
+                "friendlyName": "Disabled state color",
+                "description": "This is the quick order color for disabled state",
+                "type": "string",
+                "format": "color",
+                "group": "Color"
+            },
+            "msv-quick-order-disabled-background-color": {
+                "friendlyName": "Disabled state background",
+                "description": "This is the quick order background color for disabled state",
+                "type": "string",
+                "format": "color",
+                "group": "Color"
+            },
+            "msv-quick-order-alert-success-text-color": {
+                "friendlyName": "Success state text color",
+                "description": "This is the quick order font color for success state",
+                "type": "string",
+                "format": "color",
+                "group": "Color"
+            },
+            "msv-quick-order-alert-success-text-background-color": {
+                "friendlyName": "Success state background color",
+                "description": "This is the quick order background color for success state",
+                "type": "string",
+                "format": "color",
+                "group": "Color"
+            },
+            "msv-quick-order-grid-alert-error-color": {
+                "friendlyName": "Alert error message color",
+                "description": "This is the quick order alert message color",
+                "type": "string",
+                "format": "color",
+                "group": "Color"
+            }
+        },
+        "product-comparison-button": {
+            "msv-product-comparison-button-btn-icon-color": {
+                "friendlyName": "Text Color",
+                "description": "This is text color product comparison button remove",
+                "type": "string",
+                "format": "color",
+                "group": "Color"
+            },
+            "msv-product-comparison-button-btn-icon-font-size": {
+                "friendlyName": "Text  size",
+                "description": "font size for product comparison button icon ",
+                "type": "string",
+                "group": "Typography"
+            },
+            "msv-product-comparison-button-btn-text-color": {
+                "friendlyName": "Text Color",
+                "description": "This is text color product comparison button remove",
+                "type": "string",
+                "format": "color",
+                "group": "Color"
+            }
+        },
+        "product-comparison-preview": {
+            "msv-product-comparison-preview-background-color": {
+                "friendlyName": "background color for product comparison preview",
+                "description": "This is background color for product comparison preview pop up",
+                "type": "string",
+                "format": "color",
+                "group": "Color"
+            },
+            "msv-product-comparison-preview-main-container-header-icon-color": {
+                "friendlyName": "Text color for product comparison preview main container header",
+                "description": "This is text color for product comparison preview pop up main container header",
+                "type": "string",
+                "format": "color",
+                "group": "Color"
+            },
+            "msv-product-comparison-preview-main-container-header-icon-font-size": {
+                "friendlyName": "Main container header icon font size",
+                "description": "font size for product comparison preview Main container header icon",
+                "type": "string",
+                "group": "Typography"
+            },
+            "msv-product-comparison-preview-main-container-header-collapse-color": {
+                "friendlyName": "Collapse icon color for product comparison preview main container header",
+                "description": "This is collapse icon color for product comparison preview pop up main container header",
+                "type": "string",
+                "format": "color",
+                "group": "Color"
+            },
+            "msv-product-comparison-preview-main-container-header-collapse-size": {
+                "friendlyName": "Main container header collapse icon font size",
+                "description": "font size for product comparison preview Main container header collapse icon",
+                "type": "string",
+                "group": "Typography"
+            }
+        },
+        "product-comparison": {
+            "msv-comparison-header-color": {
+                "friendlyName": "color for product comparison page for header",
+                "description": "This is color for product comparison page for header",
+                "type": "string",
+                "format": "color",
+                "group": "Color"
+            },
+            "msv-comparison-remove-button-background-color": {
+                "friendlyName": "background color for product comparison page for remove button",
+                "description": "This is background color for product comparison page for remove button",
+                "type": "string",
+                "format": "color",
+                "group": "Color"
+            },
+            "msv-comparison-remove-button-font-size": {
+                "friendlyName": "product comparison page remove button font size",
+                "description": "font size for product comparison page remove button",
+                "type": "string",
+                "group": "Typography"
+            },
+            "msv-comparison-main-color": {
+                "friendlyName": "background color for product comparison page main container",
+                "description": "This is background color for product comparison page main container",
+                "type": "string",
+                "format": "color",
+                "group": "Color"
+            },
+            "msv-comparison-btn-bg": {
+                "friendlyName": "background color for product comparison page clear all button",
+                "description": "This is background color for product comparison page clear all button",
+                "type": "string",
+                "format": "color",
+                "group": "Color"
+            },
+            "msv-comparison-clicker-button-background-color": {
+                "friendlyName": "background color for product comparison page next-previous cliker button",
+                "description": "This is background color for product comparison page next-previous cliker button",
+                "type": "string",
+                "format": "color",
+                "group": "Color"
+            },
+            "msv-comparison-clicker-button-color": {
+                "friendlyName": "color for product comparison page next-previous cliker button",
+                "description": "This is color for product comparison page next-previous cliker button",
+                "type": "string",
+                "format": "color",
+                "group": "Color"
+            }
+        }
+    }
+}

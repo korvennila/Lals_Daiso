@@ -1,0 +1,22 @@
+@import "../common/00-settings/responsive-breakpoints.scss";
+
+$rtl-msv-checkout-payment-instrument-card-number-margin-right: 10px;
+
+[dir="rtl"] {
+    .ms-checkout-payment-instrument {
+        &__card-number {
+            margin-left: 0;
+            margin-right: $rtl-msv-checkout-payment-instrument-card-number-margin-right;
+        }
+
+        &__error-title::before {
+            margin-right: 0;
+            margin-left: 22px;
+        }
+
+        &__error-message {
+            margin-left: 0;
+            margin-right: 42px;
+        }
+    }
+}

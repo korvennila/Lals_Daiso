@@ -1,0 +1,287 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`footer item view tests renders correctly 1`] = `
+initialize {
+  "0": Node {
+    "attribs": Object {
+      "class": "module-class-FooterItem",
+      "data-m-t": "mock-type",
+      "id": "",
+    },
+    "children": Array [
+      Node {
+        "attribs": Object {
+          "class": "mock-class-HeadingContainer",
+        },
+        "children": Array [
+          Node {
+            "data": " ",
+            "next": Node {
+              "attribs": Object {
+                "aria-hidden": "true",
+                "class": "ms-footer__heading__title-icon",
+              },
+              "children": Array [],
+              "name": "i",
+              "namespace": "http://www.w3.org/1999/xhtml",
+              "next": Node {
+                "data": "{heading} ",
+                "next": null,
+                "parent": [Circular],
+                "prev": [Circular],
+                "type": "text",
+              },
+              "parent": [Circular],
+              "prev": [Circular],
+              "type": "tag",
+              "x-attribsNamespace": Object {
+                "aria-hidden": undefined,
+                "class": undefined,
+              },
+              "x-attribsPrefix": Object {
+                "aria-hidden": undefined,
+                "class": undefined,
+              },
+            },
+            "parent": [Circular],
+            "prev": null,
+            "type": "text",
+          },
+          Node {
+            "attribs": Object {
+              "aria-hidden": "true",
+              "class": "ms-footer__heading__title-icon",
+            },
+            "children": Array [],
+            "name": "i",
+            "namespace": "http://www.w3.org/1999/xhtml",
+            "next": Node {
+              "data": "{heading} ",
+              "next": null,
+              "parent": [Circular],
+              "prev": [Circular],
+              "type": "text",
+            },
+            "parent": [Circular],
+            "prev": Node {
+              "data": " ",
+              "next": [Circular],
+              "parent": [Circular],
+              "prev": null,
+              "type": "text",
+            },
+            "type": "tag",
+            "x-attribsNamespace": Object {
+              "aria-hidden": undefined,
+              "class": undefined,
+            },
+            "x-attribsPrefix": Object {
+              "aria-hidden": undefined,
+              "class": undefined,
+            },
+          },
+          Node {
+            "data": "{heading} ",
+            "next": null,
+            "parent": [Circular],
+            "prev": Node {
+              "attribs": Object {
+                "aria-hidden": "true",
+                "class": "ms-footer__heading__title-icon",
+              },
+              "children": Array [],
+              "name": "i",
+              "namespace": "http://www.w3.org/1999/xhtml",
+              "next": [Circular],
+              "parent": [Circular],
+              "prev": Node {
+                "data": " ",
+                "next": [Circular],
+                "parent": [Circular],
+                "prev": null,
+                "type": "text",
+              },
+              "type": "tag",
+              "x-attribsNamespace": Object {
+                "aria-hidden": undefined,
+                "class": undefined,
+              },
+              "x-attribsPrefix": Object {
+                "aria-hidden": undefined,
+                "class": undefined,
+              },
+            },
+            "type": "text",
+          },
+        ],
+        "name": "div",
+        "namespace": "http://www.w3.org/1999/xhtml",
+        "next": null,
+        "parent": [Circular],
+        "prev": null,
+        "type": "tag",
+        "x-attribsNamespace": Object {
+          "class": undefined,
+        },
+        "x-attribsPrefix": Object {
+          "class": undefined,
+        },
+      },
+    ],
+    "name": "div",
+    "namespace": "http://www.w3.org/1999/xhtml",
+    "next": null,
+    "parent": Node {
+      "children": Array [
+        [Circular],
+      ],
+      "name": "root",
+      "next": null,
+      "parent": null,
+      "prev": null,
+      "type": "root",
+    },
+    "prev": null,
+    "type": "tag",
+    "x-attribsNamespace": Object {
+      "class": undefined,
+      "data-m-t": undefined,
+      "id": undefined,
+    },
+    "x-attribsPrefix": Object {
+      "class": undefined,
+      "data-m-t": undefined,
+      "id": undefined,
+    },
+  },
+  "_root": [Circular],
+  "length": 1,
+  "options": Object {
+    "decodeEntities": true,
+    "xml": false,
+  },
+}
+`;
+
+exports[`footer item view tests renders correctly without heading & image 1`] = `
+initialize {
+  "0": Node {
+    "attribs": Object {
+      "class": "module-class-FooterItem",
+      "data-m-t": "mock-type",
+      "id": "",
+    },
+    "children": Array [
+      Node {
+        "data": "{link}",
+        "next": null,
+        "parent": [Circular],
+        "prev": null,
+        "type": "text",
+      },
+    ],
+    "name": "div",
+    "namespace": "http://www.w3.org/1999/xhtml",
+    "next": null,
+    "parent": Node {
+      "children": Array [
+        [Circular],
+      ],
+      "name": "root",
+      "next": null,
+      "parent": null,
+      "prev": null,
+      "type": "root",
+    },
+    "prev": null,
+    "type": "tag",
+    "x-attribsNamespace": Object {
+      "class": undefined,
+      "data-m-t": undefined,
+      "id": undefined,
+    },
+    "x-attribsPrefix": Object {
+      "class": undefined,
+      "data-m-t": undefined,
+      "id": undefined,
+    },
+  },
+  "_root": [Circular],
+  "length": 1,
+  "options": Object {
+    "decodeEntities": true,
+    "xml": false,
+  },
+}
+`;
+
+exports[`footer item view tests renders correctly without heading 1`] = `
+initialize {
+  "0": Node {
+    "attribs": Object {
+      "class": "module-class-FooterItem",
+      "data-m-t": "mock-type",
+      "id": "",
+    },
+    "children": Array [
+      Node {
+        "attribs": Object {
+          "class": "mock-class-Link",
+        },
+        "children": Array [
+          Node {
+            "data": "link text{image}",
+            "next": null,
+            "parent": [Circular],
+            "prev": null,
+            "type": "text",
+          },
+        ],
+        "name": "div",
+        "namespace": "http://www.w3.org/1999/xhtml",
+        "next": null,
+        "parent": [Circular],
+        "prev": null,
+        "type": "tag",
+        "x-attribsNamespace": Object {
+          "class": undefined,
+        },
+        "x-attribsPrefix": Object {
+          "class": undefined,
+        },
+      },
+    ],
+    "name": "div",
+    "namespace": "http://www.w3.org/1999/xhtml",
+    "next": null,
+    "parent": Node {
+      "children": Array [
+        [Circular],
+      ],
+      "name": "root",
+      "next": null,
+      "parent": null,
+      "prev": null,
+      "type": "root",
+    },
+    "prev": null,
+    "type": "tag",
+    "x-attribsNamespace": Object {
+      "class": undefined,
+      "data-m-t": undefined,
+      "id": undefined,
+    },
+    "x-attribsPrefix": Object {
+      "class": undefined,
+      "data-m-t": undefined,
+      "id": undefined,
+    },
+  },
+  "_root": [Circular],
+  "length": 1,
+  "options": Object {
+    "decodeEntities": true,
+    "xml": false,
+  },
+}
+`;

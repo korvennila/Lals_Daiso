@@ -1,0 +1,36 @@
+{
+    "$type": "definitionExtension",
+    "config": {
+        "displayStyle": {
+            "friendlyName": "List display style",
+            "description": "Display style of the image list",
+            "type": "css",
+            "enum": {
+                "vertical": "Vertical",
+                "horizontal": "Horizontal"
+            }
+        },
+        "imagePlacement": {
+            "friendlyName": "Image placement",
+            "description": "Placement of the image",
+            "type": "css",
+            "enum": {
+                "top": "Above text",
+                "bottom": "Below text",
+                "left": "Left of text",
+                "right": "Right of text"
+            }
+        },
+        "contentAlignment":{
+            "friendlyName": "Content alignment",
+            "description": "Alignment of the content",
+            "type": "css",
+            "enum":{
+                "left": "Left",
+                "right": "Right",
+                "center": "Center"
+            },
+            "default": "left"
+        }
+    }
+}

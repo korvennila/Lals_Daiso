@@ -1,0 +1,64 @@
+@import "../common/00-settings/responsive-breakpoints.scss";
+
+$msv-checkout-shipping-address-images-margin-left: 8px;
+$msv-checkout-shipping-address-images-line-quantity-left: 3px;
+$msv-address-detail-item-phone-margin-top: 3px;
+
+[dir="rtl"] {
+    .ms-checkout-shipping-address {
+        &__group-images {
+            &-header {
+                float: right;
+
+                &-main {
+                    &::before {
+                        padding-left: 10px;
+                        padding-right: 0;
+                    }
+                    float: left;
+                    margin-left: 10px;
+                }
+
+                &-item {
+                    float: left;
+                }
+            }
+
+            &-lines {
+                &-line-quantity {
+                    left: $msv-checkout-shipping-address-images-line-quantity-left;
+                    right: unset;
+                }
+
+                &-product {
+                    float: right;
+                    margin-right: 0;
+                    margin-left: $msv-checkout-shipping-address-images-margin-left;
+                }
+            }
+        }
+
+        .msc-address-detail {
+            &__item {
+                margin-right: 0;
+                margin-left: 5px;
+            }
+
+            &__item-phone::before {
+                margin-right: 0;
+                margin-left: 5px;
+                margin-top: $msv-address-detail-item-phone-margin-top;
+                float: right;
+            }
+        }
+
+        .msc-address-form__item-street {
+            padding-left: 12px;
+            padding-right: 0;
+
+            .msc-address-form__input-text {
+                padding: 0 12px 0 0;
+            }
+        }
+    }
+}

@@ -1,0 +1,24 @@
+@import "../common/00-settings/responsive-breakpoints.scss";
+
+$cookie-compliance_margin-left-right-mobile: 16px;
+$cookie-compliance_left-margin-desktop: 60px;
+$cookie-compliance_left-margin-tablet: 24px;
+
+[dir="rtl"] {
+    .ms-cookie-compliance {
+        @media screen and (max-width: $msv-breakpoint-m) {
+            margin-left: $cookie-compliance_margin-left-right-mobile;
+            margin-right: $cookie-compliance_margin-left-right-mobile;
+        }
+
+        @media screen and (max-width: $msv-breakpoint-l) and (min-width: $msv-breakpoint-m) {
+            left: $cookie-compliance_left-margin-tablet;
+            right: auto;
+        }
+
+        @media screen and (min-width: $msv-breakpoint-l) {
+            left: $cookie-compliance_left-margin-desktop;
+            right: auto;
+        }
+    }
+}

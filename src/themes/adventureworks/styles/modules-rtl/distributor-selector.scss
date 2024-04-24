@@ -1,0 +1,91 @@
+@import "../common/00-settings/responsive-breakpoints.scss";
+
+[dir="rtl"] {
+    .ms-distributor-selector {
+        .msc-modal__content {
+            overflow: hidden;
+        }
+
+        .current-distributor {
+            .content {
+                padding-left: 10px;
+            }
+        }
+
+        &__search {
+            &-header {
+                padding-right: 0;
+                padding-left: 20px;
+            }
+        }
+
+        &__count-message {
+            padding-right: unset;
+            padding-left: 20px;
+        }
+
+        &__details {
+            &_dialog {
+                left: unset;
+                right: -200px;
+            }
+
+            &-slider {
+                &-wrapper {
+                    left: unset;
+                    right: -100%;
+
+                    @media (max-width: $msv-breakpoint-m) {
+                        width: 100%;
+                    }
+                }
+
+                &-wrapper.show {
+                    transition: 1s;
+                    left: unset;
+                    right: 0;
+                }
+            }
+        }
+
+        &__distributors {
+            padding-left: 5px;
+        }
+
+        &__dialog {
+            &__header {
+                .close-popup {
+                    right: unset;
+                    left: 20px;
+                }
+            }
+        }
+
+        &.maps {
+            .ms-distributor-selector {
+                &__map {
+                    &_container {
+                        right: unset;
+                        left: 0;
+                    }
+                }
+
+                &__details-slider {
+                    &-wrapper {
+                        width: 61%;
+                        right: -61%;
+
+                        @media (max-width: $msv-breakpoint-m) {
+                            width: 100%;
+                            right: -100%;
+                        }
+
+                        &.show {
+                            right: 0;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

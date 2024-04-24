@@ -1,0 +1,16 @@
+@import "../common/00-settings/responsive-breakpoints.scss";
+
+iframe#Microsoft_Omnichannel_LCWidget_Chat_Iframe_Window {
+    margin-bottom: 100px;
+    margin-right: 60px;
+
+    @media screen and (max-width: $msv-breakpoint-m) {
+        margin-right: 0;
+        margin-bottom: 0;
+    }
+}
+
+iframe#Microsoft_Omnichannel_LCWidget_Chat_Iframe_Window.web_chat_panel {
+    margin-bottom: 0;
+    margin-right: 0;
+}

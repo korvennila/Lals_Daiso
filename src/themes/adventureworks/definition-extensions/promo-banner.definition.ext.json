@@ -1,0 +1,15 @@
+{
+    "$type": "definitionExtension",
+    "config": {
+        "alignment": {
+            "friendlyName": "Text alignment",
+            "description": "Alignment for the promo banner",
+            "type": "css",
+            "enum": {
+                "left": "Left",
+                "right": "Right",
+                "center": "Center"
+            }
+        }
+    }
+}

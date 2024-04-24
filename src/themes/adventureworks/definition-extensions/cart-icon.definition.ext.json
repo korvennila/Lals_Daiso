@@ -1,0 +1,50 @@
+{
+    "$type": "definitionExtension",
+     "config": {
+        "enableHoverCart": {
+            "friendlyName": "Show mini cart",
+            "description": "Show mini cart on mouse over on cart icon.",
+            "type": "boolean",
+            "default": true
+        }
+    },
+    "resources": {
+        "continueShoppingButtonTitle": {
+            "comment": "Back to shopping label",
+            "value": "Continue Shopping"
+        },
+        "subTotalMessage": {
+            "comment": "Text to display with subtotal",
+            "value": "Not including tax and shipping"
+        },
+        "item": {
+            "comment": "Text to display if the count of item in cart is one",
+            "value": "item"
+        },
+        "items": {
+            "comment": "Text to display if the count of item in cart is more than one or zero",
+            "value": "items"
+        },
+        "emptyPrice": {
+            "comment": "Empty cart price",
+            "value": "0.00"
+        }
+    },
+    "slots": {
+        "emptyCart": {
+            "friendlyName": "Empty cart",
+            "description": "Empty cart slot",
+            "allowedTypes": ["content-block"],
+            "allowedCategories": ["Promotions", "Marketing", "carousel_content"],
+            "min": 0,
+            "max": 1
+        },
+        "promoContentItem": {
+            "friendlyName": "Promotional content",
+            "description": "Allows user to add promotional content.",
+            "allowedTypes": ["image-list", "content-block", "text-block"],
+            "min": 0,
+            "max": 2
+        }
+    }
+}

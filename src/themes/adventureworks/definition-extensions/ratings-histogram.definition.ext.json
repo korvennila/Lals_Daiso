@@ -1,0 +1,9 @@
+{
+    "$type": "definitionExtension",
+    "resources":{
+        "numberOfReviewsString": {
+            "comment": "Number of reviews string",
+            "value": "{0} reviews"
+        }
+    }
+}

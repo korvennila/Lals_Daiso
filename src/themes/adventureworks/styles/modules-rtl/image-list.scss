@@ -1,0 +1,47 @@
+@import "../common/00-settings/responsive-breakpoints.scss";
+
+[dir="rtl"] {
+    .ms-image-list {
+        &__list {
+            &-item {
+                &-right {
+                    text-align: left;
+                }
+            }
+        }
+
+        &.imageplacement__right {
+            .ms-image-list__list-item {
+                text-align: left;
+            }
+        }
+
+        &.contentalignment__left {
+            text-align: right;
+            flex-direction: row;
+            justify-content: flex-end;
+            float: right;
+        }
+
+        &.contentalignment__right {
+            text-align: left;
+            flex-direction: row;
+            justify-content: flex-end;
+            float: right;
+
+            @media (max-width: $msv-breakpoint-m) {
+                .ms-image-list__list {
+                    display: inline-block;
+                    justify-content: flex-end;
+                }
+            }
+
+            @media (min-width: $msv-breakpoint-m) and (max-width: $msv-breakpoint-l) {
+                .ms-image-list__list {
+                    display: flex;
+                    justify-content: flex-end;
+                }
+            }
+        }
+    }
+}

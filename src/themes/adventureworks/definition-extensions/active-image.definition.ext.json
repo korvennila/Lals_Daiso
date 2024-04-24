@@ -1,0 +1,14 @@
+{
+    "$type": "definitionExtension",
+    "config": {
+        "texttheme": {
+        "friendlyName": "Text theme",
+        "description": "Sets font theme - light or dark",
+        "type": "css",
+        "enum": {
+            "dark": "Dark",
+            "light": "Light"
+            }
+        }
+    }
+}

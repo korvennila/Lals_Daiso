@@ -1,0 +1,9 @@
+{
+  "$type": "definitionExtension",
+  "resources":{
+    "hamburgerAriaLabel": {
+      "comment": "The aria label used for view hamburger",
+      "value": "Expand Navigation Menu to see list of items"
+    }
+  }
+}

@@ -1,0 +1,29 @@
+@import "../common/00-settings/colors.scss";
+@import "../common/02-generic/form.scss";
+
+$msv-alert-message-margin-left: 8px;
+
+[dir="rtl"] {
+    .ms-account-profile-edit {
+        &__item-error {
+            &::before {
+                margin-right: unset;
+                margin-left: $msv-alert-message-margin-left;
+            }
+        }
+
+        &__page-error {
+            .ms-account-profile-edit__page-error-text {
+                + input {
+                    border-right: 4px solid var(--msv-form-error-font-color);
+                    border-left: 0.5px solid $msv-gray-50;
+                }
+
+                &::before {
+                    margin-right: unset;
+                    margin-left: $msv-alert-message-margin-left;
+                }
+            }
+        }
+    }
+}

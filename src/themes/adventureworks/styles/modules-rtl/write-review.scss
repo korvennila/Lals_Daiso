@@ -1,0 +1,93 @@
+@import "../common/00-settings/colors.scss";
+@import "../common/00-settings/responsive-breakpoints.scss";
+
+$rtl-msv-write-review-padding-right-tablet: 33px;
+$rtl-msv-write-review-padding-right: 100px;
+$msv-review-product-description-margin-left: 12px;
+
+[dir="rtl"] {
+    .msc-modal__dialog.ms-write-review.msc-modal-input-required {
+        @media (min-width: $msv-breakpoint-m) {
+            padding-left: 0;
+            padding-right: 0;
+        }
+
+        @media (min-width: $msv-breakpoint-l) {
+            padding-left: 0;
+            padding-right: 0;
+        }
+    }
+
+    .ms-write-review.msc-modal-input-required {
+        @media (min-width: $msv-breakpoint-m) {
+            padding-left: 0;
+            padding-right: $rtl-msv-write-review-padding-right-tablet;
+        }
+
+        @media (min-width: $msv-breakpoint-l) {
+            padding-left: 0;
+            padding-right: $rtl-msv-write-review-padding-right;
+        }
+    }
+
+    .ms-write-review {
+        @media (max-width: ($msv-breakpoint-m)-1) {
+            padding-right: 0;
+        }
+
+        @media (min-width: $msv-breakpoint-m) {
+            padding-left: 0;
+            padding-right: 0;
+        }
+
+        @media (min-width: $msv-breakpoint-l) {
+            padding-left: 0;
+            padding-right: 0;
+        }
+
+        @media (min-width: $msv-breakpoint-m) {
+            .msc-modal__content .ms-review-modal-footer .ms-review-modal-submit {
+                margin: 0 0 0 16px;
+            }
+        }
+
+        .msc-modal__content {
+            .ms-review-modal-body {
+                .ms-review-modal-form {
+                    .ms-review-product {
+                        .ms-review-product-description {
+                            margin-right: 0;
+                            margin-left: $msv-review-product-description-margin-left;
+
+                            .ms-review-product-image {
+                                border-left: 0.5px solid $msv-gray-50;
+                                border-right: none;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    @media (max-width: $msv-breakpoint-m) {
+        .msc-modal__dialog.msc-modal-input-required.ms-write-review .msc-modal__content .msc-modal__header .msc-modal__title {
+            text-align: right;
+        }
+    }
+
+    @media (max-width: ($msv-breakpoint-m)-1) {
+        .ms-review-container {
+            .heading.container-heading {
+                text-align: right;
+            }
+        }
+    }
+
+    .msc-modal__header {
+        .msc-modal__close-button {
+            right: unset;
+            left: 20px;
+        }
+    }
+}

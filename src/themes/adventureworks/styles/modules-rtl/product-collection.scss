@@ -1,0 +1,287 @@
+@import "../common/00-settings/responsive-breakpoints.scss";
+
+$rtl-product-collection-heading-padding-right: 0;
+$rtl-product-collection-item-padding: 5px 20px 24px 20px;
+$rtl-breakpoint-s: 0;
+$rtl-carousel-width-s: 320px;
+$rtl-carousel-width-m: 768px;
+$rtl-carousel-width-l: 992px;
+$rtl-carousel-width-l-xl: 973px;
+$rtl-carousel-width-xl: 1380px;
+$rtl-carousel-item-width-l: 328px;
+$rtl-carousel-item-width-m: 378px;
+$rtl-carousel-item-width-xl: 340px;
+$msv-breakpoint-ml: 1050px;
+$rtl-carousel-item-desktop-width-l: 233px;
+
+[dir="rtl"] {
+    .ms-product-collection {
+        .msc-ss-carousel {
+            position: relative;
+            margin: 0 auto;
+
+            > button:nth-child(1) {
+                right: 38%;
+            }
+        }
+
+        &__item {
+            .ms-product-comparison-button__icon {
+                left: 10px;
+                right: unset;
+            }
+
+            @media (max-width: $msv-breakpoint-l) {
+                .ms-quickView {
+                    left: 10px;
+                    right: unset;
+                }
+            }
+
+            @media (min-width: $msv-breakpoint-l) {
+                &:hover,
+                &:focus {
+                    .ms-quickView,.ms-product-comparison-button__icon {
+                        left: 10px;
+                        right: unset;
+                    }
+                }
+            }
+        }
+    }
+
+    .ms-product-collection[data-m-layout="mediumWidth"] {
+        @media (max-width: $msv-breakpoint-m) {
+            .ms-product-collection__item,
+            .ms-product-collection__item:first-child {
+                width: $rtl-carousel-item-width-l;
+            }
+        }
+
+        @media (min-width: $msv-breakpoint-m) and (max-width: $msv-breakpoint-l) {
+            .ms-product-collection__item,
+            .ms-product-collection__item:first-child {
+                width: $rtl-carousel-item-width-m;
+            }
+        }
+
+        @media (min-width: $msv-breakpoint-l) {
+            .ms-product-collection__item,
+            .ms-product-collection__item:first-child {
+                width: $rtl-carousel-item-width-l;
+            }
+        }
+    }
+
+    .ms-product-collection[data-m-layout="threeCards"] {
+        @media (max-width: $msv-breakpoint-m) {
+            .ms-product-collection__item,
+            .ms-product-collection__item:first-child {
+                width: $rtl-carousel-item-width-l;
+            }
+        }
+
+        @media (min-width: $msv-breakpoint-m) and (max-width: $msv-breakpoint-l) {
+            .ms-product-collection__item,
+            .ms-product-collection__item:first-child {
+                width: $rtl-carousel-item-width-m;
+            }
+        }
+
+        @media (min-width: $msv-breakpoint-l) {
+            .ms-product-collection__item,
+            .ms-product-collection__item:first-child {
+                width: $rtl-carousel-item-width-l;
+            }
+        }
+    }
+
+    .ms-product-collection[data-m-layout="twoCards"] {
+        @media (max-width: $msv-breakpoint-m) {
+            .ms-product-collection__item,
+            .ms-product-collection__item:first-child {
+                width: $rtl-carousel-item-width-l;
+            }
+        }
+
+        @media (min-width: $msv-breakpoint-m) and (max-width: $msv-breakpoint-l) {
+            .ms-product-collection__item,
+            .ms-product-collection__item:first-child {
+                width: $rtl-carousel-item-width-m;
+            }
+        }
+
+        @media (min-width: $msv-breakpoint-l) and (max-width: $msv-breakpoint-ml) {
+            .msc-ss-carousel {
+                width: 100%;
+            }
+
+            .ms-product-collection__item,
+            .ms-product-collection__item:first-child {
+                width: 250px;
+            }
+        }
+
+        @media (min-width: $msv-breakpoint-ml) {
+            .msc-ss-carousel {
+                width: 100%;
+            }
+
+            .ms-product-collection__item,
+            .ms-product-collection__item:first-child {
+                width: 287px;
+            }
+        }
+
+        @media (min-width: $msv-breakpoint-xl) {
+            .msc-ss-carousel {
+                width: 100%;
+            }
+
+            .ms-product-collection__item,
+            .ms-product-collection__item:first-child {
+                width: $rtl-carousel-item-width-l;
+            }
+        }
+    }
+
+    .ms-product-collection[data-m-layout="oneCard"] {
+        @media (min-width: $msv-breakpoint-l) {
+            .ms-product-collection__item,
+            .ms-product-collection__item:first-child {
+                width: 318px;
+            }
+        }
+    }
+
+    .col-12:not(.col-lg-9):not(.col-lg-6):not(.col-lg-3) {
+        .ms-product-collection[data-m-layout="oneCard"] {
+            .msc-ss-carousel {
+                width: 100%;
+            }
+
+            @media (min-width: $msv-breakpoint-l) {
+                .msc-ss-carousel {
+                    width: 33.33%;
+                    margin: auto;
+                }
+            }
+        }
+
+        .ms-product-collection[data-m-layout="twoCards"] {
+            @media (max-width: $msv-breakpoint-m) {
+                .msc-ss-carousel {
+                    width: $rtl-carousel-width-s;
+                }
+
+                .ms-product-collection__item,
+                .ms-product-collection__item:first-child {
+                    width: $rtl-carousel-item-width-l;
+                }
+            }
+
+            @media (min-width: $msv-breakpoint-m) and (max-width: $msv-breakpoint-l) {
+                .msc-ss-carousel {
+                    width: $rtl-carousel-width-m;
+                }
+
+                .ms-product-collection__item,
+                .ms-product-collection__item:first-child {
+                    width: $rtl-carousel-item-width-m;
+                }
+            }
+
+            @media (min-width: $msv-breakpoint-l) {
+                .msc-ss-carousel {
+                    width: 100%;
+                }
+
+                .ms-product-collection__item,
+                .ms-product-collection__item:first-child {
+                    width: $rtl-carousel-item-width-l;
+                }
+            }
+        }
+
+        .ms-product-collection[data-m-layout="threeCards"] {
+            @media (max-width: $msv-breakpoint-m) {
+                .msc-ss-carousel {
+                    width: $rtl-carousel-width-s;
+                }
+
+                .ms-product-collection__item,
+                .ms-product-collection__item:first-child {
+                    width: $rtl-carousel-item-width-l;
+                }
+            }
+
+            @media (min-width: $msv-breakpoint-m) and (max-width: $msv-breakpoint-l) {
+                .msc-ss-carousel {
+                    width: $rtl-carousel-width-m;
+                }
+
+                .ms-product-collection__item,
+                .ms-product-collection__item:first-child {
+                    width: $rtl-carousel-item-width-m;
+                }
+            }
+
+            @media (min-width: $msv-breakpoint-l) {
+                .msc-ss-carousel {
+                    width: $rtl-carousel-width-l;
+                }
+
+                .ms-product-collection__item,
+                .ms-product-collection__item:first-child {
+                    width: $rtl-carousel-item-width-l;
+                }
+            }
+        }
+
+        .ms-product-collection[data-m-layout="mediumWidth"] {
+            @media (max-width: $msv-breakpoint-m) {
+                .msc-ss-carousel {
+                    width: $rtl-carousel-width-s;
+                }
+
+                .ms-product-collection__item,
+                .ms-product-collection__item:first-child {
+                    width: $rtl-carousel-width-s;
+                }
+            }
+
+            @media (min-width: $msv-breakpoint-m) and (max-width: $msv-breakpoint-l) {
+                .msc-ss-carousel {
+                    width: $rtl-carousel-width-m;
+                }
+
+                .ms-product-collection__item,
+                .ms-product-collection__item:first-child {
+                    width: $rtl-carousel-item-width-m;
+                }
+            }
+
+            @media (min-width: $msv-breakpoint-l) and (max-width: $msv-breakpoint-xl) {
+                .msc-ss-carousel {
+                    width: $rtl-carousel-width-l-xl;
+                }
+
+                .ms-product-collection__item,
+                .ms-product-collection__item:first-child {
+                    width: $rtl-carousel-item-desktop-width-l;
+                }
+            }
+
+            @media (min-width: $msv-breakpoint-xl) {
+                .msc-ss-carousel {
+                    width: $rtl-carousel-width-xl;
+                }
+
+                .ms-product-collection__item,
+                .ms-product-collection__item:first-child {
+                    width: $rtl-carousel-item-width-xl;
+                }
+            }
+        }
+    }
+}

@@ -1,0 +1,17 @@
+{
+    "$type": "definitionExtension",
+    "resources":{
+        "continueShoppingButtonTitle": {
+            "comment": "Back to shopping label",
+            "value": "Continue Shopping"
+        },
+        "headingForEmptyRequestStatus": {
+            "comment": "The heading to show if b2b requests is empty",
+            "value": "You do not have any requests at this time."
+        },
+        "textForEmptyRequestStatus": {
+            "comment": "The text to show if b2b requests is empty",
+            "value": "Requests will be displayed here for your reference once you have submitted a request."
+        }
+    }
+}

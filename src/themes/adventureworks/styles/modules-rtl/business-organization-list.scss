@@ -1,0 +1,203 @@
+@import "../common/00-settings/responsive-breakpoints.scss";
+@import "../common/00-settings/icons.scss";
+
+$msv-business-organization-list-action-links-padding: 0 20px 0 0;
+$msv-business-organization-list-email-column-padding: 0;
+$msv-business-organization-list-action-links-margin-l: 0 0 0 12px;
+$msv-business-organization-list-table-heading-padding: 0 8px 0 0;
+$msv-business-organization-list-form-item-margin-left: 10px;
+$msv-business-organization-list-row-links-margin-left: 53px;
+$msv-business-organization-list-request-statement-icon-margin-right: 5px;
+$msv-business-organization-list-toggle-up-margin-right: 20px;
+
+[dir="rtl"] {
+    .ms-business-organization-list {
+        &__action {
+            &__requestStatement {
+                &__toggleDown {
+                    @media screen and (max-width: $msv-breakpoint-m) {
+                        margin-right: 0;
+                    }
+
+                    @media (min-width: $msv-breakpoint-m) and (max-width: $msv-breakpoint-l) {
+                        margin-right: 20px;
+                    }
+
+                    &::after {
+                        clear: both;
+                    }
+                }
+
+                &__toggleUp {
+                    margin-right: $msv-business-organization-list-toggle-up-margin-right;
+
+                    @media only screen and (max-width: $msv-breakpoint-m) {
+                        margin-right: 0;
+                    }
+
+                    @media (min-width: $msv-breakpoint-m) and (max-width: $msv-breakpoint-l) {
+                        margin-right: 20px;
+                    }
+
+                    &::after {
+                        clear: both;
+                    }
+                }
+
+                &__buttonLabel {
+                    position: unset;
+
+                    &::after {
+                        float: left;
+                        margin-left: 0;
+                        margin-right: $msv-business-organization-list-request-statement-icon-margin-right;
+                        position: unset;
+                    }
+                }
+            }
+        }
+
+        &__table {
+            .ms-table {
+                &__heading-row,
+                &__heading-row-data,
+                &__row,
+                &__row-data,
+                &__row-links {
+                    text-align: right;
+
+                    &.num-type {
+                        text-align: right;
+
+                        @media only screen and (max-width: $msv-breakpoint-l) {
+                            text-align: left;
+                        }
+                    }
+
+                    &.action-links {
+                        @media only screen and (max-width: $msv-breakpoint-l) {
+                            padding: 0;
+                        }
+                    }
+                }
+
+                &__heading-sorting {
+                    &::after {
+                        padding: $msv-business-organization-list-table-heading-padding;
+                    }
+                }
+
+                &__row-links {
+                    padding: $msv-business-organization-list-action-links-padding;
+                }
+
+                &__row-links-edit,
+                &__row-links-delete {
+                    margin-left: $msv-business-organization-list-row-links-margin-left;
+                    margin-right: 0;
+                }
+            }
+        }
+
+        &__requestStatement__toDate {
+            float: left;
+
+            @media screen and (max-width: $msv-breakpoint-m) {
+                float: right;
+            }
+        }
+
+        &__requestStatement__fromDate {
+            float: right;
+        }
+
+        &__action__cancelRequest {
+            margin-right: 20px;
+        }
+
+        &__modal {
+            .msc-modal__close-button {
+                right: unset;
+                left: 20px;
+            }
+        }
+
+        .ms-table-business-org__pagination {
+            .previous {
+                margin-left: auto;
+                margin-right: unset;
+
+                .msc-page-link {
+                    display: inline-block;
+                    text-align: right;
+
+                    &::before {
+                        @include msv-icon();
+                        content: "";
+                    }
+
+                    .ms-table-business-org__pagination-left {
+                        @include add-icon($msv-ChevronRight, before);
+                    }
+                }
+            }
+
+            .next {
+                margin-left: unset;
+                margin-right: auto;
+
+                .msc-page-link {
+                    display: inline-block;
+                    text-align: left;
+
+                    &::after {
+                        @include msv-icon();
+                        content: "";
+                    }
+
+                    .ms-table-business-org__pagination-right {
+                        @include add-icon($msv-ChevronLeft, after);
+                    }
+                }
+            }
+        }
+
+        &__form {
+            &-item {
+                margin-left: $msv-business-organization-list-form-item-margin-left;
+                margin-right: 0;
+            }
+        }
+
+        @media only screen and (max-width: $msv-breakpoint-l) {
+            .ms-table {
+                &__row-links {
+                    &-edit,
+                    &-delete,
+                    &-view {
+                        text-align: right;
+                        margin-right: unset;
+                        margin-left: 50px;
+
+                        &::before {
+                            margin: $msv-business-organization-list-action-links-margin-l;
+                        }
+                    }
+
+                    &-minified {
+                        text-align: left;
+                    }
+                }
+            }
+        }
+
+        &__padRight {
+            padding: $msv-business-organization-list-email-column-padding;
+        }
+    }
+
+    .msc-modal__header .msc-modal__close-button {
+        right: unset;
+        left: 20px;
+    }
+}

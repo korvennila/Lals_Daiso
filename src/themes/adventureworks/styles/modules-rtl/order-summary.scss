@@ -1,0 +1,47 @@
+@import "../common/00-settings/responsive-breakpoints.scss";
+
+$msv-order-summary-value-rtl-right:10px;
+$msv-order-summary-promo-code-margin-left:0;
+
+[dir="rtl"] {
+    .msc-order-summary {
+        &__heading {
+            @media screen and (min-width: $msv-breakpoint-l) {
+                padding: 31px 35px 24px 0;
+            }
+        }
+
+        &__value {
+            margin-left: $msv-order-summary-value-rtl-right;
+            float: left;
+        }
+
+        &-wrapper {
+            @media screen and (max-width: $msv-breakpoint-m) {
+                flex: 100%;
+            }
+        }
+
+        &__checkout .msc-cart__btn-addcarttotemplate::before {
+            margin-right: 0;
+            margin-left: 10px;
+        }
+    }
+
+    .msc-promo-code {
+        &-heading {
+            padding: 31px 35px 24px 0;
+        }
+
+        &__input-box {
+            margin-left: $msv-order-summary-promo-code-margin-left;
+            margin-right: 0;
+            padding: 14px 9px 14px 0;
+        }
+
+        &__apply-btn {
+            margin-right: 9px;
+            margin-left: 0;
+        }
+    }
+}

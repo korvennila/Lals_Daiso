@@ -1,0 +1,33 @@
+{
+    "$type": "definitionExtension",
+    "resources":{
+        "pickUpMethodLabel": {
+            "value": "Pickup method",
+            "comment": "The label for pickup method dropdown"
+        },
+        "distanceString": {
+            "value": "({distance} {preferredDistanceUnit})",
+            "comment": "The distance to the store from current location"
+        },
+        "closeDistanceString": {
+            "value": "(<1 {preferredDistanceUnit})",
+            "comment": "The distance to the store from current location"
+        },
+        "storeHoursDayPeriod": {
+            "value": "{startDay}-{endDay}",
+            "comment": "To display the store hours day period"
+        },
+        "storeHoursDay": {
+            "value": "{startDay}",
+            "comment": "To display the store hours day"
+        },
+        "pickupOptionDropdownPlaceholderText": {
+            "value": "Select pickup option",
+            "comment": "To display placeholder text in pickup option dropdown"
+        },
+        "pickupOptionDropdownErrorText": {
+            "value": "Please make a selection to continue",
+            "comment": "To display error text after pickup option dropdown when user doesn't make a selection"
+        }
+    }
+}

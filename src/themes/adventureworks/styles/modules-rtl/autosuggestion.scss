@@ -1,0 +1,131 @@
+@import "../common/00-settings/responsive-breakpoints.scss";
+
+$msv-search-form-cancelsearch-margin-left: 16px;
+$msv-autosuggest-search-title-padding-right: 60px;
+$msv-autosuggest-results-container-padding-right: 60px;
+$msv-autosuggest-results-container-padding-left: 42px;
+$msv-autosuggest-results-container-padding-left-m: 16px;
+$msv-autosuggest-results-container-padding-right-m: 16px;
+$msv-search-autosuggest-keyword-padding-left: 19px;
+$msv-search-autosuggest-category-padding-left: 20px;
+$msv-autosuggest-productresults-title-padding: 20px 0 20px 12px;
+$msv-autosuggest-productresults-item-padding-left: 20px;
+$msv-search-results-padding-right: 39px;
+$msv-search-results-padding-left: 41px;
+$msv-autosuggest-search-title-mobile-padding-right: 15px;
+$msv-search-autosuggest-keyword-mobile-padding-left: 0;
+$msv-search-autosuggest-category-mobile-padding-left: 0;
+$msv-autosuggest-search-title-tablet-padding-right: 24px;
+$msv-autosuggest-results-tablet-margin-left: 24px;
+$msv-search-autosuggest-keyword-tablet-padding-left: 0;
+$msv-search-autosuggest-category-tablet-padding-left: 0;
+$msv-autosuggest-productresults-title-tablet-padding: 20px 0 20px 12px;
+$msv-search-autosuggest-keyword-padding-left: 19px;
+
+[dir="rtl"] {
+    .ms-search__autoSuggest {
+        .ms-search__form-cancelSearch {
+            float: left;
+            margin-left: $msv-search-form-cancelsearch-margin-left;
+        }
+
+        .msc-autoSuggest__search-title {
+            padding-right: $msv-autosuggest-search-title-padding-right;
+        }
+
+        .msc-autoSuggest__results-container {
+            padding-left: $msv-autosuggest-results-container-padding-left;
+            padding-right: $msv-autosuggest-results-container-padding-right;
+        }
+
+        .ms-search__autoSuggest__keyword {
+            padding-right: 0;
+            padding-left: $msv-search-autosuggest-keyword-padding-left;
+        }
+
+        .ms-search__autoSuggest__category {
+            padding-right: 0;
+            padding-left: $msv-search-autosuggest-category-padding-left;
+        }
+
+        &__product {
+            .msc-autoSuggest__productResults-title {
+                padding: $msv-autosuggest-productresults-title-padding;
+            }
+
+            a.msc-autoSuggest__productResults-item {
+                padding-left: $msv-autosuggest-productresults-item-padding-left;
+                padding-right: 0;
+            }
+        }
+    }
+
+    .search-results {
+        padding-left: $msv-search-results-padding-left;
+        padding-right: $msv-search-results-padding-right;
+    }
+
+    @media (max-width: $msv-breakpoint-m) {
+        .ms-search__autoSuggest {
+            .msc-autoSuggest__search-title-container {
+                .msc-autoSuggest__search-title {
+                    padding-left: 0;
+                    padding-right: $msv-autosuggest-search-title-mobile-padding-right;
+                }
+            }
+
+            .msc-autoSuggest__results-container {
+                padding-left: $msv-autosuggest-results-container-padding-left-m;
+                padding-right: $msv-autosuggest-results-container-padding-right-m;
+
+                .msc-autoSuggest__results {
+                    .ms-search__autoSuggest__keyword {
+                        padding-left: $msv-search-autosuggest-keyword-mobile-padding-left;
+                    }
+
+                    .ms-search__autoSuggest__category {
+                        padding-left: $msv-search-autosuggest-category-mobile-padding-left;
+                    }
+                }
+            }
+
+            &__product {
+                .msc-autoSuggest__productResults-title {
+                    padding: 0;
+                }
+            }
+        }
+    }
+
+    @media (min-width: $msv-breakpoint-m) and (max-width: $msv-breakpoint-l) {
+        .ms-search {
+            &__autoSuggest {
+                .msc-autoSuggest__search-title-container {
+                    .msc-autoSuggest__search-title {
+                        padding-right: $msv-autosuggest-search-title-tablet-padding-right;
+                    }
+                }
+
+                .msc-autoSuggest__results-container {
+                    .msc-autoSuggest__results {
+                        margin-left: $msv-autosuggest-results-tablet-margin-left;
+
+                        .ms-search__autoSuggest__keyword {
+                            padding-left: $msv-search-autosuggest-keyword-tablet-padding-left;
+                        }
+
+                        .ms-search__autoSuggest__category {
+                            padding-left: $msv-search-autosuggest-category-tablet-padding-left;
+                        }
+                    }
+                }
+
+                &__product {
+                    .msc-autoSuggest__productResults-title {
+                        padding: $msv-autosuggest-productresults-title-tablet-padding;
+                    }
+                }
+            }
+        }
+    }
+}

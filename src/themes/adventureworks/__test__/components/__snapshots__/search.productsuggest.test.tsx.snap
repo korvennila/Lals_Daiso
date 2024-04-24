@@ -1,0 +1,225 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Search unit tests - Product Suggestions Component Search unit tests - Product Suggestions Component with noSearchResultImage src data 1`] = `
+<ForwardRef
+  className="node-class-AutoSuggest"
+>
+  <div
+    className="msc-autoSuggest__productResults-title"
+  >
+    Products
+  </div>
+  <ForwardRef
+    className="node-class-AutoSuggest"
+  >
+    <ForwardRef
+      className="node-class-LiProduct"
+    >
+      <ForwardRef
+        className="node-class-AProduct"
+      >
+        test
+        test
+        test
+      </ForwardRef>
+    </ForwardRef>
+    <ForwardRef
+      className="node-class-LiProduct2"
+    >
+      <ForwardRef
+        className="node-class-AProduct2"
+      >
+        test1
+        test1
+        test1
+      </ForwardRef>
+    </ForwardRef>
+  </ForwardRef>
+</ForwardRef>
+`;
+
+exports[`Search unit tests - Product Suggestions Component Search unit tests - Product Suggestions Component with productSuggestionHeading as undefined 1`] = `
+<ForwardRef
+  className="node-class-AutoSuggest"
+>
+  <div
+    className="msc-autoSuggest__productResults-title"
+  >
+    Products
+  </div>
+  <ForwardRef
+    className="node-class-AutoSuggest"
+  >
+    <ForwardRef
+      className="node-class-LiProduct"
+    >
+      <ForwardRef
+        className="node-class-AProduct"
+      >
+        test
+        test
+        test
+      </ForwardRef>
+    </ForwardRef>
+    <ForwardRef
+      className="node-class-LiProduct2"
+    >
+      <ForwardRef
+        className="node-class-AProduct2"
+      >
+        test1
+        test1
+        test1
+      </ForwardRef>
+    </ForwardRef>
+  </ForwardRef>
+</ForwardRef>
+`;
+
+exports[`Search unit tests - Product Suggestions Component Search unit tests - Product Suggestions Component with productSuggestions as undefined 1`] = `
+<ForwardRef
+  className="node-class-AutoSuggest"
+>
+  <div
+    className="msc-autoSuggest__productResults-title"
+  >
+    Products
+  </div>
+  <ForwardRef
+    className="node-class-AutoSuggest"
+  >
+    <ForwardRef
+      className="msc-no-result-content"
+      tag="li"
+    >
+      <ForwardRef
+        className="msc-autoSuggest__productResults-no-results-content"
+      >
+        <div
+          className="msc-autoSuggest__productResults-no-results-image"
+        />
+        <div
+          className="msc-autoSuggest__productResults-no-results-content-title"
+        />
+        <div
+          className="msc-autoSuggest__productResults-no-results-content-paragraph"
+        />
+      </ForwardRef>
+    </ForwardRef>
+  </ForwardRef>
+</ForwardRef>
+`;
+
+exports[`Search unit tests - Product Suggestions Component Search unit tests - Product Suggestions Component with productSuggestions id as undefined 1`] = `
+<ForwardRef
+  className="node-class-AutoSuggest"
+>
+  <div
+    className="msc-autoSuggest__productResults-title"
+  >
+    Products
+  </div>
+  <ForwardRef
+    className="node-class-AutoSuggest"
+  >
+    <ForwardRef
+      className="node-class-LiProduct"
+    >
+      <ForwardRef
+        className="node-class-AProduct"
+      >
+        test
+        test
+        test
+      </ForwardRef>
+    </ForwardRef>
+    <ForwardRef
+      className="node-class-LiProduct2"
+    >
+      <ForwardRef
+        className="node-class-AProduct2"
+      >
+        test1
+        test1
+        test1
+      </ForwardRef>
+    </ForwardRef>
+  </ForwardRef>
+</ForwardRef>
+`;
+
+exports[`Search unit tests - Product Suggestions Component Search unit tests - Product Suggestions Component with props data 1`] = `
+<ForwardRef
+  className="node-class-AutoSuggest"
+>
+  <div
+    className="msc-autoSuggest__productResults-title"
+  >
+    123
+  </div>
+  <ForwardRef
+    className="node-class-AutoSuggest"
+  >
+    <ForwardRef
+      className="node-class-LiProduct"
+    >
+      <ForwardRef
+        className="node-class-AProduct"
+      >
+        test
+        test
+        test
+      </ForwardRef>
+    </ForwardRef>
+    <ForwardRef
+      className="node-class-LiProduct2"
+    >
+      <ForwardRef
+        className="node-class-AProduct2"
+      >
+        test1
+        test1
+        test1
+      </ForwardRef>
+    </ForwardRef>
+  </ForwardRef>
+</ForwardRef>
+`;
+
+exports[`Search unit tests - Product Suggestions Component Search unit tests - Product Suggestions Component with request grid settings object 1`] = `
+<ForwardRef
+  className="node-class-AutoSuggest"
+>
+  <div
+    className="msc-autoSuggest__productResults-title"
+  >
+    Products
+  </div>
+  <ForwardRef
+    className="node-class-AutoSuggest"
+  >
+    <ForwardRef
+      className="node-class-LiProduct"
+    >
+      <ForwardRef
+        className="node-class-AProduct"
+      >
+        test
+        test
+        test
+      </ForwardRef>
+    </ForwardRef>
+    <ForwardRef
+      className="node-class-LiProduct2"
+    >
+      <ForwardRef
+        className="node-class-AProduct2"
+      >
+        test1
+        test1
+        test1
+      </ForwardRef>
+    </ForwardRef>
+  </ForwardRef>
+</ForwardRef>
+`;

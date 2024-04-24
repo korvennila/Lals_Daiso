@@ -1,0 +1,499 @@
+@import "../common/00-settings/colors.scss";
+@import "../common/00-settings/font.scss";
+@import "../common/00-settings/icons.scss";
+@import "../common/00-settings/responsive-breakpoints.scss";
+@import "../common/02-generic/button.scss";
+@import "../common/02-generic/image.scss";
+@import "../common/02-generic/reset.scss";
+
+$popover-menu-item-height: 48px;
+$msv-order-history-with-search-and-filters-padding-bottom: 28px;
+$msv-order-history-with-search-and-filters-sales-order-padding-top: 80px;
+$msv-order-history-with-search-and-filters-sales-order-padding-bottom: 80px;
+$msv-order-history-with-search-and-filters-sales-order-padding-top-tablet: 60px;
+$msv-order-history-with-search-and-filters-sales-order-padding-bottom-tablet: 60px;
+$msv-order-history-with-search-and-filters-sales-order-padding-top-mobile: 40px;
+$msv-order-history-with-search-and-filters-sales-order-padding-bottom-mobile: 40px;
+$msv-details-order-information-channel-name-margin-bottom: 16px;
+$msv-order-history-with-search-and-filters-sales-lines-margin-top: 28px;
+$msv-order-history-with-search-and-filters-sales-line-picture-margin-right: 8px;
+$msv-order-history-with-search-and-filters-sales-line-picture-margin-top: 12px;
+$msv-order-history-with-search-and-filters-sales-line-picture-height: 180px;
+$msv-order-history-with-search-and-filters-sales-line-picture-height-tablet: 120px;
+$msv-order-history-with-search-and-filters-sales-line-picture-height-mobile: 80px;
+$msv-order-history-with-search-and-filters-empty-image-width: 81px;
+$msv-order-history-with-search-and-filters-btn-order-details-margin-top: 28px;
+$msv-order-history-with-search-and-filters-order-information-created-date-padding-right: 5px;
+$msv-order-history-with-search-and-filters-order-information-amount-padding-left: 5px;
+$msv-order-history-with-search-and-filters-btn-keep-shopping-margin-top: 20px;
+$msv-order-history-with-search-and-filters-btn-more-margin-top: 28px;
+$msv-order-history-with-search-and-filters-alert-margin-top: 20px;
+$msv-order-history-with-search-and-filters-alert-margin-bottom: 20px;
+$msv-order-information-sales-id-margin-bottom: 4px;
+$msv-order-information-placed-by-margin-bottom: 12px;
+$msv-order-history-with-search-and-filters-filter-padding: 0 20px;
+$msv-order-history-with-search-and-filters-popover-links-max-width: 300px;
+$msv-order-history-with-search-and-filters-table-list-action-container-depth: 0 3.2px 7.2px rgba(0, 0, 0, 0.132), 0 0.6px 1.8px rgba(0, 0, 0, 0.108);
+$msv-order-history-with-search-and-filters-heading-margin-bottom: 10px;
+$msv-order-history-with-search-and-filters-heading-loading-state-margin-top: 148px;
+$msv-order-history-with-search-and-filters-heading-loading-state-margin-right: 8px;
+$msv-order-history-with-search-and-filters-heading-loading-icon-dimension: 20px;
+$msv-order-history-with-search-and-filters-table-header-row-height: 40px;
+$msv-order-history-with-search-and-filters-table-header-row-padding: 12px 0 12px 12px;
+$msv-order-history-with-search-and-filters-table-order-row-width: 60px;
+$msv-order-history-with-search-and-filters-table-placed-by-row-width: 160px;
+$msv-order-history-with-search-and-filters-sales-order-list-padding: 0 150px;
+$msv-order-history-with-search-and-filters-order-information-count-margin-left: 5px;
+$msv-order-history-with-search-and-filters-order-information-count-margin-top: 4px;
+$msv-order-history-with-search-and-filters-order__expand-products-button-margin-top: 35px;
+$msv-order-history-with-search-and-filters-empty-message-container-height: 427px;
+$msv-order-history-with-search-and-filters-empty-message-container-padding: 0 300px;
+$msv-order-history-with-search-and-filters-empty-message-container-padding-tablet: 0 160px;
+$msv-order-history-with-search-and-filters-empty-message-container-padding-mobile: 0 40px;
+$msv-order-history-with-search-and-filters-btn-more-width: 250px;
+$msv-order-history-with-search-and-filters-loading-icon-border-color: rgb(0, 120, 212) rgb(199, 224, 244) rgb(199, 224, 244);
+$balloon-arrow-size: 5px;
+
+// order-history-with-search-and-filters-header
+$msv-order-history-with-search-and-filters-header-margin-top: 10px;
+$msv-order-history-with-search-and-filters-header-heading-margin-bottom: 10px;
+$msv-order-history-with-search-and-filters-header-order-count-margin-left: 12px;
+$msv-order-history-with-search-and-filters-header-order-count-padding-top: 5px;
+
+// order-history-with-search-and-filters-view-mode-selector
+$msv-order-history-with-search-and-filters-view-mode-btn-margin: 0 4px;
+$msv-order-history-with-search-and-filters-view-mode-btn-dimension: 36px;
+
+//style presets
+:root {
+    --msv-order-history-with-search-and-filters-border-color: #{$msv-gray-50};
+
+    // header
+    --msv-order-history-with-search-and-filters-heading-font-color: var(--msv-font-primary-color);
+    --msv-order-history-with-search-and-filters-text-font-color: #{$msv-gray-40};
+    --msv-order-history-with-search-and-filters-title-font-color: #{$msv-gray-20};
+
+    //background
+    --msv-order-history-with-search-and-filters-actions-container-background-color: var(--msv-bg-color);
+    --msv-order-history-with-search-and-filters-button-background-color: #{$msv-transparent};
+
+    // view modes
+    --msv-order-history-with-search-and-filters-view-mode-btn-background-color: #{$msv-white-20};
+    --msv-order-history-with-search-and-filters-view-mode-btn-color: #{$msv-gray-20};
+    --msv-order-history-with-search-and-filters-view-mode-btn-hover-color: #{$msv-blue};
+
+    // text
+    --msv-order-order-information-font-color: #{$msv-gray-40};
+    --msv-order-history-with-search-and-filters-text-font-size: var(--msv-body-font-size-m);
+}
+
+.ms-order-history-with-search-and-filters {
+    padding-bottom: $msv-order-history-with-search-and-filters-padding-bottom;
+    overflow-y: auto;
+
+    .ms-order-history-with-search-and-filters__search-bar {
+        margin: 28px 0;
+    }
+
+    // order-history-with-search-and-filters-header
+    .ms-order-history-with-search-and-filters-header {
+        margin-top: $msv-order-history-with-search-and-filters-header-margin-top;
+        display: flex;
+        flex-wrap: wrap;
+
+        &__heading {
+            @include font-heading-h3-l();
+            text-transform: capitalize;
+            color: var(--msv-order-history-with-search-and-filters-heading-font-color);
+            width: auto;
+            margin-bottom: $msv-order-history-with-search-and-filters-header-heading-margin-bottom;
+        }
+
+        &__order-count {
+            @include font-body-regular-s();
+            display: inline-block;
+            margin-left: $msv-order-history-with-search-and-filters-header-order-count-margin-left;
+            color: var(--msv-order-history-with-search-and-filters-text-font-color);
+            padding-top: $msv-order-history-with-search-and-filters-header-order-count-padding-top;
+            width: calc(100% - 185px);
+        }
+    }
+
+    // order-history-with-search-and-filters-organization-wide-selector
+    .ms-order-history-with-search-and-filters-organization-wide-selector {
+        &__button {
+            align-items: center;
+            border-radius: 100px;
+            box-sizing: border-box;
+            cursor: pointer;
+            display: inline-flex;
+            flex-direction: row;
+            font-family: Rubik-Regular;
+            font-weight: 400;
+            height: 44px;
+            justify-content: center;
+            line-height: 20px;
+            min-width: 165px;
+            outline: none;
+            overflow: hidden;
+            padding: 12px 48px;
+            position: relative;
+            text-align: center;
+            margin-right: 15px;
+            margin-top: 25px;
+            margin-bottom: 25px;
+
+            @media screen and (max-width: $msv-breakpoint-m) {
+                margin-top: 0;
+                margin-bottom: 10px;
+            }
+        }
+
+        &__active-button {
+            background: $msv-gray-20;
+            border: 1px solid $msv-white;
+            color: $msv-white;
+        }
+
+        &__inactive-button {
+            background: $msv-white;
+            border: 1px solid $msv-gray-20;
+            color: $msv-gray-20;
+        }
+
+        @media screen and (max-width: $msv-breakpoint-m) {
+            margin-top: 25px;
+            margin-bottom: 25px;
+        }
+    }
+
+    // order-history-with-search-and-filters-view-mode-selector
+    .ms-order-history-with-search-and-filters-view-mode-selector {
+        margin-left: auto;
+
+        button {
+            margin: $msv-order-history-with-search-and-filters-view-mode-btn-margin;
+            padding: 8px;
+            width: $msv-order-history-with-search-and-filters-view-mode-btn-dimension;
+            height: $msv-order-history-with-search-and-filters-view-mode-btn-dimension;
+            border: none;
+            color: var(--msv-order-history-with-search-and-filters-view-mode-btn-hover-color);
+            cursor: pointer;
+        }
+
+        &__list-view {
+            @include add-icon($msv-list-unordered);
+            color: var(--msv-order-history-with-search-and-filters-view-mode-btn-color);
+            background: none;
+
+            &:hover {
+                color: var(--msv-order-history-with-search-and-filters-view-mode-btn-hover-color);
+            }
+        }
+
+        &__detailed-view {
+            @include add-icon($msv-layout-grid-line);
+            color: var(--msv-order-history-with-search-and-filters-view-mode-btn-color);
+            background: none;
+
+            &:hover {
+                color: var(--msv-order-history-with-search-and-filters-view-mode-btn-hover-color);
+            }
+        }
+
+        &__selected {
+            background: var(--msv-order-history-with-search-and-filters-view-mode-btn-background-color);
+        }
+    }
+
+    // order-history-with-search-and-filters-view-order-list
+    .ms-order-history-with-search-and-filters-order-list {
+        @media screen and (min-width: $msv-breakpoint-l) {
+            padding: $msv-order-history-with-search-and-filters-sales-order-list-padding;
+        }
+
+        &__sales-order {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            padding-top: $msv-order-history-with-search-and-filters-sales-order-padding-top;
+            padding-bottom: $msv-order-history-with-search-and-filters-sales-order-padding-bottom;
+            position: relative;
+            border-bottom: 1px solid var(--msv-order-history-with-search-and-filters-border-color);
+
+            @media screen and (max-width: $msv-breakpoint-l) {
+                padding-top: $msv-order-history-with-search-and-filters-sales-order-padding-top-tablet;
+                padding-bottom: $msv-order-history-with-search-and-filters-sales-order-padding-bottom-tablet;
+            }
+
+            @media screen and (max-width: $msv-breakpoint-m) {
+                padding-top: $msv-order-history-with-search-and-filters-sales-order-padding-top-mobile;
+                padding-bottom: $msv-order-history-with-search-and-filters-sales-order-padding-bottom-mobile;
+            }
+
+            @media screen and (min-width: $msv-breakpoint-m + 1) {
+                display: flex;
+                width: $msv-width-full;
+                flex-wrap: wrap;
+            }
+
+            &-placed-by {
+                color: var(--msv-order-order-information-font-color);
+                margin-bottom: $msv-order-information-placed-by-margin-bottom;
+                overflow: hidden;
+                text-overflow: ellipsis;
+                width: 280px;
+                white-space: nowrap;
+
+                .bolded {
+                    font-weight: bold;
+                }
+            }
+
+            &__expand-products-button {
+                @include font-body-regular-m();
+                margin-right: auto;
+                cursor: pointer;
+                background-color: unset;
+                text-decoration-line: underline;
+                margin-top: $msv-order-history-with-search-and-filters-order__expand-products-button-margin-top;
+                border: none;
+                order: 4;
+
+                @media screen and (max-width: $msv-breakpoint-m) {
+                    order: 3;
+                }
+            }
+
+            &__expand-products-button-wrapper {
+                width: calc(100% - 550px);
+
+                @media screen and (max-width: $msv-breakpoint-m) {
+                    width: calc(100% - 300px);
+                }
+            }
+        }
+
+        &__order-information {
+            &-channel-name {
+                @include font-heading-h5-l();
+                color: var(--msv-order-history-with-search-and-filters-title-font-color);
+                display: inline-block;
+                vertical-align: top;
+                margin-bottom: $msv-details-order-information-channel-name-margin-bottom;
+                text-transform: capitalize;
+                width: 165px;
+                word-wrap: break-word;
+            }
+
+            &-sales-id {
+                @include font-body-bold-m();
+                @include font-heading-h6-l();
+                display: block;
+                color: var(--msv-order-history-with-search-and-filters-title-font-color);
+                margin-bottom: $msv-order-information-sales-id-margin-bottom;
+            }
+
+            &-receipt-id {
+                display: block;
+            }
+
+            &-channel-reference-id {
+                @include font-body-regular-m();
+                display: block;
+                font-size: var(--msv-order-history-with-search-and-filters-text-font-size);
+                color: var(--msv-order-order-information-font-color);
+            }
+
+            &-created-date {
+                padding-right: $msv-order-history-with-search-and-filters-order-information-created-date-padding-right;
+                border-right: 1px solid var(--msv-order-history-with-search-and-filters-border-color);
+
+                @include font-body-regular-m();
+            }
+
+            &-count {
+                @include font-body-regular-s();
+                display: inline-block;
+                vertical-align: top;
+                margin-top: $msv-order-history-with-search-and-filters-order-information-count-margin-top;
+                margin-left: $msv-order-history-with-search-and-filters-order-information-count-margin-left;
+                margin-bottom: $msv-details-order-information-channel-name-margin-bottom;
+            }
+
+            &-amount {
+                @include font-body-regular-m();
+                padding-left: $msv-order-history-with-search-and-filters-order-information-amount-padding-left;
+            }
+
+            &-receipt-id,
+            &-created-date,
+            &-amount {
+                font-size: var(--msv-order-history-with-search-and-filters-text-font-size);
+                color: var(--msv-order-history-with-search-and-filters-title-font-color);
+            }
+        }
+
+        &__sales-lines {
+            margin-top: $msv-order-history-with-search-and-filters-sales-lines-margin-top;
+            display: flex;
+            flex-wrap: wrap;
+        }
+
+        &__sales-line-picture {
+            margin-right: $msv-order-history-with-search-and-filters-sales-line-picture-margin-right;
+            margin-top: $msv-order-history-with-search-and-filters-sales-line-picture-margin-top;
+
+            @include image($msv-order-history-with-search-and-filters-sales-line-picture-height);
+
+            @media (min-width: $msv-breakpoint-m+1) and (max-width: $msv-breakpoint-l) {
+                @include image($msv-order-history-with-search-and-filters-sales-line-picture-height-tablet);
+            }
+
+            @media screen and (max-width: $msv-breakpoint-m) {
+                @include image($msv-order-history-with-search-and-filters-sales-line-picture-height-mobile);
+            }
+
+            .msc_image {
+                border: 0.5px solid var(--msv-order-history-with-search-and-filters-border-color);
+                box-sizing: border-box;
+            }
+        }
+
+        &__groups {
+            display: flex;
+            order: 3;
+
+            @media screen and (max-width: $msv-breakpoint-m) {
+                order: 2;
+            }
+        }
+
+        &__group-delivery {
+            display: none;
+        }
+
+        &__btn-order-details {
+            @include secondary-button-light();
+
+            @media screen and (max-width: $msv-breakpoint-m) {
+                margin-top: $msv-order-history-with-search-and-filters-btn-order-details-margin-top;
+                width: $msv-width-full;
+                order: 4;
+            }
+        }
+    }
+
+    // order-history-with-search-and-filters-view-order-table
+    .ms-order-history-with-search-and-filters-order-table {
+        &__row__order-number {
+            text-decoration: underline;
+        }
+
+        &__row__actions {
+            padding: 0;
+
+            &.text {
+                text-align: right;
+            }
+        }
+
+        &__row__view-details-action {
+            @include add-icon($msv-file);
+        }
+    }
+
+    &__loading {
+        @include font-body-regular-s();
+        display: flex;
+        margin-top: $msv-order-history-with-search-and-filters-heading-loading-state-margin-top;
+        justify-content: center;
+
+        &::before {
+            @include msv-icon();
+            content: $msv-Spinner;
+            margin-right: $msv-order-history-with-search-and-filters-heading-loading-state-margin-right;
+            border-radius: 50%;
+            border-width: 1.5px;
+            border-style: solid;
+            border-color: $msv-order-history-with-search-and-filters-loading-icon-border-color;
+            border-image: initial;
+            animation: spin 1s steps(8) infinite;
+            animation-timing-function: cubic-bezier(0.53, 0.21, 0.29, 0.67);
+            width: $msv-order-history-with-search-and-filters-heading-loading-icon-dimension;
+            height: $msv-order-history-with-search-and-filters-heading-loading-icon-dimension;
+            font-family: inherit;
+        }
+    }
+
+    &__actions-container {
+        display: flex;
+        width: 100%;
+        flex-direction: column;
+    }
+
+    &__more-actions {
+        display: flex;
+        justify-content: flex-end;
+    }
+
+    &__empty-message,
+    &__alert {
+        display: block;
+        margin-top: $msv-order-history-with-search-and-filters-alert-margin-top;
+        margin-bottom: $msv-order-history-with-search-and-filters-alert-margin-bottom;
+    }
+
+    &__empty-message-container {
+        justify-content: center;
+
+        @media screen and (min-width: $msv-breakpoint-m) {
+            border: 0.5px solid var(--msv-order-history-with-search-and-filters-border-color);
+            border-radius: 10px;
+            flex-direction: column;
+            display: flex;
+            align-items: center;
+            height: $msv-order-history-with-search-and-filters-empty-message-container-height;
+        }
+
+        .ms-order-history-with-search-and-filters__empty-message {
+            @include font-heading-h2-l();
+            padding: $msv-order-history-with-search-and-filters-empty-message-container-padding;
+            text-align: center;
+
+            @media screen and (max-width: $msv-breakpoint-l) {
+                @include font-heading-h2-m();
+                padding: $msv-order-history-with-search-and-filters-empty-message-container-padding-tablet;
+            }
+
+            @media screen and (max-width: $msv-breakpoint-m) {
+                padding: $msv-order-history-with-search-and-filters-empty-message-container-padding-mobile;
+
+                margin: 40px 0;
+                display: block;
+            }
+        }
+    }
+
+    &__btn-keep-shopping {
+        margin-top: $msv-order-history-with-search-and-filters-btn-keep-shopping-margin-top;
+
+        @include primary-button-light();
+
+        @media screen and (max-width: $msv-breakpoint-m) {
+            width: $msv-width-full;
+        }
+    }
+
+    &__btn-more {
+        &.is-busy {
+            @include add-spinner(before);
+        }
+
+        @include primary-button-light();
+        display: flex;
+        margin: auto;
+        margin-top: $msv-order-history-with-search-and-filters-btn-more-margin-top;
+        width: $msv-order-history-with-search-and-filters-btn-more-width;
+    }
+}

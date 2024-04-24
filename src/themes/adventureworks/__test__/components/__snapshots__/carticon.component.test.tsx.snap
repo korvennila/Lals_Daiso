@@ -1,0 +1,345 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`CartIcon renders correctly with change event 1`] = `
+initialize {
+  "0": Node {
+    "attribs": Object {
+      "aria-label": "Shopping bag",
+      "class": "msc-cart-icon",
+      "data-bi-id": "12345",
+      "data-m": "{\\"id\\":\\"12345\\",\\"key1\\":\\"val1\\"}\\"",
+      "role": "button",
+      "title": "Shopping bag",
+    },
+    "children": Array [
+      Node {
+        "attribs": Object {
+          "aria-hidden": "true",
+          "class": "msc-cart-icon__count",
+          "style": "visibility:visible",
+        },
+        "children": Array [
+          Node {
+            "data": "0",
+            "next": null,
+            "parent": [Circular],
+            "prev": null,
+            "type": "text",
+          },
+        ],
+        "name": "div",
+        "namespace": "http://www.w3.org/1999/xhtml",
+        "next": null,
+        "parent": [Circular],
+        "prev": null,
+        "type": "tag",
+        "x-attribsNamespace": Object {
+          "aria-hidden": undefined,
+          "class": undefined,
+          "style": undefined,
+        },
+        "x-attribsPrefix": Object {
+          "aria-hidden": undefined,
+          "class": undefined,
+          "style": undefined,
+        },
+      },
+    ],
+    "name": "div",
+    "namespace": "http://www.w3.org/1999/xhtml",
+    "next": null,
+    "parent": Node {
+      "children": Array [
+        [Circular],
+      ],
+      "name": "root",
+      "next": null,
+      "parent": null,
+      "prev": null,
+      "type": "root",
+    },
+    "prev": null,
+    "type": "tag",
+    "x-attribsNamespace": Object {
+      "aria-label": undefined,
+      "class": undefined,
+      "data-bi-id": undefined,
+      "data-m": undefined,
+      "role": undefined,
+      "title": undefined,
+    },
+    "x-attribsPrefix": Object {
+      "aria-label": undefined,
+      "class": undefined,
+      "data-bi-id": undefined,
+      "data-m": undefined,
+      "role": undefined,
+      "title": undefined,
+    },
+  },
+  "_root": [Circular],
+  "length": 1,
+  "options": Object {
+    "decodeEntities": true,
+    "xml": false,
+  },
+}
+`;
+
+exports[`CartIcon renders correctly with change event1 1`] = `
+initialize {
+  "0": Node {
+    "attribs": Object {
+      "aria-label": "Shopping bag",
+      "class": "msc-cart-icon",
+      "data-bi-id": "12345",
+      "data-m": "{\\"id\\":\\"12345\\",\\"key1\\":\\"val1\\"}\\"",
+      "role": "button",
+      "title": "Shopping bag",
+    },
+    "children": Array [
+      Node {
+        "attribs": Object {
+          "aria-hidden": "true",
+          "class": "msc-cart-icon__count",
+          "style": "visibility:visible",
+        },
+        "children": Array [
+          Node {
+            "data": "0",
+            "next": null,
+            "parent": [Circular],
+            "prev": null,
+            "type": "text",
+          },
+        ],
+        "name": "div",
+        "namespace": "http://www.w3.org/1999/xhtml",
+        "next": null,
+        "parent": [Circular],
+        "prev": null,
+        "type": "tag",
+        "x-attribsNamespace": Object {
+          "aria-hidden": undefined,
+          "class": undefined,
+          "style": undefined,
+        },
+        "x-attribsPrefix": Object {
+          "aria-hidden": undefined,
+          "class": undefined,
+          "style": undefined,
+        },
+      },
+    ],
+    "name": "div",
+    "namespace": "http://www.w3.org/1999/xhtml",
+    "next": null,
+    "parent": Node {
+      "children": Array [
+        [Circular],
+      ],
+      "name": "root",
+      "next": null,
+      "parent": null,
+      "prev": null,
+      "type": "root",
+    },
+    "prev": null,
+    "type": "tag",
+    "x-attribsNamespace": Object {
+      "aria-label": undefined,
+      "class": undefined,
+      "data-bi-id": undefined,
+      "data-m": undefined,
+      "role": undefined,
+      "title": undefined,
+    },
+    "x-attribsPrefix": Object {
+      "aria-label": undefined,
+      "class": undefined,
+      "data-bi-id": undefined,
+      "data-m": undefined,
+      "role": undefined,
+      "title": undefined,
+    },
+  },
+  "_root": [Circular],
+  "length": 1,
+  "options": Object {
+    "decodeEntities": true,
+    "xml": false,
+  },
+}
+`;
+
+exports[`CartIcon renders correctly with change event2 1`] = `
+initialize {
+  "0": Node {
+    "attribs": Object {
+      "aria-label": "Shopping bag",
+      "class": "msc-cart-icon",
+      "data-bi-id": "12345",
+      "data-m": "{\\"id\\":\\"12345\\",\\"key1\\":\\"val1\\"}\\"",
+      "role": "button",
+      "title": "Shopping bag",
+    },
+    "children": Array [
+      Node {
+        "attribs": Object {
+          "aria-hidden": "true",
+          "class": "msc-cart-icon__count",
+          "style": "visibility:hidden",
+        },
+        "children": Array [
+          Node {
+            "data": "0",
+            "next": null,
+            "parent": [Circular],
+            "prev": null,
+            "type": "text",
+          },
+        ],
+        "name": "div",
+        "namespace": "http://www.w3.org/1999/xhtml",
+        "next": null,
+        "parent": [Circular],
+        "prev": null,
+        "type": "tag",
+        "x-attribsNamespace": Object {
+          "aria-hidden": undefined,
+          "class": undefined,
+          "style": undefined,
+        },
+        "x-attribsPrefix": Object {
+          "aria-hidden": undefined,
+          "class": undefined,
+          "style": undefined,
+        },
+      },
+    ],
+    "name": "div",
+    "namespace": "http://www.w3.org/1999/xhtml",
+    "next": null,
+    "parent": Node {
+      "children": Array [
+        [Circular],
+      ],
+      "name": "root",
+      "next": null,
+      "parent": null,
+      "prev": null,
+      "type": "root",
+    },
+    "prev": null,
+    "type": "tag",
+    "x-attribsNamespace": Object {
+      "aria-label": undefined,
+      "class": undefined,
+      "data-bi-id": undefined,
+      "data-m": undefined,
+      "role": undefined,
+      "title": undefined,
+    },
+    "x-attribsPrefix": Object {
+      "aria-label": undefined,
+      "class": undefined,
+      "data-bi-id": undefined,
+      "data-m": undefined,
+      "role": undefined,
+      "title": undefined,
+    },
+  },
+  "_root": [Circular],
+  "length": 1,
+  "options": Object {
+    "decodeEntities": true,
+    "xml": false,
+  },
+}
+`;
+
+exports[`CartIcon renders correctly with change event3 1`] = `
+initialize {
+  "0": Node {
+    "attribs": Object {
+      "aria-label": "Shopping bag",
+      "class": "msc-cart-icon",
+      "data-bi-id": "12345",
+      "data-m": "{\\"id\\":\\"12345\\",\\"key1\\":\\"val1\\"}\\"",
+      "role": "button",
+      "title": "Shopping bag",
+    },
+    "children": Array [
+      Node {
+        "attribs": Object {
+          "aria-hidden": "true",
+          "class": "msc-cart-icon__count",
+          "style": "visibility:visible",
+        },
+        "children": Array [
+          Node {
+            "data": "99+",
+            "next": null,
+            "parent": [Circular],
+            "prev": null,
+            "type": "text",
+          },
+        ],
+        "name": "div",
+        "namespace": "http://www.w3.org/1999/xhtml",
+        "next": null,
+        "parent": [Circular],
+        "prev": null,
+        "type": "tag",
+        "x-attribsNamespace": Object {
+          "aria-hidden": undefined,
+          "class": undefined,
+          "style": undefined,
+        },
+        "x-attribsPrefix": Object {
+          "aria-hidden": undefined,
+          "class": undefined,
+          "style": undefined,
+        },
+      },
+    ],
+    "name": "div",
+    "namespace": "http://www.w3.org/1999/xhtml",
+    "next": null,
+    "parent": Node {
+      "children": Array [
+        [Circular],
+      ],
+      "name": "root",
+      "next": null,
+      "parent": null,
+      "prev": null,
+      "type": "root",
+    },
+    "prev": null,
+    "type": "tag",
+    "x-attribsNamespace": Object {
+      "aria-label": undefined,
+      "class": undefined,
+      "data-bi-id": undefined,
+      "data-m": undefined,
+      "role": undefined,
+      "title": undefined,
+    },
+    "x-attribsPrefix": Object {
+      "aria-label": undefined,
+      "class": undefined,
+      "data-bi-id": undefined,
+      "data-m": undefined,
+      "role": undefined,
+      "title": undefined,
+    },
+  },
+  "_root": [Circular],
+  "length": 1,
+  "options": Object {
+    "decodeEntities": true,
+    "xml": false,
+  },
+}
+`;

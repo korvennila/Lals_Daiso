@@ -1,0 +1,57 @@
+@import "../common/00-settings/responsive-breakpoints.scss";
+
+$msv-cancelRequest-margin-right: 20px;
+$msv-requestStatement-padding-left: 20px;
+$msv-account-balance-credit-summary-heading-padding-left: 5px;
+$msv-account-balance-credit-summary-dollar-icon-margin-top: 3px;
+
+[dir="rtl"] {
+    .ms-account-customer-balance {
+        &__action__requestStatement__toggleDown {
+            margin-right: 0;
+        }
+
+        &__action__requestStatement__toggleUp {
+            margin-right: 0;
+        }
+
+        &__action__cancelRequest {
+            margin-right: $msv-cancelRequest-margin-right;
+        }
+
+        &__action__requestStatement__buttonLabel {
+            padding-left: $msv-requestStatement-padding-left;
+            padding-right: 0;
+        }
+
+        &__requestStatement__fromDate {
+            float: right;
+        }
+
+        &__requestStatement__toDate {
+            float: left;
+        }
+
+        @media screen and (max-width: $msv-breakpoint-m) {
+            &__requestStatement__toDate {
+                float: right;
+            }
+        }
+
+        &__credit-summary-heading {
+            &::before {
+                padding-right: 0;
+                padding-left: $msv-account-balance-credit-summary-heading-padding-left;
+                margin-top: $msv-account-balance-credit-summary-dollar-icon-margin-top;
+                float: right;
+            }
+        }
+    }
+
+    .msc-modal__header {
+        .msc-modal__close-button {
+            right: unset;
+            left: 20px;
+        }
+    }
+}

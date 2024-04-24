@@ -1,0 +1,75 @@
+@import "../common/00-settings/icons.scss";
+@import "../common/00-settings/responsive-breakpoints.scss";
+
+$rtl-msv-account-b2b-requests-header-margin-left: 25px;
+$rtl-msv-account-b2b-requests-header-span-margin-right: 14px;
+$rtl-msv-account-b2b-requests-table-heading-sorting-padding-right: 8px;
+
+[dir="rtl"] {
+    .ms-account-b2b-requests {
+        &__header {
+            &__container {
+                margin-left: $rtl-msv-account-b2b-requests-header-margin-left;
+                margin-right: unset;
+
+                span {
+                    margin-right: $rtl-msv-account-b2b-requests-header-span-margin-right;
+                    margin-left: 0;
+                }
+            }
+        }
+
+        &__table {
+            &__header {
+                text-align: right;
+            }
+
+            .ms-table {
+                &__row-data {
+                    text-align: right;
+                }
+
+                &__heading-row-data {
+                    text-align: right;
+                }
+
+                &__heading-sorting {
+                    &::after {
+                        padding-right: $rtl-msv-account-b2b-requests-table-heading-sorting-padding-right;
+                        padding-left: unset;
+                    }
+                }
+            }
+        }
+
+        .ms-table-business-org__pagination {
+            .previous {
+                margin-left: auto;
+                margin-right: unset;
+
+                .msc-page-link {
+                    display: inline-block;
+                    text-align: right;
+
+                    .ms-table-business-org__pagination-left {
+                        @include add-icon($msv-ChevronRight, before);
+                    }
+                }
+            }
+
+            .next {
+                margin-left: unset;
+                margin-right: auto;
+
+                .msc-page-link {
+                    display: inline-block;
+                    text-align: left;
+
+                    .ms-table-business-org__pagination-right {
+                        @include add-icon($msv-ChevronLeft, after);
+                    }
+                }
+            }
+        }
+    }
+}

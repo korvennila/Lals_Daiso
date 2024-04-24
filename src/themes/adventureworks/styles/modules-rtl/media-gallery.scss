@@ -1,0 +1,67 @@
+@import "../common/00-settings/responsive-breakpoints.scss";
+
+$media-gallery-rtl-margin-left: 22px;
+$msv-modal-rtl-close-button-position: 20px;
+$msv-grid-rtl-item-margin-left: 22px;
+$msv-magnifying-glass-rtl-desktop-margin: 13px;
+$msv-magnifying-glass-rtl-mobile-margin: 10px;
+$msv-close-button-left-align: 10px;
+
+[dir="rtl"] {
+    .ms-buybox__media-gallery {
+        margin-left: $media-gallery-rtl-margin-left;
+    }
+
+    .ms-media-gallery {
+        .ms-media-gallery__thumbnail-item {
+            margin-left: $msv-grid-rtl-item-margin-left;
+            margin-right: 0;
+        }
+
+        .ms-fullscreen-section {
+            &__magnifying-glass-icon {
+                left: 0;
+                margin-left: $msv-magnifying-glass-rtl-desktop-margin;
+                margin-right: 0;
+                right: unset;
+
+                @media (max-width: $msv-breakpoint-m) {
+                    margin-left: $msv-magnifying-glass-rtl-mobile-margin;
+                }
+            }
+        }
+    }
+
+    .msc-modal {
+        .ms-media-gallery__modal {
+            .msc-modal__close-button {
+                left: $msv-modal-rtl-close-button-position;
+                right: auto;
+
+                @media (max-width: $msv-breakpoint-m) {
+                    left: $msv-close-button-left-align;
+                }
+            }
+        }
+
+        .msc-fullview-modal-body .msc-carousel__item .ms-media-gallery__item.msc-mobile-zoomed-in {
+            transform-origin: top;
+        }
+    }
+
+    .ms-containerZoom {
+        &__image {
+            right: 0;
+        }
+    }
+
+    @media (max-width: $msv-breakpoint-m) {
+        .ms-inline-zoom {
+            float: right;
+
+            &__zoomedImg {
+                right: 0;
+            }
+        }
+    }
+}

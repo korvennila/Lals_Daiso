@@ -1,0 +1,77 @@
+@import "../common/00-settings/responsive-breakpoints.scss";
+
+$search-form-padding-right: 5px;
+$search-form-padding-left: 20px;
+$search-form-submit-margin-right: 12px;
+$search-form-control-margin-right: 8px;
+$search-form-control-margin-left: 40px;
+$ms-header-search-margin-left: 30px;
+$ms-search-autoSuggest-productResults-item-padding-right: 0;
+$ms-search-autoSuggest-productResults-empty-mobile-content-padding-right: 16px;
+$ms-search-autoSuggest-productResults-empty-mobile-content-padding-left: -16px;
+$rtl-search-autoSuggest-loading-item-padding: 13px 0 14px 12px;
+$rtl-search-autoSuggest-loading-text-margin: 0 8px 0 0;
+
+[dir="rtl"] {
+    .ms-search {
+        &__form-submitSearch {
+            margin-right: $search-form-submit-margin-right;
+            margin-left: 0;
+        }
+
+        .ms-search__form-control {
+            margin-right: $search-form-control-margin-right;
+            margin-left: 0;
+            padding-right: 0;
+        }
+
+        .ms-search__searchForm {
+            padding-left: $search-form-padding-left;
+            padding-right: $search-form-padding-right;
+        }
+
+        @media (max-width: $msv-breakpoint-m) {
+            .ms-search__searchForm {
+                padding: 0;
+
+                .msc-autoSuggest__productResults-empty-mobile-content {
+                    margin-right: $ms-search-autoSuggest-productResults-empty-mobile-content-padding-right;
+                    margin-left: $ms-search-autoSuggest-productResults-empty-mobile-content-padding-left;
+                }
+            }
+        }
+
+        @media (min-width: $msv-breakpoint-m) and (max-width: $msv-breakpoint-l) {
+            &__form.bx-show {
+                .ms-search__searchForm {
+                    padding-left: $search-form-padding-left;
+                    padding-right: $search-form-padding-right;
+                }
+
+                .ms-search__form-control {
+                    padding-left: $search-form-control-margin-left;
+                    padding-right: $search-form-control-margin-right;
+                }
+
+                .ms-search__form-submitSearch {
+                    margin-left: 0;
+                }
+            }
+
+            .ms-header__container .ms-header__topbar .ms-search {
+                margin-left: $ms-header-search-margin-left;
+                margin-right: 0;
+            }
+        }
+    }
+
+    li.msc-autoSuggest__productResults-item {
+        padding-right: $ms-search-autoSuggest-productResults-item-padding-right;
+    }
+
+    .msc-autoSuggest__loadingResult {
+        .ms-Spinner-label {
+            margin: $rtl-search-autoSuggest-loading-text-margin;
+        }
+    }
+}

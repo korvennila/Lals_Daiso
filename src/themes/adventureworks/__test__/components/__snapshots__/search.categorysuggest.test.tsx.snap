@@ -1,0 +1,54 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Search unit tests - Category Suggestions Component render empty category heading 1`] = `
+<ForwardRef
+  className="node-class-CategorySuggest"
+>
+  <div
+    className="msc-autoSuggest__categoryResults-title"
+  >
+    In categories
+  </div>
+  <ForwardRef
+    className="node-class-UlCategory"
+  >
+    test
+  </ForwardRef>
+</ForwardRef>
+`;
+
+exports[`Search unit tests - Category Suggestions Component render without auto suggestion category 1`] = `
+<ForwardRef>
+  <div
+    className="msc-autoSuggest__categoryResults-title"
+  >
+    headding
+  </div>
+  <ForwardRef
+    className="node-class-UlCategory"
+  >
+    <li
+      className="msc-autoSuggest__categoryResults-no-results"
+    >
+      no data
+    </li>
+  </ForwardRef>
+</ForwardRef>
+`;
+
+exports[`Search unit tests - Category Suggestions Component renders correctly 1`] = `
+<ForwardRef
+  className="node-class-CategorySuggest"
+>
+  <div
+    className="msc-autoSuggest__categoryResults-title"
+  >
+    heading
+  </div>
+  <ForwardRef
+    className="node-class-UlCategory"
+  >
+    test
+  </ForwardRef>
+</ForwardRef>
+`;

@@ -1,0 +1,1 @@
+import './business-partner-promotion.scss';

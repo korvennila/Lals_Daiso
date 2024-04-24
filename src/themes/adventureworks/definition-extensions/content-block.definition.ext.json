@@ -1,0 +1,36 @@
+{
+    "$type": "definitionExtension",
+    "config": {
+        "textplacement":{
+            "friendlyName": "Text placement",
+            "description": "Placement of the text",
+            "type": "css",
+            "enum":{
+                "left": "Left",
+                "right": "Right",
+                "center": "Center"
+            },
+            "default": "left"
+        },
+        "imageplacement":{
+            "friendlyName": "Image placement",
+            "description": "Placement of the image",
+            "type": "css",
+            "enum":{
+                "top": "Top",
+                "bottom": "Bottom",
+                "right": "Right",
+                "left": "Left"
+            }
+        },
+        "texttheme": {
+            "friendlyName": "Text theme",
+            "description": "Sets font theme- light or dark",
+            "type": "css",
+            "enum": {
+                "dark": "Dark",
+                "light": "Light"
+            }
+        }
+    }
+}

@@ -1,0 +1,154 @@
+@import "../common/00-settings/colors.scss";
+@import "../common/00-settings/responsive-breakpoints.scss";
+
+$rtl-msv-order-history-order-count-margin-right: 10px;
+$rtl-msv-order-history-order-count-margin-left: 8px;
+$rtl-msv-order-history-order-information-created-date-padding-left: 5px;
+$rtl-msv-order-history-order-information-amount-padding-right: 5px;
+
+[dir="rtl"] {
+    .ms-order-history {
+        &__order-count {
+            margin-left: 0;
+            margin-right: $rtl-msv-order-history-order-count-margin-right;
+        }
+
+        &__order-information-created-date {
+            padding-right: 0;
+            border-right: none;
+            padding-left: $rtl-msv-order-history-order-information-created-date-padding-left;
+            border-left: 1px solid $msv-gray-300;
+        }
+
+        &__order-information-count {
+            border-right: none;
+            border-left: 1px solid $msv-gray-300;
+            left: 0;
+            right: 164px;
+
+            @media screen and (max-width: $msv-breakpoint-m) {
+                right: 166px;
+                left: 0;
+            }
+        }
+
+        &__sales-order__expand-products-button {
+            margin-left: auto;
+            margin-right: unset;
+        }
+
+        &__order-information-amount {
+            padding-right: $rtl-msv-order-history-order-information-amount-padding-right;
+            padding-left: 0;
+        }
+
+        &__sales-line-picture {
+            margin-right: unset;
+            margin-left: $rtl-msv-order-history-order-count-margin-left;
+        }
+
+        &__ms-order-history-view-modes {
+            margin-right: auto;
+            margin-left: unset;
+        }
+
+        &__table-list {
+            &__header {
+                text-align: right;
+
+                &__row {
+                    th {
+                        padding-right: 12px;
+                        padding-left: 0;
+                        text-align: right;
+                    }
+                }
+            }
+
+            &__row {
+                td {
+                    padding-left: unset;
+                    padding-right: 12px;
+                }
+
+                &__column-with-number {
+                    text-align: left;
+                }
+
+                &__extra-actions-cell {
+                    &__actions-container {
+                        padding-right: 0;
+                        padding-left: unset;
+                        right: 0;
+                        left: unset;
+                    }
+
+                    button {
+                        text-align: right;
+
+                        &::before {
+                            margin-right: 0;
+                            margin-left: 12px;
+                        }
+                    }
+                }
+            }
+
+            th, td {
+                text-align: right;
+            }
+        }
+
+        @media screen and (min-width: $msv-breakpoint-m + 1) {
+            &__groups {
+                float: left;
+            }
+        }
+
+        &__ms-order-history-filter {
+            margin-left: unset;
+            margin-right: auto;
+
+            .msc-popover button {
+                text-align: left;
+            }
+
+            &__expand-filter-button {
+                padding-left: 0;
+                float: left;
+
+                &::after {
+                    margin-right: 8px;
+                    padding-left: 10px;
+                    border-left: 0.5px solid $msv-gray-50;
+                    margin-left: 0;
+                    padding-right: 0;
+                    border-right: 0;
+                }
+            }
+
+            @media screen and (max-width: $msv-breakpoint-m - 1) {
+                float: none;
+                text-align: right;
+                margin-right: 0;
+                margin-left: unset;
+
+                &__expand-filter-button {
+                    padding-right: 0;
+                    border-right: 0;
+                }
+
+                .msc-popover button {
+                    text-align: right;
+                }
+            }
+        }
+
+        &__loading {
+            &::before {
+                margin-left: 8px;
+                margin-right: 0;
+            }
+        }
+    }
+}

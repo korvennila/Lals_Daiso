@@ -1,0 +1,28 @@
+@import "../common/00-settings/responsive-breakpoints.scss";
+
+$rtl-msv-checkout-terms-and-conditions-checkbox-margin-left: 10px;
+$msv-checkout-terms-and-conditions-icon-margin-left: 22px;
+$msv-checkout-terms-and-conditions-error-message-margin-right: 42px;
+
+[dir="rtl"] {
+    .ms-checkout-terms-and-conditions {
+        &__input-checkbox {
+            margin-right: 0;
+            margin-left: $rtl-msv-checkout-terms-and-conditions-checkbox-margin-left;
+        }
+
+        &__error {
+            &-title {
+                &::before {
+                    margin-right: 0;
+                    margin-left: $msv-checkout-terms-and-conditions-icon-margin-left;
+                }
+            }
+
+            &-message {
+                margin-left: 0;
+                margin-right: $msv-checkout-terms-and-conditions-error-message-margin-right;
+            }
+        }
+    }
+}

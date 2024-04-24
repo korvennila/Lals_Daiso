@@ -1,0 +1,110 @@
+@import "../common/00-settings/responsive-breakpoints.scss";
+@import "../common/01-tools/layout.scss";
+
+$media-gallary-padding-left: 40px;
+$media-gallary-padding-right: 0;
+$msv-quickview-content-width: 30%;
+$msv-quickview-minmax-label-text-before-padding-left: 5px;
+$msv-quickview-msi-exclamation-triangle-before-padding-left: 5px;
+$msv-quickview-product-add-to-cart-padding-left: 15px;
+$quickView-add-to-cart-container-margin-left: 12px;
+$rtl-msv-quickview-add-to-wishlist-icon-margin-left: 10px;
+$msv-rtl-quickview-heading-margin-left: 20px;
+
+[dir="rtl"] {
+    .msc-modal.fade .ms-quickView__dialog {
+        left: -($msv-column-width-s * 4);
+        right: unset;
+
+        @media (max-width: $msv-breakpoint-l) {
+            left: -($msv-column-width-m * 4);
+        }
+
+        @media (max-width: ($msv-breakpoint-m)-1) {
+            left: -($msv-column-width-l * 4);
+        }
+        -webkit-transition: opacity 0.3s linear, left 0.3s ease-out;
+        -moz-transition: opacity 0.3s linear, left 0.3s ease-out;
+        -o-transition: opacity 0.3s linear, left 0.3s ease-out;
+        transition: opacity 0.3s linear, left 0.3s ease-out;
+    }
+
+    .msc-modal.fade.show .ms-quickView__dialog {
+        left: 0;
+    }
+
+    .msc-modal__dialog.ms-quickView__dialog {
+        float: left;
+
+        .ms-quickView {
+            &__header {
+                .msc-quickview__heading {
+                    margin-left: $msv-rtl-quickview-heading-margin-left;
+                    margin-right: 0;
+                }
+
+                .msc-modal__close-button {
+                    right: unset;
+                    left: 20px;
+                }
+            }
+
+            &__media-gallery {
+                padding-right: $media-gallary-padding-right;
+            }
+
+            &__body {
+                .msc-quickview__price-section {
+                    &-text {
+                        float: right;
+                    }
+                }
+
+                .quantity_text_message {
+                    .ms-buybox__minmax_label_text::before {
+                        padding-left: $msv-quickview-minmax-label-text-before-padding-left;
+                        padding-right: 0;
+                    }
+                }
+            }
+
+            &__add-to-wishlist-container {
+                float: left;
+
+                .msc-add-to-wishlist::before {
+                    margin-right: 0;
+                    margin-left: $rtl-msv-quickview-add-to-wishlist-icon-margin-left;
+                }
+
+                .msc-alert {
+                    .msc-alert__header {
+                        .msi-exclamation-triangle::before {
+                            padding-right: 0;
+                            padding-left: $msv-quickview-msi-exclamation-triangle-before-padding-left;
+                        }
+                    }
+
+                    .msc-alert__line {
+                        display: none;
+                    }
+                }
+            }
+
+            &__add-to-cart-container {
+                margin-left: $quickView-add-to-cart-container-margin-left;
+                margin-right: 0;
+
+                .msc-alert-danger {
+                    .msc-alert__header {
+                        text-align: right;
+
+                        .msi-exclamation-triangle::before {
+                            padding-left: $msv-quickview-msi-exclamation-triangle-before-padding-left;
+                            padding-right: 0;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

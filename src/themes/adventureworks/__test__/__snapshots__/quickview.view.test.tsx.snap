@@ -1,0 +1,321 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`quickView unit tests - View renders correctly 1`] = `
+initialize {
+  "0": Node {
+    "attribs": Object {
+      "class": "ms-quick-View",
+      "data-m-t": "mock-type",
+      "id": "",
+      "title": "Quick View",
+    },
+    "children": Array [
+      Node {
+        "attribs": Object {
+          "aria-label": "Quick View",
+          "class": "ms-quick-View__button msc-btn",
+          "title": "Quick View button",
+        },
+        "children": Array [
+          Node {
+            "data": "Quick View",
+            "next": null,
+            "parent": [Circular],
+            "prev": null,
+            "type": "text",
+          },
+        ],
+        "name": "button",
+        "namespace": "http://www.w3.org/1999/xhtml",
+        "next": null,
+        "parent": [Circular],
+        "prev": null,
+        "type": "tag",
+        "x-attribsNamespace": Object {
+          "aria-label": undefined,
+          "class": undefined,
+          "title": undefined,
+        },
+        "x-attribsPrefix": Object {
+          "aria-label": undefined,
+          "class": undefined,
+          "title": undefined,
+        },
+      },
+    ],
+    "name": "div",
+    "namespace": "http://www.w3.org/1999/xhtml",
+    "next": null,
+    "parent": Node {
+      "children": Array [
+        [Circular],
+      ],
+      "name": "root",
+      "next": null,
+      "parent": null,
+      "prev": null,
+      "type": "root",
+    },
+    "prev": null,
+    "type": "tag",
+    "x-attribsNamespace": Object {
+      "class": undefined,
+      "data-m-t": undefined,
+      "id": undefined,
+      "title": undefined,
+    },
+    "x-attribsPrefix": Object {
+      "class": undefined,
+      "data-m-t": undefined,
+      "id": undefined,
+      "title": undefined,
+    },
+  },
+  "_root": [Circular],
+  "length": 1,
+  "options": Object {
+    "decodeEntities": true,
+    "xml": false,
+  },
+}
+`;
+
+exports[`quickView unit tests - View renders correctly when modal open -- No product 1`] = `
+initialize {
+  "0": Node {
+    "attribs": Object {
+      "class": "ms-quick-View",
+      "data-m-t": "mock-type",
+      "id": "",
+      "title": "Quick View",
+    },
+    "children": Array [
+      Node {
+        "attribs": Object {
+          "aria-label": "Quick View",
+          "class": "ms-quick-View__button msc-btn",
+          "title": "Quick View button",
+        },
+        "children": Array [
+          Node {
+            "data": "Quick View",
+            "next": null,
+            "parent": [Circular],
+            "prev": null,
+            "type": "text",
+          },
+        ],
+        "name": "button",
+        "namespace": "http://www.w3.org/1999/xhtml",
+        "next": null,
+        "parent": [Circular],
+        "prev": null,
+        "type": "tag",
+        "x-attribsNamespace": Object {
+          "aria-label": undefined,
+          "class": undefined,
+          "title": undefined,
+        },
+        "x-attribsPrefix": Object {
+          "aria-label": undefined,
+          "class": undefined,
+          "title": undefined,
+        },
+      },
+    ],
+    "name": "div",
+    "namespace": "http://www.w3.org/1999/xhtml",
+    "next": null,
+    "parent": Node {
+      "children": Array [
+        [Circular],
+      ],
+      "name": "root",
+      "next": null,
+      "parent": null,
+      "prev": null,
+      "type": "root",
+    },
+    "prev": null,
+    "type": "tag",
+    "x-attribsNamespace": Object {
+      "class": undefined,
+      "data-m-t": undefined,
+      "id": undefined,
+      "title": undefined,
+    },
+    "x-attribsPrefix": Object {
+      "class": undefined,
+      "data-m-t": undefined,
+      "id": undefined,
+      "title": undefined,
+    },
+  },
+  "_root": [Circular],
+  "length": 1,
+  "options": Object {
+    "decodeEntities": true,
+    "xml": false,
+  },
+}
+`;
+
+exports[`quickView unit tests - View renders correctly when modal open -- loading 1`] = `
+initialize {
+  "0": Node {
+    "attribs": Object {
+      "class": "ms-quick-View",
+      "data-m-t": "mock-type",
+      "id": "",
+      "title": "Quick View",
+    },
+    "children": Array [
+      Node {
+        "attribs": Object {
+          "aria-label": "Quick View",
+          "class": "ms-quick-View__button msc-btn",
+          "title": "Quick View button",
+        },
+        "children": Array [
+          Node {
+            "data": "Quick View",
+            "next": null,
+            "parent": [Circular],
+            "prev": null,
+            "type": "text",
+          },
+        ],
+        "name": "button",
+        "namespace": "http://www.w3.org/1999/xhtml",
+        "next": null,
+        "parent": [Circular],
+        "prev": null,
+        "type": "tag",
+        "x-attribsNamespace": Object {
+          "aria-label": undefined,
+          "class": undefined,
+          "title": undefined,
+        },
+        "x-attribsPrefix": Object {
+          "aria-label": undefined,
+          "class": undefined,
+          "title": undefined,
+        },
+      },
+    ],
+    "name": "div",
+    "namespace": "http://www.w3.org/1999/xhtml",
+    "next": null,
+    "parent": Node {
+      "children": Array [
+        [Circular],
+      ],
+      "name": "root",
+      "next": null,
+      "parent": null,
+      "prev": null,
+      "type": "root",
+    },
+    "prev": null,
+    "type": "tag",
+    "x-attribsNamespace": Object {
+      "class": undefined,
+      "data-m-t": undefined,
+      "id": undefined,
+      "title": undefined,
+    },
+    "x-attribsPrefix": Object {
+      "class": undefined,
+      "data-m-t": undefined,
+      "id": undefined,
+      "title": undefined,
+    },
+  },
+  "_root": [Circular],
+  "length": 1,
+  "options": Object {
+    "decodeEntities": true,
+    "xml": false,
+  },
+}
+`;
+
+exports[`quickView unit tests - View renders correctly when modal open 1`] = `
+initialize {
+  "0": Node {
+    "attribs": Object {
+      "class": "ms-quick-View",
+      "data-m-t": "mock-type",
+      "id": "",
+      "title": "Quick View",
+    },
+    "children": Array [
+      Node {
+        "attribs": Object {
+          "aria-label": "Quick View",
+          "class": "ms-quick-View__button msc-btn",
+          "title": "Quick View button",
+        },
+        "children": Array [
+          Node {
+            "data": "Quick View",
+            "next": null,
+            "parent": [Circular],
+            "prev": null,
+            "type": "text",
+          },
+        ],
+        "name": "button",
+        "namespace": "http://www.w3.org/1999/xhtml",
+        "next": null,
+        "parent": [Circular],
+        "prev": null,
+        "type": "tag",
+        "x-attribsNamespace": Object {
+          "aria-label": undefined,
+          "class": undefined,
+          "title": undefined,
+        },
+        "x-attribsPrefix": Object {
+          "aria-label": undefined,
+          "class": undefined,
+          "title": undefined,
+        },
+      },
+    ],
+    "name": "div",
+    "namespace": "http://www.w3.org/1999/xhtml",
+    "next": null,
+    "parent": Node {
+      "children": Array [
+        [Circular],
+      ],
+      "name": "root",
+      "next": null,
+      "parent": null,
+      "prev": null,
+      "type": "root",
+    },
+    "prev": null,
+    "type": "tag",
+    "x-attribsNamespace": Object {
+      "class": undefined,
+      "data-m-t": undefined,
+      "id": undefined,
+      "title": undefined,
+    },
+    "x-attribsPrefix": Object {
+      "class": undefined,
+      "data-m-t": undefined,
+      "id": undefined,
+      "title": undefined,
+    },
+  },
+  "_root": [Circular],
+  "length": 1,
+  "options": Object {
+    "decodeEntities": true,
+    "xml": false,
+  },
+}
+`;

@@ -1,0 +1,259 @@
+@import "../common/00-settings/responsive-breakpoints.scss";
+
+$rtl-header-myaccount-margin-right: 8px;
+$rtl-header-cart-icon-margin-right: 4px;
+$rtl-header-logo-margin: auto 12px auto auto;
+$rtl-header-icon-padding-left: 10px;
+$rtl-header-icon-padding-right: 10px;
+$rtl-header-logo-margin-left: 32px;
+$rtl-header-search-margin-left: 40px;
+$rtl-header-ms-search-form-control-margin-right: 8px;
+$rtl-header-ms-search-account-info-margin-left: 26px;
+$rtl-signin-button-text-margin-right: 10.33px;
+$rtl-header-locator-margin-left-desktop: 26px;
+$rtl-header-search-margin-left-tablet: 20px;
+$rtl-header-modal-mobile-close-button-padding-left: 12px;
+
+[dir="rtl"] {
+    .ms-header {
+        &__account-info {
+            margin-right: unset;
+            margin-left: $rtl-header-ms-search-account-info-margin-left;
+        }
+
+        &__container {
+            .ms-header__account-info {
+                .ms-header__signin-button-text, .ms-profile-button-text {
+                    margin-right: $rtl-signin-button-text-margin-right;
+                    text-align: right;
+                }
+            }
+
+            .ms-header__logo {
+                margin-right: unset;
+                margin-left: $rtl-header-logo-margin-left;
+            }
+
+            .ms-search.with-submit {
+                margin-left: $rtl-header-search-margin-left;
+                margin-right: unset;
+
+                .ms-search__searchForm {
+                    .ms-search__form-control {
+                        margin-right: $rtl-header-ms-search-form-control-margin-right;
+                        margin-left: unset;
+                        padding-right: unset;
+                    }
+                }
+            }
+
+            .ms-site-picker.desktop-view {
+                margin-left: 0;
+                margin-right: 15px;
+            }
+        }
+
+        @media screen and (min-width: $msv-breakpoint-l) {
+            .ms-header__preferred-store-container {
+                margin-left: $rtl-header-locator-margin-left-desktop;
+                margin-right: unset;
+
+                .ms-header__preferred-store-btn {
+                    &::before {
+                        margin-left: 10px;
+                        margin-right: unset;
+                    }
+                }
+            }
+        }
+
+        @media (min-width: $msv-breakpoint-m) and (max-width: $msv-breakpoint-l) {
+            .mobile-navicon-container {
+                display: none;
+            }
+
+            .ms-nav.desktop-vp {
+                display: flex;
+                position: relative;
+                border-top: 1px solid var(--msv-header-font-color);
+            }
+
+            .ms-header__topbar {
+                .ms-search {
+                    margin-left: $rtl-header-search-margin-left-tablet;
+                    margin-right: unset;
+                }
+
+                .ms-header__account-info {
+                    margin-left: $rtl-header-search-margin-left-tablet;
+                    margin-right: unset;
+                }
+
+                .ms-header__preferred-store-container {
+                    margin-left: $rtl-header-search-margin-left-tablet;
+                    margin-right: unset;
+
+                    .ms-header__preferred-store-btn {
+                        margin-right: unset;
+
+                        &::before {
+                            margin-left: 0;
+                        }
+                    }
+                }
+
+                .ms-header__container .ms-header__topbar .ms-header__account-info {
+                    margin-left: $rtl-header-search-margin-left-tablet;
+                    margin-right: unset;
+                    margin-top: 0;
+                }
+            }
+        }
+
+        @media (max-width: ($msv-breakpoint-m)-1) {
+            .ms-header__topbar {
+                .desktop-navicon-container {
+                    display: none;
+                }
+
+                .ms-search {
+                    margin-left: auto;
+                    margin-right: unset;
+                }
+
+                .ms-header__account-info {
+                    margin-left: 0;
+                    margin-right: unset;
+                }
+
+                .ms-header__preferred-store-btn {
+                    margin-left: 0;
+                    margin-right: unset;
+
+                    &::before {
+                        margin-left: 0;
+                        margin-right: unset;
+                    }
+                }
+            }
+        }
+
+        .msc-cart-icon {
+            &__count {
+                margin-left: unset;
+                margin-right: $rtl-header-cart-icon-margin-right;
+            }
+        }
+
+        @media (max-width: $msv-breakpoint-l) {
+            &__collapsible-hamburger {
+                .ms-nav {
+                    .ms-nav__drawer {
+                        .drawer__button {
+                            .drawer__glyph__end {
+                                right: unset;
+                                left: $rtl-header-icon-padding-left;
+                            }
+                            text-align: right;
+                        }
+                    }
+                }
+
+                .ms-search.with-submit {
+                    &__icon-text {
+                        padding-left: unset;
+                        padding-right: $rtl-header-icon-padding-right;
+                    }
+                }
+
+                .ms-header__wishlist-mobile {
+                    text-align: right;
+
+                    &::before {
+                        padding-left: $rtl-header-icon-padding-left;
+                        padding-right: unset;
+                    }
+                }
+            }
+
+            &__container {
+                .ms-header__topbar {
+                    .ms-header__logo {
+                        margin: $rtl-header-logo-margin;
+                    }
+                }
+
+                .mobile-navicon-container {
+                    .ms-header__nav-icon {
+                        margin-left: 0;
+                        margin-right: unset;
+                    }
+                }
+            }
+
+            .ms-header__container .ms-header__topbar .ms-header__account-info {
+                &.account-mobile {
+                    .drawer__button {
+                        &::before {
+                            padding-right: unset;
+                            padding-left: $rtl-header-icon-padding-left;
+                        }
+
+                        .drawer__glyph__end {
+                            right: unset;
+                            left: $rtl-header-icon-padding-left;
+                        }
+                        text-align: right;
+                    }
+
+                    .ms-header__signin-button {
+                        &::before {
+                            padding-right: unset;
+                            padding-left: $rtl-header-icon-padding-left;
+                        }
+                    }
+                }
+            }
+
+            .ms-cart-icon {
+                padding-left: unset;
+            }
+
+            &__profile-button {
+                &::after {
+                    margin-left: unset;
+                    margin-right: $rtl-header-myaccount-margin-right;
+                }
+            }
+        }
+    }
+
+    .ms-header__modal {
+        .msc-modal {
+            .ms-header__mobile-hamburger {
+                .msc-modal__content {
+                    .msc-modal__header {
+                        text-align: left;
+
+                        .msc-modal__close-button {
+                            right: 0;
+                            position: relative;
+                            padding-left: $rtl-header-modal-mobile-close-button-padding-left;
+                            padding-right: unset;
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    .skip-to-main {
+        left: 0;
+        right: -999px;
+    }
+
+    .skip-to-main:focus,
+    .skip-to-main:active {
+        right: 0;
+    }
+}

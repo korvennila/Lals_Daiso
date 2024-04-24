@@ -1,0 +1,13 @@
+{
+    "$type": "definitionExtension",
+    "resources":{
+        "headingForEmptyOrderTemplateList": {
+            "comment": "The heading to show if order template list is empty",
+            "value": "Looks like you have not created any order templates."
+        },
+        "textForEmptyOrderTemplateList": {
+            "comment": "The text to show if order template list is empty",
+            "value": "Order templates will be saved to your account. You can reuse them in the future to speed up the checkout process."
+        }
+    }
+}

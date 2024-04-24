@@ -1,0 +1,13 @@
+{
+    "$type": "definitionExtension",
+    "resources": {
+        "priceText": {
+            "comment": "Price text",
+            "value": "Price"
+        },
+        "skuText": {
+            "comment": "SKU text",
+            "value": "SKU:"
+        }
+    }
+}

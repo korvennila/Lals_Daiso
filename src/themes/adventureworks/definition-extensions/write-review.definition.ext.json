@@ -1,0 +1,15 @@
+{
+    "$type": "definitionExtension",
+    "config": {
+        "paragraph": {
+            "type": "richText",
+            "friendlyName": "Rich text",
+            "description": "Paragraph text"
+        },
+        "imageSettings": {
+            "friendlyName": "Write Review Image Settings",
+            "description": "Image settings for product Image in Write Review modal",
+            "type": "imageSettings"
+        }
+    }
+}

@@ -1,0 +1,29 @@
+@import "../common/00-settings/responsive-breakpoints.scss";
+
+$msv-checkout-gift-card-input-fields-padding-left: 20px;
+$msv-checkout-gift-card-input-text-margin-left: 20px;
+
+[dir="rtl"] {
+    .ms-checkout-gift-card {
+        &__input-pin-fields,
+        &__input-num-fields {
+            padding-right: 0;
+            padding-left: $msv-checkout-gift-card-input-fields-padding-left;
+        }
+
+        &__input-error::before {
+            margin-right: 0;
+            margin-left: 10px;
+        }
+
+        &__input-text {
+            margin-left: $msv-checkout-gift-card-input-text-margin-left;
+        }
+
+        @media screen and (min-width: $msv-breakpoint-m) {
+            &__input-text {
+                margin-left: 0;
+            }
+        }
+    }
+}

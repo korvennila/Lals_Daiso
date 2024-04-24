@@ -1,0 +1,56 @@
+@import "../common/00-settings/responsive-breakpoints.scss";
+@import "../common/02-generic/image.scss";
+
+$rtl-feature-content-textplacement-left-margin-left: 40px;
+$rtl-feature-content-textplacement-left-margin-right: 20px;
+$rtl-feature-content-textplacement-right-margin-left: 20px;
+$rtl-feature-content-textplacement-right-margin-right: 40px;
+$rtl-feature-content-details-margin: 16px;
+
+[dir="rtl"] {
+    .ms-content-block {
+        &[data-m-layout="left-right"] {
+            @include image(100%);
+
+            @media screen and (min-width: $msv-breakpoint-m) {
+                &.textplacement__left {
+                    .ms-content-block__details {
+                        margin-left: $rtl-feature-content-textplacement-left-margin-left;
+                        margin-right: $rtl-feature-content-textplacement-left-margin-right;
+                    }
+                }
+
+                &.textplacement__right {
+                    .ms-content-block__details {
+                        margin-left: $rtl-feature-content-textplacement-right-margin-left;
+                        margin-right: $rtl-feature-content-textplacement-right-margin-right;
+                    }
+                }
+            }
+
+            @media screen and (max-width: $msv-breakpoint-m) {
+                &.textplacement__left {
+                    .ms-content-block__details {
+                        margin-left: $rtl-feature-content-details-margin;
+                        margin-right: $rtl-feature-content-details-margin;
+                    }
+                }
+
+                &.textplacement__right {
+                    .ms-content-block__details {
+                        margin-left: unset;
+                        margin-right: unset;
+                    }
+                }
+            }
+
+            .ms-content-block__details__additional-content {
+                .ms-content-block__details__additional-content__container {
+                    .ms-content-block__details__additional-content-cta {
+                        padding-right: 0;
+                    }
+                }
+            }
+        }
+    }
+}

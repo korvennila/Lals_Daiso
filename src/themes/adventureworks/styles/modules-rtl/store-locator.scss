@@ -1,0 +1,201 @@
+@import "../common/00-settings/responsive-breakpoints.scss";
+
+$pickup-option-list-item-padding-left: 5px;
+$pickup-option-list-item-padding-right: 16px;
+
+[dir="rtl"] {
+    .ms-store-locate {
+        right: 0;
+
+        .ms-store-select {
+            &__header {
+                @media screen and (max-width: $msv-breakpoint-m) {
+                    /* stylelint-disable-next-line declaration-no-important -- Auto-suppressed. Please fix if possible. */
+                    padding: 12px 25px 16px 16px !important;
+                }
+            }
+
+            &__search {
+                &-form {
+                    padding-left: 5px;
+
+                    .MicrosoftMap {
+                        .as_container_search {
+                            right: 0;
+                        }
+                    }
+                }
+
+                &-button {
+                    margin-right: 4px;
+                }
+            }
+
+            &__locations {
+                margin-left: 5px;
+            }
+
+            &__location {
+                &::after {
+                    right: 0;
+                    border-right: none;
+                }
+
+                &::before {
+                    right: 10px;
+                }
+
+                &-line-item {
+                    &-store-hours {
+                        margin-left: 15px;
+                    }
+
+                    &-contact-info {
+                        margin-left: 15px;
+                    }
+
+                    &-set-as-preferred-store {
+                        left: 0;
+
+                        @media screen and (max-width: $msv-breakpoint-m) {
+                            left: auto;
+                            right: auto;
+                        }
+
+                        &::after {
+                            right: 16px;
+
+                            @media screen and (max-width: $msv-breakpoint-m) {
+                                right: auto;
+                                margin-left: 10px;
+                            }
+                        }
+                    }
+
+                    &-preferred-store {
+                        left: auto;
+
+                        @media screen and (max-width: $msv-breakpoint-m) {
+                            left: auto;
+                        }
+
+                        &::before {
+                            right: 23px;
+
+                            @media screen and (max-width: $msv-breakpoint-m) {
+                                right: -125px;
+                            }
+                        }
+
+                        &::after {
+                            right: 16px;
+
+                            @media screen and (max-width: $msv-breakpoint-m) {
+                                margin-left: 10px;
+                            }
+                        }
+                    }
+                }
+
+                &-line-item-header {
+                    @media screen and (max-width: $msv-breakpoint-m) {
+                        padding: 0 50px;
+                    }
+                }
+
+                &-line-item-store-index {
+                    margin-left: 5px;
+                }
+
+                &-line-item-store-distance {
+                    padding-right: 12px;
+                }
+
+                &-line-shop-address {
+                    &-glyph-icon {
+                        padding-left: 2px;
+                    }
+                }
+
+                &-line-shop-phone {
+                    &-icon {
+                        padding-left: 15px;
+                    }
+
+                    &-list-toggle {
+                        &::after {
+                            left: 225px;
+
+                            @media (max-width: $msv-breakpoint-m) {
+                                left: 18px;
+                            }
+
+                            @media (min-width: $msv-breakpoint-m + 1) and (max-width: $msv-breakpoint-l) {
+                                left: 255px;
+                            }
+                        }
+
+                        &:focus {
+                            &::after {
+                                left: 11px;
+                            }
+                        }
+                    }
+
+                    &[data-selected="true"] {
+                        .ms-store-select__location-line-pickup-label {
+                            &::after {
+                                right: -85px;
+                            }
+                        }
+
+                        .ms-store-select__location-line-pickup-list-toggle {
+                            padding-right: 45px;
+                        }
+                    }
+
+                    &-list {
+                        &.show {
+                            border-bottom-right-radius: 4px;
+                            border-bottom-left-radius: 4px;
+                        }
+
+                        &-item {
+                            &-button {
+                                padding-right: $pickup-option-list-item-padding-right;
+                            }
+                        }
+
+                        &-link {
+                            padding-left: $pickup-option-list-item-padding-left;
+                            padding-right: $pickup-option-list-item-padding-right;
+                        }
+                    }
+
+                    &[data-error="true"] {
+                        .ms-store-select__location-line-pickup-list-error {
+                            &::before {
+                                margin-left: 10px;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    @media screen and (max-width: $msv-breakpoint-m) {
+        .ms-store-locate {
+            .ms-store-select {
+                &__search {
+                    padding: 0 15px 0 0;
+                }
+
+                &__locations {
+                    padding: 0 20px 8px 16px;
+                    margin-left: 4px;
+                }
+            }
+        }
+    }
+}

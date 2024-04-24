@@ -1,0 +1,354 @@
+@import "../common/00-settings/responsive-breakpoints.scss";
+@import "../common/00-settings/colors.scss";
+
+$rtl-msv-store-selector-location-line-shop-address-padding-left : 15px;
+$rtl-msv-store-selector-location-line-pickup-list-toggle-padding-right: 12px;
+$rtl-msv-store-selector-location-line-pickup-list-toggle-padding-left: 16px;
+$rtl-msv-store-selector-location-line-pickup-list-toggle-focus-left: 11px;
+$rtl-msv-store-selector-location-line-pickup-list-item-button-padding-right: 16px;
+$rtl-msv-store-selector-location-line-pickup-list-item-button-padding-left: 6px;
+$rtl-msv-store-selector-location-line-pickup-list-toggle-data-selected-padding-right: 45px;
+$msv-breakpoint-modal-m: 450px;
+
+[dir="rtl"] {
+    .ms-store-select {
+        .msc-modal__close-button {
+            right: auto;
+            left: 22px;
+        }
+
+        &.msc-modal__dialog.msc-modal-input-required .msc-modal__content .msc-modal__header .msc-modal__title {
+            text-align: right;
+        }
+
+        &.ms-store-select__map .ms-store-select__map_container {
+            left: 0;
+            right: unset;
+
+            .MicrosoftMap .NavBar_Container {
+                .bm_LocateMeControl {
+                    margin-left: 30px;
+                }
+            }
+        }
+
+        .ms-store-select__toggle-view::after {
+            padding-left: 0;
+            padding-right: 5px;
+        }
+
+        @media screen and (max-width: $msv-breakpoint-modal-m) and (orientation: portrait) {
+            &__map {
+                .ms-store-select {
+                    &__locations {
+                        max-height: calc(100vh - 300px);
+                    }
+                }
+            }
+        }
+
+        &__search-button {
+            margin-left: 0;
+            margin-right: 4px;
+        }
+
+        &__search {
+            &-form {
+                .MicrosoftMap {
+                    .as_container_search {
+                        left: unset;
+                        right: 0;
+                    }
+                }
+            }
+        }
+
+        &__locations {
+            padding: 0 0 32px 10px;
+
+            @media screen and (max-width: $msv-breakpoint-m) {
+                padding: 0 16px 0 8px;
+                margin-right: unset;
+                margin-left: 4px;
+                max-height: calc(100vh - 300px);
+
+                @media screen and (max-width: 450px) and (orientation: portrait) {
+                    max-height: calc(100vh - 200px);
+                }
+            }
+        }
+
+        &__search-header-pickup-menu {
+            padding-right: 10px;
+            padding-left: 0;
+
+            &::after {
+                padding-left: 0;
+                padding-right: 10px;
+            }
+        }
+
+        &__location-wrapper {
+            padding-left: 10px;
+        }
+
+        &__location {
+            @media screen and (max-width: $msv-breakpoint-m - 1) {
+                padding: 20px 0 0 0;
+            }
+
+            &::before {
+                left: auto;
+                right: 10px;
+            }
+
+            &::after {
+                left: auto;
+                right: 0;
+                border-radius: 8px 0 0 8px;
+                border-right: none;
+                border-left: 0.5px solid $msv-gray-50;
+            }
+
+            &-line-item {
+                &-header {
+                    display: flex;
+                    padding-left: 0;
+                    padding-right: 30px;
+
+                    @media screen and (max-width: $msv-breakpoint-m) {
+                        padding: 0;
+                    }
+                }
+
+                &-preferred-store {
+                    right: auto;
+                    left: 37px;
+                    padding: 16px 50px 16px 18px;
+
+                    @media screen and (max-width: $msv-breakpoint-m - 1) {
+                        left: auto;
+                    }
+
+                    &::before {
+                        left: auto;
+                        right: 23px;
+
+                        @media screen and (max-width: $msv-breakpoint-m - 1) {
+                            right: -125px;
+                        }
+                    }
+
+                    &::after {
+                        left: auto;
+                        right: 16px;
+
+                        @media screen and (max-width: $msv-breakpoint-m) {
+                            margin-right: 0;
+                            margin-left: 10px;
+                        }
+
+                        @media screen and (max-width: $msv-breakpoint-m - 1) {
+                            margin-right: 0;
+                            margin-left: 25px;
+                        }
+                    }
+                }
+
+                &-set-as-preferred-store {
+                    right: auto;
+                    left: 0;
+                    padding: 16px 50px 16px 18px;
+
+                    &::after {
+                        left: auto;
+                        right: 16px;
+
+                        @media (max-width: $msv-breakpoint-m - 1) {
+                            left: 16px;
+                            right: auto;
+                        }
+                    }
+                }
+
+                &-store-distance {
+                    align-self: center;
+                    padding-right: 12px;
+                    padding-left: 0;
+                }
+            }
+
+            &-line-shop-address {
+                &-glyph-icon {
+                    padding-right: 0;
+                    padding-left: $rtl-msv-store-selector-location-line-shop-address-padding-left;
+                }
+            }
+
+            &-line-shop-phone-icon {
+                padding-left: 15px;
+                padding-right: 0;
+            }
+
+            &-line-pickup {
+                &-list-toggle {
+                    text-align: right;
+                    padding-right: $rtl-msv-store-selector-location-line-pickup-list-toggle-padding-right;
+                    padding-left: $rtl-msv-store-selector-location-line-pickup-list-toggle-padding-left;
+
+                    &::after {
+                        float: left;
+                        left: 225px;
+                        right: unset;
+
+                        @media (max-width: $msv-breakpoint-m) {
+                            left: 11px;
+                            right: unset;
+                        }
+
+                        @media (min-width: $msv-breakpoint-m + 1) and (max-width: $msv-breakpoint-l) {
+                            left: 255px;
+                            right: unset;
+                        }
+                    }
+
+                    &:focus {
+                        &::after {
+                            left: $rtl-msv-store-selector-location-line-pickup-list-toggle-focus-left;
+                        }
+                    }
+                }
+
+                &[data-selected="true"] .ms-store-select__location-line-pickup-list-toggle {
+                    padding-left: 0;
+                    padding-right: $rtl-msv-store-selector-location-line-pickup-list-toggle-data-selected-padding-right;
+                }
+
+                &[data-selected="true"] .ms-store-select__location-line-pickup-label::after {
+                    left: 85px;
+                }
+
+                &[data-error="true"] .ms-store-select__location-line-pickup-list-error::before {
+                    margin-right: unset;
+                    margin-left: 10px;
+                }
+
+                &-menu {
+                    margin-left: 0;
+                }
+            }
+
+            @media screen and (max-width: $msv-breakpoint-m) {
+                .ms-store-select {
+                    &__location {
+                        &-line-item {
+                            &-store-availability {
+                                padding-bottom: 25px;
+                            }
+                        }
+                    }
+                }
+
+                &-line-pickup-menu {
+                    margin-right: 0;
+                }
+            }
+
+            @media screen and (min-width: $msv-breakpoint-m + 1) {
+                &-line-item-contact-info, &-line-item-store-hours {
+                    margin-left: 15px;
+                    margin-right: 0;
+                }
+
+                &-line-item-store-availability {
+                    text-align: left;
+                }
+            }
+        }
+
+        &__location-line-pickup-list-item-button {
+            text-align: right;
+            padding-right: $rtl-msv-store-selector-location-line-pickup-list-item-button-padding-right;
+            padding-left: $rtl-msv-store-selector-location-line-pickup-list-item-button-padding-left;
+        }
+
+        &__toggle-view {
+            margin-right: 10px;
+        }
+
+        &__map__selected_store__main {
+            &::before {
+                left: 0;
+                right: 10px;
+            }
+
+            &::after {
+                left: 0;
+                right: 0;
+                border-right: none;
+                border-left: 0.5px solid #C4C4C4;
+                border-radius: 8px 0 0 8px;
+            }
+
+            @media screen and (max-width: $msv-breakpoint-m - 1) {
+                &::before {
+                    left: 0;
+                    right: 20px;
+                }
+
+                &::after {
+                    left: 0;
+                    right: 10px;
+                }
+            }
+
+            .ms-store-select__map__selected_store__header {
+                padding-right: 56px;
+                padding-left: 0;
+
+                .ms-store-select__map__selected_store__header_close_button {
+                    right: auto;
+                    left: 20px;
+                }
+            }
+
+            @media screen and (min-width: $msv-breakpoint-m) {
+                .ms-store-select__location-line-item-set-as-preferred-store {
+                    left: 100px;
+                }
+            }
+        }
+
+        @media screen and (min-width: $msv-breakpoint-m) {
+            &__location {
+                &-line-item-contact-info {
+                    margin: 0 0 0 15px;
+                }
+
+                &-line-item-store-hours {
+                    margin: 0 0 0 15px;
+                }
+
+                &-line-item-store-availability {
+                    text-align: left;
+                }
+            }
+        }
+
+        @media screen and (max-width: $msv-breakpoint-m - 2) {
+            &__location {
+                &-line-item {
+                    &-header {
+                        padding: 0 56px 0 0;
+                    }
+
+                    &-store-hours,
+                    &-store-availability,
+                    &-contact-info {
+                        padding: 0 56px 0 0;
+                    }
+                }
+            }
+        }
+    }
+}

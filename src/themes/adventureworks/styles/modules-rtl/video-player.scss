@@ -1,0 +1,54 @@
+@import "../common/00-settings/colors.scss";
+@import "../common/00-settings/responsive-breakpoints.scss";
+
+$rtl-video-player-content-left-margin-mobile: 30px;
+
+[dir="rtl"] {
+    .ms-video-player {
+        &__details {
+            &__additional-content {
+                &__paragraph {
+                    padding-left: 20px;
+                    padding-right: unset;
+                }
+
+                &__text {
+                    @media (max-width: $msv-breakpoint-m) {
+                        margin-left: $rtl-video-player-content-left-margin-mobile;
+                        margin-right: unset;
+                    }
+                }
+
+                &__cta {
+                    &__links {
+                        cursor: pointer;
+
+                        &:nth-child(1) {
+                            border-right: 1px solid $msv-white;
+                            border-left: unset;
+                        }
+
+                        @media (max-width: $msv-breakpoint-m) {
+                            padding-left: 16px;
+                        }
+                    }
+                }
+
+                @media (min-width: $msv-breakpoint-m) and (max-width: $msv-breakpoint-l) {
+                    right: auto;
+                    left: 0;
+
+                    .ms-video-player__details__additional-content__text {
+                        margin-left: 52px;
+                        margin-right: 0;
+                    }
+
+                    .ms-video-player__details__additional-content__container {
+                        margin-left: 20px;
+                        margin-right: 0;
+                    }
+                }
+            }
+        }
+    }
+}

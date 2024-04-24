@@ -1,0 +1,118 @@
+@import "../00-settings/index.scss";
+@import "../01-tools/index.scss";
+@import "../02-generic/index.scss";
+
+$msv-table-header-row-height: 40px;
+$msv-table-header-row-cell-padding: 12px 0 12px 12px;
+
+$msv-table-row-cell-extra-actions-height: 82px;
+$msv-table-row-cell-extra-actions-width: 48px;
+
+$msv-table-actions-container-border-radius: 4px;
+$msv-table-actions-container-button-padding: 0 8px;
+$msv-table-actions-container-button-height: 52px;
+$msv-table-actions-container-button-margin-right: 12px;
+
+$balloon-arrow-size: 5px;
+
+//style presets
+:root {
+    // header
+    --msv-table-header-border-color: #{$msv-gray-50};
+
+    // row
+    --msv-table-row-border-color: #{$msv-gray-50};
+    --msv-table-row-background-color: #{$msv-white-20};
+}
+
+.msc-table {
+    width: 100%;
+    border-collapse: collapse;
+
+    &__header-cell,
+    &__row-cell {
+        text-align: left;
+
+        &.number {
+            text-align: right;
+        }
+
+        &.text,
+        &.amount,
+        &.date {
+            text-align: left;
+        }
+
+        .msc-btn {
+            color: $msv-blue;
+        }
+    }
+
+    &__header {
+        text-align: left;
+        border-bottom: 0.5px solid var(--msv-table-header-border-color);
+
+        &-row {
+            height: $msv-table-header-row-height;
+
+            th {
+                @include font-body-bold-xs();
+                padding: $msv-table-header-row-cell-padding;
+            }
+        }
+    }
+
+    &__row {
+        @include font-body-regular-s();
+        height: 80px;
+        border-bottom: 0.5px solid var(--msv-table-row-border-color);
+
+        td {
+            padding-left: 12px;
+        }
+
+        &:hover {
+            background-color: var(--msv-table-row-background-color);
+        }
+    }
+
+    [data-title] {
+        position: relative;
+
+        &::before {
+            content: " ";
+            width: 0;
+            height: 0;
+            border: $balloon-arrow-size solid transparent;
+            border-top-color: $msv-gray-20;
+            top: -4px;
+            left: 50%;
+        }
+
+        &::after {
+            content: attr(data-title);
+            background-color: $msv-gray-20;
+            color: $msv-white;
+            left: 0;
+            bottom: 100%;
+            padding: 8px;
+            margin: 4px;
+            text-align: center;
+            border-radius: 5px;
+        }
+
+        &::after, &::before {
+            transition: all 0.18s ease-out 0.18s;
+            opacity: 0;
+            visibility: hidden;
+            position: absolute;
+        }
+    }
+
+    [data-title]:hover {
+        &::after, &::before {
+            opacity: 1;
+            visibility: visible;
+        }
+    }
+}

@@ -1,0 +1,29 @@
+@import "../common/00-settings/responsive-breakpoints.scss";
+
+$msv-checkout-loyalty-amount-button-margin: 20px;
+$msv-checkout-loyalty-drawer-button-icon-margin-right: 12px;
+
+[dir="rtl"] {
+    .ms-checkout-loyalty {
+        @media screen and (min-width: $msv-breakpoint-l) {
+            &__amount-button {
+                margin-right: $msv-checkout-loyalty-amount-button-margin;
+                margin-left: 0;
+            }
+        }
+
+        .drawer__button {
+            &::after {
+                margin-right: $msv-checkout-loyalty-drawer-button-icon-margin-right;
+                margin-left: 0;
+            }
+        }
+
+        .drawer__button[aria-expanded="true"] {
+            &::after {
+                margin-right: $msv-checkout-loyalty-drawer-button-icon-margin-right;
+                margin-left: 0;
+            }
+        }
+    }
+}

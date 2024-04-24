@@ -1,0 +1,54 @@
+@import "../common/00-settings/responsive-breakpoints.scss";
+
+[dir="rtl"] {
+    .ms-checkout-customer-account {
+        &__available-credit {
+            float: left;
+        }
+
+        &__excess-credit {
+            float: left;
+        }
+
+        &__order-total {
+            float: left;
+        }
+
+        &__remove {
+            margin-right: 13px;
+            margin-left: 0;
+        }
+
+        &__account-credit-current-order-icon {
+            margin-right: 0;
+            margin-left: 6px;
+        }
+
+        &__account-credit-toggle-up, &__account-credit-toggle-down {
+            margin-left: 0;
+            margin-right: 10.58px;
+        }
+
+        &__btn-pay {
+            margin-left: 0;
+            margin-right: 12px;
+        }
+
+        &__applied-label {
+            &::before {
+                margin-left: 6px;
+                margin-right: 0;
+            }
+        }
+
+        &__applied-amount {
+            margin-left: 0;
+            margin-right: 5px;
+        }
+
+        &__input-error::before {
+            margin-right: 0;
+            margin-left: 10px;
+        }
+    }
+}

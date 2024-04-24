@@ -1,0 +1,44 @@
+@import "../common/00-settings/responsive-breakpoints.scss";
+
+$msv-subscribe-container-heading-margin: 28px 0;
+$msv-subscribe-subscribe-button-mobile-margin: 20px 0;
+$msv-subscribe-button-margin: 0 20px 0 0;
+
+[dir="rtl"] {
+    .ms-subscribe {
+        .ms-subscribe__details {
+            margin: 0 auto;
+
+            &__text {
+                margin: $msv-subscribe-container-heading-margin;
+            }
+
+            .ms-subscribe__details__form {
+                @media screen and (max-width: $msv-breakpoint-m) {
+                    &__submit {
+                        margin: $msv-subscribe-subscribe-button-mobile-margin;
+                    }
+                }
+
+                @media screen and (min-width: $msv-breakpoint-m) {
+                    &__submit {
+                        margin: $msv-subscribe-button-margin;
+                    }
+                }
+            }
+        }
+    }
+
+    .ms-footer {
+        .ms-subscribe {
+            .ms-subscribe__details {
+                .ms-subscribe__details__form {
+                    &__submit {
+                        float: right;
+                        margin: $msv-subscribe-subscribe-button-mobile-margin;
+                    }
+                }
+            }
+        }
+    }
+}

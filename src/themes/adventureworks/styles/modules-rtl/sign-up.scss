@@ -1,0 +1,31 @@
+@import "../common/00-settings/colors.scss";
+
+[dir="rtl"] {
+    .ms-sign-up {
+        &__item-error[aria-hidden="false"] {
+            + input {
+                border-left: 0.5px solid $msv-gray-50;
+                border-right: 4px solid var(--msv-form-error-font-color);
+            }
+
+            &::before {
+                margin-right: 0;
+                margin-left: 10px;
+            }
+        }
+
+        &__page-error[aria-hidden="false"] {
+            &::before {
+                margin-right: 0;
+                margin-left: 10px;
+            }
+        }
+
+        &__page-success[aria-hidden="false"] {
+            &::before {
+                margin-right: 0;
+                margin-left: 10px;
+            }
+        }
+    }
+}

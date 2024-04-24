@@ -1,0 +1,13 @@
+{
+    "$type": "definitionExtension",
+    "resources":{
+        "headingForEmptyUserOrganizationList": {
+            "comment": "The heading to show if business organization list is empty",
+            "value": "You do not have any organization users at this time."
+        },
+        "textForEmptyUserOrganizationList": {
+            "comment": "The text to show if business organization list is empty",
+            "value": "Organization users will be displayed here for your reference once you have added them"
+        }
+    }
+}

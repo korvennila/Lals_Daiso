@@ -1,0 +1,81 @@
+$msv-dialog-width: 400px;
+$msv-dialog-modal-content-body-text-padding: 4px 0;
+$msv-dialog-modal-content-empty-image-padding-bottom: 10px;
+$msv-dialog-modal-content-button-margin: 6px 0;
+$msv-dialog-button-width: 100%;
+$msv-dialog-msc-empty_image-size: 116px;
+$msc-item-added-to-cart-dialog-img-margin: 28px auto;
+$msv-modal-item-added-to-cart-dialog-header-padding: 25px 36px 19px;
+$msv-modal-item-added-to-cart-dialog-body-padding: 0 36px;
+$msv-modal-item-added-to-cart-dialog-footer-padding: 22px 36px;
+
+.msc-modal {
+    .msc-add-to-cart {
+        &__dialog {
+            max-width: $msv-dialog-width;
+
+            .msc-modal__content {
+                padding: 0;
+            }
+
+            &__header {
+                border-bottom: 0.5px solid $msv-gray-50;
+                padding: $msv-modal-item-added-to-cart-dialog-header-padding;
+
+                .msc-modal__title {
+                    @include font-heading-h3-l();
+
+                    @media (min-width: $msv-breakpoint-m+1) and (max-width: $msv-breakpoint-l) {
+                        @include font-heading-h3-m();
+                    }
+
+                    @media (max-width: $msv-breakpoint-m) {
+                        @include font-heading-h3-s();
+                    }
+                }
+            }
+
+            &__content {
+                img {
+                    margin: $msc-item-added-to-cart-dialog-img-margin;
+                }
+            }
+
+            &__body {
+                @include font-body-regular-m();
+                text-align: center;
+                padding: $msv-modal-item-added-to-cart-dialog-body-padding;
+
+                @include image($msv-dialog-msc-empty_image-size);
+
+                .msc-image-container {
+                    margin-right: auto;
+                    margin-left: auto;
+
+                    .msc-empty_image {
+                        padding-bottom: $msv-dialog-modal-content-empty-image-padding-bottom;
+                    }
+                }
+            }
+
+            &__go-to-cart {
+                @include primary-button-light();
+                margin: $msv-dialog-modal-content-button-margin;
+                width: $msv-dialog-button-width;
+                height: auto;
+            }
+
+            &__back-to-shopping {
+                @include secondary-button-light();
+                margin: $msv-dialog-modal-content-button-margin;
+                width: $msv-dialog-button-width;
+                height: auto;
+            }
+
+            &__footer {
+                flex-wrap: wrap;
+                padding: $msv-modal-item-added-to-cart-dialog-footer-padding;
+            }
+        }
+    }
+}

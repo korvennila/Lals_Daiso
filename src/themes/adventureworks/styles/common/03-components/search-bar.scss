@@ -1,0 +1,70 @@
+@import "../00-settings/colors.scss";
+@import "../00-settings/responsive-breakpoints.scss";
+@import "../00-settings/icons.scss";
+
+$msc-search-bar-padding: 16px 12px;
+$msc-search-bar-height: 60px;
+$msc-search-bar-options-width: 180px;
+$msc-search-bar-icon-color: $msv-white;
+$msc-search-bar-icon-font-size: 24px;
+
+.msc-search-bar {
+    &__search-options {
+        padding: $msc-search-bar-padding;
+        height: $msc-search-bar-height;
+        width: $msc-search-bar-options-width;
+        border: 0.5px solid $msv-gray-50;
+        border-radius: 4px 0 0 4px;
+        vertical-align: middle;
+    }
+
+    &__search-text {
+        padding: $msc-search-bar-padding;
+        height: $msc-search-bar-height;
+        width: calc(100% - #{$msc-search-bar-options-width} - 10px - #{$msc-search-bar-height});
+        border: 0.5px solid $msv-gray-50;
+        border-radius: 0 4px 4px 0;
+        vertical-align: middle;
+
+        &.full-width {
+            width: calc(100% - 10px - #{$msc-search-bar-height});
+            border-radius: 4px;
+        }
+    }
+
+    &__search-button {
+        cursor: pointer;
+        width: $msc-search-bar-height;
+        height: $msc-search-bar-height;
+        margin-left: 10px;
+        background: $msv-gray-20;
+        border-radius: 4px;
+        vertical-align: middle;
+        color: $msc-search-bar-icon-color;
+
+        &::after {
+            @include msv-icon();
+            content: $msv-Search;
+            font-size: $msc-search-bar-icon-font-size;
+            vertical-align: text-bottom;
+        }
+    }
+
+    @media screen and (max-width: $msv-breakpoint-m) {
+        &__search-options {
+            width: calc(100% - 10px - #{$msc-search-bar-height});
+            border-radius: 4px;
+            margin-bottom: 5px;
+        }
+
+        &__search-text {
+            width: calc(100% - 10px - #{$msc-search-bar-height});
+            border-radius: 4px;
+            vertical-align: middle;
+        }
+
+        &__search-button {
+            vertical-align: middle;
+        }
+    }
+}

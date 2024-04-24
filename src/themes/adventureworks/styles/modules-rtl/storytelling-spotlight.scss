@@ -1,0 +1,19 @@
+@import "../common/00-settings/responsive-breakpoints.scss";
+
+$rtl-storytelling-spotlight-image-list-link-margin-left: 17px;
+$rtl-storytelling-spotlight-image-list-link-margin-right: 3px;
+
+[dir="rtl"] {
+    .storytelling-spotlight {
+        .ms-image-list {
+            &__link {
+                margin-right: $rtl-storytelling-spotlight-image-list-link-margin-right;
+                margin-left: $rtl-storytelling-spotlight-image-list-link-margin-left;
+
+                @media (max-width: $msv-breakpoint-l - 1) {
+                    margin: 0 auto;
+                }
+            }
+        }
+    }
+}

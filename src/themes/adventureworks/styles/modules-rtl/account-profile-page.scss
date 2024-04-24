@@ -1,0 +1,34 @@
+$rtl-msv-account-profile-margin-left: 53px;
+$rtl-msv-account-profile-attributes-section-save-button-margin-left: 12px;
+$rtl-msv-account-profile-attributes-section-padding: 6px 0 6px 0;
+
+[dir="rtl"] {
+    .ms-account-profile {
+        .ms-account-profile-wrapper {
+            margin-right: 0;
+        }
+
+        .ms-account-profile__attributes-wrapper {
+            float: none;
+
+            .ms-account-profile__attributes {
+                &-save-button {
+                    margin-right: 0;
+                    margin-left: $rtl-msv-account-profile-attributes-section-save-button-margin-left;
+                }
+
+                &-edit-button {
+                    padding: $rtl-msv-account-profile-attributes-section-padding;
+                }
+            }
+        }
+
+        .ms-account-profile__section {
+            &-links {
+                .ms-account-profile__section-link {
+                    padding: $rtl-msv-account-profile-attributes-section-padding;
+                }
+            }
+        }
+    }
+}

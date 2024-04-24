@@ -1,0 +1,1 @@
+import './product-dimensions-matrix.scss';

@@ -1,0 +1,44 @@
+{
+    "$type": "definitionExtension",
+    "config": {
+        "noSearchResultImage": {
+            "type": "image",
+            "friendlyName": "Image when no suggestions available",
+            "description": "Image to be displayed when there are no auto-suggestions available"
+        }
+    },
+    "resources": {
+        "searchSuggestionHeading": {
+            "comment": "search suggestion in search results list heading title",
+            "value": "Search for {0}"
+        },
+        "keywordsHeading": {
+            "comment": "Keyword suggestion type search results list heading title",
+            "value": "Keywords"
+        },
+        "noResultText": {
+            "comment": "No Result text",
+            "value": "No Result"
+        },
+        "noResultContentHeadingText": {
+            "comment": "No Result Content Heading text",
+            "value": "Try a different keyword"
+        },
+        "noResultContentParagraphText": {
+            "comment": "No Result  Content Paragraph text",
+            "value": "No products found for the keyword entered."
+        },
+        "clearSearchButtonText": {
+            "comment": "Clear Search string Button text",
+            "value": "Clear"
+        },
+        "emptyMobileSearchTextHeading": {
+            "comment": "Empty text when in mboile view port",
+            "value": "Search"
+        },
+        "emptyMobileSearchText": {
+            "comment": "Empty text when in mboile view port",
+            "value": "Start typing to search for product."
+        }
+    }
+}

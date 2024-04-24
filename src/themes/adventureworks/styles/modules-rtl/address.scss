@@ -1,0 +1,89 @@
+@import "../common/00-settings/colors.scss";
+@import "../common/02-generic/form.scss";
+
+$msv-address-select-item-address-detail-padding-left: 0;
+$msv-address-select-item-address-detail-padding-right: 48px;
+$msv-address-dropdown-input-padding: 16px;
+$msv-address-button-save-margin-left: 20px;
+$msv-alert-message-margin-left: 8px;
+$msv-address-button-remove-padding-right: 28px;
+$msv-address-button-edit-padding-left: 30px;
+
+[dir="rtl"] {
+    .msc-address-form {
+        .address-form__item-invalid &__alert {
+            + input {
+                border-right: 4px solid var(--msv-form-error-font-color);
+                border-left: 0.5px solid $msv-gray-50;
+            }
+
+            + select {
+                border-right: 4px solid var(--msv-form-error-font-color);
+                border-left: 0.5px solid $msv-gray-50;
+            }
+
+            &::before {
+                margin-right: unset;
+                margin-left: $msv-alert-message-margin-left;
+            }
+        }
+
+        &__dropdown {
+            padding-right: $msv-address-dropdown-input-padding;
+        }
+
+        &__button-save {
+            margin-left: $msv-address-button-save-margin-left;
+        }
+    }
+
+    .msc-address-select {
+        &__item {
+            .msc-address-detail {
+                padding-left: $msv-address-select-item-address-detail-padding-left;
+                padding-right: $msv-address-select-item-address-detail-padding-right;
+            }
+        }
+    }
+
+    .ms-account-management-address {
+        .msc-address-list__primary {
+            .msc-address-list__primary-list {
+                .msc-address-detail {
+                    &__item {
+                        margin-left: 5px;
+                        margin-right: 0;
+                    }
+
+                    &__item-phone {
+                        &::before {
+                            margin-right: 0;
+                            float: right;
+                            margin-left: 15px;
+                        }
+                    }
+                }
+
+                .msc-address-list__button-remove {
+                    border-left: none;
+                    border-right: 0.5px solid $msv-gray-50;
+                    padding-right: $msv-address-button-remove-padding-right;
+                }
+
+                .msc-address-list__button-edit {
+                    padding-right: 0;
+                    padding-left: $msv-address-button-edit-padding-left;
+                }
+            }
+        }
+
+        .msc-address-form__item-street {
+            padding-left: 12px;
+            padding-right: 0;
+
+            .msc-address-form__input-text {
+                padding: 0 12px 0 0;
+            }
+        }
+    }
+}

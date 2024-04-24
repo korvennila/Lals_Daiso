@@ -1,0 +1,32 @@
+{
+    "$type": "definitionExtension",
+    "config": {
+        "enableProdutDescription":{
+            "friendlyName": "Show description card",
+            "description": "Show description card",
+            "type": "boolean",
+            "default": false
+          },
+        "useStickyFilter":{
+            "friendlyName": "Enable sticky Filter",
+            "description": "This setting makes the Filter sticky by keeping it visible below the header on the page while the user scrolls down",
+            "type": "boolean",
+            "required": false,
+            "default": false
+        }
+    },
+    "resources":{
+        "filterText": {
+            "value": "Filter",
+            "comment": "Refiners filter text"
+        },
+        "doneText": {
+            "value": "Done",
+            "comment": "Refiners filter collapse done button"
+        },
+        "doneAriaLabel": {
+            "value": "Done",
+            "comment": "Aria label for refiners filter collapse done button"
+        }
+    }
+}

@@ -1,0 +1,116 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Search unit tests - mobile empty Component renders correctly with noSearchResultImage as undefined 1`] = `
+<ForwardRef
+  className="msc-autoSuggest__productResults-empty-mobile-content"
+>
+  <div
+    className="msc-autoSuggest__productResults-empty-mobile-no-results-image"
+  />
+  <div
+    className="msc-autoSuggest__productResults-empty-mobile-text-content"
+  >
+    <div
+      className="msc-autoSuggest__productResults-empty-mobile-heading"
+    >
+      text
+    </div>
+    <div
+      className="msc-autoSuggest__productResults-empty-mobile-text"
+    >
+      text
+    </div>
+  </div>
+</ForwardRef>
+`;
+
+exports[`Search unit tests - mobile empty Component renders correctly with request grid settings 1`] = `
+<ForwardRef
+  className="msc-autoSuggest__productResults-empty-mobile-content"
+>
+  <div
+    className="msc-autoSuggest__productResults-empty-mobile-no-results-image"
+  >
+    <Image
+      className="msc-autoSuggest__productResults-no-results-image-img"
+      gridSettings={
+        Object {
+          "lg": Object {
+            "h": 2,
+            "w": 1,
+          },
+          "md": Object {
+            "h": 2,
+            "w": 1,
+          },
+          "sm": Object {
+            "h": 2,
+            "w": 1,
+          },
+          "xl": Object {
+            "h": 2,
+            "w": 1,
+          },
+          "xs": Object {
+            "h": 2,
+            "w": 1,
+          },
+        }
+      }
+      imageSettings={
+        Object {
+          "lazyload": true,
+          "viewports": Object {
+            "xs": Object {
+              "h": 100,
+              "q": "w=100&h=100&q=60&m=6",
+              "w": 100,
+            },
+          },
+        }
+      }
+      requestContext={
+        Object {
+          "gridSettings": Object {
+            "lg": Object {
+              "h": 2,
+              "w": 1,
+            },
+            "md": Object {
+              "h": 2,
+              "w": 1,
+            },
+            "sm": Object {
+              "h": 2,
+              "w": 1,
+            },
+            "xl": Object {
+              "h": 2,
+              "w": 1,
+            },
+            "xs": Object {
+              "h": 2,
+              "w": 1,
+            },
+          },
+        }
+      }
+      src="123"
+    />
+  </div>
+  <div
+    className="msc-autoSuggest__productResults-empty-mobile-text-content"
+  >
+    <div
+      className="msc-autoSuggest__productResults-empty-mobile-heading"
+    >
+      text
+    </div>
+    <div
+      className="msc-autoSuggest__productResults-empty-mobile-text"
+    >
+      text
+    </div>
+  </div>
+</ForwardRef>
+`;

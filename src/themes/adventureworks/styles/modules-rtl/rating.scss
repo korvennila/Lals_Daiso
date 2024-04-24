@@ -1,0 +1,14 @@
+@import "../common/00-settings/responsive-breakpoints.scss";
+
+$rtl-msv-rating-margin-left: 4px;
+
+[dir="rtl"] {
+    .msc-rating {
+        &__star,
+        &__half-star,
+        &__empty-star {
+            margin-right: 0;
+            margin-left: $rtl-msv-rating-margin-left;
+        }
+    }
+}

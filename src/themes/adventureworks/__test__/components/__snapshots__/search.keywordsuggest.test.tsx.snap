@@ -1,0 +1,56 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Search unit tests - Keyword Suggestions Component render empty keyword heading 1`] = `
+<ForwardRef
+  className="node-class-KeywordSuggest"
+>
+  <div
+    className="msc-autoSuggest_keywordsResults-title"
+  >
+    Keywords
+  </div>
+  <ForwardRef
+    className="node-class-UlKeyword"
+  >
+    keywordText
+  </ForwardRef>
+</ForwardRef>
+`;
+
+exports[`Search unit tests - Keyword Suggestions Component render without auto suggest keywords 1`] = `
+<ForwardRef
+  className="node-class-KeywordSuggest"
+>
+  <div
+    className="msc-autoSuggest_keywordsResults-title"
+  >
+    Keywords
+  </div>
+  <ForwardRef
+    className="node-class-UlKeyword"
+  >
+    <li
+      className="msc-autoSuggest__keywordResults-no-results"
+    >
+      No Result
+    </li>
+  </ForwardRef>
+</ForwardRef>
+`;
+
+exports[`Search unit tests - Keyword Suggestions Component renders correctly 1`] = `
+<ForwardRef
+  className="node-class-KeywordSuggest"
+>
+  <div
+    className="msc-autoSuggest_keywordsResults-title"
+  >
+    heading
+  </div>
+  <ForwardRef
+    className="node-class-UlKeyword"
+  >
+    keywordText
+  </ForwardRef>
+</ForwardRef>
+`;

@@ -1,0 +1,103 @@
+@import "../common/00-settings/index.scss";
+@import "../common/01-tools/index.scss";
+@import "../common/02-generic/index.scss";
+
+$product-dimensions-matrix-separator-color: $msv-gray-50;
+
+[dir="rtl"] {
+    .msc-product-dimensions-matrix {
+        &__matrix__mobile {
+            &__cell__dimension-container__cell {
+                .msc-swatch-container {
+                    padding-right: 0;
+                    padding-left: 8px;
+                }
+            }
+        }
+
+        &__header {
+            &__actions {
+                &__enter-all-quantities-container {
+                    &__toggle-button {
+                        &::before {
+                            padding-right: unset;
+                            padding-left: 10px;
+                        }
+
+                        &::after {
+                            float: left;
+                            padding-left: unset;
+                            padding-right: 10px;
+                        }
+                    }
+                }
+
+                &__clear-all-quantities-container {
+                    &__button {
+                        &::before {
+                            padding-right: unset;
+                            padding-left: 10px;
+
+                            @media screen and (max-width: $msv-breakpoint-m - 1) {
+                                padding-left: 0;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        &__matrix {
+            &__dimensions-header {
+                &__cell {
+                    &__toggle-button {
+                        text-align: right;
+                        float: right;
+
+                        &::after {
+                            float: left;
+                            padding-left: unset;
+                            padding-right: 10px;
+                        }
+                    }
+                }
+            }
+
+            &__row {
+                &__cell {
+                    &__dimension-item {
+                        .msc-swatch-container {
+                            padding-right: unset;
+                            padding-left: 8px;
+                        }
+                    }
+                }
+            }
+        }
+
+        &__footer {
+            &__total-summary {
+                border-right: unset;
+                border-left: 0.5px solid $product-dimensions-matrix-separator-color;
+            }
+
+            &__actions {
+                margin-left: 10px;
+                margin-right: auto;
+
+                &__add-to-order-template {
+                    &__add-button {
+                        &::before {
+                            padding-right: unset;
+                            padding-left: 10px;
+                        }
+
+                        @media screen and (max-width: $msv-breakpoint-m) {
+                            justify-content: right;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

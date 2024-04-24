@@ -1,0 +1,205 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Cart view unit tests - View renders correctly with 1 catline and  without cart mock data 1`] = `
+initialize {
+  "0": Node {
+    "attribs": Object {
+      "class": "",
+      "data-m-t": "mock-type",
+    },
+    "children": Array [
+      Node {
+        "attribs": Object {
+          "class": "ms-cart-icon-wrapper msc-btn",
+        },
+        "children": Array [
+          Node {
+            "data": "Icon",
+            "next": null,
+            "parent": [Circular],
+            "prev": null,
+            "type": "text",
+          },
+        ],
+        "name": "button",
+        "namespace": "http://www.w3.org/1999/xhtml",
+        "next": null,
+        "parent": [Circular],
+        "prev": null,
+        "type": "tag",
+        "x-attribsNamespace": Object {
+          "class": undefined,
+        },
+        "x-attribsPrefix": Object {
+          "class": undefined,
+        },
+      },
+    ],
+    "name": "div",
+    "namespace": "http://www.w3.org/1999/xhtml",
+    "next": null,
+    "parent": Node {
+      "children": Array [
+        [Circular],
+      ],
+      "name": "root",
+      "next": null,
+      "parent": null,
+      "prev": null,
+      "type": "root",
+    },
+    "prev": null,
+    "type": "tag",
+    "x-attribsNamespace": Object {
+      "class": undefined,
+      "data-m-t": undefined,
+    },
+    "x-attribsPrefix": Object {
+      "class": undefined,
+      "data-m-t": undefined,
+    },
+  },
+  "_root": [Circular],
+  "length": 1,
+  "options": Object {
+    "decodeEntities": true,
+    "xml": false,
+  },
+}
+`;
+
+exports[`Cart view unit tests - View renders correctly with 2 catline and cart mock data 1`] = `
+initialize {
+  "0": Node {
+    "attribs": Object {
+      "class": "",
+      "data-m-t": "mock-type",
+    },
+    "children": Array [
+      Node {
+        "attribs": Object {
+          "class": "ms-cart-icon-wrapper msc-btn",
+        },
+        "children": Array [
+          Node {
+            "data": "Icon",
+            "next": null,
+            "parent": [Circular],
+            "prev": null,
+            "type": "text",
+          },
+        ],
+        "name": "button",
+        "namespace": "http://www.w3.org/1999/xhtml",
+        "next": null,
+        "parent": [Circular],
+        "prev": null,
+        "type": "tag",
+        "x-attribsNamespace": Object {
+          "class": undefined,
+        },
+        "x-attribsPrefix": Object {
+          "class": undefined,
+        },
+      },
+    ],
+    "name": "div",
+    "namespace": "http://www.w3.org/1999/xhtml",
+    "next": null,
+    "parent": Node {
+      "children": Array [
+        [Circular],
+      ],
+      "name": "root",
+      "next": null,
+      "parent": null,
+      "prev": null,
+      "type": "root",
+    },
+    "prev": null,
+    "type": "tag",
+    "x-attribsNamespace": Object {
+      "class": undefined,
+      "data-m-t": undefined,
+    },
+    "x-attribsPrefix": Object {
+      "class": undefined,
+      "data-m-t": undefined,
+    },
+  },
+  "_root": [Circular],
+  "length": 1,
+  "options": Object {
+    "decodeEntities": true,
+    "xml": false,
+  },
+}
+`;
+
+exports[`Cart view unit tests - View renders correctly without catline and empty cart mock data 1`] = `
+initialize {
+  "0": Node {
+    "attribs": Object {
+      "class": "",
+      "data-m-t": "mock-type",
+    },
+    "children": Array [
+      Node {
+        "attribs": Object {
+          "class": "ms-cart-icon-wrapper msc-btn",
+        },
+        "children": Array [
+          Node {
+            "data": "Icon",
+            "next": null,
+            "parent": [Circular],
+            "prev": null,
+            "type": "text",
+          },
+        ],
+        "name": "button",
+        "namespace": "http://www.w3.org/1999/xhtml",
+        "next": null,
+        "parent": [Circular],
+        "prev": null,
+        "type": "tag",
+        "x-attribsNamespace": Object {
+          "class": undefined,
+        },
+        "x-attribsPrefix": Object {
+          "class": undefined,
+        },
+      },
+    ],
+    "name": "div",
+    "namespace": "http://www.w3.org/1999/xhtml",
+    "next": null,
+    "parent": Node {
+      "children": Array [
+        [Circular],
+      ],
+      "name": "root",
+      "next": null,
+      "parent": null,
+      "prev": null,
+      "type": "root",
+    },
+    "prev": null,
+    "type": "tag",
+    "x-attribsNamespace": Object {
+      "class": undefined,
+      "data-m-t": undefined,
+    },
+    "x-attribsPrefix": Object {
+      "class": undefined,
+      "data-m-t": undefined,
+    },
+  },
+  "_root": [Circular],
+  "length": 1,
+  "options": Object {
+    "decodeEntities": true,
+    "xml": false,
+  },
+}
+`;

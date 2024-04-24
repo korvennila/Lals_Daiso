@@ -1,0 +1,29 @@
+@import "../common/00-settings/responsive-breakpoints.scss";
+
+[dir="rtl"] {
+    .msc-product-comparison {
+        &__main-container {
+            &__container {
+                &__table {
+                    &__row {
+                        &__header-cell {
+                            text-align: right;
+                        }
+                    }
+
+                    &__body .msc-product-comparison__main-container__container__table__row__header-cell {
+                        left: unset;
+                        right: 0;
+                    }
+
+                    &__header {
+                        &__product-row__remove {
+                            right: unset;
+                            left: 0;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

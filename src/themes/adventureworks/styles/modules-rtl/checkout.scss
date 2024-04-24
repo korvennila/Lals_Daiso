@@ -1,0 +1,127 @@
+@import "../common/00-settings/responsive-breakpoints.scss";
+
+$msv-checkout-line-margin-right: 20px;
+$msv-checkout-pick-up-at-store-margin-left: 0;
+$msv-checkout-pick-up-at-store-margin-right: 128px;
+$msv-checkout-line-item-pickup-heading-subheading-margin: 0 37px 0 0;
+$msv-checkout-main-panel-padding-left: 49px;
+$msv-checkout-error-icon-margin-left: 22px;
+$msv-checkout-error-icon-padding-right: 2px;
+$msv-checkout-side-ordersummary-heading-padding: 27px 54px 23px 57px;
+$msv-checkout-multiple-pickup-lineitems-header-margin: 27px 54px 23px 57px;
+$msv-chckout-line-items-group-title-right: 180px;
+$msv-chckout-line-items-group-title-tablet-right: 160px;
+$msv-rtl-checkout-cart-line-unit-of-measure-margin-left: 0;
+$msv-rtl-checkout-cart-line-unit-of-measure-margin-right: 5px;
+$msv-rtl-checkout-cart-line-price-strikethrough-margin-left: 10px;
+$msv-rtl-checkout-cart-line-price-strikethrough-margin-right: 0;
+$msv-rtl-checkout-error-message-margin-left: 464px;
+
+[dir="rtl"] {
+    .ms-checkout {
+        &__main {
+            padding-left: $msv-checkout-main-panel-padding-left;
+            padding-right: 0;
+
+            @media (max-width: $msv-breakpoint-m) {
+                padding-left: 0;
+            }
+        }
+
+        &__side {
+            @media (min-width: $msv-breakpoint-l) {
+                .msc-order-summary__heading {
+                    padding: $msv-checkout-side-ordersummary-heading-padding;
+                }
+            }
+        }
+
+        .multiple-pickup-enabled {
+            @media (min-width: $msv-breakpoint-l) {
+                .ms-checkout__line-items-header {
+                    margin: $msv-checkout-multiple-pickup-lineitems-header-margin;
+                }
+            }
+        }
+
+        &__line-items {
+            &-delivery-group {
+                .ms-checkout__line-items-group-title {
+                    text-align: left;
+
+                    &-multiple-pickup-heading {
+                        margin: $msv-checkout-line-item-pickup-heading-subheading-margin;
+                    }
+                }
+
+                .ms-checkout__line-items-group-title-multiple-pickup-subheading {
+                    left: unset;
+                    right: $msv-chckout-line-items-group-title-right;
+
+                    @media screen and (max-width: $msv-breakpoint-m) {
+                        right: $msv-chckout-line-items-group-title-tablet-right;
+                    }
+                }
+
+                .ms-checkout__pick-up-at-store {
+                    margin-left: $msv-checkout-pick-up-at-store-margin-left;
+                    margin-right: $msv-checkout-pick-up-at-store-margin-right;
+                }
+
+                .msc-cart-line {
+                    &__content {
+                        margin-right: $msv-checkout-line-margin-right;
+
+                        .msc-cart-line__product-price {
+                            text-align: right;
+
+                            .msc-cart-line__product-unit-of-measure {
+                                margin-left: $msv-rtl-checkout-cart-line-unit-of-measure-margin-left;
+                                margin-right: $msv-rtl-checkout-cart-line-unit-of-measure-margin-right;
+                            }
+
+                            .msc-price__strikethrough {
+                                margin-left: $msv-rtl-checkout-cart-line-price-strikethrough-margin-left;
+                                margin-right: $msv-rtl-checkout-cart-line-price-strikethrough-margin-right;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        &__guided-card {
+            &-btn-edit {
+                display: flex;
+                margin-right: auto;
+                margin-left: 0;
+            }
+        }
+
+        &__main-control {
+            .ms-checkout__btn-place-order {
+                margin-right: 10px;
+            }
+        }
+
+        &__error-message {
+            @media screen and (min-width: ($msv-breakpoint-m + 1)) {
+                margin-left: $msv-rtl-checkout-error-message-margin-left;
+                margin-right: 0;
+            }
+
+            &::before {
+                margin-left: $msv-checkout-error-icon-margin-left;
+                padding-right: $msv-checkout-error-icon-padding-right;
+                margin-right: unset;
+                padding-left: unset;
+            }
+        }
+
+        &__guided-card-footer {
+            .ms-checkout__guided-card-btn-save {
+                margin-right: unset;
+            }
+        }
+    }
+}

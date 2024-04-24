@@ -1,0 +1,133 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Add To Order Template Button unit tests - View renders correctly 1`] = `
+<Unknown
+  addToOrderTemplateButtonText="ms-buybox"
+  addToOrderTemplateButtonTooltip="ms-buybox"
+  addToOrderTemplateDialogResources={
+    Object {
+      "addToOrderTemplateHeader": "ms-buybox",
+      "addToTemplateButtonText": "ms-buybox",
+      "cancelOrderTemplateCreationButtonText": "ms-buybox",
+      "createAnOrderTemplateButtonText": "ms-buybox",
+      "createNewOrderTemplateButtonText": "ms-buybox",
+      "lineItemsText": "ms-buybox",
+      "noOrderTemplatesDescription": "ms-buybox",
+      "noOrderTemplatesMessage": "ms-buybox",
+      "selectTemplatesText": "ms-buybox",
+    }
+  }
+  className="msc-add-to-cart-extra-actions"
+  context={Object {}}
+  createOrderTemplateDialogResources={
+    Object {
+      "defaultOrderTemplateName": "ms-buybox",
+      "orderTemplateButtonLabel": "ms-buybox",
+      "orderTemplateCancelButtonLabel": "ms-buybox",
+      "orderTemplateDescription": "ms-buybox",
+      "orderTemplateHeaderLabel": "ms-buybox",
+      "orderTemplateNameAriaLabel": "ms-buybox",
+      "orderTemplateTitleLabel": "ms-buybox",
+    }
+  }
+  data={
+    Object {
+      "customerInformation": Object {
+        "AccountNumber": "customer-id",
+        "IsB2b": true,
+      },
+      "orderTemplates": Array [
+        Object {
+          "orderTemplateLines": Array [
+            Object {
+              "productListLine": Object {
+                "LineId": "line-id",
+                "ProductId": 42,
+                "ProductListId": "product-list-id",
+                "Quantity": 12,
+                "UnitOfMeasure": "ea",
+              },
+            },
+          ],
+          "productList": Object {
+            "Id": "id",
+            "ProductListLines": Array [
+              Object {
+                "LineId": "line-id",
+                "ProductId": 42,
+                "ProductListId": "product-list-id",
+                "Quantity": 12,
+                "UnitOfMeasure": "ea",
+              },
+            ],
+          },
+          "totalLines": 0,
+        },
+        Object {
+          "orderTemplateLines": Array [],
+          "productList": Object {
+            "Id": "id",
+          },
+          "totalLines": 0,
+        },
+      ],
+      "product": Object {
+        "AdjustedPrice": 25,
+        "BasePrice": 25,
+        "Dimensions": Array [
+          Object {
+            "DimensionTypeValue": 3,
+            "DimensionValue": Object {
+              "RecordId": 1,
+              "Value": "S",
+            },
+          },
+          Object {
+            "DimensionTypeValue": 4,
+            "DimensionValue": Object {
+              "RecordId": 3,
+              "Value": "Large",
+            },
+          },
+        ],
+        "MasterProductId": 123,
+        "Name": "Crew neck server",
+        "Price": 25,
+        "ProductTypeValue": 1,
+        "RecordId": 123,
+      },
+      "quantity": 1,
+    }
+  }
+  duplicateItemsWhenAddingToOrderTemplateDialogResources={
+    Object {
+      "cancelDuplicateItemsButtonText": "ms-buybox",
+      "duplicatedProductsDescription": "ms-buybox",
+      "duplicatedProductsHeader": "ms-buybox",
+      "updateQuantityButtonText": "ms-buybox",
+    }
+  }
+  id="123"
+  isMultipleCatalogFeatureEnabledInHq={false}
+  itemAddedToOrderTemplateDialogResources={
+    Object {
+      "continueShoppingButtonText": "ms-buybox",
+      "currentPriceText": "ms-buybox",
+      "freePriceText": "ms-buybox",
+      "itemAddedToOrderTemplateHeaderItemFormatText": "ms-buybox",
+      "itemAddedToOrderTemplateHeaderItemOneText": "ms-buybox",
+      "itemAddedToOrderTemplateHeaderMessageText": "ms-buybox",
+      "originalPriceText": "ms-buybox",
+      "viewOrderTemplateButtonText": "ms-buybox",
+    }
+  }
+  onError={[Function]}
+  showButtonText={true}
+  showButtonTooltip={false}
+  typeName="type name"
+/>
+`;
+
+exports[`Add To Order Template Button unit tests - View renders correctly mock empty 1`] = `undefined`;
+
+exports[`Add To Order Template Button unit tests - View renders correctly with mock data 1 1`] = `undefined`;

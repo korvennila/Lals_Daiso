@@ -1,0 +1,83 @@
+@import "../common/00-settings/responsive-breakpoints.scss";
+
+$rtl-msc-content-block-slim-hero-large-desktop-content-margin-right: 64px;
+$rtl-msc-content-block-slim-hero-large-tablet-content-margin-right: 45px;
+$rtl-msc-content-block-slim-hero-large-mobile-content-margin-right: 28px;
+
+$rtl-msc-content-block-slim-hero-small-desktop-content-margin-right: 64px;
+$rtl-msc-content-block-slim-hero-small-desktop-content-margin-left: 58px;
+$rtl-msc-content-block-slim-hero-small-tablet-content-margin-right: 45px;
+$rtl-msc-content-block-slim-hero-small-mobile-content-margin-right: 28px;
+
+$rtl-msc-content-block-slim-hero-medium-desktop-content-margin-right: 64px;
+$rtl-msc-content-block-slim-hero-medium-mobile-content-margin-right: 28px;
+$rtl-msc-content-block-slim-hero-medium-tablet-content-margin-right: 45px;
+
+[dir="rtl"] {
+    .ms-content-block {
+        &[data-m-layout="slim-hero-large"] {
+            .ms-content-block__details {
+                @media screen and (min-width: $msv-breakpoint-l) {
+                    margin-right: $rtl-msc-content-block-slim-hero-large-desktop-content-margin-right;
+                    margin-left: 0;
+                }
+
+                @media (max-width: $msv-breakpoint-m) {
+                    margin-right: $rtl-msc-content-block-slim-hero-large-mobile-content-margin-right;
+                    margin-left: 0;
+                }
+
+                @media (min-width: $msv-breakpoint-m) and (max-width: $msv-breakpoint-l) {
+                    margin-right: $rtl-msc-content-block-slim-hero-large-tablet-content-margin-right;
+                    margin-left: 0;
+                }
+            }
+        }
+
+        &[data-m-layout="slim-hero-medium"] {
+            .ms-content-block__details {
+                margin-left: 0;
+                margin-right: $rtl-msc-content-block-slim-hero-medium-desktop-content-margin-right;
+
+                .ms-content-block__cta {
+                    left: 58px;
+                    right: auto;
+                }
+
+                @media screen and (max-width: $msv-breakpoint-m) {
+                    margin-left: 0;
+                    margin-right: $rtl-msc-content-block-slim-hero-medium-mobile-content-margin-right;
+                }
+
+                @media (min-width: $msv-breakpoint-m) and (max-width: $msv-breakpoint-l) {
+                    margin-left: 0;
+                    margin-right: $rtl-msc-content-block-slim-hero-medium-tablet-content-margin-right;
+                }
+            }
+        }
+
+        &[data-m-layout="slim-hero-small"] {
+            .ms-content-block__details {
+                @media screen and (min-width: $msv-breakpoint-l) {
+                    margin-right: $rtl-msc-content-block-slim-hero-small-desktop-content-margin-right;
+                    margin-left: $rtl-msc-content-block-slim-hero-small-desktop-content-margin-left;
+                }
+
+                @media (max-width: $msv-breakpoint-m) {
+                    margin-left: 0;
+                    margin-right: $rtl-msc-content-block-slim-hero-small-mobile-content-margin-right;
+                }
+
+                @media (min-width: $msv-breakpoint-m) and (max-width: $msv-breakpoint-l) {
+                    margin-left: 0;
+                    margin-right: $rtl-msc-content-block-slim-hero-small-tablet-content-margin-right;
+                }
+
+                .ms-content-block__cta {
+                    margin-left: 0;
+                    margin-right: auto;
+                }
+            }
+        }
+    }
+}

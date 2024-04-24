@@ -1,0 +1,19 @@
+@import "../common/00-settings/responsive-breakpoints.scss";
+
+[dir="rtl"] {
+    .ms-content-block {
+        &[data-m-layout="tile"] {
+            .ms-content-block__details {
+                text-align: right;
+            }
+
+            .ms-content-block__details__additional-content {
+                .ms-content-block__details__additional-content__container {
+                    .ms-content-block__details__additional-content-cta {
+                        padding-right: 0;
+                    }
+                }
+            }
+        }
+    }
+}

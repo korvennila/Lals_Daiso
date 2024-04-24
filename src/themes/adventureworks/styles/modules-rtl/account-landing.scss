@@ -1,0 +1,48 @@
+$rtl-msc-link-padding-right: 0;
+$rtl-msc-link-padding-left: 12px;
+$rtl-b2b-account-tile-heading-margin-left: 14px;
+
+[dir="rtl"] {
+    .ms-account {
+        &-generic-tile,
+        &-wishlist-tile,
+        &-order-templates-tile,
+        &-address-tile,
+        &-loyalty-tile,
+        &-organization-users-tile,
+        &-customer-balance-tile,
+        &-invoice-tile,
+        &-b2b-requests-tile {
+            &__link {
+                padding-right: $rtl-msc-link-padding-right;
+                padding-left: $rtl-msc-link-padding-left;
+            }
+        }
+
+        &-wishlist-tile,
+        &-address-tile,
+        &-customer-balance-tile,
+        &-organization-users-tile,
+        &-order-templates-tile,
+        &-invoice-tile,
+        &-loyalty-tile,
+        &-b2b-requests-tile {
+            &__heading {
+                &::before {
+                    margin-right: 0;
+                    margin-left: $rtl-b2b-account-tile-heading-margin-left;
+                }
+            }
+        }
+
+        &-generic-tile.order-tile,
+        &-generic-tile.profile-tile {
+            .ms-account-generic-tile__heading {
+                &::before {
+                    margin-right: 0;
+                    margin-left: $rtl-b2b-account-tile-heading-margin-left;
+                }
+            }
+        }
+    }
+}

@@ -1,0 +1,195 @@
+@import "../common/00-settings/colors.scss";
+@import "../common/00-settings/font.scss";
+@import "../common/00-settings/responsive-breakpoints.scss";
+@import "../common/01-tools/mixins.scss";
+@import "../common/00-settings/icons.scss";
+
+$msc-invoices-list-table-header-padding-left: 20px;
+$msc-invoices-list-table-row-padding-left: 20px;
+$msc-invoices-list-table-row-margin-left: 10px;
+$msc-invoices-list-extra-action-cell-margin-left: 12px;
+$msc-invoices-list-load-more-margin-left: 8px;
+$msc-invoices-list-pay-invoice-modal-margin-left: 10px;
+$msc-invoices-list-pay-invoice-modal-cancel-button-margin-right: 9px;
+$msc-invoices-list-search-bar-margin-left: 8px;
+$msc-invoices-list-search-bar-padding: 16px 16px 16px 48px;
+$rtl-msc-invoices-list-request-invoice-button-margin-right: 16px;
+$rtl-msc-invoices-list-request-invoice-modal-body-label-margin-right: 30px;
+$rtl-msc-invoices-list-request-invoice-modal-body-label-icon-margin-right: -100px;
+$msc-invoices-list-msi-exclamation-triangle-before-padding-left: 8px;
+$rtl-msc-invoices-list-container-content-msc-alert__line-padding-right: 42px;
+$msv-msc-invoices-list__table__row__open-invoice-b-padding-right: 16px;
+$msv-msc-invoices-list__table__row__open-invoice-b-padding-left: 0;
+$msc-mobile-invoices-list-request-invoice-button-margin-right: 10px;
+
+[dir="rtl"] {
+    .msc-modal__header {
+        .msc-modal__close-button {
+            right: unset;
+            left: 20px;
+        }
+    }
+
+    .msc-invoices-list {
+        &__header-description {
+            &-title,
+            &-amount,
+            &-count {
+                text-align: left;
+            }
+        }
+
+        &__container {
+            &__content {
+                .msc-alert {
+                    .msc-alert__line {
+                        padding-right: $rtl-msc-invoices-list-container-content-msc-alert__line-padding-right;
+                    }
+                }
+
+                .msi-exclamation-triangle {
+                    &::before {
+                        padding-left: $msc-invoices-list-msi-exclamation-triangle-before-padding-left;
+                    }
+                }
+
+                &__table {
+                    &__header {
+                        text-align: right;
+
+                        &__row {
+                            th {
+                                padding-left: $msc-invoices-list-table-header-padding-left;
+                                padding-right: 0;
+
+                                &:last-child {
+                                    padding-left: 0;
+                                }
+                            }
+                        }
+                    }
+
+                    &__row {
+                        &__open-invoice {
+                            & ~ b {
+                                @media screen and (max-width: $msv-breakpoint-m) {
+                                    @include font-body-regular-s();
+                                    padding-right: $msv-msc-invoices-list__table__row__open-invoice-b-padding-right;
+                                    padding-left: $msv-msc-invoices-list__table__row__open-invoice-b-padding-left;
+                                }
+                            }
+                        }
+
+                        td {
+                            padding-left: $msc-invoices-list-table-row-padding-left;
+                            padding-right: 0;
+
+                            &:nth-child(2) {
+                                &::before {
+                                    margin-left: $msc-invoices-list-table-row-margin-left;
+                                    margin-right: 0;
+                                }
+                            }
+
+                            &:last-child {
+                                padding-left: 0;
+                            }
+                        }
+
+                        &__pay-invoice {
+                            margin-right: 0;
+                            margin-left: 10px;
+                        }
+                    }
+
+                    &__row__extra-actions-cell__actions-container button {
+                        text-align: right;
+
+                        &::before {
+                            margin-right: unset;
+                            margin-left: $msc-invoices-list-extra-action-cell-margin-left;
+                        }
+                    }
+                }
+            }
+        }
+
+        &__filter {
+            @media screen and (min-width: $msv-breakpoint-m +1) {
+                position: absolute;
+                right: unset;
+                left: 0;
+            }
+        }
+
+        &__requestInvoiceButton {
+            margin-left: 0;
+            margin-right: $rtl-msc-invoices-list-request-invoice-button-margin-right;
+
+            @media only screen and (max-width: $msv-breakpoint-l) {
+                margin-left: 0;
+                margin-right: 0;
+            }
+
+            @media (min-width: $msv-breakpoint-m) and (max-width: $msv-breakpoint-l) {
+                margin-right: $msc-mobile-invoices-list-request-invoice-button-margin-right;
+            }
+        }
+
+        &__load-more {
+            &.is-busy {
+                &::before {
+                    margin-right: unset;
+                    margin-left: $msc-invoices-list-load-more-margin-left;
+                }
+            }
+        }
+    }
+
+    .msc-pay-invoice-error-dialog {
+        &__error-title {
+            &::before {
+                margin-left: $msc-invoices-list-pay-invoice-modal-margin-left;
+                margin-right: 0;
+            }
+        }
+
+        &__cancel-button {
+            margin-right: $msc-invoices-list-pay-invoice-modal-cancel-button-margin-right;
+        }
+    }
+
+    .msc-invoices-list_requestInvoice__modal {
+        .msc-modal__header {
+            .msc-modal__title {
+                /* stylelint-disable-next-line declaration-no-important -- Auto-suppressed. Please fix if possible. */
+                text-align: right !important;
+            }
+        }
+
+        .msc-modal__body label {
+            margin-right: $rtl-msc-invoices-list-request-invoice-modal-body-label-margin-right;
+
+            &::before {
+                margin-right: $rtl-msc-invoices-list-request-invoice-modal-body-label-icon-margin-right;
+            }
+        }
+
+        .msc-invoices-list__requestInvoice__search {
+            .msc-invoices-list__requestInvoice__searchBar {
+                margin-right: 0;
+                margin-left: $msc-invoices-list-search-bar-margin-left;
+                padding: $msc-invoices-list-search-bar-padding;
+            }
+        }
+    }
+
+    @media screen and (max-width: $msv-breakpoint-m) {
+        .msc-pay-invoice-error-dialog {
+            &__cancel-button {
+                margin-right: 0;
+                width: 100%;
+            }
+        }
+    }
+}

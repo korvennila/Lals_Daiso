@@ -1,0 +1,175 @@
+@import "../common/00-settings/colors.scss";
+@import "../common/00-settings/font.scss";
+@import "../common/00-settings/responsive-breakpoints.scss";
+@import "../common/00-settings/icons.scss";
+@import "../common/01-tools/mixins.scss";
+@import "../common/02-generic/image.scss";
+@import "../common/02-generic/button.scss";
+
+$rtl-nav-button-margin-right: 8px;
+$rtl-nav-parent-menu-margin-left: 24px;
+$rtl-navigation-ms-nav-list-item-drawer-collapse-tablet-padding-right: 40px;
+$rtl-navigation-ms-nav-drawer-close-padding-right: 0;
+$rtl-navigation-ms-nav-drawer-close-padding-left: 13px;
+$rtl-navigation-ms-nav-list-item-first-child-padding-right: 0;
+$rtl-navigation-ms-nav-close-button-padding-left: 16px;
+$rtl-navigation-ms-nav-list-desktop-padding-right: 60px;
+$rtl-navigation-ms-nav-list-tablet-padding-right: 24px;
+$rtl-navigation-ms-nav-list-mobile-container-padding-left: 34px;
+$rtl-navigation-ms-nav-list-mobile-container-padding-right: 16px;
+
+[dir="rtl"] {
+    .ms-nav {
+        &__list__item {
+            .havesubmenu {
+                .drawer {
+                    .collapse.show {
+                        margin-left: 0;
+                        margin-right: 10px;
+
+                        > .ms-nav__list__item__link {
+                            padding-left: 0;
+                            padding-right: 10px;
+                        }
+
+                        .ms-nav__list__item__link {
+                            margin-left: 0;
+                            margin-right: 31px;
+                        }
+                    }
+
+                    .collapsing {
+                        margin-left: 0;
+                        margin-right: 10px;
+                    }
+                }
+            }
+        }
+
+        @media screen and (min-width: $msv-breakpoint-m) {
+            &__list {
+                &__item__button {
+                    &::after {
+                        margin-left: unset;
+                        margin-right: $rtl-nav-button-margin-right;
+                    }
+                }
+
+                >.ms-nav__list__item {
+                    .ms-nav__feature, .ms-nav__deafult {
+                        .ms-nav__list.level-3 {
+                            .ms-nav__list__item {
+                                .ms-nav__drawer_desktop.level-3 {
+                                    .drawer__button {
+                                        text-align: right;
+                                    }
+
+                                    .collapse.show,
+                                    .collapsing {
+                                        /* stylelint-disable-next-line no-descending-specificity -- Auto-suppressed. Please fix if possible. */
+                                        div {
+                                            /* stylelint-disable-next-line no-descending-specificity -- Auto-suppressed. Please fix if possible. */
+                                            .ms-nav__list__item__link {
+                                                padding-right: $rtl-navigation-ms-nav-list-item-drawer-collapse-tablet-padding-right;
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+
+            &__drawer-close, &__drawer-open {
+                padding-left: $rtl-navigation-ms-nav-drawer-close-padding-left;
+                padding-right: $rtl-navigation-ms-nav-drawer-close-padding-right;
+            }
+
+            .ms-nav__list {
+                /* stylelint-disable-next-line no-descending-specificity -- Auto-suppressed. Please fix if possible. */
+                .ms-nav__list__item:first-child {
+                    padding-right: $rtl-navigation-ms-nav-list-item-first-child-padding-right;
+                    margin-left: $rtl-nav-parent-menu-margin-left;
+                }
+
+                .havecateImage {
+                    float: right;
+                    padding-right: 24px;
+                }
+            }
+        }
+
+        @media screen and (min-width: 992px) {
+            .ms-nav__list {
+                .havecateImage {
+                    padding-right: 0;
+                }
+            }
+        }
+
+        >.ms-nav__list {
+            @media screen and (min-width: $msv-breakpoint-m) {
+                padding-right: $rtl-navigation-ms-nav-list-tablet-padding-right;
+            }
+
+            @media screen and (min-width: 992px) {
+                padding-right: $rtl-navigation-ms-nav-list-desktop-padding-right;
+            }
+
+            >.ms-nav__list__item {
+                .ms-nav__list__item__button {
+                    @media screen and (max-width: ($msv-breakpoint-m)-1) {
+                        @include add-icon($msv-ChevronLeft, after);
+                        float: left;
+                    }
+                }
+
+                @media screen and (min-width: $msv-breakpoint-m) {
+                    .ms-nav__deafult {
+                        .ms-nav__list.level-2 {
+                            right: 0;
+                            padding-right: 44px;
+                            padding-left: 0;
+                            left: auto;
+                        }
+                    }
+
+                    >.ms-nav__deafult > .ms-nav__list {
+                        padding-right: 44px;
+                    }
+                }
+
+                @media screen and (min-width: $msv-breakpoint-l) {
+                    .ms-nav__deafult {
+                        .ms-nav__list.level-2 {
+                            right: 0;
+                            padding-right: 60px;
+                            padding-left: 0;
+                            left: auto;
+                        }
+                    }
+
+                    >.ms-nav__deafult > .ms-nav__list {
+                        padding-right: 60px;
+                    }
+                }
+            }
+
+            .ms-nav-close-button {
+                left: 0;
+                right: unset;
+                padding-left: $rtl-navigation-ms-nav-close-button-padding-left;
+            }
+        }
+
+        @media screen and (min-width: $msv-breakpoint-xs) {
+            &__list {
+                &__mobile__container {
+                    padding-left: $rtl-navigation-ms-nav-list-mobile-container-padding-left;
+                    padding-right: $rtl-navigation-ms-nav-list-mobile-container-padding-right;
+                }
+            }
+        }
+    }
+}

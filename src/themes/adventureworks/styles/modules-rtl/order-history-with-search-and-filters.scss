@@ -1,0 +1,87 @@
+@import "../common/00-settings/colors.scss";
+@import "../common/00-settings/responsive-breakpoints.scss";
+
+$rtl-msv-order-history-with-search-and-filters-header-order-count-margin-right: 10px;
+$rtl-msv-order-history-with-search-and-filters-count-margin-left: 8px;
+$rtl-msv-order-history-with-search-and-filters-information-created-date-padding-left: 5px;
+$rtl-msv-order-history-with-search-and-filters-order-information-count-margin-right: 5px;
+$rtl-msv-order-history-with-search-and-filters-order-information-count-margin-left: 0;
+$rtl-msv-order-history-with-search-and-filters-order-information-amount-padding-right: 5px;
+
+[dir="rtl"] {
+    .ms-order-history-with-search-and-filters {
+        // order-history-with-search-and-filters-header
+        .ms-order-history-with-search-and-filters-header {
+            &__order-count {
+                margin-left: 0;
+                margin-right: $rtl-msv-order-history-with-search-and-filters-header-order-count-margin-right;
+            }
+        }
+
+        // order-history-with-search-and-filters-organization-wide-selector
+        .ms-order-history-with-search-and-filters-organization-wide-selector {
+            margin-left: auto;
+            margin-right: unset;
+
+            &__button {
+                margin-left: 10px;
+                margin-right: 0;
+            }
+
+            @media screen and (max-width: $msv-breakpoint-m - 1) {
+                float: none;
+                text-align: right;
+                margin-right: 0;
+                margin-left: unset;
+            }
+        }
+
+        // order-history-with-search-and-filters-view-mode-selector
+        .ms-order-history-with-search-and-filters-view-mode-selector {
+            margin-right: auto;
+            margin-left: unset;
+        }
+
+        // order-history-with-search-and-filters-view-order-list
+        .ms-order-history-with-search-and-filters-order-list {
+            &__sales-order__expand-products-button {
+                margin-left: auto;
+                margin-right: unset;
+            }
+
+            &__order-information-count {
+                margin-right: $rtl-msv-order-history-with-search-and-filters-order-information-count-margin-right;
+                margin-left: $rtl-msv-order-history-with-search-and-filters-order-information-count-margin-left;
+            }
+
+            &__sales-line-picture {
+                margin-right: unset;
+                margin-left: $rtl-msv-order-history-with-search-and-filters-count-margin-left;
+            }
+
+            @media screen and (min-width: $msv-breakpoint-m + 1) {
+                &__groups {
+                    float: left;
+                }
+            }
+        }
+
+        // order-history-with-search-and-filters-view-order-table
+        .ms-order-history-with-search-and-filters-order-table {
+            &__row__actions {
+                text-align: left;
+            }
+        }
+
+        &__loading {
+            &::before {
+                margin-left: 8px;
+                margin-right: 0;
+            }
+        }
+
+        &__more-actions {
+            margin-right: auto;
+        }
+    }
+}

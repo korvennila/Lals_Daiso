@@ -1,0 +1,125 @@
+@import "../common/00-settings/responsive-breakpoints.scss";
+
+$ms-quick-order-drawer-margin-right: 6px;
+$ms-quick-order-drawer-button-margin-right: 20px;
+$ms-quick-order-drawer-button-margin-left: 20px;
+$ms-quick-order-headding-margin-right: 0;
+$ms-quick-order-headding-margin-left: 0;
+$ms-quick-order-description-margin-right: 0;
+$ms-quick-order-description-margin-left: 0;
+$ms-quick-order-content-margin-left: 0;
+$ms-quick-order-content-form-main-product-margin-left: 11px;
+$ms-quick-order-content-form-main-dropdown-margin-right: 11px;
+$ms-quick-order-addtocart-mobile-margin-left: 12px;
+$ms-quick-order-configure-margin-right: 8px;
+$ms-quick-order-configure-mobile-margin-right: 0;
+$rtl-msv-quickOrder-alert-icon-margin-left: 10px;
+$rtl-msv-alert-icon-margin-left: 22px;
+
+[dir="rtl"] {
+    .ms-quick-order {
+        &__drawer {
+            margin-right: $ms-quick-order-drawer-margin-right;
+
+            .drawer__button {
+                text-align: right;
+
+                &[aria-expanded="true"],
+                &[aria-expanded="false"] {
+                    .ms-quick-order__heading::after {
+                        margin-right: 0;
+                        margin-left: 30px;
+                    }
+                }
+            }
+        }
+
+        &__heading {
+            margin-right: $ms-quick-order-headding-margin-right;
+            margin-left: $ms-quick-order-headding-margin-left;
+        }
+
+        &__description {
+            margin-right: $ms-quick-order-description-margin-right;
+            margin-left: $ms-quick-order-description-margin-left;
+        }
+
+        &__content {
+            &-form-main {
+                &-product {
+                    width: auto;
+                    margin-right: unset;
+
+                    @media (min-width: $msv-breakpoint-m + 1) {
+                        margin-left: $ms-quick-order-content-form-main-product-margin-left;
+                    }
+
+                    @media (max-width: $msv-breakpoint-m) {
+                        margin-left: auto;
+                    }
+                }
+
+                &-quantity {
+                    @media (min-width: $msv-breakpoint-m + 1) {
+                        margin-right: auto;
+                        margin-left: unset;
+                    }
+
+                    @media (max-width: $msv-breakpoint-m) {
+                        margin-right: auto;
+                    }
+                }
+
+                @media screen and (min-width: $msv-breakpoint-m) {
+                    &-addtocart {
+                        margin-left: 0;
+                        margin-right: $ms-quick-order-addtocart-mobile-margin-left;
+                    }
+                }
+
+                .msc-alert-danger {
+                    .msi-exclamation-triangle {
+                        margin-right: 0;
+                        margin-left: $rtl-msv-quickOrder-alert-icon-margin-left;
+                    }
+                }
+
+                &__configure {
+                    margin-right: $ms-quick-order-configure-margin-right;
+                }
+
+                @media screen and (max-width: $msv-breakpoint-m) {
+                    &__configure {
+                        margin-right: $ms-quick-order-configure-mobile-margin-right;
+                    }
+                }
+
+                &__dropdown {
+                    @media (min-width: $msv-breakpoint-m + 1) {
+                        margin-right: $ms-quick-order-content-form-main-dropdown-margin-right;
+                    }
+
+                    @media (max-width: $msv-breakpoint-m) {
+                        margin-right: auto;
+                    }
+                }
+            }
+
+            &-form-msg {
+                .msc-alert-success {
+                    .fa-check {
+                        margin-right: 0;
+                        margin-left: $rtl-msv-alert-icon-margin-left;
+                    }
+                }
+
+                .msc-alert-danger {
+                    .fa-exclamation-triangle {
+                        margin-right: 0;
+                        margin-left: $rtl-msv-alert-icon-margin-left;
+                    }
+                }
+            }
+        }
+    }
+}

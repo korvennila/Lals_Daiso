@@ -1,0 +1,147 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Search unit tests - Form Component renders correctly when clear search button text is empty 1`] = `
+<ForwardRef
+  className="node-class-SearchForm"
+>
+  cancelBtn
+  <ForwardRef
+    className="node-class-FormWrapper"
+  >
+    input
+    <Button
+      className="ms-search__form-control__clear"
+      onClick={[MockFunction]}
+      outline={false}
+      tag="button"
+      title="Clear"
+    >
+      Clear
+    </Button>
+  </ForwardRef>
+</ForwardRef>
+`;
+
+exports[`Search unit tests - Form Component renders correctly when clearSearchButtonText as undefined 1`] = `
+<ForwardRef
+  className="node-class-SearchForm"
+>
+  <ForwardRef
+    className="node-class-FormWrapper"
+  >
+    submitBtn
+    input
+  </ForwardRef>
+</ForwardRef>
+`;
+
+exports[`Search unit tests - Form Component renders correctly when isMobile and isSearchText are set to false 1`] = `
+<ForwardRef
+  className="node-class-SearchForm"
+>
+  <ForwardRef
+    className="node-class-FormWrapper"
+  >
+    submitBtn
+    input
+  </ForwardRef>
+</ForwardRef>
+`;
+
+exports[`Search unit tests - Form Component renders correctly when isMobile and isSearchText are set to true and clearSearchButtonText as undefined 1`] = `
+<ForwardRef
+  className="node-class-SearchForm"
+>
+  cancelBtn
+  <ForwardRef
+    className="node-class-FormWrapper"
+  >
+    input
+    <Button
+      className="ms-search__form-control__clear"
+      onClick={[MockFunction]}
+      outline={false}
+      tag="button"
+      title="Clear"
+    >
+      Clear
+    </Button>
+  </ForwardRef>
+</ForwardRef>
+`;
+
+exports[`Search unit tests - Form Component renders correctly when isMobile is set to true and isMobile is set to false 1`] = `
+<ForwardRef
+  className="node-class-SearchForm"
+>
+  <ForwardRef
+    className="node-class-FormWrapper"
+  >
+    submitBtn
+    input
+    <Button
+      className="ms-search__form-cancelSearch"
+      onClick={[MockFunction]}
+      outline={false}
+      tag="button"
+      type="button"
+    />
+  </ForwardRef>
+</ForwardRef>
+`;
+
+exports[`Search unit tests - Form Component renders correctly when isMobile is set to true, isSearchText is set to false and clearSearchButtonText as undefined 1`] = `
+<ForwardRef
+  className="node-class-SearchForm"
+>
+  cancelBtn
+  <ForwardRef
+    className="node-class-FormWrapper"
+  >
+    input
+    <ForwardRef
+      className="msc-autoSuggest__productResults-empty-mobile-content"
+    >
+      <div
+        className="msc-autoSuggest__productResults-empty-mobile-no-results-image"
+      />
+      <div
+        className="msc-autoSuggest__productResults-empty-mobile-text-content"
+      >
+        <div
+          className="msc-autoSuggest__productResults-empty-mobile-heading"
+        >
+          text
+        </div>
+        <div
+          className="msc-autoSuggest__productResults-empty-mobile-text"
+        >
+          text
+        </div>
+      </div>
+    </ForwardRef>
+  </ForwardRef>
+</ForwardRef>
+`;
+
+exports[`Search unit tests - Form Component renders correctly when isMobile is true 1`] = `
+<ForwardRef
+  className="node-class-SearchForm"
+>
+  cancelBtn
+  <ForwardRef
+    className="node-class-FormWrapper"
+  >
+    input
+    <Button
+      className="ms-search__form-control__clear"
+      onClick={[MockFunction]}
+      outline={false}
+      tag="button"
+      title="Clear"
+    >
+      Clear
+    </Button>
+  </ForwardRef>
+</ForwardRef>
+`;

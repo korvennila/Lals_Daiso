@@ -1,0 +1,25 @@
+$msv-business-partners-search-bar-padding: 16px 16px 16px 48px;
+$msv-business-partners-search-bar-margin-left: 8px;
+$msv-alert-icon-spacing: 12px;
+
+[dir="rtl"] {
+    .ms-business-partners {
+        &__table-list {
+            &__header {
+                text-align: right;
+            }
+
+            &__searchBar {
+                padding: $msv-business-partners-search-bar-padding;
+                margin-left: $msv-business-partners-search-bar-margin-left;
+            }
+        }
+
+        .msc-alert {
+            &::before {
+                margin-right: unset;
+                margin-left: $msv-alert-icon-spacing;
+            }
+        }
+    }
+}

@@ -1,0 +1,69 @@
+{
+    "$type": "definitionExtension",
+    "config": {
+        "displayStockAvailability": {
+            "friendlyName": "Display stock availability",
+            "description": "This setting display stock availability for preferred store",
+            "type": "boolean",
+            "default": false
+        },
+        "enableWishlist": {
+            "friendlyName": "Enable add to wishlist",
+            "description": "This setting displays the add to wishlist link",
+            "type": "boolean",
+            "default": true
+        }
+    },
+    "slots": {
+        "productSpecification": {
+            "friendlyName": "Product specification",
+            "description": "This the slot for the product specification",
+            "max": 1,
+            "min": 0,
+            "allowedTypes": ["product-specification"],
+            "allowedCategories": ["buybox_productSpecification"]
+        }
+    },
+    "resources": {
+        "ariaLabelForSelectedSwatchValue": {
+            "comment": "Aria label for the selected value in dimension swatch",
+            "value": "{dimensionValue} selected"
+        },
+        "availabilityAtPreferredStoreText": {
+            "comment": "Availability at preferred store",
+            "value": "Availability at {0}: "
+        },
+        "inStockText": {
+            "comment": "Text for when item is in stock",
+            "value": "In stock"
+        },
+        "priceText": {
+            "comment": "Price text",
+            "value": "Price"
+        },
+        "shopText": {
+            "comment": "More ways to shop description text",
+            "value": "More ways to shop"
+        },
+        "descriptionText": {
+            "comment": "Description text",
+            "value": "Description"
+        },
+        "findText": {
+            "comment": "Pickup and Delivery Methods text",
+            "value": "Pickup and Delivery Methods"
+        },
+        "skuText": {
+            "comment": "SKU text",
+            "value": "SKU:"
+        },
+        "decrementButtonAriaLabel": {
+            "value": "Decrease the quantity by 1",
+            "comment": "Tooltip for the quantity decrease button"
+        },
+        "incrementButtonAriaLabel": {
+            "value": "Increase quantity by 1",
+            "comment": "Tooltip for the quantity increase button"
+        }
+    }
+}

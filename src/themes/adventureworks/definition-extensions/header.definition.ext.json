@@ -1,0 +1,18 @@
+{
+    "$type": "definitionExtension",
+      "config": {
+        "mobileLogoImage":{
+            "friendlyName": "Logo for mobile view",
+            "description": "Logo for mobile view",
+            "type": "image",
+            "required": false
+        },
+        "useStickyHeader":{
+          "friendlyName": "Enable sticky header",
+          "description": "This setting makes the header sticky by keeping it visible on top of the page while the user scrolls down",
+          "type": "boolean",
+          "required": false,
+          "default": false
+      }
+    }
+}

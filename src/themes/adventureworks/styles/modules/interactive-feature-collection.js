@@ -1,0 +1,1 @@
+import './interactive-feature-collection.scss';

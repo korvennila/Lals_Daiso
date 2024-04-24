@@ -1,0 +1,10 @@
+{
+    "$type": "definitionExtension",
+    "config": {
+        "imageSettings": {
+            "friendlyName": "Edit Review Image Settings",
+            "description": "Image settings for product Image in Edit Review modal",
+            "type": "imageSettings"
+        }
+    }
+}
