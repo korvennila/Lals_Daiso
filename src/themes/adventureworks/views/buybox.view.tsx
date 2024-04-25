@@ -490,39 +490,32 @@ const BuyboxView: React.FC<IBuyboxViewProps & IBuyboxExtentionProps<IBuyboxData>
     const closeModal = () => setOpen(false);
     const [email, setEmail] = React.useState<string>(cCustomerEmailAddress);
     const [validEmail, setValidEmail] = React.useState<string>('');
-    const [validPhone, setValidPhone] = React.useState<string>('');
-    const [phone_no, setPhoneNo] = React.useState<string>('');
     const [statusMessage, setStatusMessage] = React.useState<string>('');
+    const [loading, setLoading] = React.useState<boolean>(false);
 
     /** Notify Me Submit Form */
-    const notifyMeSubmitForm = (event: React.FormEvent<HTMLFormElement>) => {
+    const notifyMeSubmitForm = async (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();
+        setLoading(true);
 
         const itemId = product.result?.ItemId;
         console.log('SIMPLE PRODUCT ITEM ID>>>', itemId);
 
-        if (email === '') {
+        if (!email || !validateEmail(email)) {
             setValidEmail('daiso_ntfy_error-message');
+            setLoading(false);
             return;
         } else {
             setValidEmail('');
         }
 
-        if (phone_no === '' || phone_no.length !== 10) {
-            setValidPhone('daiso_ntfy_error-message');
-            return;
-        } else {
-            setValidPhone('');
-        }
-
-        // Need to 
+        // Need to update the URL with Lals
         const cNotifyMeRetailURL = `${cRetailURL}Commerce/TCPLCreateNotifyMeSubscription?api-version=7.3`;
 
         var data = JSON.stringify({
             custAccount: cCustomerAccount,
             email: email,
             itemid: itemId,
-            phone: phone_no
         });
 
         var xhr = new XMLHttpRequest();
@@ -535,29 +528,21 @@ const BuyboxView: React.FC<IBuyboxViewProps & IBuyboxExtentionProps<IBuyboxData>
                         const result = JSON.parse(xhr.responseText);
                         if (result.value === 1) {
                             setStatusMessage('true');
-                            setPhoneNo('');
                         } else {
                             setStatusMessage('false');
                         }
-                        setTimeout(function () {
-                            setOpen(false);
-                            setStatusMessage('');
-                        }, 3000);
-                        console.log('STATUS>>>>', xhr.status);
-                        console.log('RESPONSE>>>>', xhr.responseText);
                     } else {
                         setStatusMessage('false');
-                        setTimeout(function () {
-                            setOpen(false);
-                            setStatusMessage('');
-                        }, 3000);
-                        console.log('STATUS>>>>', xhr.status);
-                        console.log('RESPONSE>>>>', xhr.responseText);
                     }
-                    console.log(this.responseText);
+                    setTimeout(function () {
+                        setOpen(false);
+                        setStatusMessage('');
+                    }, 4000);
                 }
             } catch (Exception) {
                 console.log('NotifyMe Exception>>>>', Exception);
+            } finally {
+                setLoading(false);
             }
         });
 
@@ -565,9 +550,16 @@ const BuyboxView: React.FC<IBuyboxViewProps & IBuyboxExtentionProps<IBuyboxData>
         xhr.setRequestHeader('User-Agent', 'Mozilla/5.0 (Windows NT 6.3; Win64; x64; rv:58.0) Gecko/20100101 Firefox/58.0');
         xhr.setRequestHeader('OUN', cRetailOUN);
         xhr.setRequestHeader('Content-Type', 'application/json');
-
         xhr.send(data);
     };
+
+    /** Validate Email Address */
+    const validateEmail = (email: string) => {
+        // Regular expression for email validation
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        return emailRegex.test(email);
+    };
+
 
     /** Notify Me Modal Popup Container */
     const _notifyMeModalContainer = (): INodeProps => {
@@ -588,11 +580,9 @@ const BuyboxView: React.FC<IBuyboxViewProps & IBuyboxExtentionProps<IBuyboxData>
             <Node {..._notifyMeModalContainer()}>
                 <Node className='ms-notify-me__header msc-modal__header'>
                     {'Notify me when available'}
-                    {/* {<span className='daiso_ntfy_header-close' onClick={closeModal}>
-                        &times;
-                    </span>} */}
                     {<Button className='msc-modal__close-button' aria-label='Close' onClick={closeModal} ></Button>}
                 </Node>
+                {loading && <div className='loader'>Loading...</div>}
                 <Node className='ms-notify-me__body msc-modal__body'>
                     {<p>Subscribe to this product to receive a notification once it becomes available.</p>}
                     <Node className=''>
@@ -606,20 +596,11 @@ const BuyboxView: React.FC<IBuyboxViewProps & IBuyboxExtentionProps<IBuyboxData>
                                         onChange={e => setEmail(e.target.value)}
                                         placeholder='Email'
                                         className={`${validEmail}`}
+                                        required
                                     />
-                                </div>
-                                <div className='daiso_ntfy_msv-row-phone'>
-                                    <select name='dial_code'>
-                                        <option value='+91'>India (+91)</option>
-                                    </select>
-                                    <input
-                                        type='text'
-                                        name='phone_no'
-                                        value={phone_no}
-                                        onChange={e => setPhoneNo(e.target.value)}
-                                        placeholder='Phone No'
-                                        className={`daiso_ntfy_has-margin-left ${validPhone}`}
-                                    />
+                                    {validEmail !== '' && (
+                                        <div>Please enter a valid mail</div>
+                                    )}
                                 </div>
                                 {statusMessage !== '' && (
                                     <div className='daiso_ntfy_alert-message'>
