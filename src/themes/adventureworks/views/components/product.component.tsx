@@ -9,8 +9,7 @@ import {
     ISwatchItem,
     PriceComponent,
     ProductComponentSwatchComponent,
-    RatingComponent,
-    // AddToCartComponent
+    RatingComponent
 } from '@msdyn365-commerce/components';
 import {
     getCatalogId,
@@ -25,9 +24,7 @@ import {
     Image,
     msdyn365Commerce
 } from '@msdyn365-commerce/core';
-import { AttributeSwatch, AttributeValue, ProductDimension, ProductPrice, ProductSearchResult,
-    // SimpleProduct 
-} from '@msdyn365-commerce/retail-proxy';
+import { AttributeSwatch, AttributeValue, ProductDimension, ProductPrice, ProductSearchResult } from '@msdyn365-commerce/retail-proxy';
 import {
     ArrayExtensions,
     convertDimensionTypeToProductDimensionType,
@@ -551,19 +548,20 @@ const ProductCard: React.FC<IProductComponentProps> = ({
                     </div>
                 </a>
             )}
-            {/* {renderAddToCart(context, typeName, id, product)} */}
-            {stockAvailability === true ? (                
+            {stockAvailability === true ? (
                 <div>
                     <div className='ms-addToBag'>
-                        <button className='ms-addToBag__button' aria-label='ADD TO BAG' onClick={() => productAddToCart(product)}>
-                            ADD TO BAG
+                        <button className='ms-addToBag__button' title='ADD TO BAG' onClick={() => productAddToCart(product)}>
+                            +
                         </button>
                     </div>
                 </div>
             ) : (
                 <div>
                     <div className='ms-soldOut'>
-                        <button className='ms-soldOut__button'>SOLD OUT</button>
+                        <button className='ms-soldOut__button' title='SOLD OUT'>
+                            +
+                        </button>
                     </div>
                 </div>
             )}
@@ -572,7 +570,7 @@ const ProductCard: React.FC<IProductComponentProps> = ({
                 renderRating(context, typeName, id, product.AverageRating, product.TotalRatings, ratingAriaLabel, ratingCountAriaLabel)}
             {renderProductAvailability(inventoryLabel)}
             {quickViewButton && renderQuickView(quickViewButton, product.RecordId)}
-            {productComparisonButton && renderProductComparisonButton(productComparisonButton, product, getCatalogId(context.request))}            
+            {productComparisonButton && renderProductComparisonButton(productComparisonButton, product, getCatalogId(context.request))}
         </>
     );
 };
@@ -675,40 +673,6 @@ function renderPrice(
         />
     );
 }
-
-// function renderAddToCart(
-//     context: ICoreContext,
-//     typeName: string,
-//     id: string,
-//     product: ProductSearchResult): JSX.Element | null {
-//     const price: ProductPrice = {
-//         BasePrice: product.BasePrice,
-//         AdjustedPrice: product.Price,
-//         CustomerContextualPrice: product.Price
-//     };
-
-//     const simpleProduct: SimpleProduct = {
-//         RecordId: product.RecordId,
-//         ProductTypeValue: 0,
-//         BasePrice: product.BasePrice ? product.BasePrice : 0,
-//         Price: product.Price,
-//         AdjustedPrice: product.Price ? product.Price : 0
-//     }
-
-//     const addToCart = {
-//         product: simpleProduct,
-//         price: price
-//     }
-//     return (
-//         <AddToCartComponent 
-//             addToCartText={'Add to Cart'} 
-//             context={context} 
-//             id={id} 
-//             typeName={typeName} 
-//             data={ addToCart } 
-//         />
-//     );
-// }
 
 function renderProductPlacementImage(
     imageSettings?: IImageSettings,

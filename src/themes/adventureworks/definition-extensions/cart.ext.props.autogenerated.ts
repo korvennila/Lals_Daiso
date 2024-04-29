@@ -15,6 +15,8 @@ export interface ICartConfig extends Msdyn365.IModuleConfig {
     showAvailablePromotions?: boolean;
     clientRender?: boolean;
     showGuestCheckoutButton?: boolean;
+    freeShippingPrice?: string;
+    freeShippingTitle?: string;
 }
 
 export interface ICartResources {
