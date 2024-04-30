@@ -636,6 +636,14 @@
 			"allowedCategories": [
 				"cart_paymentExpress"
 			]
-		}
+		},
+        "emptyCart": {
+            "friendlyName": "Empty cart",
+            "description": "Empty cart slot",
+            "allowedTypes": ["content-block"],
+            "allowedCategories": ["Promotions", "Marketing", "carousel_content"],
+            "min": 0,
+            "max": 1
+        }
 	}
 }

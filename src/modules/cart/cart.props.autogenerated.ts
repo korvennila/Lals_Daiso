@@ -150,5 +150,6 @@ export interface ICartProps<T> extends Msdyn365.IModule<T> {
     slots: {
         storeSelector: React.ReactNode[];
         paymentExpress: React.ReactNode[];
+        emptyCart: React.ReactNode[];
     };
 }

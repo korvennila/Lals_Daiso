@@ -91,7 +91,7 @@ export interface ICartViewProps extends ICartProps<ICartData> {
     checkoutBlockedDueToUnavailableFunds?: React.ReactNode;
     removeItemClickHandler(cartlineToRemove: CartLine): void;
     moveToWishlistSuccessHandler(result: IWishlistActionSuccessResult, cartlineId: CartLine): void;
-    freeShippingContent?: any;
+    freeShippingContent?: string;
 }
 
 /**
@@ -376,7 +376,7 @@ class Cart extends React.Component<ICartProps<ICartData>> {
         return this.props.renderView(viewProps) as React.ReactElement;
     }
     /* eslint-enable complexity -- Disabling complexity for render method */
-    public freeShippingUpdate(cartLines: ICartlinesViewProps[] | null): any {
+    public freeShippingUpdate(cartLines: ICartlinesViewProps[] | null): string {
         const freeShippingTitle = this.props.config.freeShippingTitle || '';
         const freeShippingPriceString = this.props.config.freeShippingPrice?.toString() || '0';
         const freeShippingPrice = parseInt(freeShippingPriceString, 10);
