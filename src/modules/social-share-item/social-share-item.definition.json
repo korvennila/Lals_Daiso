@@ -1,0 +1,44 @@
+{
+	"$type": "contentModule",
+	"friendlyName": "Social share item (COPY)",
+	"name": "social-share-item",
+	"description": "Social share allows product detail page to be shared to user's favorite social media platform.",
+	"categories": [
+		"social-share-item",
+		"socialShare_socialShareItems"
+	],
+	"config": {
+		"socialMedia": {
+			"friendlyName": "Social media",
+			"description": "Choose a social media to share the product details page",
+			"type": "string",
+			"enum": {
+				"facebook": "Facebook",
+				"twitter": "Twitter",
+				"pinterest": "Pinterest",
+				"mail": "Mail",
+				"linkedin": "Linkedin",
+				"whatsapp": "Whatsapp"
+			},
+			"required": true
+		},
+		"icon": {
+			"friendlyName": "Icon",
+			"description": "Icon",
+			"type": "image",
+			"isSingleViewportImage": true,
+			"required": true
+		},
+		"className": {
+			"friendlyName": "Class name",
+			"description": "class name",
+			"type": "string"
+		},
+		"clientRender": {
+			"friendlyName": "Render module client side",
+			"description": "Enabling this property will cause the module to load its Javascript chunk and render on the client based on the user view port. This property is recommended for modules which are generally hidden below the users view port (lower on the page) to increase page load performance.",
+			"type": "boolean",
+			"default": false
+		}
+	}
+}

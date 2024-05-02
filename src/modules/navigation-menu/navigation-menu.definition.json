@@ -1,0 +1,129 @@
+{
+	"$type": "contentModule",
+	"friendlyName": "Navigation menu (COPY)",
+	"name": "navigation-menu",
+	"description": "Navigation menu items represent the product browsing hierarchy and other static links to pages  ",
+	"categories": [
+		"Header",
+		"Navigation",
+		"header_menuBar"
+	],
+	"dataActions": {
+		"categories": {
+			"path": "@msdyn365-commerce-modules/retail-actions/dist/lib/get-categories-hierarchy"
+		}
+	},
+	"config": {
+		"navigationMenuSource": {
+			"friendlyName": "Source for navigation menu",
+			"description": "Shows navigation menu items from retail server or CMS tool or both",
+			"type": "string",
+			"enum": {
+				"all": "All",
+				"retailServerOnly": "Channel navigation hierarchy only",
+				"cmsOnly": "Manual Authoring only"
+			},
+			"default": "all",
+			"scope": "module",
+			"group": "Data source"
+		},
+		"cmsNavItems": {
+			"type": "array",
+			"friendlyName": "Static menu items",
+			"description": "If source allows manual authoring, you can configure the menu items",
+			"items": {
+				"$ref": "@msdyn365-commerce-modules/definitions/dist/src/MenuItem.json#/definitions/menuItem"
+			},
+			"group": "Data source"
+		},
+		"enableMultilevelMenu": {
+			"friendlyName": "Enable multilevel navigation menu",
+			"description": "Enable multilevel navigation menu",
+			"type": "boolean",
+			"default": false,
+			"required": false,
+			"group": "Menu display style"
+		},
+		"enabletopMenu": {
+			"friendlyName": "Show root menu",
+			"description": "Show root menu",
+			"type": "boolean",
+			"default": false,
+			"required": false,
+			"group": "Menu display style"
+		},
+		"menuLevelSupport": {
+			"friendlyName": "Number of levels",
+			"description": "Number of levels",
+			"type": "number",
+			"default": 3,
+			"required": false,
+			"group": "Menu display style"
+		},
+		"rootMenuNavigation": {
+			"friendlyName": "Root menu",
+			"description": "Root menu",
+			"type": "string",
+			"default": "",
+			"group": "Menu display style"
+		},
+		"displayCategoryImage": {
+			"friendlyName": "Show category images",
+			"description": "Show category images",
+			"type": "boolean",
+			"default": false,
+			"required": false,
+			"group": "Images"
+		},
+		"displayPromotionalImage": {
+			"friendlyName": "Show promotional images",
+			"description": "Show promotional images",
+			"type": "boolean",
+			"default": false,
+			"required": false,
+			"group": "Images"
+		},
+		"categoryPromotionalContent": {
+			"type": "array",
+			"friendlyName": "Category promotional content",
+			"description": "If source allows manual authoring, you can configure the Category Promotional Content",
+			"items": {
+				"$ref": "@msdyn365-commerce-modules/definitions/dist/src/CategoryPromotionalContent.json#/definitions/categoryPromotionalContent"
+			},
+			"group": "Images"
+		},
+		"categoryImageSettings": {
+			"friendlyName": "Category image quality",
+			"description": "Image settings category",
+			"type": "imageSettings",
+			"group": "Images"
+		},
+		"className": {
+			"friendlyName": "Custom CSS class name",
+			"description": "Provide a custom css class name defined in the theme pack to target the CSS for this module",
+			"type": "string",
+			"default": "",
+			"group": "Advanced"
+		},
+		"clientRender": {
+			"friendlyName": "Render module client side",
+			"description": "Enabling this property will cause the module to load its Javascript chunk and render on the client based on the user view port. This property is recommended for modules which are generally hidden below the users view port (lower on the page) to increase page load performance.",
+			"type": "boolean",
+			"default": false
+		}
+	},
+	"resources": {
+		"menuAriaLabel": {
+			"comment": "aria label for menu under main menu",
+			"value": "Menu"
+		},
+		"backButtonAriaLabel": {
+			"comment": "aria label for back button",
+			"value": "Back"
+		},
+		"allCategoryMenuText": {
+			"comment": "Menu text for all categories",
+			"value": "All"
+		}
+	}
+}

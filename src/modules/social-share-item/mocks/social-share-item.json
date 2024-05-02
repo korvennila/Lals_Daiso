@@ -1,0 +1,15 @@
+{
+	"id": "SocialShare1",
+	"typeName": "social-share",
+	"config": {
+		"Caption": "Share",
+		"className": "Social-share-mock",
+		"postUrlSouce": "pdp",
+		"facebook": true,
+		"twitter": true,
+		"pinterest": true,
+		"mail": true,
+		"linkedin": true,
+		"orientation": "horizontal"
+	}
+}

@@ -58,12 +58,12 @@ export class HeaderView extends React.PureComponent<IHeaderViewProps & IHeaderPr
             <Module {...HeaderTag}>
                 <Node {...HeaderContainer}>
                     <Node {...HeaderTopBarContainer}>
+                        {this.props.logo}
+                        {this._renderMobileLogo()}
                         <div className='desktop-navicon-container' ref={this.menuNode}>
                             {this._renderReactFragment(this.props.menuBar)}
                         </div>
                         <div className='mobile-navicon-container'>{this.props.navIcon}</div>
-                        {this.props.logo}
-                        {this._renderMobileLogo()}
                         {this._renderReactFragment(this.props.search)}
                         {this.props.preferredStore}
                         {this.props.currentDistributor}

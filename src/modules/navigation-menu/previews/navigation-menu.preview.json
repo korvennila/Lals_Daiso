@@ -1,0 +1,58 @@
+{
+	"id": "navigationMenuModule",
+	"config": {
+		"overFlowMenuText": "${navigationMenu_overFlowMenuText}",
+		"cmsNavItems": [
+			{
+				"linkText": "${navigationMenu_link}",
+				"linkUrl": {
+					"destinationUrl": "#"
+				},
+				"ariaLabel": "${navigationMenu_ariaLabel}",
+				"image": {
+					"$type": "image",
+					"src": "svg.large",
+					"altText": "${navigationMenu_imageAltText}",
+					"quality": 70,
+					"width": 612,
+					"height": 408,
+					"title": "${navigationMenu_imageAltTitle}"
+				}
+			},
+			{
+				"linkText": "${navigationMenu_link}",
+				"linkUrl": {
+					"destinationUrl": "#"
+				},
+				"ariaLabel": "${navigationMenu_ariaLabel}",
+				"image": {
+					"$type": "image",
+					"src": "svg.large",
+					"altText": "${navigationMenu_imageAltText}",
+					"quality": 70,
+					"width": 612,
+					"height": 408,
+					"title": "${navigationMenu_imageAltTitle}"
+				}
+			}
+		]
+	},
+	"resources": {
+		"navigationMenu_overFlowMenuText": {
+			"value": "Sample menu text"
+		},
+		"navigationMenu_link": {
+			"value": "Link"
+		},
+		"navigationMenu_ariaLabel": {
+			"value": "Sample aria label"
+		},
+		"navigationMenu_imageAltText": {
+			"value": "Sample alt text"
+		},
+		"navigationMenu_imageAltTitle": {
+			"value": "Sample title"
+		}
+	},
+	"typeName": "navigation-menu"
+}

@@ -1,0 +1,389 @@
+{
+	"data": {
+		"isTransparent": true,
+		"categories": {
+			"result": [
+				{
+					"Name": "Link1",
+					"NameTranslations": [
+						{
+							"Language": "en-us",
+							"Text": "Fashion Accessories"
+						}
+					],
+					"Children": [
+						{
+							"RecordId": "1",
+							"Children": [],
+							"NameTranslations": [
+								{
+									"Language": "en-us",
+									"Text": "E2E"
+								}
+							]
+						},
+						{
+							"RecordId": "2",
+							"Children": [],
+							"NameTranslations": [
+								{
+									"Language": "en-us",
+									"Text": "Fashion Sunglasses"
+								}
+							]
+						},
+						{
+							"RecordId": "3",
+							"Children": [],
+							"NameTranslations": [
+								{
+									"Language": "en-us",
+									"Text": "Gloves & Scarves"
+								}
+							]
+						},
+						{
+							"RecordId": "4",
+							"Children": [],
+							"NameTranslations": [
+								{
+									"Language": "en-us",
+									"Text": "Handbags"
+								}
+							]
+						},
+						{
+							"RecordId": "5",
+							"Children": [],
+							"NameTranslations": [
+								{
+									"Language": "en-us",
+									"Text": "Jewelery"
+								}
+							]
+						},
+						{
+							"RecordId": "6",
+							"Children": [],
+							"NameTranslations": [
+								{
+									"Language": "en-us",
+									"Text": "Watches"
+								}
+							]
+						}
+					]
+				},
+				{
+					"NameTranslations": [
+						{
+							"Language": "en-us",
+							"Text": "Mens Wear"
+						}
+					],
+					"Children": [
+						{
+							"RecordId": "1",
+							"Children": [],
+							"NameTranslations": [
+								{
+									"Language": "en-us",
+									"Text": "Casual Shirts"
+								}
+							]
+						},
+						{
+							"RecordId": "2",
+							"Children": [],
+							"NameTranslations": [
+								{
+									"Language": "en-us",
+									"Text": "Coats & Jackets"
+								}
+							]
+						},
+						{
+							"RecordId": "3",
+							"Children": [],
+							"NameTranslations": [
+								{
+									"Language": "en-us",
+									"Text": "Dress Shirts"
+								}
+							]
+						},
+						{
+							"RecordId": "4",
+							"Children": [],
+							"NameTranslations": [
+								{
+									"Language": "en-us",
+									"Text": "Hats"
+								}
+							]
+						},
+						{
+							"RecordId": "5",
+							"Children": [],
+							"NameTranslations": [
+								{
+									"Language": "en-us",
+									"Text": "Mens Jeans"
+								}
+							]
+						},
+						{
+							"RecordId": "6",
+							"Children": [],
+							"NameTranslations": [
+								{
+									"Language": "en-us",
+									"Text": "Mens Shoes"
+								}
+							]
+						},
+						{
+							"RecordId": "7",
+							"Children": [],
+							"NameTranslations": [
+								{
+									"Language": "en-us",
+									"Text": "Pants"
+								}
+							]
+						},
+						{
+							"RecordId": "8",
+							"Children": [],
+							"NameTranslations": [
+								{
+									"Language": "en-us",
+									"Text": "Suits & Sportcoats"
+								}
+							]
+						}
+					]
+				},
+				{
+					"NameTranslations": [
+						{
+							"Language": "en-us",
+							"Text": "Womenswear"
+						}
+					],
+					"Children": [
+						{
+							"RecordId": "1",
+							"Children": [],
+							"NameTranslations": [
+								{
+									"Language": "en-us",
+									"Text": "Coats"
+								}
+							]
+						},
+						{
+							"RecordId": "2",
+							"Children": [],
+							"NameTranslations": [
+								{
+									"Language": "en-us",
+									"Text": "Dresses"
+								}
+							]
+						},
+						{
+							"RecordId": "3",
+							"Children": [],
+							"NameTranslations": [
+								{
+									"Language": "en-us",
+									"Text": "Skirts"
+								}
+							]
+						},
+						{
+							"RecordId": "4",
+							"Children": [],
+							"NameTranslations": [
+								{
+									"Language": "en-us",
+									"Text": "Sweaters"
+								}
+							]
+						},
+						{
+							"RecordId": "5",
+							"Children": [],
+							"NameTranslations": [
+								{
+									"Language": "en-us",
+									"Text": "Tops"
+								}
+							]
+						},
+						{
+							"RecordId": "6",
+							"Children": [],
+							"NameTranslations": [
+								{
+									"Language": "en-us",
+									"Text": "Womens Jeans"
+								}
+							]
+						},
+						{
+							"RecordId": "7",
+							"Children": [],
+							"NameTranslations": [
+								{
+									"Language": "en-us",
+									"Text": "Womens Shoes"
+								}
+							]
+						}
+					]
+				}
+			]
+		}
+	},
+	"id": "NavigationMenu",
+	"config": {
+		"alignment": "left",
+		"createOverFlowMenu": true,
+		"overFlowMenuText": "More",
+		"cmsNavItems": [
+			{
+				"linkText": "Collections",
+				"linkUrl": {
+					"destinationUrl": "https://store-int.fabrikam.com/home"
+				},
+				"ariaLabel": "Collections"
+			},
+			{
+				"linkText": "Men Wear",
+				"linkUrl": {
+					"destinationUrl": "https://store-int.fabrikam.com/home"
+				},
+				"ariaLabel": "Men Wear",
+				"subMenus": [
+					{
+						"linkText": "All",
+						"linkUrl": {
+							"destinationUrl": "https://store-int.fabrikam.com/home"
+						},
+						"ariaLabel": "All"
+					},
+					{
+						"linkText": "MenShoes",
+						"linkUrl": {
+							"destinationUrl": "https://store-int.fabrikam.com/home"
+						},
+						"ariaLabel": "MenShoes"
+					},
+					{
+						"linkText": "Casual Shirts",
+						"linkUrl": {
+							"destinationUrl": "https://store-int.fabrikam.com/home"
+						},
+						"ariaLabel": "Casual Shirts"
+					},
+					{
+						"linkText": "Coats and Jackets",
+						"linkUrl": {
+							"destinationUrl": "https://store-int.fabrikam.com/home"
+						},
+						"ariaLabel": "Coats and Jackets"
+					},
+					{
+						"linkText": "Pants",
+						"linkUrl": {
+							"destinationUrl": "https://store-int.fabrikam.com/home"
+						},
+						"ariaLabel": "Pants"
+					},
+					{
+						"linkText": "Dress Shirts",
+						"linkUrl": {
+							"destinationUrl": "https://store-int.fabrikam.com/home"
+						},
+						"ariaLabel": "Dress Shirts"
+					},
+					{
+						"linkText": "Jeans",
+						"linkUrl": {
+							"destinationUrl": "https://store-int.fabrikam.com/home"
+						},
+						"ariaLabel": "Jeans"
+					},
+					{
+						"linkText": "Suits and Sportcoats",
+						"linkUrl": {
+							"destinationUrl": "https://store-int.fabrikam.com/home"
+						},
+						"ariaLabel": "Suits and Sportcoats"
+					}
+				]
+			},
+			{
+				"linkText": "Virtual Catalog",
+				"linkUrl": {
+					"destinationUrl": "https://store-int.fabrikam.com/home"
+				},
+				"ariaLabel": "Virtual Catalog"
+			},
+			{
+				"linkText": "Accessories",
+				"linkUrl": {
+					"destinationUrl": "https://store-int.fabrikam.com/home"
+				},
+				"ariaLabel": "Accessories"
+			},
+			{
+				"linkText": "Gift Cards",
+				"linkUrl": {
+					"destinationUrl": "https://store-int.fabrikam.com/home"
+				},
+				"ariaLabel": "Gift Cards"
+			}
+		]
+	},
+	"resources": {
+		"navMenu_overFlowMenuText": "Overflow Menu"
+	},
+	"renderingContext": {
+		"flightIds": [
+			"feature.xboxcontentondesktop",
+			"feature.sfwaa_control"
+		],
+		"requestUrl": "rushmore.microsoft.com/cittadesign/demopagev3",
+		"clientContext": {
+			"deviceGroupId": "uplevel.web.pc.webkit.chrome",
+			"deviceType": "Pc"
+		},
+		"staticContext": {
+			"staticCdnUrl": "/",
+			"staticCdnUrlWithLocale": "/"
+		},
+		"userContext": {
+			"token": null,
+			"isAuthenticated": false,
+			"signInUrl": "https://onerf.dev.microsoft.com:443/cittadesign/onerf/signin?EEL=True&pcexp=True",
+			"signOutUrl": "https://onerf.dev.microsoft.com:443/cittadesign/onerf/signout?pcexp=True",
+			"signinName": null,
+			"name": null,
+			"emailAddress": null,
+			"customerAccountNumber": ""
+		},
+		"apiSettings": {
+			"baseUrl": "https://rushe2e-tie-sb3f7e6dfa6e7204c89ret.cloudax.test.dynamics.com/",
+			"channelId": 5637145359,
+			"catalogId": 0,
+			"oun": "077",
+			"baseImageUrl": "https://img-prod-cms-mr-microsoft-com.akamaized.net/cms/api/fabrikam/imageFileData/search?fileName=/"
+		},
+		"locale": "en-us",
+		"market": "US"
+	},
+	"typeName": "navigation-menu"
+}
