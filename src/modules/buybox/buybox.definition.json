@@ -550,6 +550,42 @@
 		"salesAgreementRemainingQuantityPrompt": {
 			"value": "Remaining quantity to qualify: {0}",
 			"comment": ""
+		},
+		"availabilityAtPreferredStoreText": {
+			"value": "Availability at preferred store",
+			"comment": ""
+		},
+		"inStockText": {
+			"value": "In stock",
+			"comment": ""
+		},
+		"priceText": {
+			"value": "Price",
+			"comment": ""
+		},
+		"shopText": {
+			"value": "Shop",
+			"comment": ""
+		},
+		"descriptionText": {
+			"value": "Description",
+			"comment": ""
+		},
+		"findText": {
+			"value": "Pickup and Delivery Methods",
+			"comment": ""
+		},
+		"skuText": {
+			"value": "SKU:",
+			"comment": ""
+		},
+		"decrementButtonAriaLabel": {
+			"value": "Decrease the quantity by 1",
+			"comment": ""
+		},
+		"incrementButtonAriaLabel": {
+			"value": "Increase quantity by 1",
+			"comment": ""
 		}
 	}
 }

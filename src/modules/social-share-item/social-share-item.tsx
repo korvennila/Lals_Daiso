@@ -73,13 +73,12 @@ class SocialShareItem extends React.PureComponent<ISocialShareItemProps<ISocialS
                     return (
                         <SocialMediaComponent
                             socialMedia={SocialMedia.Pinterest}
-                            postUrl={`https://wa.me/?text=${window.location.href}`}
+                            postUrl={document.URL}
                             context={this.context}
                             id={`${this.props.id}_pinterest`}
                             typeName={this.props.typeName}
                             data={{}}
                             src={src}
-                            postTitle={`Whatsapp`}
                         />
                     );
                 case socialMedia.linkedin:
@@ -104,6 +103,20 @@ class SocialShareItem extends React.PureComponent<ISocialShareItemProps<ISocialS
                             typeName={this.props.typeName}
                             data={{}}
                             src={src}
+                        />
+                    );
+                case socialMedia.whatsapp:
+                    return (
+                        <SocialMediaComponent
+                            socialMedia={SocialMedia.Customization}
+                            postUrl={document.URL}
+                            context={this.context}
+                            id={`${this.props.id}_whatsapp`}
+                            typeName={this.props.typeName}
+                            data={{}}
+                            src={src}
+                            socialMediaName={`Whatsapp`}
+                            socialShareURL={`https://wa.me/?text=${window.location.href}`}
                         />
                     );
                 default:

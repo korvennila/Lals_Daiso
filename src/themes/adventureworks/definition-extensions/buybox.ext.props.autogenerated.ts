@@ -121,7 +121,6 @@ export interface IBuyboxResources {
     salesAgreementExpirationDatePrompt: string;
     salesAgreementCommittedQuantityPrompt: string;
     salesAgreementRemainingQuantityPrompt: string;
-    ariaLabelForSelectedSwatchValue: string;
     availabilityAtPreferredStoreText: string;
     inStockText: string;
     priceText: string;
@@ -131,6 +130,7 @@ export interface IBuyboxResources {
     skuText: string;
     decrementButtonAriaLabel: string;
     incrementButtonAriaLabel: string;
+    ariaLabelForSelectedSwatchValue: string;
 }
 
 export interface IBuyboxProps<T> extends Msdyn365.IModule<T> {

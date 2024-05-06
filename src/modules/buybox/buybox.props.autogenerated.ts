@@ -119,6 +119,15 @@ export interface IBuyboxResources {
     salesAgreementExpirationDatePrompt: string;
     salesAgreementCommittedQuantityPrompt: string;
     salesAgreementRemainingQuantityPrompt: string;
+    availabilityAtPreferredStoreText: string;
+    inStockText: string;
+    priceText: string;
+    shopText: string;
+    descriptionText: string;
+    findText: string;
+    skuText: string;
+    decrementButtonAriaLabel: string;
+    incrementButtonAriaLabel: string;
 }
 
 export interface IBuyboxProps<T> extends Msdyn365.IModule<T> {
