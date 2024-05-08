@@ -89,7 +89,7 @@ export class NavigationMenuRootEnabled extends React.PureComponent<INavigationMe
             drawerKeyValue: {},
             isOnlyMobile: this.isOnlyMobile,
             categoryImage: this.promotionalImage,
-            isNavOpen: true
+            isNavOpen: false
         };
 
         this.telemetryContent = getTelemetryObject(

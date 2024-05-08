@@ -394,7 +394,10 @@ const ProductCard: React.FC<IProductComponentProps> = ({
             productAvailabilites?.AggregatedProductInventoryAvailabilities &&
             productAvailabilites.AggregatedProductInventoryAvailabilities?.length > 0
         ) {
-            if (productAvailabilites.AggregatedProductInventoryAvailabilities[0].PhysicalAvailableInventoryLevelCode === 'AVAIL' && productAvailabilites.AggregatedProductInventoryAvailabilities[0].TotalAvailableQuantity! > 0) {
+            if (
+                productAvailabilites.AggregatedProductInventoryAvailabilities[0].PhysicalAvailableInventoryLevelCode === 'AVAIL' &&
+                productAvailabilites.AggregatedProductInventoryAvailabilities[0].TotalAvailableQuantity! > 0
+            ) {
                 setStockAvailability(true);
             } else {
                 setStockAvailability(false);
@@ -406,7 +409,7 @@ const ProductCard: React.FC<IProductComponentProps> = ({
 
     async function productAddToCart(product: ProductSearchResult) {
         const currentCartState = await getCartState(context?.actionContext);
-        
+
         const cartLines = [
             {
                 ItemId: product.ItemId,
@@ -439,7 +442,7 @@ const ProductCard: React.FC<IProductComponentProps> = ({
                 currentCartState.cart.Id,
                 cartLines,
                 currentCartState.cart.Version!
-            ).then(async (result) => {
+            ).then(async result => {
                 console.log('cart response--->', result);
                 await currentCartState.refreshCart({});
             });
@@ -449,7 +452,7 @@ const ProductCard: React.FC<IProductComponentProps> = ({
     }
 
     React.useEffect(() => {
-        getStockAvailability(product)
+        getStockAvailability(product);
     }, []);
 
     // Construct telemetry attribute to render
@@ -490,19 +493,42 @@ const ProductCard: React.FC<IProductComponentProps> = ({
                         </div>
                         <div className='msc-product__title_description'>
                             <h5 className='msc-product__title__text'>{product.Name}</h5>
-                            {renderPrice(
-                                context,
-                                typeName,
-                                id,
-                                product.BasePrice,
-                                product.Price,
-                                savingsText,
-                                freePriceText,
-                                originalPriceText,
-                                currentPriceText,
-                                isPriceMinMaxEnabled,
-                                priceResources
-                            )}
+                            <div className='msc-product__price-conatiner'>
+                                {renderPrice(
+                                    context,
+                                    typeName,
+                                    id,
+                                    product.BasePrice,
+                                    product.Price,
+                                    savingsText,
+                                    freePriceText,
+                                    originalPriceText,
+                                    currentPriceText,
+                                    isPriceMinMaxEnabled,
+                                    priceResources
+                                )}
+                                {stockAvailability === true ? (
+                                    <div>
+                                        <div className='ms-addToBag'>
+                                            <button
+                                                className='ms-addToBag__button'
+                                                title='ADD TO BAG'
+                                                onClick={() => productAddToCart(product)}
+                                            >
+                                                +
+                                            </button>
+                                        </div>
+                                    </div>
+                                ) : (
+                                    <div>
+                                        <div className='ms-soldOut'>
+                                            <button className='ms-soldOut__button' title='SOLD OUT'>
+                                                +
+                                            </button>
+                                        </div>
+                                    </div>
+                                )}
+                            </div>
                             {isUnitOfMeasureEnabled && renderProductUnitOfMeasure(product.DefaultUnitOfMeasure)}
                             {renderDescription(product.Description)}
                         </div>
@@ -533,37 +559,43 @@ const ProductCard: React.FC<IProductComponentProps> = ({
                     </div>
                     <div className='msc-product__details'>
                         <h5 className='msc-product__title'>{product.Name}</h5>
-                        {renderPrice(
-                            context,
-                            typeName,
-                            id,
-                            product.BasePrice,
-                            product.Price,
-                            savingsText,
-                            freePriceText,
-                            originalPriceText,
-                            currentPriceText
-                        )}
+                        <div className='msc-product__price-conatiner'>
+                            {renderPrice(
+                                context,
+                                typeName,
+                                id,
+                                product.BasePrice,
+                                product.Price,
+                                savingsText,
+                                freePriceText,
+                                originalPriceText,
+                                currentPriceText
+                            )}
+                            {stockAvailability === true ? (
+                                <div>
+                                    <div className='ms-addToBag'>
+                                        <button
+                                            className='ms-addToBag__button'
+                                            title='ADD TO BAG'
+                                            onClick={() => productAddToCart(product)}
+                                        >
+                                            +
+                                        </button>
+                                    </div>
+                                </div>
+                            ) : (
+                                <div>
+                                    <div className='ms-soldOut'>
+                                        <button className='ms-soldOut__button' title='SOLD OUT'>
+                                            +
+                                        </button>
+                                    </div>
+                                </div>
+                            )}
+                        </div>
                         {isUnitOfMeasureEnabled && renderProductUnitOfMeasure(product.DefaultUnitOfMeasure)}
                     </div>
                 </a>
-            )}
-            {stockAvailability === true ? (
-                <div>
-                    <div className='ms-addToBag'>
-                        <button className='ms-addToBag__button' title='ADD TO BAG' onClick={() => productAddToCart(product)}>
-                            +
-                        </button>
-                    </div>
-                </div>
-            ) : (
-                <div>
-                    <div className='ms-soldOut'>
-                        <button className='ms-soldOut__button' title='SOLD OUT'>
-                            +
-                        </button>
-                    </div>
-                </div>
             )}
             {renderProductDimensions(product.AttributeValues)}
             {!context.app.config.hideRating &&

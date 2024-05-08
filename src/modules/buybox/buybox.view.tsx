@@ -761,6 +761,7 @@ const BuyboxView: React.FC<IBuyboxViewProps & IBuyboxExtentionProps<IBuyboxData>
                 <Node {...ProductInfoContainerProps}>
                     {catalogs && catalogs[0].Name}
                     {title}
+                    {configure && renderConfigure(configure)}
                     <Node className='msc-buybox__description-section'>
                         <div className='msc-buybox__description-section-text'>{props.resources.descriptionText}</div>
                         {description}
@@ -773,7 +774,6 @@ const BuyboxView: React.FC<IBuyboxViewProps & IBuyboxExtentionProps<IBuyboxData>
                         <div className='msc-buybox__price-section-text'>{props.resources.priceText}</div>
                         {price}
                     </Node>
-                    {configure && renderConfigure(configure)}
                     {keyInPrice && renderKeyInPrice(keyInPrice)}
                     <Node className='msc-buybox__bulk-purchase-section'>
                         <div className='msc-buybox__bulk-purchase-button-text'>
