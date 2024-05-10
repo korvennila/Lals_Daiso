@@ -82,7 +82,7 @@ export class NavigationMenuRootDisabled extends React.PureComponent<INavigationM
         }
 
         this.state = {
-            activeMenu: 1,
+            activeMenu: undefined,
             mobileViewLabelText: '',
             parentMenu: undefined,
             drawerKeyValue: {},
@@ -541,6 +541,9 @@ export class NavigationMenuRootDisabled extends React.PureComponent<INavigationM
                                     this._renderPromotionalLink(item.altText, item.additionalProperties?.linkUrl)}
                             </Node>
                         ))}
+                </div>
+                <div className='menu-custom-close-button'>
+                    <p title='Close'>x</p>
                 </div>
             </Node>
         );

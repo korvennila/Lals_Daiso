@@ -595,6 +595,9 @@ export class NavigationMenuRootEnabled extends React.PureComponent<INavigationMe
                             </Node>
                         ))}
                 </div>
+                <div className='menu-custom-close-button'>
+                    <p title='Close'>x</p>
+                </div>
             </Node>
         );
     }

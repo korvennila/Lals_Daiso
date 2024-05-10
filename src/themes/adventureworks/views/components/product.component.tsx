@@ -687,7 +687,7 @@ function renderPrice(
 ): JSX.Element | null {
     const price: ProductPrice = {
         BasePrice: basePrice,
-        AdjustedPrice: adjustedPrice,
+        AdjustedPrice: basePrice,
         CustomerContextualPrice: adjustedPrice
     };
 
