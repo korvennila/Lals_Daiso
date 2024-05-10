@@ -1,0 +1,70 @@
+{
+	"$type": "contentModule",
+	"friendlyName": "Product details (COPY)",
+	"name": "product-specification",
+	"description": "Product details is used to display additional information about the product in the product details page",
+	"categories": [
+		"Product details "
+	],
+	"dataActions": {
+		"product": {
+			"path": "@msdyn365-commerce-modules/retail-actions/dist/lib/get-selected-variant"
+		},
+		"productSpecificationData": {
+			"path": "@msdyn365-commerce-modules/product-specification/dist/lib/dataActions/get-attributes-for-selected-variant"
+		},
+		"additionalMediaLocations": {
+			"path": "@msdyn365-commerce-modules/retail-actions/dist/lib/get-additional-media-locations-for-selected-variant"
+		}
+	},
+	"config": {
+		"heading": {
+			"friendlyName": "Heading",
+			"description": "Heading for product details",
+			"$ref": "@msdyn365-commerce-modules/definitions/dist/src/Heading.json#/definitions/heading"
+		},
+		"displayStyle": {
+			"friendlyName": "Display style",
+			"description": "Flag to render product specification as a table or an accordion",
+			"type": "string",
+			"enum": {
+				"accordion": "accordion",
+				"table": "table"
+			},
+			"default": "table",
+			"scope": "module"
+		},
+		"hideEmptyProductSpec": {
+			"friendlyName": "Hide empty blocks in product specification",
+			"description": "Flag to hide empty blocks in product specification",
+			"type": "boolean",
+			"default": true
+		},
+		"className": {
+			"friendlyName": "Custom CSS class name",
+			"description": "Provide a custom css class name defined in the theme pack to target the CSS for this module",
+			"type": "string",
+			"default": ""
+		},
+		"clientRender": {
+			"friendlyName": "Render module client side",
+			"description": "Enabling this property will cause the module to load its Javascript chunk and render on the client based on the user view port. This property is recommended for modules which are generally hidden below the users view port (lower on the page) to increase page load performance.",
+			"type": "boolean",
+			"default": false
+		}
+	},
+	"resources": {
+		"trueValueText": {
+			"value": "Yes",
+			"comment": "Text to show for boolean fields whose value is true"
+		},
+		"falseValueText": {
+			"value": "No",
+			"comment": "Text to show for boolean fields whose value is false"
+		},
+		"additionalDownloadsText": {
+			"value": "Additional downloads",
+			"comment": "Additional downloads"
+		}
+	}
+}

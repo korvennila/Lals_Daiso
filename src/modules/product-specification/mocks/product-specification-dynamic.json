@@ -1,0 +1,12 @@
+{
+	"id": "R1Module1",
+	"config": {},
+	"data": {
+		"heading": {
+			"headingTag": "h6",
+			"text": "Additional Specifications",
+			"textSize": "sm"
+		}
+	},
+	"typeName": "product-specification"
+}
