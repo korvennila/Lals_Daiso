@@ -357,6 +357,24 @@ const renderCartLinesGroupHeader = (
 };
 
 /**
+ * Render Cart Lines static group header.
+ * @returns JSX Element.
+ */
+const renderCartLinesGroupHeaderStatic = () => {
+    return (
+        <>
+            <div className='msc-cart-lines-group-wrapper__bopis-heading'>
+                <div>Product Details</div>
+                <div>Price</div>
+                <div>Quantity</div>
+                <div>Total Price</div>
+                <div>Action</div>
+            </div>
+        </>
+    );
+};
+
+/**
  * Returns count of products.
  * @param cartLine - The cart line view props.
  * @returns Number of products.
@@ -379,32 +397,43 @@ const countItems = (cartLine: ICartlinesViewProps[]): number => {
 const renderCartLinesGroup = (props: ICartViewProps & ICartExtensionProps<{}>, resources: ICartResources): JSX.Element | undefined => {
     if (props.cartLinesGroup && ArrayExtensions.hasElements(props.cartLinesGroup)) {
         return (
-            <div className='msc-cart-lines-group'>
-                {props.cartLinesGroup.map(cartlines => {
-                    return (
-                        <div key={cartlines[0].cartlineId} className='msc-cart-lines-group-wraper'>
-                            {renderCartLinesGroupHeader(
-                                cartlines[0],
-                                resources,
-                                countItems(cartlines),
-                                props.context.actionContext.requestContext.channel?.EmailDeliveryModeCode
-                            )}
-                            {renderCartlines(
-                                props,
-                                cartlines,
-                                props.resources,
-                                props.storeSelector,
-                                props.waitingComponent,
-                                props.cartLoadingStatus,
-                                props.cartDataResult,
-                                props.telemetryContent,
-                                props.multiplePickUpEnabled,
-                                props.context.actionContext.requestContext.channel?.EmailDeliveryModeCode
-                            )}
-                        </div>
-                    );
-                })}
-            </div>
+            <>
+                <div className='msc-cart-lines-group'>
+                    {props.cartLinesGroup.map(cartlines => {
+                        return (
+                            <div key={cartlines[0].cartlineId} className='msc-cart-lines-group-wraper'>
+                                {renderCartLinesGroupHeader(
+                                    cartlines[0],
+                                    resources,
+                                    countItems(cartlines),
+                                    props.context.actionContext.requestContext.channel?.EmailDeliveryModeCode
+                                )}
+                                {renderCartLinesGroupHeaderStatic()}
+                                {renderCartlines(
+                                    props,
+                                    cartlines,
+                                    props.resources,
+                                    props.storeSelector,
+                                    props.waitingComponent,
+                                    props.cartLoadingStatus,
+                                    props.cartDataResult,
+                                    props.telemetryContent,
+                                    props.multiplePickUpEnabled,
+                                    props.context.actionContext.requestContext.channel?.EmailDeliveryModeCode
+                                )}
+                            </div>
+                        );
+                    })}
+
+                    <div className='msc-cart__free-shipping-container'>
+                        {!props.cartDataResult && (
+                            <Node className='msc-cart__free-shipping-info'>
+                                <h1>{props.freeShippingContent}</h1>
+                            </Node>
+                        )}
+                    </div>
+                </div>
+            </>
         );
     }
     return props.cartDataResult ? (
@@ -556,13 +585,6 @@ const CartView: React.FC<ICartViewProps & ICartExtensionProps<{}>> = (props: ICa
     );
     return (
         <>
-            <div className='msc-cart__free-shipping-container'>
-                {!props.cartDataResult && (
-                    <Node className='msc-cart__free-shipping-info'>
-                        <h1>{props.freeShippingContent}</h1>
-                    </Node>
-                )}
-            </div>
             <div className={props.className} id={props.id} {...props.renderModuleAttributes(props)}>
                 {props.checkoutBlockedDueToUnavailableFunds}
                 {updatedTitle}
@@ -580,6 +602,9 @@ const CartView: React.FC<ICartViewProps & ICartExtensionProps<{}>> = (props: ICa
                           props.cartLoadingStatus,
                           props.cartDataResult
                       )}
+                {props.storeSelector}
+            </div>
+            <>
                 {props.orderSummaryHeading && (
                     <Node {...props.OrderSummaryWrapper}>
                         <Node className='msc-order-summary__items'>
@@ -592,8 +617,7 @@ const CartView: React.FC<ICartViewProps & ICartExtensionProps<{}>> = (props: ICa
                         {renderOrderSummaryCheckout(props)}
                     </Node>
                 )}
-                {props.storeSelector}
-            </div>
+            </>
         </>
     );
 };

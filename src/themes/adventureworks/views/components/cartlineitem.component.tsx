@@ -900,13 +900,13 @@ const CartLine: React.FC<ICartLineProps> = (props: ICartLineProps) => {
                         {renderConfirmedShipDate}
                         {renderUnitOfMeasure()}
                     </div>
-                    {renderProductUnitPrice}
                     {renderInventoryLabel}
                     {renderDiscountLines}
                     {props.showShippingChargesForLineItems && <div className='msc-cart-line__freight'>{renderShippingLabel}</div>}
                     {renderOtherCharges}
                     {renderSalesAgreementPrompt}
                 </div>
+                {renderProductUnitPrice}
                 {generateQuantityAndPrice()}
                 {renderSalesAgreementPrompt}
                 {props.data.cartLine.IsInvoiceLine && props.data.cartState && props.resources.priceEditorResources && (
