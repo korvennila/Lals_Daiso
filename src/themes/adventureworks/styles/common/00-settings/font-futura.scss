@@ -1,0 +1,64 @@
+@font-face {
+    font-family: 'Futura Bk BT';
+    src: url('#{$msv-font-path}/FuturaBT-Book.eot');
+    src: url('#{$msv-font-path}/FuturaBT-Book.eot?#iefix') format('embedded-opentype'),
+    url('#{$msv-font-path}/FuturaBT-Book.woff2') format('woff2'),
+    url('#{$msv-font-path}/FuturaBT-Book.woff') format('woff'),
+    url('#{$msv-font-path}/FuturaBT-Book.ttf') format('truetype'),
+    url('#{$msv-font-path}/FuturaBT-Book.svg#FuturaBT-Book') format('svg');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Futura BdCn BT';
+    src: url('#{$msv-font-path}/FuturaBT-BoldCondensed.eot');
+    src: url('#{$msv-font-path}/FuturaBT-BoldCondensed.eot?#iefix') format('embedded-opentype'),
+    url('#{$msv-font-path}/FuturaBT-BoldCondensed.woff2') format('woff2'),
+    url('#{$msv-font-path}/FuturaBT-BoldCondensed.woff') format('woff'),
+    url('#{$msv-font-path}/FuturaBT-BoldCondensed.ttf') format('truetype'),
+    url('#{$msv-font-path}/FuturaBT-BoldCondensed.svg#FuturaBT-BoldCondensed') format('svg');
+    font-weight: bold;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Futura Lt BT';
+    src: url('#{$msv-font-path}/FuturaBT-Light.eot');
+    src: url('#{$msv-font-path}/FuturaBT-Light.eot?#iefix') format('embedded-opentype'),
+    url('#{$msv-font-path}/FuturaBT-Light.woff2') format('woff2'),
+    url('#{$msv-font-path}/FuturaBT-Light.woff') format('woff'),
+    url('#{$msv-font-path}/FuturaBT-Light.ttf') format('truetype'),
+    url('#{$msv-font-path}/FuturaBT-Light.svg#FuturaBT-Light') format('svg');
+    font-weight: 300;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Futura Hv BT';
+    src: url('#{$msv-font-path}/FuturaBT-Heavy.eot');
+    src: url('#{$msv-font-path}/FuturaBT-Heavy.eot?#iefix') format('embedded-opentype'),
+    url('#{$msv-font-path}/FuturaBT-Heavy.woff2') format('woff2'),
+    url('#{$msv-font-path}/FuturaBT-Heavy.woff') format('woff'),
+    url('#{$msv-font-path}/FuturaBT-Heavy.ttf') format('truetype'),
+    url('#{$msv-font-path}/FuturaBT-Heavy.svg#FuturaBT-Heavy') format('svg');
+    font-weight: 900;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Futura Md BT';
+    src: url('#{$msv-font-path}/FuturaBT-Medium.eot');
+    src: url('#{$msv-font-path}/FuturaBT-Medium.eot?#iefix') format('embedded-opentype'),
+    url('#{$msv-font-path}/FuturaBT-Medium.woff2') format('woff2'),
+    url('#{$msv-font-path}/FuturaBT-Medium.woff') format('woff'),
+    url('#{$msv-font-path}/FuturaBT-Medium.ttf') format('truetype'),
+    url('#{$msv-font-path}/FuturaBT-Medium.svg#FuturaBT-Medium') format('svg');
+    font-weight: 500;
+    font-style: normal;
+    font-display: swap;
+}

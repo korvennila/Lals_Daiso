@@ -405,14 +405,19 @@ const _assembleNode = (
               })
             : undefined,
         remove: (
-            <Button className='msc-cart-line__remove-item' onClick={onRemoveClickHandler} title={removeButtonText} {...attributes}>
+            <Button
+                className='msc-cart-line__remove-item remove-btn'
+                onClick={onRemoveClickHandler}
+                title={removeButtonText}
+                {...attributes}
+            >
                 {removeButtonText}
             </Button>
         ),
         addToWishlist:
             isAuthenticated && product && !isCustomPriceSelected ? (
                 <AddToWishlistComponent
-                    className='msc-cart-line__add-to-wishlist'
+                    className='msc-cart-line__add-to-wishlist wishlist-btn'
                     addToWishlistButtonText={addToWishlistButtonText}
                     removeFromWishlistButtonText={removeFromWishlistButtonText}
                     context={context}
