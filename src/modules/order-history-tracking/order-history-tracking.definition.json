@@ -1,0 +1,46 @@
+{
+    "$type": "contentModule",
+    "friendlyName": "Order History Tracking",
+    "name": "order-history-tracking",
+    "description": "Please add meaningful description for authoring",
+    "categories": ["commerce"],
+    "tags": ["order", "history"],
+    "dataActions": {},
+    "config": {
+        "showText": {
+            "friendlyName": "showText",
+            "description": "example config value",
+            "type": "string",
+            "default": "Example Config Value",
+            "scope": "module",
+            "group": "Layout Properties"
+        },
+        "titleHeadingTag": {
+            "friendlyName": "Heading tag",
+            "type": "string",
+            "description": "Tag to give the heading",
+            "enum": {
+                "h1": "h1",
+                "h2": "h2",
+                "h3": "h3",
+                "h4": "h4",
+                "h5": "h5",
+                "h6": "h6"
+            },
+            "default": "h1",
+            "scope": "module"
+        }
+    },
+    "resources": {
+        "resourceKey": {
+            "comment": "resource description",
+            "value": "resource value"
+        },
+        "textBoxPlaceholder": {
+            "value": "Enter order ID"
+        },
+        "submitButtonText": {
+            "value": "Track Order"
+        }
+    }
+}
