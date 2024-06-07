@@ -101,6 +101,14 @@
             "value": "Email address",
             "comment": "Text display as Aria Label in the email textbox."
         },
+        "emailOrPhoneLabelText": {
+            "value": "Email address / Phone Number *",
+            "comment": "Text display as placeholder in Email address or Phone number label."
+        },
+        "emailOrPhoneAriaLabel": {
+            "value": "Email address / Phone Number",
+            "comment": "Text display as Aria Label in the email / phone number textbox."
+        },
         "passwordLabelText": {
             "value": "Password *",
             "comment": "Text display as placeholder in password label."
@@ -140,6 +148,10 @@
         "invalidEmailError": {
             "value": "Please enter a valid email address.",
             "comment": "Error to display when email format is invalid."
+        },
+        "invalidPhoneError": {
+            "value": "Please enter a valid phone number.",
+            "comment": "Error to display when phone format is invalid."
         },
         "invalidPasswordError": {
             "value": "The password you entered is not in the expected format.",

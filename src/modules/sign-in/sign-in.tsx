@@ -1,11 +1,4 @@
-/*!
- * Copyright (c) Microsoft Corporation.
- * All rights reserved. See LICENSE in the project root for license information.
- */
-
-/* eslint-disable no-duplicate-imports */
 import * as Msdyn365 from '@msdyn365-commerce/core';
-import { EmailRegex } from '@msdyn365-commerce-modules/retail-actions';
 import { getTelemetryObject, IModuleProps, INodeProps, ITelemetryContent, Modal, ModalBody } from '@msdyn365-commerce-modules/utilities';
 import classnames from 'classnames';
 import { observable } from 'mobx';
@@ -103,9 +96,9 @@ class SignIn extends React.Component<ISignInProps<ISignInConfig>> {
 
     private readonly telemetryContent?: ITelemetryContent;
 
-    @observable private emailId: string;
+    @observable private emailOrPhoneId: string;
 
-    @observable private emailRegex: string;
+    @observable private emailOrPhoneRegex: string;
 
     @observable private isInitialized: boolean;
 
@@ -114,14 +107,15 @@ class SignIn extends React.Component<ISignInProps<ISignInConfig>> {
 
     constructor(props: ISignInProps<ISignInConfig>) {
         super(props);
-        this.emailRegex = EmailRegex.defaultRegex.source;
+        // Update the regex to match both email and phone numbers
+        this.emailOrPhoneRegex = '^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$|^[0-9]{10}$';
         this.isInitialized = false;
         this.telemetryContent = getTelemetryObject(
             this.props.context.request.telemetryPageName!,
             this.props.friendlyName,
             this.props.telemetry
         );
-        this.emailId = 'logonIdentifier';
+        this.emailOrPhoneId = 'logonIdentifier';
     }
 
     public componentDidMount(): void {
@@ -193,11 +187,11 @@ class SignIn extends React.Component<ISignInProps<ISignInConfig>> {
                 },
                 items: [
                     this._renderInput(
-                        this.emailId,
-                        'email',
-                        resources.emailAddressLabelText,
-                        resources.emailAddressAriaLabel,
-                        this.emailRegex
+                        this.emailOrPhoneId,
+                        'text',
+                        resources.emailOrPhoneLabelText,
+                        resources.emailOrPhoneAriaLabel,
+                        this.emailOrPhoneRegex
                     ),
                     this._renderInput('password', 'password', resources.passwordLabelText)
                 ],
@@ -332,13 +326,13 @@ class SignIn extends React.Component<ISignInProps<ISignInConfig>> {
         // eslint-disable-next-line @typescript-eslint/dot-notation, @typescript-eslint/no-unsafe-member-access -- Auto-suppressed.
         if (window && window['CONTENT'] && window['CONTENT']['email_pattern']) {
             // eslint-disable-next-line @typescript-eslint/dot-notation, @typescript-eslint/no-unsafe-member-access -- Auto-suppressed.
-            this.emailRegex = window['CONTENT']['email_pattern'];
+            this.emailOrPhoneRegex = window['CONTENT']['email_pattern'];
         }
 
         // eslint-disable-next-line @typescript-eslint/dot-notation, @typescript-eslint/no-unsafe-member-access -- Auto-suppressed.
         if (window['SA_FIELDS'] && window['SA_FIELDS']['AttributeFields']) {
             // @ts-expect-error
-            this.emailId = (window.SA_FIELDS.AttributeFields || [])[0].ID || this.emailId;
+            this.emailOrPhoneId = (window.SA_FIELDS.AttributeFields || [])[0].ID || this.emailOrPhoneId;
         }
     };
 
@@ -351,6 +345,7 @@ class SignIn extends React.Component<ISignInProps<ISignInConfig>> {
                 requiredField_email: resources.requriedEmailError,
                 requiredField_password: resources.requriedPasswordError,
                 invalid_email: resources.invalidEmailError,
+                invalid_phone: resources.invalidPhoneError,
                 invalid_password: resources.invalidPasswordError,
                 unknown_error: resources.unknownError
             };

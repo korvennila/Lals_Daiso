@@ -31,6 +31,8 @@ export interface ISignInResources {
     b2bButtonAriaLabel: string;
     emailAddressLabelText: string;
     emailAddressAriaLabel: string;
+    emailOrPhoneLabelText: string;
+    emailOrPhoneAriaLabel: string;
     passwordLabelText: string;
     loginButtonText: string;
     loginButtonAriaLabel: string;
@@ -41,6 +43,7 @@ export interface ISignInResources {
     requriedEmailError: string;
     requriedPasswordError: string;
     invalidEmailError: string;
+    invalidPhoneError: string;
     invalidPasswordError: string;
     unknownError: string;
     loadingMessage: string;
