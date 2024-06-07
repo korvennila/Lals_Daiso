@@ -1,0 +1,38 @@
+{
+    "CacheObjectType": "WishList",
+    "CacheKey": "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsImtpZCI6ImV0aTF3b25IV29STy1QWC1PNTlZTXhwR0F6N1JDVHdLWUswTmZQU3Y2OTQifQ.eyJleHAiOjE1NDgyOTYwMTAsIm5iZiI6MTU0ODI2NzIxMCwidmVyIjoiMS4wIiwiaXNzIjoiaHR0cHM6Ly9ydXNobW9yZWIyYy5iMmNsb2dpbi5jb20vdGZwLzA3MTgwOGMzLTAyMTMtNGY0My1iNWUyLWRmMDEyNjZlNDRhZS9iMmNfMWFfc2lnbnVwX3NpZ25pbi92Mi4wLyIsInN1YiI6IjY4NzFmZDNmLTcyZjEtNGIzNS04MTEwLWFhNTVmNGZmNjc0NCIsImF1ZCI6Ijc1ZmUxYWVjLTg1MzctNDkzYS1hMjFjLTA5YzU0NzNiMThlMyIsImFjciI6ImIyY18xYV9zaWdudXBfc2lnbmluIiwibm9uY2UiOiI2MzY4Mzg2NDAwOTY2NDU1MDEuTWpVMU1HSTFOakV0TWpsbE9TMDBabU0yTFRsbE0yUXRZVGRpWlROaE16ZGpOVE5pTlRRMllXTTJaakF0WkdNek5pMDBPRFpsTFRnellXTXRNMk00WldNM1l6WmhaVEkwIiwiaWF0IjoxNTQ4MjY3MjEwLCJhdXRoX3RpbWUiOjE1NDgyNjcyMTAsIm5hbWUiOiJBamF5RGlzcGxheSIsImdpdmVuX25hbWUiOiJBamF5Rmlyc3QiLCJmYW1pbHlfbmFtZSI6IkFqYXlMYXN0IiwiY19oYXNoIjoicHlkVE5ROW5NY0lFb0M2dXVqR3FiQSJ9.G6wGxANLnbyLlx9mpA9e76D7IX2MrcUezA5xvAHWAdj8EW_BAZVg5mtx3617wav-TCrSGINc0Yt9KzZ15ekQZEJtNOuWrLYFj6n1vP-Naf4kYDfLvqp6g96xCIL8r_bG4ePNxz6tuUZnvaYpNeAQeNtWo1hnsW48f3r1nTbIg1raUxfL4WYgO8nIaa-erQFFMSsYEswQJ5fvXRvpOBrbxGwcgki9o5ZEhehiyS8tGIozSIfk_zbwpbq0RIgJds4HU1Ojm5RtBxLXD3t0IXY5Yq4fc5raPkUh_QqIOUEAHmhGydV7xfIOddThSxzXTzLKGzfNOhMG35YGe9ACOkYpTA",
+    "Mock": [
+        {
+            "Id":68719478986,
+            "Name":"mywishlist",
+            "CustomerId":"004066",
+            "CustomerName":"TestFirstName TestLastName",
+            "IsFavorite":false,
+            "IsRecurring":false,
+            "IsPrivate":false,
+            "IsCollaborative":false,
+            "CreatedDateTime":"\/Date(-62135596800000)\/",
+            "DueDateTime":"\/Date(-62135596800000)\/",
+            "CommerceListTypeValue":1,
+            "CommerceListLines":[
+                {
+                    "CommerceListId":68719478986,
+                    "LineId":68719478986,
+                    "CustomerId":"004147",
+                    "CustomerName":"TestFirstName TestLastName",
+                    "ProductId":22565423116,
+                    "Quantity":1.00,
+                    "UnitOfMeasure":"",
+                    "IsFavorite":false,
+                    "IsRecurring":false,
+                    "IsPrivate":false,
+                    "CreatedDateTime":"\/Date(1552324262000)\/",
+                    "ExtensionProperties":[]
+                }
+            ],
+            "CommerceListContributors":[],
+            "CommerceListInvitations":[],
+            "ExtensionProperties":[]
+        }
+    ]
+}

@@ -1,0 +1,148 @@
+{
+	"$type": "contentModule",
+	"friendlyName": "Wishlist (COPY)",
+	"name": "wishlist-items",
+	"description": "Module to show the items in the wishlist",
+	"categories": [
+		"Account management"
+	],
+	"dataActions": {
+		"cart": {
+			"path": "@msdyn365-commerce/global-state/dist/lib/data-actions/cart-state-data-action",
+			"runOn": "server"
+		},
+		"wishlists": {
+			"path": "@msdyn365-commerce-modules/retail-actions/dist/lib/get-wishlist-by-customer-id",
+			"runOn": "client"
+		},
+		"products": {
+			"path": "./actions/get-items-in-wishlists",
+			"runOn": "client"
+		},
+		"productAvailability": {
+			"path": "./actions/get-product-availabilities-wishlist-items",
+			"runOn": "client"
+		},
+		"customerInformation": {
+			"path": "@msdyn365-commerce-modules/retail-actions/dist/lib/get-customer"
+		},
+		"featureState": {
+			"path": "@msdyn365-commerce-modules/retail-actions/dist/lib/get-feature-state",
+			"runOn": "server"
+		},
+		"cartConfiguration": {
+			"path": "@msdyn365-commerce-modules/retail-actions/dist/lib/get-cart-configuration",
+			"runOn": "server"
+		}
+	},
+	"config": {
+		"heading": {
+			"$ref": "@msdyn365-commerce-modules/definitions/dist/src/Heading.json#/definitions/heading"
+		},
+		"imageSettings": {
+			"friendlyName": "Wishlist item image settings",
+			"description": "Image settings for wishlist item",
+			"type": "imageSettings"
+		},
+		"enableImageProductLink": {
+			"friendlyName": "Allow images to navigate to PDP",
+			"description": "This setting allows navigation to PDP when the image is selected.",
+			"type": "boolean",
+			"default": false
+		},
+		"className": {
+			"friendlyName": "Custom CSS class name",
+			"description": "Provide a custom css class name defined in the theme pack to target the CSS for this module",
+			"type": "string",
+			"default": ""
+		},
+		"clientRender": {
+			"friendlyName": "Render module client side",
+			"description": "Enabling this property will cause the module to load its Javascript chunk and render on the client based on the user view port. This property is recommended for modules which are generally hidden below the users view port (lower on the page) to increase page load performance.",
+			"type": "boolean",
+			"default": false
+		}
+	},
+	"resources": {
+		"emptyWishlistText": {
+			"comment": "Text for the empty wishlist",
+			"value": "Your wishlist is empty."
+		},
+		"noLongerExitsWishlistItemText": {
+			"comment": "Text for the empty wishlist",
+			"value": "Some products are no longer available and are removed."
+		},
+		"priceFree": {
+			"comment": "Text to show when product is free",
+			"value": "Free"
+		},
+		"unableToGetWishlist": {
+			"comment": "Text for the not getting wishlist",
+			"value": "Unable to get wishlists!"
+		},
+		"removeButtonText": {
+			"comment": "Text for the remove button",
+			"value": "Remove from wishlist"
+		},
+		"addToCartButtonText": {
+			"comment": "Text for the add to cart button",
+			"value": "Add to cart"
+		},
+		"removeButtonAriaLabel": {
+			"comment": "Aria label for the remove button",
+			"value": "Remove from wishlist"
+		},
+		"waitingClass": {
+			"comment": "CSS class for the waiting class",
+			"value": "waiting waiting-circular waiting-lg"
+		},
+		"outOfStockText": {
+			"comment": "out of stock text for wishlist item",
+			"value": "This item is out of stock"
+		},
+		"addedToCartSuccessMessage": {
+			"comment": "Added to cart friendly message",
+			"value": "Added to your cart"
+		},
+		"addedToCartFailureMessage": {
+			"comment": "Message to show when add to cart fails",
+			"value": "Add to cart failed. Please refresh and retry"
+		},
+		"maxQuantityLimitText": {
+			"comment": "String to show message that you've reached max quantity",
+			"value": "You already have {curQuantity} of this item in your shopping bag. You can only add {maxQuantity} of this item to your shopping bag"
+		},
+		"originalPriceText": {
+			"comment": "String that corresponds to the original price screen reader text",
+			"value": "Original price"
+		},
+		"currentPriceText": {
+			"comment": "String that corresponds to the current price screen reader text",
+			"value": "Current price"
+		},
+		"productDimensionTypeColor": {
+			"comment": "String that corresponds to the Color Product Dimension Type (1)",
+			"value": "Color"
+		},
+		"productDimensionTypeSize": {
+			"comment": "String that corresponds to the Size Product Dimension Type (3)",
+			"value": "Size"
+		},
+		"productDimensionTypeStyle": {
+			"comment": "String that corresponds to the Style Product Dimension Type (4)",
+			"value": "Style"
+		},
+		"productDimensionTypeAmount": {
+			"comment": "String that corresponds to the Style Product Dimension Type (4) for gift card product",
+			"value": "Amount"
+		},
+		"wishlistErrorGettingWishlist": {
+			"comment": "Text for the error message while getting wishlist",
+			"value": "Sorry we are unable to load your wishlist at this moment, please try again later."
+		},
+		"invoiceInCartErrorMessage": {
+			"comment": "Text for the error message while adding product to cart with an invoice",
+			"value": "Can not add items to a cart containing an invoice."
+		}
+	}
+}

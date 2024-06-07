@@ -1,8 +1,3 @@
-/*!
- * Copyright (c) Microsoft Corporation.
- * All rights reserved. See LICENSE in the project root for license information.
- */
-
 import * as React from 'react';
 
 import { IOrderHistoryTrackingData } from './order-history-tracking.data';
@@ -12,6 +7,7 @@ export interface IOrderHistoryTrackingViewProps extends IOrderHistoryTrackingPro
     orderHistory: any;
     handleTrackOrder: () => void;
     orderIdInputRef: React.RefObject<HTMLInputElement>;
+    errorMessage: string | null;
 }
 
 /**
@@ -21,6 +17,7 @@ export interface IOrderHistoryTrackingViewProps extends IOrderHistoryTrackingPro
  */
 interface IOrderHistoryTrackingState {
     orderHistory: any;
+    errorMessage: string | null;
 }
 
 class OrderHistoryTracking extends React.PureComponent<IOrderHistoryTrackingProps<IOrderHistoryTrackingData>, IOrderHistoryTrackingState> {
@@ -29,26 +26,32 @@ class OrderHistoryTracking extends React.PureComponent<IOrderHistoryTrackingProp
     constructor(props: IOrderHistoryTrackingProps<IOrderHistoryTrackingData>) {
         super(props);
         this.state = {
-            orderHistory: null
+            orderHistory: null,
+            errorMessage: null
         };
         this.orderIdInputRef = React.createRef();
     }
 
     private handleTrackOrder = async (): Promise<void> => {
         const orderId = this.orderIdInputRef.current?.value;
-        if (orderId) {
-            const apiUrl = `https://yourapiendpoint.com/orderhistory?orderId=${orderId}`;
-            try {
-                const response = await fetch(apiUrl);
-                if (!response.ok) {
-                    throw new Error('Network response was not ok');
-                }
-                const data = await response.json();
-                this.setState({ orderHistory: data });
-            } catch (error) {
-                console.error('Failed to fetch order history:', error);
-                this.setState({ orderHistory: null });
+        if (!orderId) {
+            this.setState({ errorMessage: 'Order ID cannot be empty.' });
+            return;
+        }
+
+        this.setState({ errorMessage: null }); // Clear any previous error message
+
+        const apiUrl = `https://yourapiendpoint.com/orderhistory?orderId=${orderId}`;
+        try {
+            const response = await fetch(apiUrl);
+            if (!response.ok) {
+                throw new Error(this.props.resources.networkResponseText);
             }
+            const data = await response.json();
+            this.setState({ orderHistory: data });
+        } catch (error) {
+            console.error('Failed to fetch order history:', error);
+            this.setState({ orderHistory: null, errorMessage: 'Failed to fetch order history. Please try again.' });
         }
     };
 
@@ -57,7 +60,8 @@ class OrderHistoryTracking extends React.PureComponent<IOrderHistoryTrackingProp
             ...this.props,
             orderHistory: this.state.orderHistory,
             handleTrackOrder: this.handleTrackOrder,
-            orderIdInputRef: this.orderIdInputRef
+            orderIdInputRef: this.orderIdInputRef,
+            errorMessage: this.state.errorMessage
         };
 
         return this.props.renderView(viewProps);

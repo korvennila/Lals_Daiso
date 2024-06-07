@@ -1,0 +1,43 @@
+{
+	"id": "R1SignIn",
+	"data": {
+		"signInHeading": {
+			"headingTag": "h2",
+			"text": "Sign in",
+			"textSize": "sm"
+		},
+		"signUpHeading": {
+			"headingTag": "h2",
+			"text": "Don’t have an account?",
+			"textSize": "sm"
+		},
+		"signUpDescriptionText": {
+			"text": "Create an account with us to get Fabrikam membership points and to save your favorites to the Wishlist."
+		},
+		"disclaimer": {
+			"text": "<p>By signing in to your account, you accept our <a href=\"privacypolicy\" class=\"c-hyperlink\">Privacy Policy</a>.</p>"
+		}
+	},
+	"config": {
+		"signUpDescriptionText": "Create an account with us to get Fabrikam membership points and to save your favorites to the Wishlist.",
+		"facebookButtonText": "Sign in with Facebook",
+		"facebookButtonAriaLabel": "Sign in with Facebook",
+		"microsoftButtonText": "Sign in with Microsoft",
+		"microsoftButtonAriaLabel": "Sign in with Microsoft",
+		"emailAddressLabelText": "Email address",
+		"passwordLabelText": "Password",
+		"loginButtonText": "Sign in",
+		"loginButtonAriaLabel": "Sign in",
+		"signUpButtonText": "Create an account",
+		"signUpButtonAriaLabel": "Create an account",
+		"forgotPasswordButtonText": "Forgotten password?",
+		"forgotPasswordButtonAriaLabel": "Forgotten password?",
+		"loadingMessage": "Please wait.",
+		"requriedEmailError": "Please enter your email address.",
+		"requriedPasswordError": "Please enter your password.",
+		"invalidEmailError": "Please enter a valid email address.",
+		"invalidPasswordError": "The password you entered is not in the expected format.",
+		"unknownError": "We are having trouble signing you in. Please try again later."
+	},
+	"typeName": "sign-in"
+}

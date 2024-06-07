@@ -1,0 +1,32 @@
+{
+	"id": "R1SignUp",
+	"data": {
+		"heading": {
+			"headingTag": "h1",
+			"text": "Sign up",
+			"textSize": "sm"
+		},
+		"disclaimer": {
+			"text": "<p>By creating an account, you agree to Fabrikam’s <a href=\"TermsOfUser\" class=\"c-hyperlink\">Terms of Use</a> and accept our <a href=\"privacypolicy\" class=\"c-hyperlink\">Privacy Policy</a>.</p>"
+		}
+	},
+	"config": {
+		"firstNameLabelText": "First Name",
+		"lastNameLabelText": "Last Name",
+		"emailAddressLabelText": "Email Address",
+		"passwordLabelText": "Password",
+		"confirmPasswordLabelText": "Confirm Password",
+		"signUpButtonText": "Sign up",
+		"signUpButtonArialabel": "Sign up",
+		"cancelButtonText": "Cancel",
+		"cancelButtonArialabel": "Cancel",
+		"passwordEntryMismatchError": "The password entry fields do not match. Please enter the same password in both fields and try again.",
+		"requiredFieldMissingSummaryError": "A required field is missing. Please fill out all required fields and try again.",
+		"requiredFieldMissingError": "This information is required.",
+		"fieldIncorrectError": "One or more fields are filled out incorrectly. Please check your entries and try again.",
+		"invalidEmailAddressError": "Please enter a valid email address.",
+		"invalidPasswordError": "Please enter a valid password.",
+		"loadingMessage": "Please wait."
+	},
+	"typeName": "sign-up"
+}

@@ -231,7 +231,7 @@ const renderAddToCart = (
             {shouldShowOutOfStock(buttonProps, false) ? (
                 <div className={buttonProps.className}>
                     <button
-                        className='msc-add-to-cart mt-3'
+                        className='notify-btn mt-3'
                         onClick={() => {
                             setOpen(o => !o);
                         }}

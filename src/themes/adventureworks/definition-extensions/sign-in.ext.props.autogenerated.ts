@@ -13,6 +13,7 @@ export interface ISignInConfig extends Msdyn365.IModuleConfig {
     signInDisclaimer?: Msdyn365.RichText;
     facebookIcon?: Msdyn365.IImageData;
     microsoftIcon?: Msdyn365.IImageData;
+    googleIcon?: Msdyn365.IImageData;
     className?: string;
     clientRender?: boolean;
     displayB2bAccountManagerSignin?: boolean;
@@ -24,6 +25,8 @@ export interface ISignInResources {
     facebookButtonAriaLabel: string;
     microsoftButtonText: string;
     microsoftButtonAriaLabel: string;
+    googleButtonText: string;
+    googleButtonAriaLabel: string;
     b2bButtonText: string;
     b2bButtonAriaLabel: string;
     emailAddressLabelText: string;

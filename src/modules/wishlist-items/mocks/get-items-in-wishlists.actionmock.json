@@ -1,0 +1,150 @@
+{
+    "CacheObjectType": "ActiveWishlistItems",
+    "CacheKey": "ActiveWishlistItems",
+    "Mock":  [
+        {
+            "RecordId": 22565423456,
+            "ItemId": "2101",
+            "Name": "A. Datum Compact Digital Camera M200",
+            "Description": "A. Datum Compact Dig",
+            "ProductTypeValue": 5,
+            "DefaultUnitOfMeasure": "Ea",
+            "BasePrice": 129,
+            "Price": 129,
+            "AdjustedPrice": 103.2,
+            "MasterProductId": 22565423455,
+            "Components": [],
+            "Dimensions": [
+                {
+                    "DimensionTypeValue": 1,
+                    "DimensionValue": {
+                        "RecordId": 22565420935,
+                        "Value": "Black",
+                        "ExtensionProperties": []
+                    },
+                    "ExtensionProperties": []
+                }
+            ],
+            "Behavior": {
+                "HasSerialNumber": false,
+                "IsDiscountAllowed": true,
+                "IsManualDiscountAllowed": true,
+                "IsKitDisassemblyAllowed": false,
+                "IsNegativeQuantityAllowed": false,
+                "IsReturnAllowed": true,
+                "IsSaleAtPhysicalStoresAllowed": true,
+                "IsZeroSalePriceAllowed": false,
+                "KeyInPriceValue": 0,
+                "KeyInQuantityValue": 0,
+                "MustKeyInComment": false,
+                "MustPrintIndividualShelfLabelsForVariants": false,
+                "MustPromptForSerialNumberOnlyAtSale": false,
+                "MustWeighProductAtSale": false,
+                "ValidFromDateForSaleAtPhysicalStores": "/Date(-2208988800000)/",
+                "ValidToDateForSaleAtPhysicalStores": "/Date(5837961600000)/",
+                "IsBlankSerialNumberAllowed": false,
+                "ExtensionProperties": []
+            },
+            "LinkedProducts": [],
+            "PrimaryImageUrl": "https://test/Products/2101_000_001.png",
+            "ExtensionProperties": [
+                {
+                    "Key": "PrimaryImageUri",
+                    "Value": {
+                        "BooleanValue": null,
+                        "ByteValue": null,
+                        "DateTimeOffsetValue": null,
+                        "DecimalValue": null,
+                        "IntegerValue": null,
+                        "LongValue": null,
+                        "StringValue": "Products/2010101.png"
+                    }
+                },
+                {
+                    "Key": "PrimaryImageAltText",
+                    "Value": {
+                        "BooleanValue": null,
+                        "ByteValue": null,
+                        "DateTimeOffsetValue": null,
+                        "DecimalValue": null,
+                        "IntegerValue": null,
+                        "LongValue": null,
+                        "StringValue": "Demo data product image"
+                    }
+                }
+            ]
+        },
+        {
+            "RecordId": 22565423217,
+            "ItemId": "1302",
+            "Name": "Southridge Video Desktop PC2.30 MD230",
+            "Description": "Southridge Video Des",
+            "ProductTypeValue": 5,
+            "DefaultUnitOfMeasure": "Ea",
+            "BasePrice": 599,
+            "Price": 599,
+            "AdjustedPrice": 509.15,
+            "MasterProductId": 22565423216,
+            "Components": [],
+            "Dimensions": [
+                {
+                    "DimensionTypeValue": 1,
+                    "DimensionValue": {
+                        "RecordId": 22565420935,
+                        "Value": "Black",
+                        "ExtensionProperties": []
+                    },
+                    "ExtensionProperties": []
+                }
+            ],
+            "Behavior": {
+                "HasSerialNumber": false,
+                "IsDiscountAllowed": true,
+                "IsManualDiscountAllowed": true,
+                "IsKitDisassemblyAllowed": false,
+                "IsNegativeQuantityAllowed": false,
+                "IsReturnAllowed": true,
+                "IsSaleAtPhysicalStoresAllowed": true,
+                "IsZeroSalePriceAllowed": false,
+                "KeyInPriceValue": 0,
+                "KeyInQuantityValue": 0,
+                "MustKeyInComment": false,
+                "MustPrintIndividualShelfLabelsForVariants": false,
+                "MustPromptForSerialNumberOnlyAtSale": false,
+                "MustWeighProductAtSale": false,
+                "ValidFromDateForSaleAtPhysicalStores": "/Date(-2208988800000)/",
+                "ValidToDateForSaleAtPhysicalStores": "/Date(5837961600000)/",
+                "IsBlankSerialNumberAllowed": false,
+                "ExtensionProperties": []
+            },
+            "LinkedProducts": [],
+            "PrimaryImageUrl": "https://test/Products/2101_000_001.png",
+            "ExtensionProperties": [
+                {
+                    "Key": "PrimaryImageUri",
+                    "Value": {
+                        "BooleanValue": null,
+                        "ByteValue": null,
+                        "DateTimeOffsetValue": null,
+                        "DecimalValue": null,
+                        "IntegerValue": null,
+                        "LongValue": null,
+                        "StringValue": "Products/1030201.png"
+                    }
+                },
+                {
+                    "Key": "PrimaryImageAltText",
+                    "Value": {
+                        "BooleanValue": null,
+                        "ByteValue": null,
+                        "DateTimeOffsetValue": null,
+                        "DecimalValue": null,
+                        "IntegerValue": null,
+                        "LongValue": null,
+                        "StringValue": "Demo data product image"
+                    }
+                }
+            ]
+        }
+    ]
+}

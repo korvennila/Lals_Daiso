@@ -22,9 +22,10 @@ export interface IOrderHistoryTrackingConfig extends Msdyn365.IModuleConfig {
 }
 
 export interface IOrderHistoryTrackingResources {
-    resourceKey: string;
     textBoxPlaceholder: string;
     submitButtonText: string;
+    noResultText: string;
+    networkResponseText: string;
 }
 
 export interface IOrderHistoryTrackingProps<T> extends Msdyn365.IModule<T> {

@@ -1,0 +1,157 @@
+{
+    "$type": "contentModule",
+    "friendlyName": "Sign in (COPY)",
+    "name": "sign-in",
+    "description": "Allows end users to sign-in with either native accounts, or open accounts. This module also allows users to reset a forgotten password.",
+    "categories": ["Account management", "Sign-in"],
+    "config": {
+        "signInHeading": {
+            "friendlyName": "Sign-in heading",
+            "description": "Sign-in section Heading.",
+            "$ref": "@msdyn365-commerce-modules/definitions/dist/src/Heading.json#/definitions/heading",
+            "required": true
+        },
+        "signUpHeading": {
+            "friendlyName": "Sign-up heading",
+            "description": "Sign-up heading",
+            "$ref": "@msdyn365-commerce-modules/definitions/dist/src/Heading.json#/definitions/heading",
+            "required": true
+        },
+        "signInDisclaimer": {
+            "friendlyName": "Disclaimer text for sign-in",
+            "description": "Disclaimer text sign-in",
+            "type": "richText"
+        },
+        "facebookIcon": {
+            "friendlyName": "Facebook icon",
+            "description": "Facebook icon",
+            "type": "image"
+        },
+        "microsoftIcon": {
+            "friendlyName": "Microsoft icon",
+            "description": "Microsoft icon",
+            "type": "image"
+        },
+        "googleIcon": {
+            "friendlyName": "Google icon",
+            "description": "Google icon",
+            "type": "image"
+        },
+        "className": {
+            "friendlyName": "Custom CSS class name",
+            "description": "Provide a custom css class name defined in the theme pack to target the CSS for this module",
+            "type": "string",
+            "default": ""
+        },
+        "clientRender": {
+            "friendlyName": "Render module client side",
+            "description": "Enabling this property will cause the module to load its Javascript chunk and render on the client based on the user view port. This property is recommended for modules which are generally hidden below the users view port (lower on the page) to increase page load performance.",
+            "type": "boolean",
+            "default": false
+        },
+        "displayB2bAccountManagerSignin": {
+            "friendlyName": "Render B2B account sign-in button",
+            "description": "Enabling this property will cause the module to add sign-in button for B2B users",
+            "type": "boolean",
+            "default": false
+        }
+    },
+    "resources": {
+        "signUpDescriptionText": {
+            "value": "Create an account with us to track your orders and save your favorites to the Wishlist.",
+            "comment": "Sign-up description."
+        },
+        "facebookButtonText": {
+            "value": "Sign in with Facebook",
+            "comment": "Facebook button text."
+        },
+        "facebookButtonAriaLabel": {
+            "value": "Sign in with Facebook",
+            "comment": "Facebook button aria label."
+        },
+        "microsoftButtonText": {
+            "value": "Sign in with Microsoft",
+            "comment": "Microsoft button text."
+        },
+        "microsoftButtonAriaLabel": {
+            "value": "Sign in with Microsoft",
+            "comment": "Microsoft button aria label."
+        },
+        "googleButtonText": {
+            "value": "Sign in with Google",
+            "comment": "Google button text."
+        },
+        "googleButtonAriaLabel": {
+            "value": "Sign in with Google",
+            "comment": "Google button aria label."
+        },
+        "b2bButtonText": {
+            "value": "EMPLOYEE SIGN IN",
+            "comment": "B2B button text."
+        },
+        "b2bButtonAriaLabel": {
+            "value": "Store Manager B2B Sign in",
+            "comment": "B2B button aria label."
+        },
+        "emailAddressLabelText": {
+            "value": "Email address *",
+            "comment": "Text display as placeholder in Email address label."
+        },
+        "emailAddressAriaLabel": {
+            "value": "Email address",
+            "comment": "Text display as Aria Label in the email textbox."
+        },
+        "passwordLabelText": {
+            "value": "Password *",
+            "comment": "Text display as placeholder in password label."
+        },
+        "loginButtonText": {
+            "value": "Sign in",
+            "comment": "Login button text."
+        },
+        "loginButtonAriaLabel": {
+            "value": "Sign in",
+            "comment": "Login button aria label."
+        },
+        "signUpButtonText": {
+            "value": "Sign Up",
+            "comment": "signUp button text."
+        },
+        "signUpButtonAriaLabel": {
+            "value": "Sign Up",
+            "comment": "signUp button aria label."
+        },
+        "forgotPasswordButtonText": {
+            "value": "Forgotten password?",
+            "comment": "Forgot password button text."
+        },
+        "forgotPasswordButtonAriaLabel": {
+            "value": "Forgotten password?",
+            "comment": "Forgot password button aria label."
+        },
+        "requriedEmailError": {
+            "value": "Please enter your email address.",
+            "comment": "Error to display when user didn't enter email address."
+        },
+        "requriedPasswordError": {
+            "value": "Please enter your password.",
+            "comment": "Error to display when user didn't enter password address."
+        },
+        "invalidEmailError": {
+            "value": "Please enter a valid email address.",
+            "comment": "Error to display when email format is invalid."
+        },
+        "invalidPasswordError": {
+            "value": "The password you entered is not in the expected format.",
+            "comment": "Error to display when password format is invalid."
+        },
+        "unknownError": {
+            "value": "We are having trouble signing you in. Please try again later.",
+            "comment": "Unknown error message."
+        },
+        "loadingMessage": {
+            "value": "Please wait.",
+            "comment": "Loading message."
+        }
+    }
+}

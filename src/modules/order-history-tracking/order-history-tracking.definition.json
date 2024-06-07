@@ -32,15 +32,21 @@
         }
     },
     "resources": {
-        "resourceKey": {
-            "comment": "resource description",
-            "value": "resource value"
-        },
         "textBoxPlaceholder": {
+            "comment": "text box placeholder",
             "value": "Enter order ID"
         },
         "submitButtonText": {
+            "comment": "submit button text",
             "value": "Track Order"
+        },
+        "noResultText": {
+            "comment": "no result text",
+            "value": "No order history found."
+        },
+        "networkResponseText": {
+            "comment": "network response text",
+            "value": "Network response was not ok"
         }
     }
 }

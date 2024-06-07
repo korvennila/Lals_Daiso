@@ -2,11 +2,10 @@
     "$type": "contentModule",
     "friendlyName": "unsubscribe",
     "name": "unsubscribe",
-    "description": "Please add meaningful description for authoring",
-    "categories": ["unsubscribe"],
-    "tags": ["Additional tags go here"],
-    "dataActions": {        
-    },    
+    "description": "A module to unsubscribe from email notifications",
+    "categories": ["commerce"],
+    "tags": ["unsubscribe", "email"],
+    "dataActions": {},
     "config": {
         "showText": {
             "friendlyName": "showText",
@@ -18,9 +17,21 @@
         }
     },
     "resources": {
-        "resourceKey": {
-            "comment": "resource description",
-            "value": "resource value"
+        "textBoxPlaceholder": {
+            "comment": "text box placeholder",
+            "value": "Enter your email"
+        },
+        "submitButtonText": {
+            "comment": "submit button text",
+            "value": "Unsubscribe"
+        },
+        "emailRequiredText": {
+            "comment": "email required text",
+            "value": "Email is required."
+        },
+        "emailValidateText": {
+            "comment": "enter valid email address",
+            "value": "Please enter a valid email address."
         }
     }
 }

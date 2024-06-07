@@ -12,7 +12,10 @@ export interface IUnsubscribeConfig extends Msdyn365.IModuleConfig {
 }
 
 export interface IUnsubscribeResources {
-    resourceKey: string;
+    textBoxPlaceholder: string;
+    submitButtonText: string;
+    emailRequiredText: string;
+    emailValidateText: string;
 }
 
 export interface IUnsubscribeProps<T> extends Msdyn365.IModule<T> {
