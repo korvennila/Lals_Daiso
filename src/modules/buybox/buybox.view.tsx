@@ -525,12 +525,12 @@ const BuyboxView: React.FC<IBuyboxViewProps & IBuyboxExtentionProps<IBuyboxData>
         }
 
         // Need to update the URL with Lals
-        const cNotifyMeRetailURL = `${cRetailURL}Commerce/TCPLCreateNotifyMeSubscription?api-version=7.3`;
+        const cNotifyMeRetailURL = `${cRetailURL}commerce/SaveNotifyMeRequest?api-version=7.3`;
 
         var data = JSON.stringify({
-            custAccount: cCustomerAccount,
-            email: email,
-            itemid: itemId
+            CustAccount: cCustomerAccount,
+            Email: email,
+            ItemId: itemId
         });
 
         var xhr = new XMLHttpRequest();

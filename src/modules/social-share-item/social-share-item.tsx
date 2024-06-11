@@ -44,6 +44,7 @@ class SocialShareItem extends React.PureComponent<ISocialShareItemProps<ISocialS
     private _getSocialShareItem(): React.ReactNode | null {
         const src = this.props.config.icon;
         if (MsDyn365.isBrowser) {
+            const shareUrl = encodeURIComponent(window.location.href);
             switch (this.props.config.socialMedia) {
                 case socialMedia.facebook:
                     return (
@@ -116,7 +117,35 @@ class SocialShareItem extends React.PureComponent<ISocialShareItemProps<ISocialS
                             data={{}}
                             src={src}
                             socialMediaName={`Whatsapp`}
-                            socialShareURL={`https://wa.me/?text=${window.location.href}`}
+                            socialShareURL={`https://wa.me/?text=${shareUrl}`}
+                        />
+                    );
+                case socialMedia.tiktok:
+                    return (
+                        <SocialMediaComponent
+                            socialMedia={SocialMedia.Customization}
+                            postUrl={document.URL}
+                            context={this.context}
+                            id={`${this.props.id}_tiktok`}
+                            typeName={this.props.typeName}
+                            data={{}}
+                            src={src}
+                            socialMediaName={`TikTok`}
+                            socialShareURL={`https://www.tiktok.com/share/video?url=${shareUrl}`}
+                        />
+                    );
+                case socialMedia.youtube:
+                    return (
+                        <SocialMediaComponent
+                            socialMedia={SocialMedia.Customization}
+                            postUrl={document.URL}
+                            context={this.context}
+                            id={`${this.props.id}_youtube`}
+                            typeName={this.props.typeName}
+                            data={{}}
+                            src={src}
+                            socialMediaName={`YouTube`}
+                            socialShareURL={`https://www.youtube.com/share?url=${shareUrl}`}
                         />
                     );
                 default:

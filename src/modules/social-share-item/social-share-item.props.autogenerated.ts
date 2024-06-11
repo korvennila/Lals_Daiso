@@ -13,7 +13,9 @@ export const enum socialMedia {
     pinterest = 'pinterest',
     mail = 'mail',
     linkedin = 'linkedin',
-    whatsapp = 'whatsapp'
+    whatsapp = 'whatsapp',
+    tiktok = 'tiktok',
+    youtube = 'youtube'
 }
 
 export interface ISocialShareItemConfig extends Msdyn365.IModuleConfig {
