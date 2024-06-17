@@ -20,6 +20,10 @@ export interface ISubscribeResources {
     subscribeFormAriaLabel: string;
     subscribeFormEmailAriaLabel: string;
     subscribeFormSubmitAriaLabel: string;
+    emailRequiredText: string;
+    emailValidateText: string;
+    subscriptionSuccessMessage: string;
+    subscriptionFailureMessage: string;
 }
 
 export const enum HeadingTag {

@@ -21,8 +21,10 @@ export interface ICustomSignUpResources {
     lastNameMaxLength: string;
     emailAddressLabelText: string;
     verificationCodeLabelText: string;
+    mobileVerificationLabelText: string;
     passwordLabelText: string;
     confirmPasswordLabelText: string;
+    mobileNumberLabelText: string;
     signUpButtonText: string;
     signUpButtonArialabel: string;
     cancelButtonText: string;
@@ -37,11 +39,13 @@ export interface ICustomSignUpResources {
     changeEmailButtonAriaLabel: string;
     verificationCodeSendSuccess: string;
     emailAddressVerifiedSuccess: string;
+    mobileNumberVerifiedSuccess: string;
     passwordEntryMismatchError: string;
     requiredFieldMissingSummaryError: string;
     requiredFieldMissingError: string;
     fieldIncorrectError: string;
     invalidEmailAddressError: string;
+    invalidMobileError: string;
     invalidPasswordError: string;
     invalidEmailError: string;
     retryError: string;

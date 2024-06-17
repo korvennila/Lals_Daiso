@@ -5,7 +5,7 @@
 
 /* eslint-disable no-duplicate-imports */
 import * as Msdyn365 from '@msdyn365-commerce/core';
-import { EmailRegex, PasswordRegex } from '@msdyn365-commerce-modules/retail-actions';
+import { EmailRegex, PasswordRegex, PhoneRegex } from '@msdyn365-commerce-modules/retail-actions';
 import { IModuleProps, INodeProps, Modal, ModalBody } from '@msdyn365-commerce-modules/utilities';
 import classnames from 'classnames';
 import { observable } from 'mobx';
@@ -67,6 +67,7 @@ export interface ISignUpLocalAccount {
     localAccount: INodeProps;
     items: ISignUpItem[];
     emailVerification: ISignUpEmailVerification;
+    mobileVerification: ISignUpMobileVerification;
     givenNameVerification: ISignUpGivenNameVerification;
     surnameVerification: ISignUpSurnameVerification;
     buttons: React.ReactNode[];
@@ -90,6 +91,16 @@ export interface ISignUpViewProps {
     aadConainer: INodeProps;
     heading: React.ReactNode;
     signUpLocalAccount: ISignUpLocalAccount;
+}
+
+export interface ISignUpMobileVerification {
+    isRequired: boolean;
+    mobile: ISignUpItem;
+    buttonWrapper: INodeProps;
+    buttons: React.ReactNode[];
+    successMessage: React.ReactNode[];
+    errorMessage: React.ReactNode[];
+    verificationControlWrapper: INodeProps;
 }
 
 /**
@@ -119,6 +130,12 @@ class SignUp extends React.Component<ICustomSignUpProps<ICustomSignUpConfig>> {
 
     @observable private templateVersion: string;
 
+    @observable private isMobileVerificationRequired: boolean;
+
+    @observable private mobileRegex: string;
+
+    @observable private mobileTemplateVersion: string;
+
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     private initializationTimer: any;
 
@@ -133,6 +150,9 @@ class SignUp extends React.Component<ICustomSignUpProps<ICustomSignUpConfig>> {
         this.isSurnameVerificationRequried = false;
         this.isInitialized = false;
         this.templateVersion = '';
+        this.isMobileVerificationRequired = false;
+        this.mobileRegex = PhoneRegex.defaultRegex;
+        this.mobileTemplateVersion = '';
     }
 
     public componentDidMount(): void {
@@ -256,6 +276,17 @@ class SignUp extends React.Component<ICustomSignUpProps<ICustomSignUpConfig>> {
                             this.templateVersion = 'v1';
                             break;
                         }
+                        case 'mobileverificationcontrol': {
+                            this.isMobileVerificationRequired = true;
+                            this.mobileTemplateVersion = 'v2';
+                            break;
+                        }
+                        case 'mobile': {
+                            this.mobileRegex = obj.PAT;
+                            this.isMobileVerificationRequired = obj.VERIFY;
+                            this.mobileTemplateVersion = 'v1';
+                            break;
+                        }
                         case 'givennameverificationcontrol': {
                             this.isGivenNameVerificationRequried = true;
                             break;
@@ -317,6 +348,9 @@ class SignUp extends React.Component<ICustomSignUpProps<ICustomSignUpConfig>> {
         if (this.templateVersion) {
             return this.templateVersion === 'v1' ? v1Value : v2Value;
         }
+        if (this.mobileTemplateVersion) {
+            return this.mobileTemplateVersion === 'v1' ? v1Value : v2Value;
+        }
         return '';
     };
 
@@ -331,6 +365,7 @@ class SignUp extends React.Component<ICustomSignUpProps<ICustomSignUpConfig>> {
                 this._renderInput('givenName', 'text', resources.firstNameLabelText, resources.firstNameMaxLength),
                 this._renderInput('surname', 'text', resources.lastNameLabelText, resources.lastNameMaxLength),
                 this._renderInput('email', 'email', resources.emailAddressLabelText, undefined, this.emailRegex),
+                this._renderInput('mobile', 'tel', resources.mobileNumberLabelText, undefined, this.mobileRegex),
                 this._renderInput('newPassword', 'password', resources.passwordLabelText, undefined, this.newPasswordRegex),
                 this._renderInput('reenterPassword', 'password', resources.confirmPasswordLabelText, undefined, this.reenterPasswordRegex)
             ],
@@ -443,6 +478,123 @@ class SignUp extends React.Component<ICustomSignUpProps<ICustomSignUpConfig>> {
                     <SignUpErrorComponent
                         key='email_incorrect_format'
                         id='email_incorrect_format'
+                        className={this.moduleClassName}
+                        message={resources.invalidEmailError}
+                    />
+                ]
+            },
+            mobileVerification: {
+                isRequired: this.isMobileVerificationRequired,
+                mobile: this._renderInput(
+                    this.getValue('mobile_ver_input', 'mobileVerificationCode'),
+                    'text',
+                    resources.mobileVerificationLabelText,
+                    undefined,
+                    undefined,
+                    'VerificationCode'
+                ),
+                verificationControlWrapper: {
+                    id: 'mobileVerificationControl',
+                    className: `${this.moduleClassName}__verification-control-content verificationControlContent`
+                },
+                buttonWrapper: {
+                    className: `${this.moduleClassName}__mobile-verification-buttons ${this.getValue('verify', '')}`,
+                    'data-claim_id': 'mobile'
+                },
+                buttons: [
+                    // Customize buttons as per your requirement
+                    <SignUpButtonComponent
+                        key='mobile_ver_but_send'
+                        id={this.getValue('mobile_ver_but_send', 'mobileVerificationControl_but_send_code')}
+                        className={`${this.moduleClassName}__mobile-verification-button ${
+                            this.moduleClassName
+                        }__verify-mobile-send-button ${this.getValue('sendButton', 'sendNewCode')}`}
+                        ariaLabel={resources.sendCodeButtonAriaLabel}
+                        text={resources.sendCodeButtonText}
+                    />,
+                    <SignUpButtonComponent
+                        key='mobile_ver_but_verify'
+                        id={this.getValue('mobile_ver_but_verify', 'mobileVerificationControl_but_verify_code')}
+                        className={`${this.moduleClassName}__mobile-verification-button ${
+                            this.moduleClassName
+                        }__verify-mobile-verify-button ${this.getValue('verifyButton', 'verifyCode')}`}
+                        ariaLabel={resources.verifyCodeButtonAriaLabel}
+                        text={resources.verifyCodeButtonText}
+                    />,
+                    <SignUpButtonComponent
+                        key='mobile_ver_but_resend'
+                        id={this.getValue('mobile_ver_but_resend', 'mobileVerificationControl_but_send_new_code')}
+                        className={`${this.moduleClassName}__mobile-verification-button ${
+                            this.moduleClassName
+                        }__verify-mobile-resend-button ${this.getValue('sendButton', 'sendNewCode')}`}
+                        ariaLabel={resources.resendCodeButtonAriaLabel}
+                        text={resources.resendCodeButtonText}
+                    />,
+                    <SignUpButtonComponent
+                        key='mobile_ver_but_edit'
+                        id={this.getValue('mobile_ver_but_edit', 'mobileVerificationControl_but_change_claims')}
+                        className={`${this.moduleClassName}__mobile-verification-button ${
+                            this.moduleClassName
+                        }__verify-mobile-edit-button ${this.getValue('editButton', 'changeClaims')}`}
+                        ariaLabel={resources.changeEmailButtonAriaLabel}
+                        text={resources.changeEmailButtonText}
+                    />
+                ],
+                successMessage: [
+                    // Customize success messages as per your requirement
+                    <SignUpSuccessComponent
+                        key='mobile_info'
+                        id={this.getValue('mobile_info', 'mobileVerificationControl_info_message')}
+                        className={this.moduleClassName}
+                        message={resources.verificationCodeSendSuccess}
+                    />,
+                    <SignUpSuccessComponent
+                        key='mobile_success'
+                        id={this.getValue('mobile_success', 'mobileVerificationControl_success_message')}
+                        className={this.moduleClassName}
+                        message={resources.mobileNumberVerifiedSuccess}
+                    />
+                ],
+                errorMessage: [
+                    // Customize error messages as per your requirement
+                    <SignUpErrorComponent
+                        key='mobileVerificationControl_error_message'
+                        id='mobileVerificationControl_error_message'
+                        className={this.moduleClassName}
+                    />,
+                    <SignUpErrorComponent
+                        key='mobile_fail_retry'
+                        id='mobile_fail_retry'
+                        className={this.moduleClassName}
+                        message={resources.retryError}
+                    />,
+                    <SignUpErrorComponent
+                        key='mobile_fail_no_retry'
+                        id='mobile_fail_no_retry'
+                        className={this.moduleClassName}
+                        message={resources.retryNotAllowedError}
+                    />,
+                    <SignUpErrorComponent
+                        key='mobile_fail_throttled'
+                        id='mobile_fail_throttled'
+                        className={this.moduleClassName}
+                        message={resources.throttledError}
+                    />,
+                    <SignUpErrorComponent
+                        key='mobile_fail_code_expired'
+                        id='mobile_fail_code_expired'
+                        className={this.moduleClassName}
+                        message={resources.codeExpiredError}
+                    />,
+                    <SignUpErrorComponent
+                        key='mobile_fail_server'
+                        id='mobile_fail_server'
+                        className={this.moduleClassName}
+                        message={resources.serverError}
+                    />,
+                    <SignUpErrorComponent
+                        key='mobile_incorrect_format'
+                        id='mobile_incorrect_format'
                         className={this.moduleClassName}
                         message={resources.invalidEmailError}
                     />

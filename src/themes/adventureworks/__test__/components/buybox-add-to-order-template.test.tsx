@@ -172,7 +172,14 @@ describe('Add To Order Template Button unit tests - View', () => {
         salesAgreementPricePrompt: 'Contract price and terms may apply.',
         salesAgreementExpirationDatePrompt: 'Available period: {0} - {1}',
         salesAgreementCommittedQuantityPrompt: 'Quantity commitment: {0}',
-        salesAgreementRemainingQuantityPrompt: 'Remaining quantity to qualify: {0}'
+        salesAgreementRemainingQuantityPrompt: 'Remaining quantity to qualify: {0}',
+        notifyMeSuccessMessage: '',
+        notifyMeFailureMessage: '',
+        emailRequiredText: '',
+        emailValidateText: '',
+        buttonNotifyMeText: '',
+        titleNotifyMeText: '',
+        textForNotificationWhenAvailable: ''
     };
 
     // @ts-expect-error partial mock

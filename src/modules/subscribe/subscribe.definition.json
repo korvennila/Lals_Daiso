@@ -1,58 +1,70 @@
 {
-	"$type": "contentModule",
-	"friendlyName": "Subscribe (COPY)",
-	"name": "subscribe",
-	"description": "Allows user to subscribe to email, promotions etc. This module requires integration with an email provider.",
-	"categories": [
-		"Promotions",
-		"Marketing",
-		"Subscribe"
-	],
-	"dataActions": {},
-	"config": {
-		"heading": {
-			"friendlyName": "Heading",
-			"description": "Heading",
-			"$ref": "@msdyn365-commerce-modules/definitions/dist/src/Heading.json#/definitions/heading"
-		},
-		"paragraph": {
-			"type": "richText",
-			"friendlyName": "Rich text",
-			"description": "Paragraph text"
-		},
-		"className": {
-			"friendlyName": "Custom CSS class name",
-			"description": "Provide a custom css class name defined in the theme pack to target the CSS for this module",
-			"type": "string",
-			"default": ""
-		},
-		"clientRender": {
-			"friendlyName": "Render module client side",
-			"description": "Enabling this property will cause the module to load its Javascript chunk and render on the client based on the user view port. This property is recommended for modules which are generally hidden below the users view port (lower on the page) to increase page load performance.",
-			"type": "boolean",
-			"default": false
-		}
-	},
-	"resources": {
-		"subscribeEmailPlaceholderText": {
-			"comment": "Placeholder text for Email Address input box",
-			"value": "Enter your email address"
-		},
-		"subscribeButtonLabel": {
-			"comment": "Label for subscribe button",
-			"value": "Sign Me Up"
-		},
-		"subscribeFormAriaLabel": {
-			"comment": "Placeholder text for subscribe form aria label",
-			"value": "Subscribe form"
-		},
-		"subscribeFormEmailAriaLabel": {
-			"comment": "Placeholder text for subscribe form email aria label",
-			"value": "Email address"
-		},
-		"subscribeFormSubmitAriaLabel": {
-			"comment": "Placeholder text for subscribe form submit aria label",
-			"value": "Sign me up"
-		}
-	}
+    "$type": "contentModule",
+    "friendlyName": "Subscribe (COPY)",
+    "name": "subscribe",
+    "description": "Allows user to subscribe to email, promotions etc. This module requires integration with an email provider.",
+    "categories": ["Promotions", "Marketing", "Subscribe"],
+    "dataActions": {},
+    "config": {
+        "heading": {
+            "friendlyName": "Heading",
+            "description": "Heading",
+            "$ref": "@msdyn365-commerce-modules/definitions/dist/src/Heading.json#/definitions/heading"
+        },
+        "paragraph": {
+            "type": "richText",
+            "friendlyName": "Rich text",
+            "description": "Paragraph text"
+        },
+        "className": {
+            "friendlyName": "Custom CSS class name",
+            "description": "Provide a custom css class name defined in the theme pack to target the CSS for this module",
+            "type": "string",
+            "default": ""
+        },
+        "clientRender": {
+            "friendlyName": "Render module client side",
+            "description": "Enabling this property will cause the module to load its Javascript chunk and render on the client based on the user view port. This property is recommended for modules which are generally hidden below the users view port (lower on the page) to increase page load performance.",
+            "type": "boolean",
+            "default": false
+        }
+    },
+    "resources": {
+        "subscribeEmailPlaceholderText": {
+            "comment": "Placeholder text for Email Address input box",
+            "value": "Enter your email address"
+        },
+        "subscribeButtonLabel": {
+            "comment": "Label for subscribe button",
+            "value": "Sign Me Up"
+        },
+        "subscribeFormAriaLabel": {
+            "comment": "Placeholder text for subscribe form aria label",
+            "value": "Subscribe form"
+        },
+        "subscribeFormEmailAriaLabel": {
+            "comment": "Placeholder text for subscribe form email aria label",
+            "value": "Email address"
+        },
+        "subscribeFormSubmitAriaLabel": {
+            "comment": "Placeholder text for subscribe form submit aria label",
+            "value": "Sign me up"
+        },
+        "emailRequiredText": {
+            "comment": "email required text",
+            "value": "Email is required."
+        },
+        "emailValidateText": {
+            "comment": "enter valid email address",
+            "value": "Please enter a valid email address."
+        },
+        "subscriptionSuccessMessage": {
+            "comment": "Text for Subscription Success Message",
+            "value": "Your request has been submitted"
+        },
+        "subscriptionFailureMessage": {
+            "comment": "Text for Subscription Failure Message",
+            "value": "Your request has not been submitted"
+        }
+    }
 }

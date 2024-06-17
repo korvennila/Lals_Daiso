@@ -130,6 +130,13 @@ export interface IBuyboxResources {
     skuText: string;
     decrementButtonAriaLabel: string;
     incrementButtonAriaLabel: string;
+    notifyMeSuccessMessage: string;
+    notifyMeFailureMessage: string;
+    emailRequiredText: string;
+    emailValidateText: string;
+    buttonNotifyMeText: string;
+    titleNotifyMeText: string;
+    textForNotificationWhenAvailable: string;
     ariaLabelForSelectedSwatchValue: string;
 }
 

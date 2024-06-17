@@ -1,0 +1,44 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Account Management Address renders correctly 1`] = `
+<div
+  className="ms-account-management-address"
+  data-m-t="mock-type"
+  id=""
+>
+  <div
+    className="ms-address-list"
+  >
+    <h1
+      className="msc-address-list__heading"
+      contentEditable={false}
+      dangerouslySetInnerHTML={
+        Object {
+          "__html": "Address",
+        }
+      }
+      disabled={true}
+      onBlur={[Function]}
+      onChange={[Function]}
+      onInput={[Function]}
+      onKeyDown={[Function]}
+      onKeyUp={[Function]}
+    />
+    <p
+      className="msc-address-list__add-empty"
+    >
+      No addresses are present. Please add one.
+    </p>
+    <button
+      aria-label="Add address"
+      className="msc-address-list__button-add msc-btn"
+      data-bi-id="12345"
+      data-m="{\\"id\\":\\"12345\\",\\"key1\\":\\"val1\\"}\\""
+      disabled={false}
+      onClick={[Function]}
+    >
+      Add address
+    </button>
+  </div>
+</div>
+`;

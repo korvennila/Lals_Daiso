@@ -495,9 +495,7 @@ const BuyboxView: React.FC<IBuyboxViewProps & IBuyboxExtentionProps<IBuyboxData>
     /* Context Variables */
     const cRetailURL = props.context.request.apiSettings.baseUrl;
     const cRetailOUN = props.context.request.apiSettings.oun ? props.context.request.apiSettings.oun : '';
-    const cCustomerAccount = props.context.request.user.customerAccountNumber
-        ? props.context.request.user.customerAccountNumber
-        : 'EC00001';
+    const cCustomerAccount = props.context.request.user.customerAccountNumber ? props.context.request.user.customerAccountNumber : '';
     const cCustomerEmailAddress = props.context.request.user.emailAddress ? props.context.request.user.emailAddress : '';
 
     /** Notify Me */
@@ -593,12 +591,12 @@ const BuyboxView: React.FC<IBuyboxViewProps & IBuyboxExtentionProps<IBuyboxData>
         return (
             <Node {..._notifyMeModalContainer()}>
                 <Node className='ms-notify-me__header msc-modal__header'>
-                    {'Notify me when available'}
+                    {resources.titleNotifyMeText}
                     {<Button className='msc-modal__close-button' aria-label='Close' onClick={closeModal}></Button>}
                 </Node>
                 {loading && <div className='loader'>Loading...</div>}
                 <Node className='ms-notify-me__body msc-modal__body'>
-                    {<p>Subscribe to this product to receive a notification once it becomes available.</p>}
+                    {<p>{resources.textForNotificationWhenAvailable}</p>}
                     <Node className=''>
                         {
                             <form onSubmit={notifyMeSubmitForm}>
@@ -612,20 +610,20 @@ const BuyboxView: React.FC<IBuyboxViewProps & IBuyboxExtentionProps<IBuyboxData>
                                         className={`${validEmail}`}
                                         required
                                     />
-                                    {validEmail !== '' && <div>Please enter a valid mail</div>}
+                                    {validEmail !== '' && <div>{resources.emailValidateText}</div>}
                                 </div>
                                 {statusMessage !== '' && (
                                     <div className='daiso_ntfy_alert-message'>
                                         {statusMessage === 'true' && (
-                                            <div className='alert alert-success'>Your request has been submitted</div>
+                                            <div className='alert alert-success'>{resources.notifyMeSuccessMessage}</div>
                                         )}
                                         {statusMessage === 'false' && (
-                                            <div className='alert alert-danger'>Your request has not been submitted</div>
+                                            <div className='alert alert-danger'>{resources.notifyMeFailureMessage}</div>
                                         )}
                                     </div>
                                 )}
                                 <button className='daiso_ntfy_submit-button' type='submit'>
-                                    Notify me when available
+                                    {resources.buttonNotifyMeText}
                                 </button>
                             </form>
                         }

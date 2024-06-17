@@ -11,13 +11,13 @@ export default (props: IUnsubscribeViewProps) => {
         <div className='unsubscribe'>
             <h2>{props.config.showText}</h2>
             <input type='email' ref={props.emailInputRef} placeholder={props.resources.textBoxPlaceholder} />
-            <button onClick={props.handleUnsubscribe}>{props.resources.submitButtonText}</button>
             {props.validationError && <p className='error'>{props.validationError}</p>}
             {props.apiCalled && props.unsubscribeResponse && (
                 <div id='unsubscribeResponse'>
                     <p>{props.unsubscribeResponse}</p>
                 </div>
             )}
+            <button onClick={props.handleUnsubscribe}>{props.resources.submitButtonText}</button>
         </div>
     );
 };

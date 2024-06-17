@@ -57,6 +57,10 @@
 			"comment": "Text display as label for verification code textbox.",
 			"value": "Verification code *"
 		},
+		"mobileVerificationLabelText": {
+			"comment": "Text display as label for verification code mobile textbox.",
+			"value": "Mobile verification code *"
+		},
 		"passwordLabelText": {
 			"comment": "Text display as label for password textbox.",
 			"value": "Password *"
@@ -64,6 +68,10 @@
 		"confirmPasswordLabelText": {
 			"comment": "Text display as label for confirm password textbox.",
 			"value": "Confirm password *"
+		},
+		"mobileNumberLabelText": {
+			"comment": "Text display as label for mobile number textbox.",
+			"value": "Mobile Number *"
 		},
 		"signUpButtonText": {
 			"comment": "Sign-up button text",
@@ -121,6 +129,10 @@
 			"comment": "Message to display on email address is verified successfully.",
 			"value": "E-mail address verified. You can now continue"
 		},
+		"mobileNumberVerifiedSuccess": {
+			"comment": "Message to display on mobile number is verified successfully.",
+			"value": "Mobile number verified. You can now continue"
+		},
 		"passwordEntryMismatchError": {
 			"comment": "Password mismatch error message.",
 			"value": "The password entry fields do not match. Please enter the same password in both fields and try again."
@@ -140,6 +152,10 @@
 		"invalidEmailAddressError": {
 			"comment": "Email address invalid field error message.",
 			"value": "Please enter a valid email address."
+		},
+		"invalidMobileError": {
+			"comment": "Mobile number invalid field error message.",
+			"value": "Please enter a valid mobile number."
 		},
 		"invalidPasswordError": {
 			"comment": "Must have more than 8 characters with at least 1 number and special character.",
