@@ -60,16 +60,32 @@ export const SubscribeView: React.FC<ISubscribeViewProps> = props => {
                     OUN: cRetailOUN,
                     'User-Agent': 'Mozilla/5.0 (Windows NT 6.3; Win64; x64; rv:58.0) Gecko/20100101 Firefox/58.0'
                 },
-                body: JSON.stringify({ Email: email, CustAccount: cCustomerAccount })
+                body: JSON.stringify({
+                    Email: email,
+                    CustAccount: cCustomerAccount,
+                    Subscribe: 1,
+                    Unsubscribe: 0
+                })
             });
 
-            if (!response.ok) {
-                throw new Error('Network response was not ok');
-            }
+            if (response.status === 200) {
+                const data = await response.json();
+                if (data.value === 1) {
+                    setResponseMessage(props.resources.subscriptionSuccessMessage);
+                } else {
+                    setResponseMessage(props.resources.subscriptionAlreadySentMessage);
+                }
 
-            const data = await response.json();
-            if (data.value === 1) {
-                setResponseMessage(props.resources.subscriptionSuccessMessage);
+                // Reset the email state and clear the email input field only if cCustomerEmailAddress is not available
+                setTimeout(function() {
+                    if (!props.context.request.user.emailAddress) {
+                        setEmail('');
+                        if (emailInputRef.current) {
+                            emailInputRef.current.value = '';
+                        }
+                    }
+                    setResponseMessage(null);
+                }, 4000);
             } else {
                 setResponseMessage(props.resources.subscriptionFailureMessage);
             }

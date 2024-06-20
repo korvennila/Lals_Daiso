@@ -228,12 +228,12 @@ class SignIn extends React.Component<ICustomSignInProps<ICustomSignInConfig>> {
                     className: `${this.moduleClassName}__social-accounts`
                 },
                 items: [
-                    this._renderSocialAccount(
-                        'FacebookExchange',
-                        resources.facebookButtonText,
-                        resources.facebookButtonAriaLabel,
-                        config.facebookIcon
-                    ),
+                    // this._renderSocialAccount(
+                    //     'FacebookExchange',
+                    //     resources.facebookButtonText,
+                    //     resources.facebookButtonAriaLabel,
+                    //     config.facebookIcon
+                    // ),
                     this._renderSocialAccount(
                         'GoogleExchange',
                         resources.googleButtonText,

@@ -130,6 +130,7 @@ export interface IBuyboxResources {
     incrementButtonAriaLabel: string;
     notifyMeSuccessMessage: string;
     notifyMeFailureMessage: string;
+    notifyMeAlreadySentMessage: string;
     emailRequiredText: string;
     emailValidateText: string;
     buttonNotifyMeText: string;

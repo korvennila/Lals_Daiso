@@ -16,6 +16,9 @@ export interface IUnsubscribeResources {
     submitButtonText: string;
     emailRequiredText: string;
     emailValidateText: string;
+    unsubscriptionSuccessMessage: string;
+    unsubscriptionAlreadySenteMessage: string;
+    unsubscriptionFailureMessage: string;
 }
 
 export interface IUnsubscribeProps<T> extends Msdyn365.IModule<T> {

@@ -572,6 +572,10 @@
             "comment": "Text for Notify Me Failure Message",
             "value": "Your request has not been submitted"
         },
+        "notifyMeAlreadySentMessage": {
+            "comment": "Text for Notify Me Already Sent Message",
+            "value": "Your request has been submitted already."
+        },
         "emailRequiredText": {
             "comment": "email required text",
             "value": "Email is required."

@@ -493,42 +493,7 @@ const ProductCard: React.FC<IProductComponentProps> = ({
                         </div>
                         <div className='msc-product__title_description'>
                             <h5 className='msc-product__title__text'>{product.Name}</h5>
-                            <div className='msc-product__price-conatiner'>
-                                {renderPrice(
-                                    context,
-                                    typeName,
-                                    id,
-                                    product.BasePrice,
-                                    product.Price,
-                                    savingsText,
-                                    freePriceText,
-                                    originalPriceText,
-                                    currentPriceText,
-                                    isPriceMinMaxEnabled,
-                                    priceResources
-                                )}
-                                {stockAvailability === true ? (
-                                    <div>
-                                        <div className='ms-addToBag'>
-                                            <button
-                                                className='ms-addToBag__button'
-                                                title='ADD TO BAG'
-                                                onClick={() => productAddToCart(product)}
-                                            >
-                                                +
-                                            </button>
-                                        </div>
-                                    </div>
-                                ) : (
-                                    <div>
-                                        <div className='ms-soldOut'>
-                                            <button className='ms-soldOut__button' title='SOLD OUT'>
-                                                +
-                                            </button>
-                                        </div>
-                                    </div>
-                                )}
-                            </div>
+
                             {isUnitOfMeasureEnabled && renderProductUnitOfMeasure(product.DefaultUnitOfMeasure)}
                             {renderDescription(product.Description)}
                         </div>
@@ -559,7 +524,7 @@ const ProductCard: React.FC<IProductComponentProps> = ({
                     </div>
                     <div className='msc-product__details'>
                         <h5 className='msc-product__title'>{product.Name}</h5>
-                        <div className='msc-product__price-conatiner'>
+                        {/* <div className='msc-product__price-conatiner'>
                             {renderPrice(
                                 context,
                                 typeName,
@@ -592,11 +557,43 @@ const ProductCard: React.FC<IProductComponentProps> = ({
                                     </div>
                                 </div>
                             )}
-                        </div>
+                        </div> */}
                         {isUnitOfMeasureEnabled && renderProductUnitOfMeasure(product.DefaultUnitOfMeasure)}
                     </div>
                 </a>
             )}
+            <div className='msc-product__price-conatiner'>
+                {renderPrice(
+                    context,
+                    typeName,
+                    id,
+                    product.BasePrice,
+                    product.Price,
+                    savingsText,
+                    freePriceText,
+                    originalPriceText,
+                    currentPriceText,
+                    isPriceMinMaxEnabled,
+                    priceResources
+                )}
+                {stockAvailability === true ? (
+                    <div>
+                        <div className='ms-addToBag'>
+                            <button className='ms-addToBag__button' title='ADD TO BAG' onClick={() => productAddToCart(product)}>
+                                +
+                            </button>
+                        </div>
+                    </div>
+                ) : (
+                    <div>
+                        <div className='ms-soldOut'>
+                            <button className='ms-soldOut__button' title='SOLD OUT'>
+                                +
+                            </button>
+                        </div>
+                    </div>
+                )}
+            </div>
             {renderProductDimensions(product.AttributeValues)}
             {!context.app.config.hideRating &&
                 renderRating(context, typeName, id, product.AverageRating, product.TotalRatings, ratingAriaLabel, ratingCountAriaLabel)}

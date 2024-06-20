@@ -1,0 +1,10 @@
+{
+	"id": "OrderConfirmationModule_1",
+	"config": {},
+	"data": {
+		"orderHistoryUrl": {
+			"text": "/order-history"
+		}
+	},
+	"typeName": "order-confirmation"
+}

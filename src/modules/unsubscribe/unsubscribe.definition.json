@@ -32,6 +32,18 @@
         "emailValidateText": {
             "comment": "enter valid email address",
             "value": "Please enter a valid email address."
+        },
+        "unsubscriptionSuccessMessage": {
+            "comment": "Text for Unsubscription Success Message",
+            "value": "Your request has been submitted."
+        },
+        "unsubscriptionAlreadySenteMessage": {
+            "comment": "Text for Unsubscription Already Sent Message",
+            "value": "Your request has been submitted already."
+        },
+        "unsubscriptionFailureMessage": {
+            "comment": "Text for Unsubscription Failure Message",
+            "value": "Your request has not been submitted."
         }
     }
 }

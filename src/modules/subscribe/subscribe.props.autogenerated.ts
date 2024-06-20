@@ -23,6 +23,7 @@ export interface ISubscribeResources {
     emailRequiredText: string;
     emailValidateText: string;
     subscriptionSuccessMessage: string;
+    subscriptionAlreadySentMessage: string;
     subscriptionFailureMessage: string;
 }
 

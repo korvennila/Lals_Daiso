@@ -62,6 +62,10 @@
             "comment": "Text for Subscription Success Message",
             "value": "Your request has been submitted"
         },
+        "subscriptionAlreadySentMessage": {
+            "comment": "Text for Subscription Already Sent Message",
+            "value": "Your request has been submitted already."
+        },
         "subscriptionFailureMessage": {
             "comment": "Text for Subscription Failure Message",
             "value": "Your request has not been submitted"

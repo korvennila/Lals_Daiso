@@ -504,6 +504,7 @@ const BuyboxView: React.FC<IBuyboxViewProps & IBuyboxExtentionProps<IBuyboxData>
     const [email, setEmail] = React.useState<string>(cCustomerEmailAddress);
     const [validEmail, setValidEmail] = React.useState<string>('');
     const [statusMessage, setStatusMessage] = React.useState<string>('');
+    const [responseMessage, setResponseMessage] = React.useState<string | null>(null);
     const [loading, setLoading] = React.useState<boolean>(false);
 
     /** Notify Me Submit Form */
@@ -539,21 +540,29 @@ const BuyboxView: React.FC<IBuyboxViewProps & IBuyboxExtentionProps<IBuyboxData>
                 if (this.readyState === 4) {
                     if (xhr.status === 200) {
                         const result = JSON.parse(xhr.responseText);
+                        setStatusMessage('true');
                         if (result.value === 1) {
-                            setStatusMessage('true');
+                            setResponseMessage(resources.notifyMeSuccessMessage);
                         } else {
-                            setStatusMessage('false');
+                            setResponseMessage(resources.notifyMeAlreadySentMessage);
                         }
                     } else {
                         setStatusMessage('false');
+                        setResponseMessage(resources.notifyMeFailureMessage);
                     }
                     setTimeout(function() {
                         setOpen(false);
                         setStatusMessage('');
+                        setResponseMessage(null);
+
+                        if (!props.context.request.user.emailAddress) {
+                            setEmail('');
+                        }
                     }, 4000);
                 }
             } catch (Exception) {
                 console.log('NotifyMe Exception>>>>', Exception);
+                setResponseMessage('Failed to make a request. Please try again.');
             } finally {
                 setLoading(false);
             }
@@ -614,12 +623,8 @@ const BuyboxView: React.FC<IBuyboxViewProps & IBuyboxExtentionProps<IBuyboxData>
                                 </div>
                                 {statusMessage !== '' && (
                                     <div className='daiso_ntfy_alert-message'>
-                                        {statusMessage === 'true' && (
-                                            <div className='alert alert-success'>{resources.notifyMeSuccessMessage}</div>
-                                        )}
-                                        {statusMessage === 'false' && (
-                                            <div className='alert alert-danger'>{resources.notifyMeFailureMessage}</div>
-                                        )}
+                                        {statusMessage === 'true' && <div className='alert alert-success'>{responseMessage}</div>}
+                                        {statusMessage === 'false' && <div className='alert alert-danger'>{responseMessage}</div>}
                                     </div>
                                 )}
                                 <button className='daiso_ntfy_submit-button' type='submit'>

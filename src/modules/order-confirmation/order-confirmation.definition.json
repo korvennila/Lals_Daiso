@@ -1,0 +1,352 @@
+{
+	"$type": "contentModule",
+	"friendlyName": "Order confirmation (COPY)",
+	"name": "order-confirmation",
+	"description": "This module shows an order confirmation after the order is placed. It includes confirmation id and details about the order",
+	"categories": [
+		"Account management",
+		"Order management"
+	],
+	"dataActions": {
+		"orderHydration": {
+			"path": "@msdyn365-commerce-modules/order-management/dist/lib/actions/get-sales-order-confirmation-with-hydrations",
+			"runOn": "server"
+		},
+		"tenderTypes": {
+			"path": "@msdyn365-commerce-modules/order-management/dist/lib/actions/get-tender-types",
+			"runOn": "server"
+		},
+		"loyaltyCard": {
+			"path": "@msdyn365-commerce-modules/retail-actions/dist/lib/get-loyalty-card",
+			"runOn": "client"
+		},
+		"channelDeliveryOptionConfig": {
+			"path": "@msdyn365-commerce-modules/retail-actions/dist/lib/get-channel-delivery-option-configuration",
+			"runOn": "server"
+		},
+		"featureState": {
+			"path": "@msdyn365-commerce-modules/retail-actions/dist/lib/get-feature-state",
+			"runOn": "server"
+		},
+		"accountInformation": {
+			"path": "@msdyn365-commerce-modules/retail-actions/dist/lib/get-customer"
+		}
+	},
+	"config": {
+		"heading": {
+			"friendlyName": "Heading",
+			"description": "Heading",
+			"$ref": "@msdyn365-commerce-modules/definitions/dist/src/Heading.json#/definitions/heading"
+		},
+		"shouldShowQrCode": {
+			"friendlyName": "Show QR code",
+			"description": "Show QR code based on confirmation id",
+			"type": "boolean",
+			"default": true,
+			"scope": "module"
+		},
+		"showTimeslot": {
+			"friendlyName": "Show pickup time slot information",
+			"description": "Show pickup time slot information if available",
+			"type": "boolean",
+			"default": false,
+			"scope": "module"
+		},
+		"contactNumber": {
+			"friendlyName": "Contact number",
+			"description": "Contact number for help",
+			"type": "string"
+		},
+		"imageSettings": {
+			"friendlyName": "Order confirmation image settings",
+			"description": "Image settings for order confirmation",
+			"type": "imageSettings"
+		},
+		"className": {
+			"friendlyName": "Custom CSS class name",
+			"description": "Provide a custom css class name defined in the theme pack to target the CSS for this module",
+			"type": "string",
+			"default": ""
+		},
+		"clientRender": {
+			"friendlyName": "Render module client side",
+			"description": "Enabling this property will cause the module to load its Javascript chunk and render on the client based on the user view port. This property is recommended for modules which are generally hidden below the users view port (lower on the page) to increase page load performance.",
+			"type": "boolean",
+			"default": false
+		}
+	},
+	"resources": {
+		"loadingLabel": {
+			"comment": "Loading message",
+			"value": "Loading..."
+		},
+		"genericErrorMessage": {
+			"comment": "Localized generic error message for Payment instrument module",
+			"value": "Something went wrong. Please try again later."
+		},
+		"orderItemLabel": {
+			"comment": "total items in order",
+			"value": "item"
+		},
+		"orderItemsLabel": {
+			"comment": "total items in order",
+			"value": "items"
+		},
+		"orderIdLabel": {
+			"comment": "Order ID label",
+			"value": "Order#"
+		},
+		"confirmationIdLabel": {
+			"comment": "Confirmation ID label",
+			"value": "Your Order ID is:"
+		},
+		"orderSummaryTitle": {
+			"comment": "Title for order summary",
+			"value": "Order summary"
+		},
+		"paymentMethodsTitle": {
+			"comment": "Title for payment methods",
+			"value": "Payment method"
+		},
+		"shippingAddressTitle": {
+			"comment": "Title for shipping address",
+			"value": "Shipping address"
+		},
+		"noSalesOrderText": {
+			"comment": "Text describes no sales order found",
+			"value": "No order confirmation found"
+		},
+		"creditCardEndingLabel": {
+			"comment": "Credit card ending label",
+			"value": "card ending in"
+		},
+		"giftCardEndingLabel": {
+			"comment": "Gift card ending label",
+			"value": "Gift card ending in"
+		},
+		"amountCoveredLabel": {
+			"comment": "Amount covered label",
+			"value": "Amount covered:"
+		},
+		"loyaltyCardUsedLabel": {
+			"comment": "Loyalty card used label",
+			"value": "Loyalty card used "
+		},
+		"cashUsedLabel": {
+			"comment": "Cash used label",
+			"value": "Cash"
+		},
+		"customerAccountUsedLabel": {
+			"comment": "Customer Account used label",
+			"value": "Customer Account"
+		},
+		"freePriceText": {
+			"comment": "Free price text",
+			"value": "FREE"
+		},
+		"orderSummaryItemsTotalLabel": {
+			"comment": "Order summary items total label",
+			"value": "Subtotal"
+		},
+		"orderSummaryShippingFeeLabel": {
+			"comment": "Order summary shipping fee label",
+			"value": "Shipping"
+		},
+		"orderSummaryTaxLabel": {
+			"comment": "Order summary tax label",
+			"value": "Tax"
+		},
+		"orderSummaryGrandTotalLabel": {
+			"comment": "Order summary grand total label",
+			"value": "Total"
+		},
+		"salesLineQuantityText": {
+			"comment": "Sales line quantity label",
+			"value": "Qty"
+		},
+		"processingLabel": {
+			"comment": "Text for order in processing state",
+			"value": "Processing"
+		},
+		"needHelpLabel": {
+			"comment": "Need help label",
+			"value": "Need help?"
+		},
+		"helpLineNumberLabel": {
+			"comment": "Help line number label",
+			"value": "Contact us at"
+		},
+		"helpLineContactAriaLabel": {
+			"comment": "Localized text for contact link aria label",
+			"value": "Need help, call"
+		},
+		"pickedUpSalesLines": {
+			"comment": "Store pickup title",
+			"value": "Store pickup"
+		},
+		"deliveredSalesLines": {
+			"comment": "Delivery at home",
+			"value": "Delivery"
+		},
+		"carryOutSalesLines": {
+			"comment": "Customer carry out",
+			"value": "Purchased"
+		},
+		"emailSalesLines": {
+			"comment": "Email delivery title",
+			"value": "Email delivery"
+		},
+		"orderStatusReadyForPickup": {
+			"comment": "Order status for order pickup",
+			"value": "Ready for pickup"
+		},
+		"orderStatusProcessing": {
+			"comment": "Order status for order processing",
+			"value": "Processing"
+		},
+		"orderStatusShipped": {
+			"comment": "Order status for order shipped",
+			"value": "Shipped"
+		},
+		"orderStatusPickedUp": {
+			"comment": "Order status for order picked up",
+			"value": "Picked up"
+		},
+		"orderStatusCanceled": {
+			"comment": "Order status for order canceled",
+			"value": "Canceled"
+		},
+		"orderStatusEmailed": {
+			"comment": "Order status for order emailed",
+			"value": "Emailed"
+		},
+		"phoneAriaLabel": {
+			"comment": "Aria label for phone",
+			"value": "phone"
+		},
+		"buyItAgainLabel": {
+			"comment": "text for buy it again link",
+			"value": "Buy it again"
+		},
+		"buyItAgainAriaLabel": {
+			"comment": "text for buy it again aria label",
+			"value": "Buy it again for {productName}"
+		},
+		"shipToLabel": {
+			"comment": "Ship to label",
+			"value": "Ship to"
+		},
+		"storeLabel": {
+			"comment": "Store label",
+			"value": "Store"
+		},
+		"productDimensionTypeColor": {
+			"comment": "String that corresponds to the Color Product Dimension Type (1)",
+			"value": "Color"
+		},
+		"productDimensionTypeSize": {
+			"comment": "String that corresponds to the Size Product Dimension Type (3)",
+			"value": "Size"
+		},
+		"productDimensionTypeStyle": {
+			"comment": "String that corresponds to the Style Product Dimension Type (4)",
+			"value": "Style"
+		},
+		"trackingLabel": {
+			"comment": "tracking number label for orders",
+			"value": "Tracking number: "
+		},
+		"trackingComingSoonLabel": {
+			"comment": "tracking number coming soon",
+			"value": "Not yet available"
+		},
+		"trackingAriaLabel": {
+			"comment": "aria label for tracking number link",
+			"value": "track your order"
+		},
+		"pointsEarnedLabel": {
+			"comment": "Label for the amount of loyalty points earned",
+			"value": "Points earned"
+		},
+		"receiptEmailMessage": {
+			"comment": "Label for reciept email",
+			"value": "Confirmation email sent to "
+		},
+		"receiptIdLabel": {
+			"comment": "Receipt id label",
+			"value": "Receipt#"
+		},
+		"backToShopping": {
+			"comment": "Back to shopping label",
+			"value": "Back to shopping"
+		},
+		"configString": {
+			"comment": "Configuration text",
+			"value": "Configuration"
+		},
+		"phoneLabel": {
+			"comment": "Phone label",
+			"value": "Phone: "
+		},
+		"orderSummaryHeading": {
+			"comment": "Order summary heading",
+			"value": "Order summary"
+		},
+		"discountStringText": {
+			"comment": "String to show discount offer string",
+			"value": "Savings "
+		},
+		"pickupItemsHeader": {
+			"comment": "Header for pickup items group",
+			"value": "Pickup address"
+		},
+		"pickingItemsLabel": {
+			"comment": "Picking items label ",
+			"value": "Picking up {0} {1}"
+		},
+		"emailItemsHeader": {
+			"comment": "Header for email items group",
+			"value": "Email delivery"
+		},
+		"emailingItemsLabel": {
+			"comment": "Emailing items label ",
+			"value": "Emailing {0} {1}"
+		},
+		"shippingItemToYouLabel": {
+			"comment": "Shipping items to you label",
+			"value": "Shipping {0} {1} to you"
+		},
+		"shippingItemToOBOCustomerLabel": {
+			"comment": "Shipping items to customer (for OnBehalfOf (OBO) feature) label",
+			"value": "Shipping {0} {1} to {2}"
+		},
+		"orderPlacedOnLabel": {
+			"comment": "label for order created date",
+			"value": "Order placed on:"
+		},
+		"pickupDateTimeslotText": {
+			"comment": "Label for pickup date and timeslot",
+			"value": "Pickup date and time slot"
+		},
+		"pickupTimeslotPlaceHolder": {
+			"comment": "Placeholder for time slot data, in the format of from start time to end time, e.g., 9:00 - 10:00",
+			"value": "{0} - {1}"
+		},
+		"qrCodeSrText": {
+			"comment": "Screen reader text for QR Code",
+			"value": "Scan QR Code"
+		},
+		"orderPlacedByFullText": {
+			"comment": "Order placed by text",
+			"value": "Order placed by:"
+		},
+		"orderOnBehalfOfText": {
+			"comment": "On behalf of text",
+			"value": "on behalf of:"
+		},
+		"orderPlacedByYouText": {
+			"comment": "Text to be shown in table row when order placed by you",
+			"value": " (You)"
+		}
+	}
+}

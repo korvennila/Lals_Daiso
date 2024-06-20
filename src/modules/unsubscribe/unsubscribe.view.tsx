@@ -10,7 +10,13 @@ export default (props: IUnsubscribeViewProps) => {
     return (
         <div className='unsubscribe'>
             <h2>{props.config.showText}</h2>
-            <input type='email' ref={props.emailInputRef} placeholder={props.resources.textBoxPlaceholder} />
+            <input
+                type='email'
+                ref={props.emailInputRef}
+                placeholder={props.resources.textBoxPlaceholder}
+                value={props.email}
+                onChange={props.onEmailChange}
+            />
             {props.validationError && <p className='error'>{props.validationError}</p>}
             {props.apiCalled && props.unsubscribeResponse && (
                 <div id='unsubscribeResponse'>

@@ -179,7 +179,8 @@ describe('Add To Order Template Button unit tests - View', () => {
         emailValidateText: '',
         buttonNotifyMeText: '',
         titleNotifyMeText: '',
-        textForNotificationWhenAvailable: ''
+        textForNotificationWhenAvailable: '',
+        notifyMeAlreadySentMessage: ''
     };
 
     // @ts-expect-error partial mock

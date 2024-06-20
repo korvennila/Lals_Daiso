@@ -13,17 +13,15 @@ export interface IUnsubscribeViewProps extends IUnsubscribeProps<IUnsubscribeDat
     emailInputRef: React.RefObject<HTMLInputElement>;
     validationError: string | null;
     apiCalled: boolean;
+    email: string;
+    onEmailChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
 }
 
-/**
- *
- * Unsubscribe component
- * @extends {React.PureComponent<IUnsubscribeProps<IUnsubscribeData>>}
- */
 interface IUnsubscribeState {
     unsubscribeResponse: string | null;
     validationError: string | null;
     apiCalled: boolean;
+    email: string;
 }
 
 class Unsubscribe extends React.PureComponent<IUnsubscribeProps<IUnsubscribeData>, IUnsubscribeState> {
@@ -31,11 +29,17 @@ class Unsubscribe extends React.PureComponent<IUnsubscribeProps<IUnsubscribeData
 
     public constructor(props: IUnsubscribeProps<IUnsubscribeData>) {
         super(props);
+
+        // Context Variables
+        const cCustomerEmailAddress = props.context.request.user.emailAddress ? props.context.request.user.emailAddress : '';
+
         this.state = {
             unsubscribeResponse: null,
             validationError: null,
-            apiCalled: false
+            apiCalled: false,
+            email: cCustomerEmailAddress
         };
+
         this.emailInputRef = React.createRef();
     }
 
@@ -45,7 +49,12 @@ class Unsubscribe extends React.PureComponent<IUnsubscribeProps<IUnsubscribeData
     }
 
     private handleUnsubscribe = async (): Promise<void> => {
-        const email = this.emailInputRef.current?.value;
+        const cRetailURL = this.props.context.request.apiSettings.baseUrl;
+        const cRetailOUN = this.props.context.request.apiSettings.oun ? this.props.context.request.apiSettings.oun : '';
+        const cCustomerAccount = this.props.context.request.user.customerAccountNumber
+            ? this.props.context.request.user.customerAccountNumber
+            : '';
+        const email = this.state.email;
         if (!email) {
             this.setState({ validationError: this.props.resources.emailRequiredText, unsubscribeResponse: null, apiCalled: false });
             return;
@@ -57,20 +66,35 @@ class Unsubscribe extends React.PureComponent<IUnsubscribeProps<IUnsubscribeData
 
         this.setState({ validationError: null, apiCalled: true });
 
-        const apiUrl = `https://yourapiendpoint.com/unsubscribe?email=${email}`;
+        const apiUrl = `${cRetailURL}commerce/SaveSubscriptionsRequest?api-version=7.3`;
         try {
             const response = await fetch(apiUrl, {
                 method: 'POST',
                 headers: {
-                    'Content-Type': 'application/json'
+                    'Content-Type': 'application/json',
+                    OUN: cRetailOUN,
+                    'User-Agent': 'Mozilla/5.0 (Windows NT 6.3; Win64; x64; rv:58.0) Gecko/20100101 Firefox/58.0'
                 },
-                body: JSON.stringify({ email })
+                body: JSON.stringify({
+                    Email: email,
+                    CustAccount: cCustomerAccount,
+                    Subscribe: 0,
+                    Unsubscribe: 1
+                })
             });
-            if (!response.ok) {
-                throw new Error('Network response was not ok');
+
+            if (response.status === 200) {
+                const data = await response.json();
+                if (data.value === 1) {
+                    this.setState({
+                        unsubscribeResponse: this.props.resources.unsubscriptionSuccessMessage
+                    });
+                } else {
+                    this.setState({ unsubscribeResponse: this.props.resources.unsubscriptionAlreadySenteMessage });
+                }
+            } else {
+                this.setState({ unsubscribeResponse: this.props.resources.unsubscriptionFailureMessage });
             }
-            const data = await response.json();
-            this.setState({ unsubscribeResponse: data.message });
 
             // Redirect to home page after a delay
             setTimeout(() => {
@@ -82,6 +106,10 @@ class Unsubscribe extends React.PureComponent<IUnsubscribeProps<IUnsubscribeData
         }
     };
 
+    private handleEmailChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+        this.setState({ email: event.target.value });
+    };
+
     public render(): JSX.Element | null {
         const viewProps: IUnsubscribeViewProps = {
             ...this.props,
@@ -89,7 +117,9 @@ class Unsubscribe extends React.PureComponent<IUnsubscribeProps<IUnsubscribeData
             handleUnsubscribe: this.handleUnsubscribe,
             emailInputRef: this.emailInputRef,
             validationError: this.state.validationError,
-            apiCalled: this.state.apiCalled
+            apiCalled: this.state.apiCalled,
+            email: this.state.email,
+            onEmailChange: this.handleEmailChange
         };
 
         return this.props.renderView(viewProps);
