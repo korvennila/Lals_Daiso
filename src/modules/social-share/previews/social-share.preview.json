@@ -1,0 +1,16 @@
+{
+	"id": "socialShareModule",
+	"config": {
+		"caption": "${socialShare_caption}",
+		"orientation": "${socialShare_orientation}"
+	},
+	"resources": {
+		"socialShare_caption": {
+			"value": "Caption"
+		},
+		"socialShare_orientation": {
+			"value": "horizontal"
+		}
+	},
+	"typeName": "social-share"
+}

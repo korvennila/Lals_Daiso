@@ -180,7 +180,8 @@ describe('Add To Order Template Button unit tests - View', () => {
         buttonNotifyMeText: '',
         titleNotifyMeText: '',
         textForNotificationWhenAvailable: '',
-        notifyMeAlreadySentMessage: ''
+        notifyMeAlreadySentMessage: '',
+        productSpecificationTitle: ''
     };
 
     // @ts-expect-error partial mock

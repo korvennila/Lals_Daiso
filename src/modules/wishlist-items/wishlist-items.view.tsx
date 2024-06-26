@@ -31,17 +31,29 @@ const WishlistItemsView: React.FC<IWishlistItemsViewProps> = props => {
         ProductDetails,
         ProductDimensions,
         telemetryContent,
-        statusNotExistsMessage
+        statusNotExistsMessage,
+        config,
+        resources
     } = props;
 
     return (
         <Module {...WishlistItems}>
             {heading}
             {statusNotExistsMessage}
-            {status !== 'SUCCESS' && statusMessage}
-            {status === 'EMPTY' && (
+            {/* {status !== 'SUCCESS' && statusMessage} */}
+            {status === 'EMPTY' && statusMessage}
+            {status === 'EMPTY' && config.buttonLink && (
                 <Node className='add-favourites_btn'>
-                    <Button>Add Favourites</Button>
+                    <Button>
+                        <a
+                            href={config.buttonLink.linkUrl.destinationUrl}
+                            aria-label={config.buttonLink.ariaLabel}
+                            target={config.buttonLink.openInNewTab ? '_blank' : undefined}
+                            rel='noopener noreferrer'
+                        >
+                            {resources.addFavouritesButtonText}
+                        </a>
+                    </Button>
                 </Node>
             )}
             {Products && products && products.length > 0 && (

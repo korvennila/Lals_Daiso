@@ -754,11 +754,39 @@ const BuyboxView: React.FC<IBuyboxViewProps & IBuyboxExtentionProps<IBuyboxData>
         return <Node {...containerProps}>{availability}</Node>;
     };
 
+    const [isPopoverOpen, setIsPopoverOpen] = React.useState(false);
+    const [isExpanded, setIsExpanded] = React.useState(false);
+
+    const handleShareClick: React.MouseEventHandler<HTMLButtonElement> = () => {
+        setIsPopoverOpen(true);
+    };
+
+    const closePopover = () => {
+        setIsPopoverOpen(false);
+    };
+
+    const toggleDescription = () => {
+        setIsExpanded(!isExpanded);
+    };
+
     return (
         <>
             <Module {...ModuleProps}>
                 <Node {...MediaGalleryContainerProps}>
                     {addToWishlist && renderAddToWishlist(props, state, callbacks)}
+                    <Node className='msc-social-share-section'>
+                        {props.slots && props.slots.socialShare && (
+                            <Button className='msc-social-share-btn' onClick={handleShareClick}>
+                                <span></span>
+                            </Button>
+                        )}
+                        {isPopoverOpen && (
+                            <div className='msc-social-share-container'>
+                                <button onClick={closePopover}>X</button>
+                                {_renderSocialShare(props.slots.socialShare)}
+                            </div>
+                        )}
+                    </Node>
                     {props.mediaGallery}
                 </Node>
                 <Node {...ProductInfoContainerProps}>
@@ -766,9 +794,18 @@ const BuyboxView: React.FC<IBuyboxViewProps & IBuyboxExtentionProps<IBuyboxData>
                     {title}
                     {configure && renderConfigure(configure)}
                     <Node className='msc-buybox__description-section'>
-                        <div className='msc-buybox__description-section-text'>{props.resources.descriptionText}</div>
-                        {description}
+                        <Node className='msc-buybox__description-container'>
+                            <div className='msc-buybox__description-section-text'>{props.resources.descriptionText}</div>
+                            <Button
+                                className={`msc-buybox__description-section-btn ${isExpanded ? 'expanded' : 'collapsed'}`}
+                                onClick={toggleDescription}
+                            >
+                                <span></span>
+                            </Button>
+                        </Node>
+                        {isExpanded && <Node className='msc-buybox__description-content'>{description}</Node>}
                     </Node>
+                    <Node className='msc-product-spec_copy'></Node>
                     <Node className='msc-buybox__ratings-section'>
                         <div className='msc-buybox__ratings-section-sku-text'>{skuText}</div>
                         {rating}
@@ -806,7 +843,7 @@ const BuyboxView: React.FC<IBuyboxViewProps & IBuyboxExtentionProps<IBuyboxData>
                     {findInStore?.productPickupOptionList ? (
                         <div className='msc-buybox__pickup-options'>{findInStore.productPickupOptionList}</div>
                     ) : null}
-                    {_renderSocialShare(props.slots && props.slots.socialShare)}
+                    {/* {_renderSocialShare(props.slots && props.slots.socialShare)} */}
                     <div className='msc-buybox__description-text'>{props.resources.shopText}</div>
                     <Node className='msc-buybox__shop-description'>
                         {shopSimilarLook && renderShopSimilarItem(shopSimilarLook)}
@@ -814,12 +851,14 @@ const BuyboxView: React.FC<IBuyboxViewProps & IBuyboxExtentionProps<IBuyboxData>
                     </Node>
                 </Node>
             </Module>
-            <Node className='msc-buybox__prod-spec-container'>
-                <h2 className='msc-buybox__prod-spec-title'>Product Specification</h2>
-                {ArrayExtensions.hasElements(props.slots.productSpecification) ? (
-                    <Node className='msc-buybox__product-specification'>{props.slots.productSpecification[0]}</Node>
-                ) : null}
-            </Node>
+            {/* {props.slots.productSpecification && (
+                <Node className='msc-buybox__prod-spec-container'>
+                    <h2 className='msc-buybox__prod-spec-title'>{props.resources.productSpecificationTitle}</h2>
+                    {ArrayExtensions.hasElements(props.slots.productSpecification) ? (
+                        <Node className='msc-buybox__product-specification'>{props.slots.productSpecification[0]}</Node>
+                    ) : null}
+                </Node>
+            )} */}
             {renderNotifyMe()}
         </>
     );

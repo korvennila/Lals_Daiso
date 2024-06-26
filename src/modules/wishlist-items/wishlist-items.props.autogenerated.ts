@@ -13,6 +13,7 @@ export interface IWishlistItemsConfig extends Msdyn365.IModuleConfig {
     enableImageProductLink?: boolean;
     className?: string;
     clientRender?: boolean;
+    buttonLink?: IButtonLinkData;
 }
 
 export interface IWishlistItemsResources {
@@ -22,6 +23,7 @@ export interface IWishlistItemsResources {
     unableToGetWishlist: string;
     removeButtonText: string;
     addToCartButtonText: string;
+    addFavouritesButtonText: string;
     removeButtonAriaLabel: string;
     waitingClass: string;
     outOfStockText: string;
@@ -50,6 +52,13 @@ export const enum HeadingTag {
 export interface IHeadingData {
     text: string;
     tag?: HeadingTag;
+}
+
+export interface IButtonLinkData {
+    linkText?: string;
+    linkUrl: Msdyn365.ILinkData;
+    ariaLabel?: string;
+    openInNewTab?: boolean;
 }
 
 export interface IWishlistItemsProps<T> extends Msdyn365.IModule<T> {

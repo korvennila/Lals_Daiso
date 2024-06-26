@@ -492,7 +492,7 @@ const ProductCard: React.FC<IProductComponentProps> = ({
                             )}
                         </div>
                         <div className='msc-product__title_description'>
-                            <h5 className='msc-product__title__text'>{product.Name}</h5>
+                            <h5 className='msc-product__title__text' title={product.Name}>{product.Name}</h5>
 
                             {isUnitOfMeasureEnabled && renderProductUnitOfMeasure(product.DefaultUnitOfMeasure)}
                             {renderDescription(product.Description)}
@@ -523,7 +523,7 @@ const ProductCard: React.FC<IProductComponentProps> = ({
                         )}
                     </div>
                     <div className='msc-product__details'>
-                        <h5 className='msc-product__title'>{product.Name}</h5>
+                        <h5 className='msc-product__title' title={product.Name}>{product.Name}</h5>
                         {/* <div className='msc-product__price-conatiner'>
                             {renderPrice(
                                 context,
