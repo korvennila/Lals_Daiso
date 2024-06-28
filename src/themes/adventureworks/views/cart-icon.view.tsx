@@ -177,7 +177,7 @@ export class CartIconView extends React.PureComponent<
             placement: 'bottom-end',
             hideArrow: true,
             className: 'ms-cart-icon__minicartmodal-container',
-            wrapClassName: 'ms-cart-icon__minicartmodal',
+            wrapClassName: 'ms-cart-icon__minicartmodal ms-sidebar-cart-section',
             isOpen: this.state.isModalOpen,
             toggle: this.closeModal
         };

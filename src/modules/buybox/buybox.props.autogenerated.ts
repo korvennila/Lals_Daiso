@@ -27,7 +27,6 @@ export interface IBuyboxConfig extends Msdyn365.IModuleConfig {
     maximumKeyInPrice?: number;
     className?: string;
     clientRender?: boolean;
-    buttonLink?: IButtonLinkData;
 }
 
 export interface IBuyboxResources {
@@ -138,13 +137,6 @@ export interface IBuyboxResources {
     titleNotifyMeText: string;
     textForNotificationWhenAvailable: string;
     productSpecificationTitle: string;
-}
-
-export interface IButtonLinkData {
-    linkText?: string;
-    linkUrl: Msdyn365.ILinkData;
-    ariaLabel?: string;
-    openInNewTab?: boolean;
 }
 
 export interface IBuyboxProps<T> extends Msdyn365.IModule<T> {
