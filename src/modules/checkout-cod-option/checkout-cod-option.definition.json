@@ -80,12 +80,12 @@
 			"value": "Gift card has no balance left"
 		},
 		"giftCardFormLabel": {
-			"comment": "Gift card form label",
-			"value": "Gift card"
+			"comment": "Cash on Delivery form label",
+			"value": "Cash on Delivery"
 		},
 		"giftCardNumberLabel": {
-			"comment": "Gift card number label",
-			"value": "Gift card number"
+			"comment": "Cash on Delivery label",
+			"value": "Cash on Delivery"
 		},
 		"giftCardPinLabel": {
 			"comment": "Gift card pin label",

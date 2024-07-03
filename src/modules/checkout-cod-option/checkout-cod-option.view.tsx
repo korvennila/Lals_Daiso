@@ -12,25 +12,25 @@ import { IAddResource, ICheckoutGiftCardViewProps, IForm, IItem, IList, IShowRes
 export const From: React.FC<IForm> = ({
     formProps,
     label,
-    inputPinLabel,
-    inputExpLabel,
+    // inputPinLabel,
+    // inputExpLabel,
     alert,
-    inputProps,
-    inputNumProps,
-    inputPinProps,
-    inputExpProps,
-    inputNumber,
-    inputPin,
-    inputExp,
-    applyButton,
-    supportExternalGiftCard,
-    showGiftCardPinInput,
-    showGiftCardExpInput,
-    alertFieldLabel
+    // inputProps,
+    // inputNumProps,
+    // inputPinProps,
+    // inputExpProps,
+    inputNumber
+    // inputPin,
+    // inputExp,
+    // applyButton,
+    // supportExternalGiftCard,
+    // showGiftCardPinInput,
+    // showGiftCardExpInput,
+    // alertFieldLabel
 }) => (
     <Node {...formProps}>
         {alert}
-        {supportExternalGiftCard ? (
+        {/* {supportExternalGiftCard ? (
             <Node {...inputProps}>
                 <Node {...inputNumProps}>
                     {label}
@@ -50,13 +50,13 @@ export const From: React.FC<IForm> = ({
                 )}
                 {(showGiftCardPinInput || showGiftCardExpInput) && alertFieldLabel}
             </Node>
-        ) : (
-            <>
-                {label}
-                {inputNumber}
-            </>
-        )}
-        {applyButton}
+        ) : ( */}
+        <>
+            {label}
+            {inputNumber}
+        </>
+        {/* )} */}
+        {/* {applyButton} */}
     </Node>
 );
 
@@ -78,7 +78,7 @@ export const GiftCardList: React.FC<IList> = ({ listProps, list }) => (
 export const AddResource: React.FC<IAddResource> = ({ form, list }) => (
     <>
         {form && <From {...form} />}
-        {list && <GiftCardList {...list} />}
+        {/* {list && <GiftCardList {...list} />} */}
     </>
 );
 

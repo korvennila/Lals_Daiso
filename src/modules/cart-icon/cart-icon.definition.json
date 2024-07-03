@@ -1,151 +1,147 @@
 {
-	"$type": "containerModule",
-	"friendlyName": "Cart icon (COPY)",
-	"name": "cart-icon",
-	"description": "Cart is used for viewing all the items added to the cart, allows user to proceed to checkout.",
-	"categories": [
-		"Purchase",
-		"Shopping bag",
-		"header_cartIcon"
-	],
-	"dataActions": {
-		"cart": {
-			"path": "@msdyn365-commerce/global-state/dist/lib/data-actions/get-cart-state-data-action",
-			"runOn": "client"
-		},
-		"orgUnitLocations": {
-			"path": "@msdyn365-commerce-modules/retail-actions/dist/lib/search-org-unit-locations",
-			"runOn": "server"
-		},
-		"customerInformation": {
-			"path": "@msdyn365-commerce-modules/retail-actions/dist/lib/get-customer"
-		},
-		"channelDeliveryOptionConfig": {
-			"path": "@msdyn365-commerce-modules/retail-actions/dist/lib/get-channel-delivery-option-configuration",
-			"runOn": "server"
-		},
-		"featureState": {
-			"path": "@msdyn365-commerce-modules/retail-actions/dist/lib/get-feature-state",
-			"runOn": "server"
-		},
-		"catalogs": {
-			"path": "@msdyn365-commerce-modules/retail-actions/dist/lib/get-catalogs",
-			"runOn": "server"
-		},
-		"customerBalances": {
-			"path": "@msdyn365-commerce-modules/retail-actions/dist/lib/get-customer-balance",
-			"runOn": "server"
-		},
-		"cartConfiguration": {
-			"path": "@msdyn365-commerce-modules/retail-actions/dist/lib/get-cart-configuration",
-			"runOn": "server"
-		}
-	},
-	"config": {
-		"imageSettings": {
-			"friendlyName": "Cart line item image settings",
-			"description": "Image settings for cart line item",
-			"type": "imageSettings"
-		},
-		"enableHoverCart": {
-			"friendlyName": "Show mini cart",
-			"description": "Show mini cart on mouse over on cart icon.",
-			"type": "boolean",
-			"default": true
-		},
-		"cartLinesSortOrder": {
-			"friendlyName": "Order of items",
-			"description": "This property will show you to change the order in which items appear in the mini-cart",
-			"type": "string",
-			"enum": {
-				"ascending": "New items added to bottom of list",
-				"descending": "New items added to top of list"
-			},
-			"required": false,
-			"default": "ascending"
-		},
-		"isAnonymousCheckout": {
-			"friendlyName": "Allow anonymous checkout",
-			"description": "When this property is enabled, mini-cart will allow anonymous checkout if user is not signed-in",
-			"type": "boolean",
-			"default": false
-		},
-		"clientRender": {
-			"friendlyName": "Render module client side",
-			"description": "Enabling this property will cause the module to load its Javascript chunk and render on the client based on the user view port. This property is recommended for modules which are generally hidden below the users view port (lower on the page) to increase page load performance.",
-			"type": "boolean",
-			"default": false
-		}
-	},
-	"resources": {
-		"goToCartButtonTitle": {
-			"comment": "Label for go to cart button. Count = number of items in the cart",
-			"value": "View shopping bag ({count})"
-		},
-		"totalPriceFormatString": {
-			"comment": "String associated with total price to display. Price = formatted price",
-			"value": "Subtotal: "
-		},
-		"guestCheckoutButtonTitle": {
-			"comment": "Label for guest checkout button",
-			"value": "Guest Checkout"
-		},
-		"checkoutButtonTitle": {
-			"comment": "Label for checkout button",
-			"value": "Checkout"
-		},
-		"productDimensionTypeColor": {
-			"comment": "String that corresponds to the Color Product Dimension Type (1)",
-			"value": "Color"
-		},
-		"productDimensionTypeSize": {
-			"comment": "String that corresponds to the Size Product Dimension Type (3)",
-			"value": "Size"
-		},
-		"productDimensionTypeStyle": {
-			"comment": "String that corresponds to the Style Product Dimension Type (4)",
-			"value": "Style"
-		},
-		"productDimensionTypeConfiguration": {
-			"comment": "String that corresponds to the Style Product Dimension Configuration (2)",
-			"value": "Configuration"
-		},
-		"quantityDisplayText": {
-			"comment": "String that corresponds to the quantity display text",
-			"value": "Quantity"
-		},
-		"removeCartButtonText": {
-			"comment": "Text for the remove button",
-			"value": "Remove"
-		},
-		"cartLabel": {
-			"comment": "string to be shown for cart or shopping bag tooltip",
-			"value": "Shopping bag, ({0}) items"
-		},
-		"cartQtyLabel": {
-			"comment": "string to be shown for cart item quantity",
-			"value": "({0})"
-		},
-		"flyoutTitle": {
-			"comment": "string to be shown for mini cart flyout",
-			"value": "Your shopping bag"
-		},
-		"salesAgreementPricePrompt": {
-			"value": "Contract price applied",
-			"comment": "Prompt message in cart lines."
-		},
-		"shippingText": {
-			"comment": "string to be shown for Shipping label",
-			"value": "Shipping"
-		},
-		"checkoutBlockedDueToUnavailableFundsTitle": {
-			"comment": "Title of message to be shown when an employee working on behalf of customer is warned that the current cart cannot be checked out.",
-			"value": "No funds available"
-		},
-		"checkoutBlockedDueToUnavailableFundsMessage": {
-			"comment": "Text of message to be shown when an employee working on behalf of customer is warned that the current cart cannot be checked out.",
-			"value": "To enable checkout, work with the Business partner to ensure funds have been allocated to this account."
-		}
-	},
-	"slots": {}
+    "$type": "containerModule",
+    "friendlyName": "Cart icon (COPY)",
+    "name": "cart-icon",
+    "description": "Cart is used for viewing all the items added to the cart, allows user to proceed to checkout.",
+    "categories": ["Purchase", "Shopping bag", "header_cartIcon"],
+    "dataActions": {
+        "cart": {
+            "path": "@msdyn365-commerce/global-state/dist/lib/data-actions/get-cart-state-data-action",
+            "runOn": "client"
+        },
+        "orgUnitLocations": {
+            "path": "@msdyn365-commerce-modules/retail-actions/dist/lib/search-org-unit-locations",
+            "runOn": "server"
+        },
+        "customerInformation": {
+            "path": "@msdyn365-commerce-modules/retail-actions/dist/lib/get-customer"
+        },
+        "channelDeliveryOptionConfig": {
+            "path": "@msdyn365-commerce-modules/retail-actions/dist/lib/get-channel-delivery-option-configuration",
+            "runOn": "server"
+        },
+        "featureState": {
+            "path": "@msdyn365-commerce-modules/retail-actions/dist/lib/get-feature-state",
+            "runOn": "server"
+        },
+        "catalogs": {
+            "path": "@msdyn365-commerce-modules/retail-actions/dist/lib/get-catalogs",
+            "runOn": "server"
+        },
+        "customerBalances": {
+            "path": "@msdyn365-commerce-modules/retail-actions/dist/lib/get-customer-balance",
+            "runOn": "server"
+        },
+        "cartConfiguration": {
+            "path": "@msdyn365-commerce-modules/retail-actions/dist/lib/get-cart-configuration",
+            "runOn": "server"
+        }
+    },
+    "config": {
+        "imageSettings": {
+            "friendlyName": "Cart line item image settings",
+            "description": "Image settings for cart line item",
+            "type": "imageSettings"
+        },
+        "enableHoverCart": {
+            "friendlyName": "Show mini cart",
+            "description": "Show mini cart on mouse over on cart icon.",
+            "type": "boolean",
+            "default": true
+        },
+        "cartLinesSortOrder": {
+            "friendlyName": "Order of items",
+            "description": "This property will show you to change the order in which items appear in the mini-cart",
+            "type": "string",
+            "enum": {
+                "ascending": "New items added to bottom of list",
+                "descending": "New items added to top of list"
+            },
+            "required": false,
+            "default": "ascending"
+        },
+        "isAnonymousCheckout": {
+            "friendlyName": "Allow anonymous checkout",
+            "description": "When this property is enabled, mini-cart will allow anonymous checkout if user is not signed-in",
+            "type": "boolean",
+            "default": false
+        },
+        "clientRender": {
+            "friendlyName": "Render module client side",
+            "description": "Enabling this property will cause the module to load its Javascript chunk and render on the client based on the user view port. This property is recommended for modules which are generally hidden below the users view port (lower on the page) to increase page load performance.",
+            "type": "boolean",
+            "default": false
+        }
+    },
+    "resources": {
+        "goToCartButtonTitle": {
+            "comment": "Label for go to cart button. Count = number of items in the cart",
+            "value": "View shopping bag ({count})"
+        },
+        "totalPriceFormatString": {
+            "comment": "String associated with total price to display. Price = formatted price",
+            "value": "Subtotal: "
+        },
+        "guestCheckoutButtonTitle": {
+            "comment": "Label for guest checkout button",
+            "value": "Guest Checkout"
+        },
+        "checkoutButtonTitle": {
+            "comment": "Label for checkout button",
+            "value": "Checkout"
+        },
+        "productDimensionTypeColor": {
+            "comment": "String that corresponds to the Color Product Dimension Type (1)",
+            "value": "Color"
+        },
+        "productDimensionTypeSize": {
+            "comment": "String that corresponds to the Size Product Dimension Type (3)",
+            "value": "Size"
+        },
+        "productDimensionTypeStyle": {
+            "comment": "String that corresponds to the Style Product Dimension Type (4)",
+            "value": "Style"
+        },
+        "productDimensionTypeConfiguration": {
+            "comment": "String that corresponds to the Style Product Dimension Configuration (2)",
+            "value": "Configuration"
+        },
+        "quantityDisplayText": {
+            "comment": "String that corresponds to the quantity display text",
+            "value": "Quantity"
+        },
+        "removeCartButtonText": {
+            "comment": "Text for the remove button",
+            "value": "Remove"
+        },
+        "cartLabel": {
+            "comment": "string to be shown for cart or shopping bag tooltip",
+            "value": "Shopping bag, ({0}) items"
+        },
+        "cartQtyLabel": {
+            "comment": "string to be shown for cart item quantity",
+            "value": "({0})"
+        },
+        "flyoutTitle": {
+            "comment": "string to be shown for mini cart flyout",
+            "value": "Your shopping bag"
+        },
+        "salesAgreementPricePrompt": {
+            "value": "Contract price applied",
+            "comment": "Prompt message in cart lines."
+        },
+        "shippingText": {
+            "comment": "string to be shown for Shipping label",
+            "value": "Shipping"
+        },
+        "checkoutBlockedDueToUnavailableFundsTitle": {
+            "comment": "Title of message to be shown when an employee working on behalf of customer is warned that the current cart cannot be checked out.",
+            "value": "No funds available"
+        },
+        "checkoutBlockedDueToUnavailableFundsMessage": {
+            "comment": "Text of message to be shown when an employee working on behalf of customer is warned that the current cart cannot be checked out.",
+            "value": "To enable checkout, work with the Business partner to ensure funds have been allocated to this account."
+        }
+    },
+    "slots": {}
 }

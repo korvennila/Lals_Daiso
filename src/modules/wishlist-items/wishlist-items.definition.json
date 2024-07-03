@@ -64,6 +64,11 @@
             "friendlyName": "Add Favorites link",
             "description": "Add Favorites link",
             "$ref": "@msdyn365-commerce-modules/definitions/dist/src/ActionLink.json#/definitions/actionLink"
+        },
+        "noWishlistResultImage": {
+            "type": "image",
+            "friendlyName": "Image when no wishlist item available",
+            "description": "Image to be displayed when there are no wishlist item available"
         }
     },
     "resources": {

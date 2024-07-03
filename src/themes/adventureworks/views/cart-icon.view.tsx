@@ -145,9 +145,13 @@ export class CartIconView extends React.PureComponent<
                         <Node {...this.props.CartlinesWrapper}>{renderCartlines(this.props.cartlines, this.props)}</Node>
                     </Node>
                     <Node className='ms-cart-icon__footer msc-modal__footer'>
-                        {this.props.slots.promoContentItem}
-                        {renderTotalPrice(this.props)}
-                        {renderSubtotalMessage(this.props)}
+                        {this.props.data.cart.result?.isEmpty ? null : (
+                            <Node className='ms-cart-icon__footer-priceSection'>
+                                {this.props.slots.promoContentItem}
+                                {renderTotalPrice(this.props)}
+                                {renderSubtotalMessage(this.props)}
+                            </Node>
+                        )}
                         {this.props.checkoutAsSignInUserButton}
                         {this.props.checkoutAsGuestButton}
                         {this.props.data.cart.result?.isEmpty ? null : this.props.goToCartButton}

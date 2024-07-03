@@ -14,6 +14,7 @@ export interface IWishlistItemsConfig extends Msdyn365.IModuleConfig {
     className?: string;
     clientRender?: boolean;
     buttonLink?: IButtonLinkData;
+    noWishlistResultImage?: Msdyn365.IImageData;
 }
 
 export interface IWishlistItemsResources {

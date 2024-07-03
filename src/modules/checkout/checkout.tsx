@@ -59,6 +59,8 @@ import { AsyncResultStatusCode, IExpressPaymentDetails } from '@msdyn365-commerc
 export * from './components/get-line-items';
 export * from './components/get-order-summary';
 
+import CodPaymentService from '../../shared/CodPaymentService';
+
 /**
  * Device type.
  */
@@ -72,6 +74,7 @@ interface ICheckoutState {
     isValidationPassed: boolean;
     isPlaceOrderLoading?: boolean;
     isPlaceOrderClicked?: boolean;
+    isCODOptionSelected?: string;
 }
 
 /**
@@ -166,14 +169,19 @@ class Checkout extends React.PureComponent<ICheckoutModuleProps> {
 
         const disableForOBO = Msdyn365.isOboRequest(this.props.context.request) && !this.isPaidOffByCustomerAccount;
 
+        const { isCODOptionSelected } = this.state;
+
         // If isTermsAndConditionAccepted is undefined means TermsAndCondition module is not added to page and we should able to place order.
         return (
-            this.props.moduleState.isReady &&
-            (isTermsAndConditionAccepted === undefined || isTermsAndConditionAccepted || shouldEnableSinglePaymentAuthorizationCheckout) &&
-            (this.state.errorMessage === '' ||
-                shouldEnableSinglePaymentAuthorizationCheckout ||
-                (this.props.data.checkout.result?.isPaymentVerificationRedirection ?? false)) &&
-            !(shouldEnableSinglePaymentAuthorizationCheckout && disableForOBO)
+            (this.props.moduleState.isReady &&
+                (isTermsAndConditionAccepted === undefined ||
+                    isTermsAndConditionAccepted ||
+                    shouldEnableSinglePaymentAuthorizationCheckout) &&
+                (this.state.errorMessage === '' ||
+                    shouldEnableSinglePaymentAuthorizationCheckout ||
+                    (this.props.data.checkout.result?.isPaymentVerificationRedirection ?? false)) &&
+                !(shouldEnableSinglePaymentAuthorizationCheckout && disableForOBO)) ||
+            isCODOptionSelected !== ''
         );
     }
 
@@ -204,7 +212,8 @@ class Checkout extends React.PureComponent<ICheckoutModuleProps> {
         errorMessage: '',
         isValidationPassed: false,
         isPlaceOrderLoading: false,
-        isPlaceOrderClicked: false
+        isPlaceOrderClicked: false,
+        isCODOptionSelected: ''
     };
 
     private readonly telemetryContent: ITelemetryContent = getTelemetryObject(
@@ -219,6 +228,14 @@ class Checkout extends React.PureComponent<ICheckoutModuleProps> {
         const {
             resources: { genericErrorMessage }
         } = this.props;
+
+        const codPaymentService = CodPaymentService.getInstance();
+
+        // Listen for changes in radio button state
+        codPaymentService.addListener(this.handleRadioButtonChange);
+
+        // Set initial state based on current selected option
+        this.setState({ isCODOptionSelected: codPaymentService.getSelectedOption() });
 
         when(
             () => this.asyncResultStatus !== AsyncResultStatusCode.LOADING,
@@ -427,6 +444,10 @@ class Checkout extends React.PureComponent<ICheckoutModuleProps> {
             focusOnCheckoutError(this.checkoutErrorRef, this.props.context.actionContext);
         }
     }
+
+    public handleRadioButtonChange = (isCODOptionSelected: string) => {
+        this.setState({ isCODOptionSelected });
+    };
 
     // eslint-disable-next-line complexity -- ignore the complexity.
     public render(): JSX.Element {
