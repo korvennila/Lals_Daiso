@@ -18,6 +18,8 @@ export interface ICheckoutCodOptionConfig extends Msdyn365.IModuleConfig {
     shouldBeEnabledForGuest?: boolean;
     className?: string;
     clientRender?: boolean;
+    mobileNumberOTPImage?: Msdyn365.IImageData;
+    otpVerificationImage?: Msdyn365.IImageData;
 }
 
 export interface ICheckoutCodOptionResources {
@@ -40,6 +42,16 @@ export interface ICheckoutCodOptionResources {
     removeGiftCardButton: string;
     enteredGiftCardLabel: string;
     giftCardAvailableBalanceLabel: string;
+    mobileNumberHeadingLabel: string;
+    mobileNumberHeadingDescription: string;
+    mobileNumberInputLabel: string;
+    mobileNumberCodeMessage: string;
+    mobileNumberGetOTPText: string;
+    otpVerificationHeadingLabel: string;
+    otpVerificationChangePhoneLabel: string;
+    otpVerificationValidationMessage: string;
+    otpVerificationConfirmOtpLabel: string;
+    otpVerificationResendLabel: string;
 }
 
 export interface ICheckoutCodOptionProps<T> extends Msdyn365.IModule<T> {

@@ -8,6 +8,7 @@ import { Module, Node } from '@msdyn365-commerce-modules/utilities';
 import * as React from 'react';
 
 import { IAddResource, ICheckoutGiftCardViewProps, IForm, IItem, IList, IShowResource } from './checkout-cod-option';
+import MobileModal from './components/mobile-modal';
 
 export const From: React.FC<IForm> = ({
     formProps,
@@ -90,11 +91,20 @@ export const ShowResource: React.FC<IShowResource> = ({ title, list }) => (
 );
 
 const CheckoutGiftCardView: React.FC<ICheckoutGiftCardViewProps> = props => {
-    const { checkoutGiftCardProps, checkoutErrorRef, showGiftCard, addGiftCard } = props;
+    const {
+        checkoutGiftCardProps,
+        checkoutErrorRef,
+        //showGiftCard,
+        addGiftCard,
+        isMobileModalOpen,
+        closeModal,
+        resources
+    } = props;
+
     return (
         <Module {...checkoutGiftCardProps} ref={checkoutErrorRef}>
-            {showGiftCard && <ShowResource {...showGiftCard} />}
             {addGiftCard && <AddResource {...addGiftCard} />}
+            {isMobileModalOpen && <MobileModal isOpen={isMobileModalOpen} onClose={closeModal} resources={resources} props={props} />}
         </Module>
     );
 };

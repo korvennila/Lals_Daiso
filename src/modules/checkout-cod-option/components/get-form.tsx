@@ -36,6 +36,7 @@ export interface IGetFormInput {
     onEnterGiftCardPin(giftCardPin: string): void;
     onEnterGiftCardExp(giftCardExp: string): void;
     onApplyGiftCard(): Promise<void>;
+    handleCodClick(): void;
 }
 
 export interface IForm {
@@ -141,13 +142,15 @@ export const getForm = (options: IGetFormInput): IForm => {
             giftCardAlertLabel,
             giftCardPinPlaceholderText,
             giftCardExpPlaceholderText
-        }
+        },
+        handleCodClick
     } = options;
 
     const handleCODOptionChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         const selectedOption = event.target.value;
         const radioButtonService = CodPaymentService.getInstance();
         radioButtonService.setSelectedOption(selectedOption);
+        handleCodClick();
     };
 
     const formProps = {

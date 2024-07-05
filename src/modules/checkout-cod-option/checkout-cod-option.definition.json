@@ -1,127 +1,172 @@
 {
-	"$type": "contentModule",
-	"friendlyName": "Checkout COD Option",
-	"name": "checkout-cod-option",
-	"description": "Gift card allows the user to pay for the order using a gift card",
-	"categories": [
-		"Purchase",
-		"Payment",
-		"checkout_checkoutInformation",
-		"checkoutSectionContainer_primary"
-	],
-	"dataActions": {
-		"checkout": {
-			"path": "@msdyn365-commerce/global-state/dist/lib/data-actions/checkout-state-data-action",
-			"runOn": "client"
-		}
-	},
-	"config": {
-		"showAdditionalFields": {
-			"friendlyName": "Show additional fields",
-			"description": "This property allows you to define which fields should be shown in addition to the gift card number field",
-			"type": "string",
-			"enum": {
-				"pin": "Pin",
-				"expirationDate": "Expiry date",
-				"pinAndExpirationDate": "Pin and Expiry date"
-			},
-			"scope": "module"
-		},
-		"shouldBeEnabledForGuest": {
-			"friendlyName": "Enable for guest users",
-			"description": "This property when enabled will allow gift cards to be redeemed for guest users. This requires the anonymous access for gift cards to be also enabled on Headquarters",
-			"type": "boolean",
-			"default": false
-		},
-		"className": {
-			"friendlyName": "Custom CSS class name",
-			"description": "Provide a custom css class name defined in the theme pack to target the CSS for this module",
-			"type": "string",
-			"default": ""
-		},
-		"clientRender": {
-			"friendlyName": "Render module client side",
-			"description": "Enabling this property will cause the module to load its Javascript chunk and render on the client based on the user view port. This property is recommended for modules which are generally hidden below the users view port (lower on the page) to increase page load performance.",
-			"type": "boolean",
-			"default": false
-		}
-	},
-	"resources": {
-		"emptyInputError": {
-			"comment": "Error message for no gift card code entered",
-			"value": "Please enter a gift card number"
-		},
-		"invalidCodeError": {
-			"comment": "Error message for invalid gift card code entered",
-			"value": "Invalid gift card code entered"
-		},
-		"invalidCardInfoError": {
-			"comment": "Error message for invalid gift card information entered",
-			"value": "Invalid gift card information entered"
-		},
-		"invalidCardTypeError": {
-			"comment": "Error message for invalid gift card type",
-			"value": "The gift card type is not supported"
-		},
-		"noCardPinError": {
-			"comment": "Error message for missing required gift card pin",
-			"value": "Gift card PIN is required"
-		},
-		"noCardExpError": {
-			"comment": "Error message for missing required gift card expiration date",
-			"value": "Gift card expiration date is required"
-		},
-		"duplicatedCodeError": {
-			"comment": "Error message for entering a gift card twice",
-			"value": "You already entered this gift card"
-		},
-		"noBalanceError": {
-			"comment": "Error message for gift card has 0 balance",
-			"value": "Gift card has no balance left"
-		},
-		"giftCardFormLabel": {
-			"comment": "Cash on Delivery form label",
-			"value": "Cash on Delivery"
-		},
-		"giftCardNumberLabel": {
-			"comment": "Cash on Delivery label",
-			"value": "Cash on Delivery"
-		},
-		"giftCardPinLabel": {
-			"comment": "Gift card pin label",
-			"value": "PIN"
-		},
-		"giftCardExpLabel": {
-			"comment": "Gift card expiration date label",
-			"value": "Expiration date"
-		},
-		"giftCardPinPlaceholderText": {
-			"comment": "Text for gift card pin place holder",
-			"value": "PIN"
-		},
-		"giftCardExpPlaceholderText": {
-			"comment": "Text for gift card expiratio date place holder",
-			"value": "MM/YYYY"
-		},
-		"giftCardAlertLabel": {
-			"comment": "Gift card input fields alert label",
-			"value": "Your gift card may or may not include these fields"
-		},
-		"applyGiftCardButton": {
-			"comment": "Label for apply gift card button",
-			"value": "Apply"
-		},
-		"removeGiftCardButton": {
-			"comment": "Label for remove gift card button",
-			"value": "Remove"
-		},
-		"enteredGiftCardLabel": {
-			"comment": "Label about gift card entered with balance and giftCardIssueAmount",
-			"value": "Gift card ending in"
-		},
-		"giftCardAvailableBalanceLabel": {
-			"comment": "Label about gift card entered with balance and giftCardIssueAmount",
-			"value": "Available balance"
-		}
-	}
+    "$type": "contentModule",
+    "friendlyName": "Checkout COD Option",
+    "name": "checkout-cod-option",
+    "description": "Gift card allows the user to pay for the order using a gift card",
+    "categories": ["Purchase", "Payment", "checkout_checkoutInformation", "checkoutSectionContainer_primary"],
+    "dataActions": {
+        "checkout": {
+            "path": "@msdyn365-commerce/global-state/dist/lib/data-actions/checkout-state-data-action",
+            "runOn": "client"
+        }
+    },
+    "config": {
+        "showAdditionalFields": {
+            "friendlyName": "Show additional fields",
+            "description": "This property allows you to define which fields should be shown in addition to the gift card number field",
+            "type": "string",
+            "enum": {
+                "pin": "Pin",
+                "expirationDate": "Expiry date",
+                "pinAndExpirationDate": "Pin and Expiry date"
+            },
+            "scope": "module"
+        },
+        "shouldBeEnabledForGuest": {
+            "friendlyName": "Enable for guest users",
+            "description": "This property when enabled will allow gift cards to be redeemed for guest users. This requires the anonymous access for gift cards to be also enabled on Headquarters",
+            "type": "boolean",
+            "default": false
+        },
+        "className": {
+            "friendlyName": "Custom CSS class name",
+            "description": "Provide a custom css class name defined in the theme pack to target the CSS for this module",
+            "type": "string",
+            "default": ""
+        },
+        "clientRender": {
+            "friendlyName": "Render module client side",
+            "description": "Enabling this property will cause the module to load its Javascript chunk and render on the client based on the user view port. This property is recommended for modules which are generally hidden below the users view port (lower on the page) to increase page load performance.",
+            "type": "boolean",
+            "default": false
+        },
+        "mobileNumberOTPImage": {
+            "type": "image",
+            "friendlyName": "Mobile Number OTP Image",
+            "description": "Image to be displayed when Mobile Number OTP Popup triggered"
+        },
+        "otpVerificationImage": {
+            "type": "image",
+            "friendlyName": "OTP Verification Image",
+            "description": "Image to be displayed when OTP Verification Popup triggered"
+        }
+    },
+    "resources": {
+        "emptyInputError": {
+            "comment": "Error message for no gift card code entered",
+            "value": "Please enter a gift card number"
+        },
+        "invalidCodeError": {
+            "comment": "Error message for invalid gift card code entered",
+            "value": "Invalid gift card code entered"
+        },
+        "invalidCardInfoError": {
+            "comment": "Error message for invalid gift card information entered",
+            "value": "Invalid gift card information entered"
+        },
+        "invalidCardTypeError": {
+            "comment": "Error message for invalid gift card type",
+            "value": "The gift card type is not supported"
+        },
+        "noCardPinError": {
+            "comment": "Error message for missing required gift card pin",
+            "value": "Gift card PIN is required"
+        },
+        "noCardExpError": {
+            "comment": "Error message for missing required gift card expiration date",
+            "value": "Gift card expiration date is required"
+        },
+        "duplicatedCodeError": {
+            "comment": "Error message for entering a gift card twice",
+            "value": "You already entered this gift card"
+        },
+        "noBalanceError": {
+            "comment": "Error message for gift card has 0 balance",
+            "value": "Gift card has no balance left"
+        },
+        "giftCardFormLabel": {
+            "comment": "Cash on Delivery form label",
+            "value": "Cash on Delivery"
+        },
+        "giftCardNumberLabel": {
+            "comment": "Cash on Delivery label",
+            "value": "Cash on Delivery"
+        },
+        "giftCardPinLabel": {
+            "comment": "Gift card pin label",
+            "value": "PIN"
+        },
+        "giftCardExpLabel": {
+            "comment": "Gift card expiration date label",
+            "value": "Expiration date"
+        },
+        "giftCardPinPlaceholderText": {
+            "comment": "Text for gift card pin place holder",
+            "value": "PIN"
+        },
+        "giftCardExpPlaceholderText": {
+            "comment": "Text for gift card expiratio date place holder",
+            "value": "MM/YYYY"
+        },
+        "giftCardAlertLabel": {
+            "comment": "Gift card input fields alert label",
+            "value": "Your gift card may or may not include these fields"
+        },
+        "applyGiftCardButton": {
+            "comment": "Label for apply gift card button",
+            "value": "Apply"
+        },
+        "removeGiftCardButton": {
+            "comment": "Label for remove gift card button",
+            "value": "Remove"
+        },
+        "enteredGiftCardLabel": {
+            "comment": "Label about gift card entered with balance and giftCardIssueAmount",
+            "value": "Gift card ending in"
+        },
+        "giftCardAvailableBalanceLabel": {
+            "comment": "Label about gift card entered with balance and giftCardIssueAmount",
+            "value": "Available balance"
+        },
+        "mobileNumberHeadingLabel": {
+            "comment": "Heading label for Mobile Number Section",
+            "value": "Let's Verify Your Number"
+        },
+        "mobileNumberHeadingDescription": {
+            "comment": "Description label for Mobile Number Section",
+            "value": "That's okay, just give us your Mobile Number and you can create a password later"
+        },
+        "mobileNumberInputLabel": {
+            "comment": "Label for Mobile Number input box",
+            "value": "Enter Mobile Number"
+        },
+        "mobileNumberCodeMessage": {
+            "comment": "Label for verification code message",
+            "value": "We will send you a 4 Digit Verification Code"
+        },
+        "mobileNumberGetOTPText": {
+            "comment": "Label for Get OTP button on Mobile Number Section",
+            "value": "Get OTP"
+        },
+        "otpVerificationHeadingLabel": {
+            "comment": "Label for OTP Verification Section as Heading",
+            "value": "OTP Verification"
+        },
+        "otpVerificationChangePhoneLabel": {
+            "comment": "Label for Change Phone Number on OTP Verification",
+            "value": "Change Phone Number"
+        },
+        "otpVerificationValidationMessage": {
+            "comment": "Label for OTP Verification Validation Message",
+            "value": "Entered OTP is invalid or expired"
+        },
+        "otpVerificationConfirmOtpLabel": {
+            "comment": "Label for Confirm OTP button on OTP Verification",
+            "value": "Confirm OTP"
+        },
+        "otpVerificationResendLabel": {
+            "comment": "Label for Resend OTP",
+            "value": "Resend OTP in {0}"
+        }
+    }
 }

@@ -1,0 +1,12 @@
+{
+	"typeName": "map",
+	"id": "map",
+	"friendlyName": "Map",
+	"config": {
+		"heading": {
+			"text": "Map",
+			"tag": "h6"
+		},
+		"className": "testClassName"
+	}
+}

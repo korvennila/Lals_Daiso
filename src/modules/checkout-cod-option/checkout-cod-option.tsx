@@ -42,6 +42,7 @@ interface ICheckoutGiftCardState {
     giftCardNumber: string;
     giftCardPin: string;
     giftCardExp: string;
+    isMobileModalOpen?: boolean;
 }
 
 enum SupportedGiftCardType {
@@ -80,6 +81,7 @@ export interface ICheckoutGiftCardViewProps extends ICheckoutCodOptionProps<{}>,
     enterGiftCardExp?(giftCardNumber: string): void;
     removeGiftCard?(giftCardNumber: string): void;
     applyGiftCard?(): void;
+    closeModal(): void;
 }
 
 /**
@@ -94,7 +96,8 @@ export class CheckoutGiftCard extends React.Component<ICheckoutGiftCardModulePro
         errorMessage: '',
         giftCardNumber: '',
         giftCardPin: '',
-        giftCardExp: ''
+        giftCardExp: '',
+        isMobileModalOpen: false
     };
 
     private readonly inputRef: React.RefObject<HTMLInputElement> = React.createRef();
@@ -196,6 +199,14 @@ export class CheckoutGiftCard extends React.Component<ICheckoutGiftCardModulePro
         return true;
     }
 
+    private handleCodClick = () => {
+        this.setState({ isMobileModalOpen: true });
+    };
+
+    private closeModal = () => {
+        this.setState({ isMobileModalOpen: false });
+    };
+
     public render(): JSX.Element | null {
         const {
             moduleState: { isReady },
@@ -268,7 +279,8 @@ export class CheckoutGiftCard extends React.Component<ICheckoutGiftCardModulePro
                           onApplyGiftCard: this.applyGiftCard,
                           supportExternalGiftCard,
                           additionalFields,
-                          disableAddGiftCard: this.disableAddGiftCard
+                          disableAddGiftCard: this.disableAddGiftCard,
+                          handleCodClick: this.handleCodClick
                       }),
                       list: getList({
                           canRemove: true,
@@ -278,7 +290,8 @@ export class CheckoutGiftCard extends React.Component<ICheckoutGiftCardModulePro
                           resources
                       })
                   }
-                : undefined
+                : undefined,
+            closeModal: this.closeModal
         };
 
         return this.props.renderView(viewProps) as React.ReactElement;
