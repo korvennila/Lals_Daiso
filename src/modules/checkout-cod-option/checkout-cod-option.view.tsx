@@ -20,10 +20,11 @@ export const From: React.FC<IForm> = ({
     // inputNumProps,
     // inputPinProps,
     // inputExpProps,
-    inputNumber
+    inputNumber,
     // inputPin,
     // inputExp,
-    // applyButton,
+    applyButton,
+    removeButton
     // supportExternalGiftCard,
     // showGiftCardPinInput,
     // showGiftCardExpInput,
@@ -57,7 +58,8 @@ export const From: React.FC<IForm> = ({
             {inputNumber}
         </>
         {/* )} */}
-        {/* {applyButton} */}
+        {applyButton}
+        {removeButton}
     </Node>
 );
 

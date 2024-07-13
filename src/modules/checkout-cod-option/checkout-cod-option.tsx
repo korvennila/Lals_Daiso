@@ -31,6 +31,7 @@ import { getForm, IForm } from './components/get-form';
 import { getList, IList } from './components/get-list';
 import TitleCompoent from './components/title';
 import { focusOnCheckoutError } from '@msdyn365-commerce-modules/checkout';
+import { getCartState } from '@msdyn365-commerce/global-state';
 
 export * from './components/get-form';
 export * from './components/get-item';
@@ -207,6 +208,89 @@ export class CheckoutGiftCard extends React.Component<ICheckoutGiftCardModulePro
         this.setState({ isMobileModalOpen: false });
     };
 
+    private readonly korPreCheckoutRequest = async (): Promise<any> => {
+        const cRetailURL = this.props.context.request.apiSettings.baseUrl;
+        const cRetailOUN = this.props.context.request.apiSettings.oun ? this.props.context.request.apiSettings.oun : '';
+
+        const cKORPreCheckoutRequestUrl = `${cRetailURL}commerce/KORPreCheckoutRequest?api-version=7.3`;
+        const currentCartState = await getCartState(this.props.context?.actionContext);
+
+        if (currentCartState) {
+            console.log('currentCartState.cart.Id---', currentCartState.cart.Id);
+            console.log('currentCartState.cart---', currentCartState.cart!);
+            console.log('telementryData---', this.props.context.request.telemetryData);
+        }
+
+        try {
+            const response = await fetch(cKORPreCheckoutRequestUrl, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    OUN: cRetailOUN,
+                    'User-Agent': 'Mozilla/5.0 (Windows NT 6.3; Win64; x64; rv:58.0) Gecko/20100101 Firefox/58.0'
+                },
+                body: JSON.stringify({
+                    cartId: currentCartState.cart.Id,
+                    amt: currentCartState.cart.TotalAmount
+                })
+            });
+
+            if (response.status === 200) {
+                const data = await response.json();
+                await currentCartState.refreshCart({});
+                return data;
+            } else {
+                this.setError('Failed to fetch data');
+                return null;
+            }
+        } catch (error) {
+            this.setError('Failed to fetch data');
+            console.error('Fetch data error:', error);
+            return null;
+        }
+    };
+
+    private readonly removePreCheckoutRequest = async (): Promise<any> => {
+        const cRetailURL = this.props.context.request.apiSettings.baseUrl;
+        const cRetailOUN = this.props.context.request.apiSettings.oun ? this.props.context.request.apiSettings.oun : '';
+
+        const cKORPreCheckoutRequestUrl = `${cRetailURL}commerce/KORPreCheckoutRequest?api-version=7.3`;
+        const currentCartState = await getCartState(this.props.context?.actionContext);
+
+        if (currentCartState) {
+            console.log('currentCartState.cart.Id---', currentCartState.cart.Id);
+            console.log('currentCartState.cart---', currentCartState.cart!);
+            console.log('telementryData---', this.props.context.request.telemetryData);
+        }
+
+        try {
+            const response = await fetch(cKORPreCheckoutRequestUrl, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    OUN: cRetailOUN,
+                    'User-Agent': 'Mozilla/5.0 (Windows NT 6.3; Win64; x64; rv:58.0) Gecko/20100101 Firefox/58.0'
+                },
+                body: JSON.stringify({
+                    cartId: currentCartState.cart.Id,
+                    amt: currentCartState.cart.TotalAmount
+                })
+            });
+
+            if (response.status === 200) {
+                const data = await response.json();
+                return data;
+            } else {
+                this.setError('Failed to fetch data');
+                return null;
+            }
+        } catch (error) {
+            this.setError('Failed to fetch data');
+            console.error('Fetch data error:', error);
+            return null;
+        }
+    };
+
     public render(): JSX.Element | null {
         const {
             moduleState: { isReady },
@@ -280,7 +364,9 @@ export class CheckoutGiftCard extends React.Component<ICheckoutGiftCardModulePro
                           supportExternalGiftCard,
                           additionalFields,
                           disableAddGiftCard: this.disableAddGiftCard,
-                          handleCodClick: this.handleCodClick
+                          handleCodClick: this.handleCodClick,
+                          handlePreCheckout: this.korPreCheckoutRequest,
+                          removePreCheckout: this.removePreCheckoutRequest
                       }),
                       list: getList({
                           canRemove: true,

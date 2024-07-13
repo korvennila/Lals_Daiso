@@ -37,6 +37,8 @@ export interface IGetFormInput {
     onEnterGiftCardExp(giftCardExp: string): void;
     onApplyGiftCard(): Promise<void>;
     handleCodClick(): void;
+    handlePreCheckout(): Promise<any>;
+    removePreCheckout(): Promise<any>;
 }
 
 export interface IForm {
@@ -57,6 +59,7 @@ export interface IForm {
     showGiftCardPinInput: boolean | undefined;
     showGiftCardExpInput: boolean | undefined;
     alertFieldLabel: React.ReactNode;
+    removeButton: React.ReactNode;
 }
 
 /**
@@ -64,9 +67,14 @@ export interface IForm {
  * @param onApplyGiftCard -On Apply Gift Card Function.
  * @returns Call of Apply Gift Card Function.
  */
-const onApplyHandler = (onApplyGiftCard: () => Promise<void>) => async (event: React.SyntheticEvent): Promise<void> => {
+const onApplyHandler = (handlePreCheckout: () => Promise<void>) => async (event: React.SyntheticEvent): Promise<void> => {
     event.preventDefault();
-    await onApplyGiftCard();
+    await handlePreCheckout();
+};
+
+const onRemoveHandler = (removePreCheckout: () => Promise<void>) => async (event: React.SyntheticEvent): Promise<void> => {
+    event.preventDefault();
+    await removePreCheckout();
 };
 
 /**
@@ -123,7 +131,7 @@ export const getForm = (options: IGetFormInput): IForm => {
         inputRef,
         inputPinRef,
         inputExpRef,
-        giftCardNumber,
+        // giftCardNumber,
         giftCardPin,
         giftCardExp,
         // onEnterGiftCardNumber,
@@ -143,13 +151,18 @@ export const getForm = (options: IGetFormInput): IForm => {
             giftCardPinPlaceholderText,
             giftCardExpPlaceholderText
         },
-        handleCodClick
+        handleCodClick,
+        handlePreCheckout,
+        removePreCheckout
     } = options;
 
     const handleCODOptionChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         const selectedOption = event.target.value;
         const radioButtonService = CodPaymentService.getInstance();
         radioButtonService.setSelectedOption(selectedOption);
+
+        // await handlePreCheckout();
+
         handleCodClick();
     };
 
@@ -269,11 +282,22 @@ export const getForm = (options: IGetFormInput): IForm => {
     const applyButton = (
         <Button
             className='ms-checkout-gift-card__btn-apply'
-            onClick={onApplyHandler(onApplyGiftCard)}
+            onClick={onApplyHandler(handlePreCheckout)}
             aria-label={applyGiftCardButton}
-            disabled={disableAddGiftCard || !giftCardNumber}
+            disabled={disableAddGiftCard}
         >
             {applyGiftCardButton}
+        </Button>
+    );
+
+    const removeButton = (
+        <Button
+            className='ms-checkout-gift-card__btn-remove'
+            onClick={onRemoveHandler(removePreCheckout)}
+            aria-label={'Remove'}
+            // disabled={disableAddGiftCard}
+        >
+            {`Remove`}
         </Button>
     );
 
@@ -311,6 +335,7 @@ export const getForm = (options: IGetFormInput): IForm => {
         supportExternalGiftCard,
         showGiftCardPinInput,
         showGiftCardExpInput,
-        alertFieldLabel
+        alertFieldLabel,
+        removeButton
     };
 };

@@ -1,0 +1,12 @@
+{
+  "id": "Our Stores",
+  "config": {
+    "showText": "Example Config Value"
+  },
+  "data": {
+    "actionResponse": {
+      "text": "Sample Action Response"
+    }
+  },
+  "typeName": "our-stores"
+}
