@@ -237,7 +237,11 @@ export class CheckoutGiftCard extends React.Component<ICheckoutGiftCardModulePro
 
             if (response.status === 200) {
                 const data = await response.json();
+                const input = {
+                    cartLineIds: data.CartLines.map((line: { LineId: any }) => line.LineId.toString())
+                };
                 await currentCartState.refreshCart({});
+                await currentCartState.removeCartLines(input);
                 return data;
             } else {
                 this.setError('Failed to fetch data');

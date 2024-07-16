@@ -1,0 +1,114 @@
+{
+	"$type": "contentModule",
+	"friendlyName": "Delivery options (COPY)",
+	"name": "checkout-delivery-options",
+	"description": "Delivery options allows the user to choose a delivery option for the order",
+	"categories": [
+		"Purchase",
+		"Shipping",
+		"checkout_checkoutInformation",
+		"checkoutSectionContainer_primary"
+	],
+	"attributes": {
+		"private": true
+	},
+	"dataActions": {
+		"checkout": {
+			"path": "@msdyn365-commerce/global-state/dist/lib/data-actions/checkout-state-data-action",
+			"runOn": "client"
+		},
+		"channelDeliveryOptionConfig": {
+			"path": "@msdyn365-commerce-modules/retail-actions/dist/lib/get-channel-delivery-option-configuration",
+			"runOn": "server"
+		},
+		"featureState": {
+			"path": "@msdyn365-commerce-modules/retail-actions/dist/lib/get-feature-state",
+			"runOn": "server"
+		},
+		"cart": {
+			"path": "@msdyn365-commerce/global-state/dist/lib/data-actions/cart-state-data-action",
+			"runOn": "server"
+		}
+	},
+	"config": {
+		"heading": {
+			"friendlyName": "Heading",
+			"description": "Module heading",
+			"$ref": "@msdyn365-commerce-modules/definitions/dist/src/Heading.json#/definitions/heading"
+		},
+		"filterDeliveryModeOption": {
+			"friendlyName": "Filter delivery mode option",
+			"description": "Filter Delivery Mode Option. Selecting <None> will display only shipping delivery options to the user.",
+			"enum": {
+				"none": "Do not filter",
+				"filterOutNonCarrierDeliveryMode": "Non-shipping modes"
+			},
+			"type": "string",
+			"default": "filterOutNonCarrierDeliveryMode",
+			"required": false
+		},
+		"useDefaultDeliveryOption": {
+			"friendlyName": "Auto select a delivery option",
+			"description": "This setting will automatically apply the first available delivery option. This setting should be used when there is only one available delivery option and there is no need to select.",
+			"enum": {
+				"none": "Allow user to select a delivery option",
+				"displaySelectedDeliveryOption": "Auto select delivery option and show summary",
+				"notDisplaySelectedDeliveryOption": "Auto select delivery option and don’t show summary"
+			},
+			"type": "string",
+			"default": "none",
+			"required": false,
+			"scope": "module"
+		},
+		"className": {
+			"friendlyName": "Custom CSS class name",
+			"description": "Provide a custom css class name defined in the theme pack to target the CSS for this module",
+			"type": "string",
+			"default": ""
+		},
+		"clientRender": {
+			"friendlyName": "Render module client side",
+			"description": "Enabling this property will cause the module to load its Javascript chunk and render on the client based on the user view port. This property is recommended for modules which are generally hidden below the users view port (lower on the page) to increase page load performance.",
+			"type": "boolean",
+			"default": false
+		}
+	},
+	"resources": {
+		"deliveryOptionsNotFound": {
+			"comment": "Error message if no delivery options found",
+			"value": "Sorry, no delivery options found. Please try different address."
+		},
+		"genericErrorMessage": {
+			"comment": "Generic error message for Address module",
+			"value": "Something went wrong. Please try again later"
+		},
+		"errorMessageTitle": {
+			"comment": "Localized text for error message title",
+			"value": "Error message"
+		},
+		"ariaLabelText": {
+			"comment": "Aria label for form",
+			"value": "Delivery options"
+		},
+		"priceFree": {
+			"comment": "Free text",
+			"value": "FREE"
+		},
+		"saveBtnLabel": {
+			"comment": "Save button label",
+			"value": "Save"
+		},
+		"editBtnLabel": {
+			"comment": "Edit button label",
+			"value": "Change"
+		},
+		"cancelBtnLabel": {
+			"comment": "Cancel button label",
+			"value": "Cancel"
+		},
+		"deliveryOptionAriaLabel": {
+			"comment": "Delivery option list aria label",
+			"value": "Delivery Option List"
+		}
+	}
+}

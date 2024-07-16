@@ -1,0 +1,61 @@
+import React, { useState } from 'react';
+import { IFullOrgUnitAvailability } from '@msdyn365-commerce-modules/retail-actions';
+
+interface Props {
+    data: { countries: { [key: string]: { [key: string]: IFullOrgUnitAvailability[] } } };
+    onStateSelected: (locations: IFullOrgUnitAvailability[]) => void;
+}
+
+const StoreSelectorAccordionList: React.FC<Props> = ({ data, onStateSelected }) => {
+    const [selectedCountry, setSelectedCountry] = useState<string | null>(null);
+    const [selectedState, setSelectedState] = useState<string | null>(null);
+
+    const toggleCountry = (country: string) => {
+        if (selectedCountry === country) {
+            setSelectedCountry(null);
+            setSelectedState(null);
+            onStateSelected([]);
+        } else {
+            setSelectedCountry(country);
+            setSelectedState(null);
+            onStateSelected([]);
+        }
+    };
+
+    const toggleState = (country: string, state: string) => {
+        if (selectedState === state) {
+            setSelectedState(null);
+            onStateSelected([]);
+        } else {
+            setSelectedState(state);
+            onStateSelected(data.countries[country][state]);
+        }
+    };
+
+    return (
+        <div className='msc-our-stores-dropdown'>
+            {Object.keys(data.countries).map(country => (
+                <div key={country} className='msc-countries-dropdown'>
+                    <h2 className='msc-countries-title' onClick={() => toggleCountry(country)}>
+                        <span className='msc-flag-icon'></span>
+                        {country}
+                    </h2>
+                    {selectedCountry === country && (
+                        <div className='msc-states-container'>
+                            {Object.keys(data.countries[country]).map(state => (
+                                <div key={state} className='msc-states-dropdown'>
+                                    <h3 className='msc-states-title' onClick={() => toggleState(country, state)}>
+                                        <span className='msc-flag-icon'></span>
+                                        {state}
+                                    </h3>
+                                </div>
+                            ))}
+                        </div>
+                    )}
+                </div>
+            ))}
+        </div>
+    );
+};
+
+export default StoreSelectorAccordionList;

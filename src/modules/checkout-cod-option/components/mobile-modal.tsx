@@ -147,7 +147,9 @@ const MobileModal: React.FC<MobileModalProps> = ({ isOpen, onClose, resources, p
                     <form onSubmit={handleOtpSubmit}>
                         {renderOTPVerificationImage(props)}
                         <h2>{resources.otpVerificationHeadingLabel}</h2>
-                        <Button onClick={() => setCurrentStep('enterMobile')}>{resources.otpVerificationChangePhoneLabel}</Button>
+                        <Button className='msc-change_phone-button' onClick={() => setCurrentStep('enterMobile')}>
+                            {resources.otpVerificationChangePhoneLabel}
+                        </Button>
                         <input type='text' value={otp} onChange={handleOtpChange} placeholder='Enter OTP' />
                         {otpErrorMessage && <p className='error'>{otpErrorMessage}</p>}
                         <Button type='submit'>{resources.otpVerificationConfirmOtpLabel}</Button>

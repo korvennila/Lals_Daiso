@@ -130,11 +130,13 @@ const _renderItem = (
                             })}
                         </Node>
                     )}
-                    {productPrice}
                     {productUnitOfMeasure}
                 </Node>
                 {inventoryInformation}
-                {addToCartButton}
+                <Node className='msc-wishlist-price_content'>
+                    {productPrice}
+                    {addToCartButton}
+                </Node>
                 {removeButton}
                 {productStatusMessage}
             </Node>
@@ -151,8 +153,10 @@ const _renderItem = (
                     })}
                 </Node>
             )}
-            {productPrice}
-            {addToCartButton}
+            <Node className='msc-wishlist-price_content'>
+                {productPrice}
+                {addToCartButton}
+            </Node>
             {removeButton}
             {productStatusMessage}
         </Node>
