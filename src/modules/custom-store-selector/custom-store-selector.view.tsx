@@ -79,10 +79,10 @@ const renderBody: React.FC<IStoreSelectorViewProps> = props => {
         spinner,
         // locationsList,
         noLocationsMessage,
-        maps,
-        bodyWrapperProps,
-        storeResultContainerProps,
-        mapContainerProps,
+        // maps,
+        // bodyWrapperProps,
+        // storeResultContainerProps,
+        // mapContainerProps,
         isMobileView,
         storeDetailsModal,
         selectedLocation,
@@ -91,30 +91,37 @@ const renderBody: React.FC<IStoreSelectorViewProps> = props => {
 
     if (isMobileView) {
         return (
+            // <Node {...BodyContainerProps}>
+            //     {/* {locationsMessage}
+            //     {search} */}
+            //     <Node {...bodyWrapperProps!}>
+            //         <Node {...storeResultContainerProps!}>
+            //             {state.isSearchInProgress ? spinner : <>{countryLevelList ? countryLevelList : noLocationsMessage}</>}
+            //             {/* {maps} */}
+            //             <Node {...storeDetailsModal!}>{selectedLocation && renderSelectedStore(selectedLocation)}</Node>
+            //         </Node>
+            //     </Node>
+            // </Node>
             <Node {...BodyContainerProps}>
-                {/* {locationsMessage}
-                {search} */}
-                <Node {...bodyWrapperProps!}>
-                    <Node {...storeResultContainerProps!}>
-                        {state.isSearchInProgress ? spinner : <>{countryLevelList ? countryLevelList : noLocationsMessage}</>}
-                        {maps}
-                        <Node {...storeDetailsModal!}>{selectedLocation && renderSelectedStore(selectedLocation)}</Node>
-                    </Node>
-                </Node>
+                {state.isSearchInProgress ? spinner : <>{countryLevelList ? countryLevelList : noLocationsMessage}</>}
+                <Node {...storeDetailsModal!}>{selectedLocation && renderSelectedStore(selectedLocation)}</Node>
             </Node>
         );
     }
 
     return (
+        // <Node {...BodyContainerProps}>
+        //     <Node {...bodyWrapperProps!}>
+        //         <Node {...storeResultContainerProps!}>
+        //             {locationsMessage}
+        //             {search}
+        //             {state.isSearchInProgress ? spinner : <>{countryLevelList ? countryLevelList : noLocationsMessage}</>}
+        //         </Node>
+        //         <Node {...mapContainerProps!}>{maps}</Node>
+        //     </Node>
+        // </Node>
         <Node {...BodyContainerProps}>
-            <Node {...bodyWrapperProps!}>
-                <Node {...storeResultContainerProps!}>
-                    {/* {locationsMessage}
-                    {search} */}
-                    {state.isSearchInProgress ? spinner : <>{countryLevelList ? countryLevelList : noLocationsMessage}</>}
-                </Node>
-                <Node {...mapContainerProps!}>{maps}</Node>
-            </Node>
+            {state.isSearchInProgress ? spinner : <>{countryLevelList ? countryLevelList : noLocationsMessage}</>}
         </Node>
     );
 };

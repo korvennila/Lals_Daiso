@@ -29,6 +29,7 @@ interface Props {
 
     telemetryContent?: ITelemetryContent;
     onLocationSelected(location: OrgUnitLocation | undefined): void;
+    maps?: React.ReactNode;
 }
 
 const transformStoreLocations = (
@@ -39,7 +40,7 @@ const transformStoreLocations = (
     storeLocationList?.forEach(store => {
         const location = store.OrgUnitAvailability?.OrgUnitLocation;
         const countryCode = location?.Country;
-        const stateCode = location?.State;
+        const stateCode = location?.StateName;
 
         if (countryCode && stateCode) {
             if (!result.countries[countryCode]) {
@@ -71,30 +72,37 @@ const StoreSelectorCustomLocationLines: React.FC<Props> = props => {
     };
 
     return (
-        <div>
-            <StoreSelectorAccordionList data={data} onStateSelected={handleStateSelected} />
-            <StoreSelectorLocationLines
-                locations={selectedLocations}
-                resources={props.resources}
-                preferredDistanceUnit={props.preferredDistanceUnit}
-                alreadySelectedLocation={props.alreadySelectedLocation}
-                outOfStockThreshold={props.outOfStockThreshold}
-                enableOutOfStockCheck={props.enableOutOfStockCheck}
-                onLocationSelected={props.onLocationSelected}
-                storeLocatorView={props.storeLocatorView}
-                selectedStoreLocationId={props.selectedStoreLocationId}
-                onClick={props.onClick}
-                preferredStoreLocationId={props.preferredStoreLocationId}
-                onSetAsPreferredStore={props.onSetAsPreferredStore}
-                onRemovePreferredStore={props.onRemovePreferredStore}
-                isPreferredStoreEnabled={props.isPreferredStoreEnabled}
-                displayList={props.displayList}
-                telemetryContent={props.telemetryContent}
-                isLocationDisabled={props.isLocationDisabled}
-                productPickUpDeliveryOptions={props.productPickUpDeliveryOptions}
-                filteredPickupMode={props.filteredPickupMode}
-                shouldShowIndex={props.shouldShowIndex}
-            />
+        <div className='msc-our-stores-mainContainer'>
+            <div className='msc-country-mainContainer'>
+                <StoreSelectorAccordionList data={data} onStateSelected={handleStateSelected} />
+            </div>
+            <div className='msc-address-mainContainer'>
+                <div className='msc-addressLineItems-mainContainer'>
+                    <StoreSelectorLocationLines
+                        locations={selectedLocations}
+                        resources={props.resources}
+                        preferredDistanceUnit={props.preferredDistanceUnit}
+                        alreadySelectedLocation={props.alreadySelectedLocation}
+                        outOfStockThreshold={props.outOfStockThreshold}
+                        enableOutOfStockCheck={props.enableOutOfStockCheck}
+                        onLocationSelected={props.onLocationSelected}
+                        storeLocatorView={props.storeLocatorView}
+                        selectedStoreLocationId={props.selectedStoreLocationId}
+                        onClick={props.onClick}
+                        preferredStoreLocationId={props.preferredStoreLocationId}
+                        onSetAsPreferredStore={props.onSetAsPreferredStore}
+                        onRemovePreferredStore={props.onRemovePreferredStore}
+                        isPreferredStoreEnabled={props.isPreferredStoreEnabled}
+                        displayList={props.displayList}
+                        telemetryContent={props.telemetryContent}
+                        isLocationDisabled={props.isLocationDisabled}
+                        productPickUpDeliveryOptions={props.productPickUpDeliveryOptions}
+                        filteredPickupMode={props.filteredPickupMode}
+                        shouldShowIndex={props.shouldShowIndex}
+                    />
+                </div>
+                {props.maps}
+            </div>
         </div>
     );
 };

@@ -201,7 +201,7 @@
             "comment": "Text to show on add to cart button"
         },
         "outOfStockText": {
-            "value": "Out of Stock",
+            "value": "Item out of Stock",
             "comment": "Text to show when out of stock"
         },
         "averageRatingAriaLabel": {

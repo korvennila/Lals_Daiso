@@ -1,0 +1,25 @@
+{
+    "$type": "contentModule",
+    "friendlyName": "COD Order Confirmation",
+    "name": "cod-order-confirmation",
+    "description": "Please add meaningful description for authoring",
+    "categories": ["cod-order-confirmation"],
+    "tags": ["Additional tags go here"],
+    "dataActions": {},
+    "config": {
+        "showText": {
+            "friendlyName": "showText",
+            "description": "example config value",
+            "type": "string",
+            "default": "Example Config Value",
+            "scope": "module",
+            "group": "Layout Properties"
+        }
+    },
+    "resources": {
+        "resourceKey": {
+            "comment": "resource description",
+            "value": "resource value"
+        }
+    }
+}

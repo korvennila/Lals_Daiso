@@ -23,8 +23,8 @@ export const From: React.FC<IForm> = ({
     inputNumber,
     // inputPin,
     // inputExp,
-    applyButton,
-    removeButton
+    applyButton
+    // removeButton
     // supportExternalGiftCard,
     // showGiftCardPinInput,
     // showGiftCardExpInput,
@@ -59,7 +59,7 @@ export const From: React.FC<IForm> = ({
         </>
         {/* )} */}
         {applyButton}
-        {removeButton}
+        {/* {removeButton} */}
     </Node>
 );
 
@@ -103,10 +103,14 @@ const CheckoutGiftCardView: React.FC<ICheckoutGiftCardViewProps> = props => {
         resources
     } = props;
 
+    const cAthenticated = props.context.request.user.isAuthenticated ? props.context.request.user.isAuthenticated : false;
+
     return (
         <Module {...checkoutGiftCardProps} ref={checkoutErrorRef}>
             {addGiftCard && <AddResource {...addGiftCard} />}
-            {isMobileModalOpen && <MobileModal isOpen={isMobileModalOpen} onClose={closeModal} resources={resources} props={props} />}
+            {isMobileModalOpen && !cAthenticated && (
+                <MobileModal isOpen={isMobileModalOpen} onClose={closeModal} resources={resources} props={props} />
+            )}
         </Module>
     );
 };

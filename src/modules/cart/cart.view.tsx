@@ -613,6 +613,20 @@ const CartView: React.FC<ICartViewProps & ICartExtensionProps<{}>> = (props: ICa
                                 ? renderInvoiceSummarylines(props.invoiceSummaryLineitems, props.OrderSummaryItems, props)
                                 : renderOrderSummarylines(props.orderSummaryLineitems, props.OrderSummaryItems, props)}
                             {renderErrorBlock(props.OrderSummaryErrors)}
+                            {props.config.buttonLink && (
+                                <Node className='msc-cart-continue-shopping_btn'>
+                                    <Button>
+                                        <a
+                                            href={props.config.buttonLink.linkUrl.destinationUrl}
+                                            aria-label={props.config.buttonLink.ariaLabel}
+                                            target={props.config.buttonLink.openInNewTab ? '_blank' : undefined}
+                                            rel='noopener noreferrer'
+                                        >
+                                            {props.resources.continueShoppingButtonText}
+                                        </a>
+                                    </Button>
+                                </Node>
+                            )}
                         </Node>
                         {renderOrderSummaryCheckout(props)}
                     </Node>

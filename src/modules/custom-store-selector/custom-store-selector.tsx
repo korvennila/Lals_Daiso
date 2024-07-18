@@ -619,6 +619,7 @@ class StoreSelector extends React.Component<ICustomStoreSelectorProps<ICustomSto
                     productPickUpDeliveryOptions={storeSelectorStateManager?.context?.deliveryOptions?.DeliveryOptions}
                     filteredPickupMode={this.state.filteredPickupMode}
                     shouldShowIndex={hasMapSlot}
+                    maps={hasMapSlot ? mapSlot[0] : undefined}
                 />
             ) : (
                 undefined

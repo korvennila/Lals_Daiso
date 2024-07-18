@@ -17,6 +17,7 @@ export interface ICartConfig extends Msdyn365.IModuleConfig {
     showGuestCheckoutButton?: boolean;
     freeShippingPrice?: string;
     freeShippingTitle?: string;
+    buttonLink?: IButtonLinkData;
 }
 
 export interface ICartResources {
@@ -142,6 +143,13 @@ export interface ICartResources {
     salesAgreementPricePrompt: string;
     checkoutBlockedDueToUnavailableFundsTitle: string;
     checkoutBlockedDueToUnavailableFundsMessage: string;
+}
+
+export interface IButtonLinkData {
+    linkText?: string;
+    linkUrl: Msdyn365.ILinkData;
+    ariaLabel?: string;
+    openInNewTab?: boolean;
 }
 
 export interface ICartProps<T> extends Msdyn365.IModule<T> {
