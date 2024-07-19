@@ -23,12 +23,14 @@ export const From: React.FC<IForm> = ({
     inputNumber,
     // inputPin,
     // inputExp,
-    applyButton
+    applyButton,
     // removeButton
     // supportExternalGiftCard,
     // showGiftCardPinInput,
     // showGiftCardExpInput,
     // alertFieldLabel
+    resources,
+    config
 }) => (
     <Node {...formProps}>
         {alert}
@@ -55,7 +57,13 @@ export const From: React.FC<IForm> = ({
         ) : ( */}
         <>
             {label}
-            {inputNumber}
+            <Node className='msc-cod-charges-container'>
+                {inputNumber}
+                <Node className='msc-cod-charges-label'>
+                    {resources?.codChargesLabel}
+                    {config?.codChargesAmount}
+                </Node>
+            </Node>
         </>
         {/* )} */}
         {applyButton}
@@ -78,9 +86,9 @@ export const GiftCardList: React.FC<IList> = ({ listProps, list }) => (
     </Node>
 );
 
-export const AddResource: React.FC<IAddResource> = ({ form, list }) => (
+export const AddResource: React.FC<IAddResource> = ({ form, list, resources, config }) => (
     <>
-        {form && <From {...form} />}
+        {form && <From {...form} resources={resources} config={config} />}
         {/* {list && <GiftCardList {...list} />} */}
     </>
 );
@@ -100,16 +108,24 @@ const CheckoutGiftCardView: React.FC<ICheckoutGiftCardViewProps> = props => {
         addGiftCard,
         isMobileModalOpen,
         closeModal,
-        resources
+        resources,
+        codMobileNumber,
+        config
     } = props;
 
     const cAthenticated = props.context.request.user.isAuthenticated ? props.context.request.user.isAuthenticated : false;
 
     return (
         <Module {...checkoutGiftCardProps} ref={checkoutErrorRef}>
-            {addGiftCard && <AddResource {...addGiftCard} />}
+            {addGiftCard && <AddResource {...addGiftCard} resources={resources} config={config} />}
             {isMobileModalOpen && !cAthenticated && (
-                <MobileModal isOpen={isMobileModalOpen} onClose={closeModal} resources={resources} props={props} />
+                <MobileModal
+                    isOpen={isMobileModalOpen}
+                    onClose={closeModal}
+                    resources={resources}
+                    props={props}
+                    codMobileNumber={codMobileNumber}
+                />
             )}
         </Module>
     );

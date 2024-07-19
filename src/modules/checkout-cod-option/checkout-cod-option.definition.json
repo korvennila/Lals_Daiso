@@ -45,6 +45,12 @@
             "friendlyName": "Mobile Number OTP Image",
             "description": "Image to be displayed when Mobile Number OTP Popup triggered"
         },
+        "codChargesAmount": {
+            "friendlyName": "Cash on Delivery Charges",
+            "description": "This allows business to set Cash on Delivery charge",
+            "type": "string",
+            "default": "0"
+        },
         "otpVerificationImage": {
             "type": "image",
             "friendlyName": "OTP Verification Image",
@@ -114,7 +120,7 @@
         },
         "applyGiftCardButton": {
             "comment": "Label for apply gift card button",
-            "value": "Apply"
+            "value": "Place Order"
         },
         "removeGiftCardButton": {
             "comment": "Label for remove gift card button",
@@ -167,6 +173,10 @@
         "otpVerificationResendLabel": {
             "comment": "Label for Resend OTP",
             "value": "Resend OTP in {0}"
+        },
+        "codChargesLabel": {
+            "comment": "Label for COD Charges",
+            "value": "COD Charges: AED"
         }
     }
 }

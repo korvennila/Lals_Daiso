@@ -19,6 +19,7 @@ export interface ICheckoutCodOptionConfig extends Msdyn365.IModuleConfig {
     className?: string;
     clientRender?: boolean;
     mobileNumberOTPImage?: Msdyn365.IImageData;
+    codChargesAmount?: string;
     otpVerificationImage?: Msdyn365.IImageData;
 }
 
@@ -52,6 +53,7 @@ export interface ICheckoutCodOptionResources {
     otpVerificationValidationMessage: string;
     otpVerificationConfirmOtpLabel: string;
     otpVerificationResendLabel: string;
+    codChargesLabel: string;
 }
 
 export interface ICheckoutCodOptionProps<T> extends Msdyn365.IModule<T> {

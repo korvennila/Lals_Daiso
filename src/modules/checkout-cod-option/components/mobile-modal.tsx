@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { INodeProps, Node, Modal, Button } from '@msdyn365-commerce-modules/utilities';
 import { IImageData, Image } from '@msdyn365-commerce/core';
 import { ICheckoutGiftCardViewProps } from '../checkout-cod-option';
+import { PhoneRegex } from '@msdyn365-commerce-modules/retail-actions';
 
 interface MobileModalProps {
     isOpen: boolean;
@@ -19,11 +20,12 @@ interface MobileModalProps {
         otpVerificationResendLabel: string;
     };
     props: ICheckoutGiftCardViewProps;
+    codMobileNumber: string | undefined;
 }
 
-const MobileModal: React.FC<MobileModalProps> = ({ isOpen, onClose, resources, props }) => {
+const MobileModal: React.FC<MobileModalProps> = ({ isOpen, onClose, resources, props, codMobileNumber }) => {
     const [currentStep, setCurrentStep] = useState<'enterMobile' | 'verifyOtp'>('enterMobile');
-    const [mobileNumber, setMobileNumber] = useState('');
+    const [mobileNumber, setMobileNumber] = useState<string>(codMobileNumber || '');
     const [otp, setOtp] = useState('');
     const [otpFromResponse, setOtpFromResponse] = useState('');
     const [otpErrorMessage, setOtpErrorMessage] = useState('');
@@ -44,9 +46,9 @@ const MobileModal: React.FC<MobileModalProps> = ({ isOpen, onClose, resources, p
     const handleMobileNumberSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
 
-        const mobileNumberPattern = /^[1-9]\d{9}$/; // Replace this pattern with the desired validation pattern
+        const mobileNumberPattern = new RegExp(PhoneRegex.defaultRegex); // Create RegExp object using the pattern
         if (!mobileNumberPattern.test(mobileNumber)) {
-            setMobileNumberErrorMessage('Please enter a valid 10-digit mobile number.');
+            setMobileNumberErrorMessage('Please enter a valid mobile number.');
             return;
         }
 
