@@ -24,7 +24,6 @@ export const From: React.FC<IForm> = ({
     // inputPin,
     // inputExp,
     applyButton,
-    // removeButton
     // supportExternalGiftCard,
     // showGiftCardPinInput,
     // showGiftCardExpInput,
@@ -60,14 +59,13 @@ export const From: React.FC<IForm> = ({
             <Node className='msc-cod-charges-container'>
                 {inputNumber}
                 <Node className='msc-cod-charges-label'>
-                    {resources?.codChargesLabel}
-                    {config?.codChargesAmount}
+                    {`${resources?.codChargesLabel} `}
+                    {parseFloat(config?.codChargesAmount!)}
                 </Node>
             </Node>
         </>
         {/* )} */}
         {applyButton}
-        {/* {removeButton} */}
     </Node>
 );
 
@@ -104,28 +102,19 @@ const CheckoutGiftCardView: React.FC<ICheckoutGiftCardViewProps> = props => {
     const {
         checkoutGiftCardProps,
         checkoutErrorRef,
-        //showGiftCard,
         addGiftCard,
         isMobileModalOpen,
-        closeModal,
         resources,
         codMobileNumber,
-        config
+        config,
+        isAuthenticated
     } = props;
-
-    const cAthenticated = props.context.request.user.isAuthenticated ? props.context.request.user.isAuthenticated : false;
 
     return (
         <Module {...checkoutGiftCardProps} ref={checkoutErrorRef}>
             {addGiftCard && <AddResource {...addGiftCard} resources={resources} config={config} />}
-            {isMobileModalOpen && !cAthenticated && (
-                <MobileModal
-                    isOpen={isMobileModalOpen}
-                    onClose={closeModal}
-                    resources={resources}
-                    props={props}
-                    codMobileNumber={codMobileNumber}
-                />
+            {isMobileModalOpen && !isAuthenticated && (
+                <MobileModal isOpen={isMobileModalOpen} resources={resources} props={props} codMobileNumber={codMobileNumber} />
             )}
         </Module>
     );

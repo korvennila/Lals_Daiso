@@ -32,6 +32,7 @@ import { getList, IList } from './components/get-list';
 import TitleCompoent from './components/title';
 import { focusOnCheckoutError } from '@msdyn365-commerce-modules/checkout';
 import { getCartState } from '@msdyn365-commerce/global-state';
+import CodPaymentService from '../../shared/CodPaymentService';
 
 export * from './components/get-form';
 export * from './components/get-item';
@@ -45,6 +46,9 @@ interface ICheckoutGiftCardState {
     giftCardExp: string;
     isMobileModalOpen?: boolean;
     isCodSelected?: boolean;
+    mobileNumberOTP: string;
+    isRadioButtonChecked: boolean;
+    isOTPVerified: boolean;
 }
 
 enum SupportedGiftCardType {
@@ -87,6 +91,11 @@ export interface ICheckoutGiftCardViewProps extends ICheckoutCodOptionProps<{}>,
     applyGiftCard?(): void;
     closeModal(): void;
     codMobileNumber?: string;
+    setCodSelected(): void;
+    isAuthenticated: boolean;
+    setMobileNumberOTP(otpValue: string): void;
+    setOTPVerified(verify: boolean): void;
+    handleCODButtonCheck(value: boolean): void;
 }
 
 /**
@@ -103,7 +112,10 @@ export class CheckoutGiftCard extends React.Component<ICheckoutGiftCardModulePro
         giftCardPin: '',
         giftCardExp: '',
         isMobileModalOpen: false,
-        isCodSelected: false
+        isCodSelected: false,
+        mobileNumberOTP: '',
+        isOTPVerified: false,
+        isRadioButtonChecked: false
     };
 
     private readonly inputRef: React.RefObject<HTMLInputElement> = React.createRef();
@@ -113,6 +125,19 @@ export class CheckoutGiftCard extends React.Component<ICheckoutGiftCardModulePro
     private readonly inputExpRef: React.RefObject<HTMLInputElement> = React.createRef();
 
     private readonly checkoutErrorRef: React.RefObject<HTMLElement> = React.createRef();
+
+    private readonly radioButtonRef: React.RefObject<HTMLInputElement> = React.createRef();
+
+    private handleCODOptionChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+        const selectedOption = event.target.value;
+        const codPaymentService = CodPaymentService.getInstance();
+        codPaymentService.setSelectedOption(selectedOption);
+
+        if (this.props.context.request.user.isAuthenticated && !this.state.isOTPVerified) {
+            this.setCodSelected();
+            this.handleCodClick();
+        }
+    };
 
     @computed get isDataReady(): boolean {
         return (this.props.data.checkout.result && this.props.data.checkout.status) === 'SUCCESS';
@@ -196,7 +221,32 @@ export class CheckoutGiftCard extends React.Component<ICheckoutGiftCardModulePro
                 }
             );
         }
+
+        const radioButton = this.radioButtonRef.current;
+        if (radioButton) {
+            radioButton.addEventListener('click', this.handleClick);
+        }
     }
+
+    public componentWillUnmount() {
+        const radioButton = this.radioButtonRef.current;
+        if (radioButton) {
+            radioButton.removeEventListener('click', this.handleClick);
+        }
+    }
+
+    private handleClick = (event: Event) => {
+        const radioButton = this.radioButtonRef.current;
+        if (radioButton) {
+            if (!this.props.context.request.user.isAuthenticated && !this.state.isOTPVerified) {
+                event.preventDefault();
+                this.setState({ isMobileModalOpen: true, isRadioButtonChecked: false });
+            } else {
+                this.setState({ isRadioButtonChecked: radioButton.checked });
+                this.handleCODOptionChange({ target: radioButton } as React.ChangeEvent<HTMLInputElement>);
+            }
+        }
+    };
 
     public shouldComponentUpdate(nextProps: ICheckoutGiftCardModuleProps, nextState: ICheckoutGiftCardState): boolean {
         if (this.state === nextState && this.props.data === nextProps.data) {
@@ -204,6 +254,10 @@ export class CheckoutGiftCard extends React.Component<ICheckoutGiftCardModulePro
         }
         return true;
     }
+
+    private handleCODButtonCheck = (value: boolean) => {
+        this.setState({ isRadioButtonChecked: value });
+    };
 
     private handleCodClick = () => {
         this.setState({ isMobileModalOpen: true });
@@ -215,6 +269,14 @@ export class CheckoutGiftCard extends React.Component<ICheckoutGiftCardModulePro
 
     private setCodSelected = () => {
         this.setState({ isCodSelected: !this.state.isCodSelected });
+    };
+
+    private setMobileNumberOPT = (value: string) => {
+        this.setState({ mobileNumberOTP: value });
+    };
+
+    private setOPTVerified = (value: boolean) => {
+        this.setState({ isOTPVerified: value });
     };
 
     private readonly korPreCheckoutRequest = async (): Promise<any> => {
@@ -232,14 +294,6 @@ export class CheckoutGiftCard extends React.Component<ICheckoutGiftCardModulePro
         const cCodChargesAmount = parseFloat(this.props.config.codChargesAmount ? this.props.config.codChargesAmount : '0');
         const cAmountDue = checkoutState?.checkoutCart.cart.AmountDue;
         const cDeliveryMode = checkoutState?.checkoutCart.cart.DeliveryMode;
-
-        if (currentCartState) {
-            console.log('currentCartState.cart.Id---', currentCartState.cart.Id);
-            console.log('checkoutState---->', checkoutState);
-            console.log('guestCheckoutEmail---->', checkoutState?.guestCheckoutEmail);
-            console.log('ShippingChargeAmount---->', checkoutState?.checkoutCart.cart.ShippingChargeAmount);
-            console.log('this.props.data.checkout.result---->', checkoutState?.checkoutCart.cart.AmountDue);
-        }
 
         try {
             const response = await fetch(cKORPreCheckoutRequestUrl, {
@@ -262,51 +316,13 @@ export class CheckoutGiftCard extends React.Component<ICheckoutGiftCardModulePro
             });
 
             if (response.status === 200) {
-                // const data = await response.json();
-                await currentCartState.refreshCart({});
-                window.location.href = `/cod-order-confirmation?orderid=${'TBDJJKD986NJJSS24'}&iscod=true`;
-                // return data;
-            } else {
-                this.setError('Failed to fetch data');
-                return null;
-            }
-        } catch (error) {
-            this.setError('Failed to fetch data');
-            console.error('Fetch data error:', error);
-            return null;
-        }
-    };
-
-    private readonly removePreCheckoutRequest = async (): Promise<any> => {
-        const cRetailURL = this.props.context.request.apiSettings.baseUrl;
-        const cRetailOUN = this.props.context.request.apiSettings.oun ? this.props.context.request.apiSettings.oun : '';
-
-        const cKORPreCheckoutRequestUrl = `${cRetailURL}commerce/KORPreCheckoutRequest?api-version=7.3`;
-        const currentCartState = await getCartState(this.props.context?.actionContext);
-
-        if (currentCartState) {
-            console.log('currentCartState.cart.Id---', currentCartState.cart.Id);
-            console.log('currentCartState.cart---', currentCartState.cart!);
-            console.log('telementryData---', this.props.context.request.telemetryData);
-        }
-
-        try {
-            const response = await fetch(cKORPreCheckoutRequestUrl, {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                    OUN: cRetailOUN,
-                    'User-Agent': 'Mozilla/5.0 (Windows NT 6.3; Win64; x64; rv:58.0) Gecko/20100101 Firefox/58.0'
-                },
-                body: JSON.stringify({
-                    cartId: currentCartState.cart.Id,
-                    amt: currentCartState.cart.TotalAmount
-                })
-            });
-
-            if (response.status === 200) {
                 const data = await response.json();
-                return data;
+                if (data && data.value) {
+                    await currentCartState.refreshCart({});
+                    if (this.props.config.codOrderConfirmationLink) {
+                        window.location.href = `${this.props.config.codOrderConfirmationLink?.linkUrl.destinationUrl}?orderid=${data.value}&iscod=true`;
+                    }
+                }
             } else {
                 this.setError('Failed to fetch data');
                 return null;
@@ -330,6 +346,7 @@ export class CheckoutGiftCard extends React.Component<ICheckoutGiftCardModulePro
         const additionalFields = showAdditionalFields;
         const supportedGiftCardType = this.props.context.app.config.giftCardSupported;
         const codMobileNumber = checkout.result?.shippingAddress?.Phone ? checkout.result?.shippingAddress?.Phone : '';
+        const cAuthenticated = this.props.context.request.user.isAuthenticated ? this.props.context.request.user.isAuthenticated : false;
 
         if (!this.isEnabled() || (!this.shouldPayGiftCard && !isReady)) {
             this.props.context.telemetry.error('Checkout giftcard content is empty, module wont render');
@@ -394,9 +411,13 @@ export class CheckoutGiftCard extends React.Component<ICheckoutGiftCardModulePro
                           disableAddGiftCard: this.disableAddGiftCard,
                           handleCodClick: this.handleCodClick,
                           handlePreCheckout: this.korPreCheckoutRequest,
-                          removePreCheckout: this.removePreCheckoutRequest,
                           setCodSelected: this.setCodSelected,
-                          isCodSelected: this.state.isCodSelected ? this.state.isCodSelected : false
+                          isCodSelected: this.state.isCodSelected ? this.state.isCodSelected : false,
+                          isAuthenticated: cAuthenticated,
+                          mobileNumberOTP: this.state.mobileNumberOTP,
+                          handleCODOptionChange: this.handleCODOptionChange,
+                          radioButtonRef: this.radioButtonRef,
+                          isRadioButtonChecked: this.state.isRadioButtonChecked
                       }),
                       list: getList({
                           canRemove: true,
@@ -408,7 +429,12 @@ export class CheckoutGiftCard extends React.Component<ICheckoutGiftCardModulePro
                   }
                 : undefined,
             closeModal: this.closeModal,
-            codMobileNumber: codMobileNumber
+            codMobileNumber: codMobileNumber,
+            setCodSelected: this.setCodSelected,
+            isAuthenticated: cAuthenticated,
+            setMobileNumberOTP: this.setMobileNumberOPT,
+            handleCODButtonCheck: this.handleCODButtonCheck,
+            setOTPVerified: this.setOPTVerified
         };
 
         return this.props.renderView(viewProps) as React.ReactElement;

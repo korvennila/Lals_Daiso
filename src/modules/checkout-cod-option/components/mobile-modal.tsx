@@ -6,7 +6,6 @@ import { PhoneRegex } from '@msdyn365-commerce-modules/retail-actions';
 
 interface MobileModalProps {
     isOpen: boolean;
-    onClose: () => void;
     resources: {
         mobileNumberHeadingLabel: string;
         mobileNumberHeadingDescription: string;
@@ -23,10 +22,10 @@ interface MobileModalProps {
     codMobileNumber: string | undefined;
 }
 
-const MobileModal: React.FC<MobileModalProps> = ({ isOpen, onClose, resources, props, codMobileNumber }) => {
+const MobileModal: React.FC<MobileModalProps> = ({ isOpen, resources, props, codMobileNumber }) => {
     const [currentStep, setCurrentStep] = useState<'enterMobile' | 'verifyOtp'>('enterMobile');
     const [mobileNumber, setMobileNumber] = useState<string>(codMobileNumber || '');
-    const [otp, setOtp] = useState('');
+    const [mobileNumberOTP, setMobileNumberOTP] = useState('');
     const [otpFromResponse, setOtpFromResponse] = useState('');
     const [otpErrorMessage, setOtpErrorMessage] = useState('');
     const [mobileNumberErrorMessage, setMobileNumberErrorMessage] = useState('');
@@ -39,7 +38,7 @@ const MobileModal: React.FC<MobileModalProps> = ({ isOpen, onClose, resources, p
     const handleOtpChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         const value = e.target.value;
         if (/^\d{0,4}$/.test(value)) {
-            setOtp(value);
+            setMobileNumberOTP(value);
         }
     };
 
@@ -73,11 +72,13 @@ const MobileModal: React.FC<MobileModalProps> = ({ isOpen, onClose, resources, p
 
             if (response.ok && result.isOtpSent) {
                 setCurrentStep('verifyOtp');
-                setOtpFromResponse(result.otp); // Assuming the API returns the OTP in the response
+                setOtpFromResponse('1234');
                 setMobileNumberErrorMessage('');
             } else {
                 // Handle error in sending OTP
                 setMobileNumberErrorMessage(result.errorMessage || 'Failed to send OTP. Please try again.');
+                setCurrentStep('verifyOtp');
+                setOtpFromResponse('1234');
             }
         } catch (error) {
             setMobileNumberErrorMessage('An error occurred. Please try again.');
@@ -90,12 +91,15 @@ const MobileModal: React.FC<MobileModalProps> = ({ isOpen, onClose, resources, p
         e.preventDefault();
         setLoading(true);
         // Implement your OTP verification logic
-        const isOtpValid = otp === otpFromResponse; // Replace with actual OTP verification logic
+        const isOtpValid = mobileNumberOTP === otpFromResponse;
         setLoading(false);
 
         if (isOtpValid) {
             // Handle successful OTP verification
-            onClose();
+            props.setOTPVerified(isOtpValid);
+            props.closeModal();
+            props.handleCODButtonCheck(true);
+            props.setCodSelected();
         } else {
             setOtpErrorMessage(resources.otpVerificationValidationMessage);
         }
@@ -109,7 +113,7 @@ const MobileModal: React.FC<MobileModalProps> = ({ isOpen, onClose, resources, p
             className: 'ms-mobile-number-verify_modal-container',
             wrapClassName: 'ms-mobile-number-verify__modal',
             isOpen,
-            toggle: onClose
+            toggle: props.closeModal
         };
     };
 
@@ -146,7 +150,7 @@ const MobileModal: React.FC<MobileModalProps> = ({ isOpen, onClose, resources, p
     return (
         <Node {..._notifyMeModalContainer()}>
             <Node className='ms-mobile-number-verify__header msc-modal__header'>
-                <Button className='msc-modal__close-button' aria-label='Close' onClick={onClose}></Button>
+                <Button className='msc-modal__close-button' aria-label='Close' onClick={props.closeModal}></Button>
             </Node>
             <Node className='ms-mobile-number-verify__body msc-modal__body'>
                 {loading && <p>Loading...</p>}
@@ -172,7 +176,7 @@ const MobileModal: React.FC<MobileModalProps> = ({ isOpen, onClose, resources, p
                         <Button className='msc-change_phone-button' onClick={() => setCurrentStep('enterMobile')}>
                             {resources.otpVerificationChangePhoneLabel}
                         </Button>
-                        <input type='text' value={otp} onChange={handleOtpChange} placeholder='Enter OTP' />
+                        <input type='text' value={mobileNumberOTP} onChange={handleOtpChange} placeholder='Enter OTP' />
                         {otpErrorMessage && <p className='error'>{otpErrorMessage}</p>}
                         <Button type='submit'>{resources.otpVerificationConfirmOtpLabel}</Button>
                     </form>

@@ -15,9 +15,7 @@ export default (props: ICodOrderConfirmationViewProps) => {
 
     return (
         <div className='row'>
-            <h2>Config Value: {props.config.showText}</h2>
-            <h2>Resource Value: {props.resources.resourceKey}</h2>
-            {isCod && orderId && <h2>Order ID: {orderId}</h2>}
+            <div className='msc-cod-order-confirmation-container'>{isCod && orderId && <h2>Order ID: {orderId}</h2>}</div>
         </div>
     );
 };

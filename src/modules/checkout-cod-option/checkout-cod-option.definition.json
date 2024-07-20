@@ -55,6 +55,16 @@
             "type": "image",
             "friendlyName": "OTP Verification Image",
             "description": "Image to be displayed when OTP Verification Popup triggered"
+        },
+        "codOrderConfirmationLink": {
+            "friendlyName": "COD Order Confirmation link",
+            "description": "COD Order Confirmation link",
+            "$ref": "@msdyn365-commerce-modules/definitions/dist/src/ActionLink.json#/definitions/actionLink"
+        },
+        "codOrderFailureLink": {
+            "friendlyName": "COD Order Failure link",
+            "description": "COD Order Failure link",
+            "$ref": "@msdyn365-commerce-modules/definitions/dist/src/ActionLink.json#/definitions/actionLink"
         }
     },
     "resources": {
