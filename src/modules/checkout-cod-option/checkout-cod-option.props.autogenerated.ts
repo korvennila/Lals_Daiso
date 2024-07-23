@@ -50,10 +50,14 @@ export interface ICheckoutCodOptionResources {
     mobileNumberInputLabel: string;
     mobileNumberCodeMessage: string;
     mobileNumberGetOTPText: string;
+    enterValidMobileNumber: string;
+    minMobileNumberLimit: string;
     otpVerificationHeadingLabel: string;
     otpVerificationChangePhoneLabel: string;
     otpVerificationValidationMessage: string;
+    otpVerificationSuccessMessage: string;
     otpVerificationConfirmOtpLabel: string;
+    otpResendButton: string;
     otpVerificationResendLabel: string;
     codChargesLabel: string;
 }

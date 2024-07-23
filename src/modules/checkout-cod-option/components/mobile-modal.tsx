@@ -1,8 +1,9 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { INodeProps, Node, Modal, Button } from '@msdyn365-commerce-modules/utilities';
 import { IImageData, Image } from '@msdyn365-commerce/core';
 import { ICheckoutGiftCardViewProps } from '../checkout-cod-option';
 import { PhoneRegex } from '@msdyn365-commerce-modules/retail-actions';
+import { isEmpty } from '@msdyn365-commerce/retail-proxy';
 
 interface MobileModalProps {
     isOpen: boolean;
@@ -17,19 +18,37 @@ interface MobileModalProps {
         otpVerificationValidationMessage: string;
         otpVerificationConfirmOtpLabel: string;
         otpVerificationResendLabel: string;
+        otpVerificationSuccessMessage: string;
+        otpResendButton: string;
+        enterValidMobileNumber: string;
+        minMobileNumberLimit: string;
     };
     props: ICheckoutGiftCardViewProps;
     codMobileNumber: string | undefined;
 }
 
 const MobileModal: React.FC<MobileModalProps> = ({ isOpen, resources, props, codMobileNumber }) => {
+    const countryCode = '+971';
     const [currentStep, setCurrentStep] = useState<'enterMobile' | 'verifyOtp'>('enterMobile');
     const [mobileNumber, setMobileNumber] = useState<string>(codMobileNumber || '');
     const [mobileNumberOTP, setMobileNumberOTP] = useState('');
     const [otpFromResponse, setOtpFromResponse] = useState('');
     const [otpErrorMessage, setOtpErrorMessage] = useState('');
+    const [otpSuccessMessage, setOtpSuccessMessage] = useState('');
     const [mobileNumberErrorMessage, setMobileNumberErrorMessage] = useState('');
     const [loading, setLoading] = useState(false);
+    const [resendTimer, setResendTimer] = useState(30);
+    const [canResend, setCanResend] = useState(false);
+
+    useEffect(() => {
+        let timer: NodeJS.Timeout;
+        if (resendTimer > 0) {
+            timer = setTimeout(() => setResendTimer(resendTimer - 1), 1000);
+        } else {
+            setCanResend(true);
+        }
+        return () => clearTimeout(timer);
+    }, [resendTimer]);
 
     const handleMobileNumberChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         setMobileNumber(e.target.value);
@@ -42,12 +61,15 @@ const MobileModal: React.FC<MobileModalProps> = ({ isOpen, resources, props, cod
         }
     };
 
-    const handleMobileNumberSubmit = async (e: React.FormEvent) => {
-        e.preventDefault();
-
+    const sendOtp = async () => {
         const mobileNumberPattern = new RegExp(PhoneRegex.defaultRegex); // Create RegExp object using the pattern
         if (!mobileNumberPattern.test(mobileNumber)) {
-            setMobileNumberErrorMessage('Please enter a valid mobile number.');
+            setMobileNumberErrorMessage(resources.enterValidMobileNumber);
+            return;
+        }
+
+        if (mobileNumber.length < 9) {
+            setMobileNumberErrorMessage(resources.minMobileNumberLimit);
             return;
         }
 
@@ -56,6 +78,7 @@ const MobileModal: React.FC<MobileModalProps> = ({ isOpen, resources, props, cod
         const cRetailOUN = props.context.request.apiSettings.oun ? props.context.request.apiSettings.oun : '';
 
         const cKORSendOTP = `${cRetailURL}commerce/KORSendOTP?api-version=7.3`;
+        const fullMobileNumber = `${countryCode}${mobileNumber}`;
         try {
             // Replace this with your actual API call
             const response = await fetch(cKORSendOTP, {
@@ -65,26 +88,31 @@ const MobileModal: React.FC<MobileModalProps> = ({ isOpen, resources, props, cod
                     OUN: cRetailOUN,
                     'User-Agent': 'Mozilla/5.0 (Windows NT 6.3; Win64; x64; rv:58.0) Gecko/20100101 Firefox/58.0'
                 },
-                body: JSON.stringify({ MobileNumer: mobileNumber })
+                body: JSON.stringify({ MobileNumer: fullMobileNumber })
             });
 
             const result = await response.json();
 
-            if (response.ok && result.isOtpSent) {
+            if (response.ok && result.value) {
                 setCurrentStep('verifyOtp');
-                setOtpFromResponse('1234');
+                setOtpFromResponse(result.value);
                 setMobileNumberErrorMessage('');
+                setResendTimer(30);
+                setCanResend(false);
             } else {
                 // Handle error in sending OTP
-                setMobileNumberErrorMessage(result.errorMessage || 'Failed to send OTP. Please try again.');
-                setCurrentStep('verifyOtp');
-                setOtpFromResponse('1234');
+                setMobileNumberErrorMessage('Failed to send OTP. Please try again.');
             }
         } catch (error) {
             setMobileNumberErrorMessage('An error occurred. Please try again.');
         } finally {
             setLoading(false);
         }
+    };
+
+    const handleMobileNumberSubmit = async (e: React.FormEvent) => {
+        e.preventDefault();
+        sendOtp();
     };
 
     const handleOtpSubmit = async (e: React.FormEvent) => {
@@ -95,11 +123,14 @@ const MobileModal: React.FC<MobileModalProps> = ({ isOpen, resources, props, cod
         setLoading(false);
 
         if (isOtpValid) {
+            setOtpSuccessMessage(resources.otpVerificationSuccessMessage);
             // Handle successful OTP verification
-            props.setOTPVerified(isOtpValid);
-            props.closeModal();
-            props.handleCODButtonCheck(true);
-            props.setCodSelected();
+            setTimeout(() => {
+                props.setOTPVerified(isOtpValid);
+                props.closeModal();
+                props.handleCODButtonCheck(true);
+                props.setCodSelected();
+            }, 3000);
         } else {
             setOtpErrorMessage(resources.otpVerificationValidationMessage);
         }
@@ -159,14 +190,19 @@ const MobileModal: React.FC<MobileModalProps> = ({ isOpen, resources, props, cod
                         {renderMobileNumberOTPImage(props)}
                         <h2>{resources.mobileNumberHeadingLabel}</h2>
                         <p>{resources.mobileNumberHeadingDescription}</p>
-                        <input
-                            type='text'
-                            value={mobileNumber}
-                            onChange={handleMobileNumberChange}
-                            placeholder={resources.mobileNumberInputLabel}
-                        />
+                        <div className='msc-mobile-number-inputContainer'>
+                            <label className='msc-mobile-number-inputLabel'>{countryCode}</label>
+                            <input
+                                type='text'
+                                value={mobileNumber}
+                                onChange={handleMobileNumberChange}
+                                placeholder={resources.mobileNumberInputLabel}
+                            />
+                        </div>
                         {mobileNumberErrorMessage && <p className='error'>{mobileNumberErrorMessage}</p>}
-                        <Button type='submit'>{resources.mobileNumberGetOTPText}</Button>
+                        <Button type='submit' disabled={isEmpty(mobileNumber)}>
+                            {resources.mobileNumberGetOTPText}
+                        </Button>
                     </form>
                 )}
                 {!loading && currentStep === 'verifyOtp' && (
@@ -177,8 +213,22 @@ const MobileModal: React.FC<MobileModalProps> = ({ isOpen, resources, props, cod
                             {resources.otpVerificationChangePhoneLabel}
                         </Button>
                         <input type='text' value={mobileNumberOTP} onChange={handleOtpChange} placeholder='Enter OTP' />
+                        {otpSuccessMessage && <p className='success'>{otpSuccessMessage}</p>}
                         {otpErrorMessage && <p className='error'>{otpErrorMessage}</p>}
-                        <Button type='submit'>{resources.otpVerificationConfirmOtpLabel}</Button>
+                        {canResend ? (
+                            <Button className='msc-otp-resend-btn' onClick={sendOtp}>
+                                {resources.otpResendButton}
+                            </Button>
+                        ) : (
+                            <div className='msc-otp-submit-container'>
+                                <Button className='msc-otp-submit-btn' type='submit' disabled={isEmpty(mobileNumberOTP)}>
+                                    {resources.otpVerificationConfirmOtpLabel}
+                                </Button>
+                                <p className='msc-otp-resend-label'>
+                                    {resources.otpVerificationResendLabel.replace('{0}', resendTimer.toString())}
+                                </p>
+                            </div>
+                        )}
                     </form>
                 )}
             </Node>

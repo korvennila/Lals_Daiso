@@ -49,6 +49,7 @@ interface ICheckoutGiftCardState {
     mobileNumberOTP: string;
     isRadioButtonChecked: boolean;
     isOTPVerified: boolean;
+    isPlaceOrderLoading?: boolean;
 }
 
 enum SupportedGiftCardType {
@@ -115,7 +116,8 @@ export class CheckoutGiftCard extends React.Component<ICheckoutGiftCardModulePro
         isCodSelected: false,
         mobileNumberOTP: '',
         isOTPVerified: false,
-        isRadioButtonChecked: false
+        isRadioButtonChecked: false,
+        isPlaceOrderLoading: false
     };
 
     private readonly inputRef: React.RefObject<HTMLInputElement> = React.createRef();
@@ -280,6 +282,7 @@ export class CheckoutGiftCard extends React.Component<ICheckoutGiftCardModulePro
     };
 
     private readonly korPreCheckoutRequest = async (): Promise<any> => {
+        this.setState({ isPlaceOrderLoading: true });
         const cRetailURL = this.props.context.request.apiSettings.baseUrl;
         const cRetailOUN = this.props.context.request.apiSettings.oun ? this.props.context.request.apiSettings.oun : '';
 
@@ -317,11 +320,21 @@ export class CheckoutGiftCard extends React.Component<ICheckoutGiftCardModulePro
 
             if (response.status === 200) {
                 const data = await response.json();
+                const cCartLineIds: string[] = currentCartState.cart.CartLines
+                    ? currentCartState.cart.CartLines.map(line => line.LineId!.toString())
+                    : [];
+                const input = {
+                    cartLineIds: cCartLineIds
+                };
                 if (data && data.value) {
                     await currentCartState.refreshCart({});
+                    await currentCartState.removeCartLines(input);
                     if (this.props.config.codOrderConfirmationLink) {
                         window.location.href = `${this.props.config.codOrderConfirmationLink?.linkUrl.destinationUrl}?orderid=${data.value}&iscod=true`;
                     }
+                } else {
+                    this.setError('Failed to Place Order');
+                    return null;
                 }
             } else {
                 this.setError('Failed to fetch data');
@@ -331,6 +344,8 @@ export class CheckoutGiftCard extends React.Component<ICheckoutGiftCardModulePro
             this.setError('Failed to fetch data');
             console.error('Fetch data error:', error);
             return null;
+        } finally {
+            this.setState({ isPlaceOrderLoading: false });
         }
     };
 
@@ -417,7 +432,8 @@ export class CheckoutGiftCard extends React.Component<ICheckoutGiftCardModulePro
                           mobileNumberOTP: this.state.mobileNumberOTP,
                           handleCODOptionChange: this.handleCODOptionChange,
                           radioButtonRef: this.radioButtonRef,
-                          isRadioButtonChecked: this.state.isRadioButtonChecked
+                          isRadioButtonChecked: this.state.isRadioButtonChecked,
+                          isPlaceOrderLoading: this.state.isPlaceOrderLoading
                       }),
                       list: getList({
                           canRemove: true,

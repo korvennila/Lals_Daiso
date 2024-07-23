@@ -169,19 +169,16 @@ class Checkout extends React.PureComponent<ICheckoutModuleProps> {
 
         const disableForOBO = Msdyn365.isOboRequest(this.props.context.request) && !this.isPaidOffByCustomerAccount;
 
-        const { isCODOptionSelected } = this.state;
+        // const { isCODOptionSelected } = this.state;
 
         // If isTermsAndConditionAccepted is undefined means TermsAndCondition module is not added to page and we should able to place order.
         return (
-            (this.props.moduleState.isReady &&
-                (isTermsAndConditionAccepted === undefined ||
-                    isTermsAndConditionAccepted ||
-                    shouldEnableSinglePaymentAuthorizationCheckout) &&
-                (this.state.errorMessage === '' ||
-                    shouldEnableSinglePaymentAuthorizationCheckout ||
-                    (this.props.data.checkout.result?.isPaymentVerificationRedirection ?? false)) &&
-                !(shouldEnableSinglePaymentAuthorizationCheckout && disableForOBO)) ||
-            isCODOptionSelected !== ''
+            this.props.moduleState.isReady &&
+            (isTermsAndConditionAccepted === undefined || isTermsAndConditionAccepted || shouldEnableSinglePaymentAuthorizationCheckout) &&
+            (this.state.errorMessage === '' ||
+                shouldEnableSinglePaymentAuthorizationCheckout ||
+                (this.props.data.checkout.result?.isPaymentVerificationRedirection ?? false)) &&
+            !(shouldEnableSinglePaymentAuthorizationCheckout && disableForOBO)
         );
     }
 

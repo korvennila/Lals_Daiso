@@ -148,10 +148,18 @@ const renderStoreHours = (
     // If that fails, fall back to using the OpenFrom and OpenTo properties on the location
     const storeOpenFrom: string | undefined = secondsToTime(location.OpenFrom);
     const storeOpenTo: string | undefined = secondsToTime(location.OpenTo);
+    const isCustom: boolean | undefined = location.IsPickupLocation;
+    const storeHoursData: string | undefined = location.BuildingCompliment;
 
     return (
-        <div className='ms-store-select__store-hours-details'>
-            {storeOpenFrom}-{storeOpenTo}
+        <div className='ms-store-select__store-hours-container'>
+            {!isCustom ? (
+                <div className='ms-store-select__store-hours-details'>
+                    {storeOpenFrom}-{storeOpenTo}
+                </div>
+            ) : (
+                <div className='ms-store-select__store-hours-details'>{storeHoursData}</div>
+            )}
         </div>
     );
 };
@@ -354,10 +362,7 @@ const storeSelectorLocationLineItem: React.FC<IStoreSelectorLocationLineItemProp
             <div className='ms-store-select__location-line-item-header'>
                 {(shouldShowIndex || storeLocatorView) && <span className='ms-store-select__location-line-item-store-index'>{index}</span>}
                 <span className='ms-store-select__location-line-item-store-name'>{storeName}</span>
-                {distanceAsString ? <span className='ms-store-select__location-line-item-store-distance'>
-                {' '}
-                {distanceAsString}
-                </span> : false}
+                {distanceAsString ? <span className='ms-store-select__location-line-item-store-distance'> {distanceAsString}</span> : false}
             </div>
             <div className='ms-store-select__location-line-item-content'>
                 <div className='ms-store-select__location-line-item-contact-info'>
@@ -436,7 +441,9 @@ const storeSelectorLocationLineItem: React.FC<IStoreSelectorLocationLineItemProp
                     <span className='msi-exclamation-triangle' aria-hidden='true' />
                     <span>{props.resources.pickupDeliveryOptionErrorMessage}</span>
                 </span>
-            ) : ('')}
+            ) : (
+                ''
+            )}
         </div>
     );
 };

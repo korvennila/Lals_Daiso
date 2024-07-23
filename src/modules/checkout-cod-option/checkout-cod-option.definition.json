@@ -164,6 +164,14 @@
             "comment": "Label for Get OTP button on Mobile Number Section",
             "value": "Get OTP"
         },
+        "enterValidMobileNumber": {
+            "comment": "Label for Enter a Valid Mobile Number",
+            "value": "Please enter a valid mobile number."
+        },
+        "minMobileNumberLimit": {
+            "comment": "Label for minimum mobile number length",
+            "value": "Mobile number must be at least 9 digits."
+        },
         "otpVerificationHeadingLabel": {
             "comment": "Label for OTP Verification Section as Heading",
             "value": "OTP Verification"
@@ -176,13 +184,21 @@
             "comment": "Label for OTP Verification Validation Message",
             "value": "Entered OTP is invalid or expired"
         },
+        "otpVerificationSuccessMessage": {
+            "comment": "Label for OTP Verification Success Message",
+            "value": "Entered OTP is verified"
+        },
         "otpVerificationConfirmOtpLabel": {
             "comment": "Label for Confirm OTP button on OTP Verification",
             "value": "Confirm OTP"
         },
+        "otpResendButton": {
+            "comment": "Button label for Resend OTP",
+            "value": "Resend OTP"
+        },
         "otpVerificationResendLabel": {
             "comment": "Label for Resend OTP",
-            "value": "Resend OTP in {0}"
+            "value": "Resend OTP in {0} seconds"
         },
         "codChargesLabel": {
             "comment": "Label for COD Charges",

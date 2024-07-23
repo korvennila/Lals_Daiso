@@ -122,6 +122,12 @@
             "description": "Provide the list of additional stores information for this module",
             "type": "string",
             "default": ""
+        },
+        "showMap": {
+            "friendlyName": "Show Map",
+            "description": "Switch to turn display map",
+            "type": "boolean",
+            "default": false
         }
     },
     "slots": {

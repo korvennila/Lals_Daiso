@@ -620,6 +620,7 @@ class StoreSelector extends React.Component<ICustomStoreSelectorProps<ICustomSto
                     filteredPickupMode={this.state.filteredPickupMode}
                     shouldShowIndex={hasMapSlot}
                     maps={hasMapSlot ? mapSlot[0] : undefined}
+                    showMap={this.props.config.showMap ? this.props.config.showMap : false}
                 />
             ) : (
                 undefined

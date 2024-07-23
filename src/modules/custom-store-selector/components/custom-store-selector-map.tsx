@@ -1,21 +1,11 @@
 import React from 'react';
-import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet';
+import { Map, Marker, ZoomControl } from 'pigeon-maps';
 
-const MapComponent: React.FC = () => {
-    const position: [number, number] = [51.505, -0.09];
+export function MyMap() {
     return (
-        <MapContainer center={position} zoom={13} style={{ height: '300px', width: '300px' }}>
-            <TileLayer
-                url='https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png'
-                attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-            />
-            <Marker position={position}>
-                <Popup>
-                    A pretty CSS3 popup. <br /> Easily customizable.
-                </Popup>
-            </Marker>
-        </MapContainer>
+        <Map height={300} defaultCenter={[50.879, 4.6997]} defaultZoom={11}>
+            <ZoomControl />
+            <Marker width={50} anchor={[50.879, 4.6997]} />
+        </Map>
     );
-};
-
-export default MapComponent;
+}

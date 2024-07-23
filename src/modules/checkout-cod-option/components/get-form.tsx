@@ -45,6 +45,7 @@ export interface IGetFormInput {
     mobileNumberOTP: string;
     handleCODOptionChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
     isRadioButtonChecked: boolean;
+    isPlaceOrderLoading?: boolean;
 }
 
 export interface IForm {
@@ -137,7 +138,8 @@ export const getForm = (options: IGetFormInput): IForm => {
         isCodSelected,
         radioButtonRef,
         handleCODOptionChange,
-        isRadioButtonChecked
+        isRadioButtonChecked,
+        isPlaceOrderLoading
     } = options;
 
     const formProps = {
@@ -247,10 +249,10 @@ export const getForm = (options: IGetFormInput): IForm => {
 
     const applyButton = (
         <Button
-            className='ms-checkout-gift-card__btn-apply'
+            className={`ms-checkout-gift-card__btn-apply ${isPlaceOrderLoading ? 'is-busy' : ''}`}
             onClick={onApplyHandler(handlePreCheckout)}
             aria-label={applyGiftCardButton}
-            disabled={disableAddGiftCard || !isCodSelected}
+            disabled={disableAddGiftCard || !isCodSelected || isPlaceOrderLoading}
         >
             {applyGiftCardButton}
         </Button>
