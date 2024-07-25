@@ -1,11 +1,120 @@
-import React from 'react';
+import React, { Component } from 'react';
 import { Map, Marker, ZoomControl } from 'pigeon-maps';
+import { IFullOrgUnitAvailability, ArrayExtensions } from '@msdyn365-commerce-modules/retail-actions';
+import { observer } from 'mobx-react';
+import { observable, reaction } from 'mobx';
+import { OrgUnitLocation } from '@msdyn365-commerce/retail-proxy';
 
-export function MyMap() {
-    return (
-        <Map height={300} defaultCenter={[50.879, 4.6997]} defaultZoom={11}>
-            <ZoomControl />
-            <Marker width={50} anchor={[50.879, 4.6997]} />
-        </Map>
-    );
+interface IStoreSelectorMapProps {
+    locations?: IFullOrgUnitAvailability[];
+    preferredStoreLocationId: string | null;
+    isPreferredStoreEnabled?: boolean;
+    selectedStoreLocationId?: string;
+    onClick: (locationId: string | undefined) => void;
+}
+
+interface IStoreSelectorMapState {
+    center: [number, number];
+    selectedMarkerIndex: number | null;
+}
+
+@observer
+export class StoreSelectorMap extends Component<IStoreSelectorMapProps, IStoreSelectorMapState> {
+    @observable private _stores: IFullOrgUnitAvailability[] | undefined;
+
+    public constructor(props: IStoreSelectorMapProps) {
+        super(props);
+        this.state = {
+            center: [50.879, 4.6997], // Default center
+            selectedMarkerIndex: null
+        };
+    }
+
+    public componentDidMount(): void {
+        this._updateStores(this.props.locations);
+
+        reaction(
+            () => this.props.locations,
+            locations => this._updateStores(locations)
+        );
+    }
+
+    public componentDidUpdate(prevProps: IStoreSelectorMapProps): void {
+        if (this.props.locations !== prevProps.locations && this.props.locations?.length) {
+            const firstStoreLocation = this.props.locations[0].OrgUnitAvailability?.OrgUnitLocation;
+            if (firstStoreLocation) {
+                this.setState({
+                    center: [firstStoreLocation.Latitude!, firstStoreLocation.Longitude!]
+                });
+            }
+        }
+
+        if (this.props.selectedStoreLocationId !== prevProps.selectedStoreLocationId && this.props.selectedStoreLocationId) {
+            const selectedStore = this.props.locations?.find(
+                store => store.OrgUnitAvailability?.OrgUnitLocation?.OrgUnitNumber === this.props.selectedStoreLocationId
+            );
+
+            if (selectedStore?.OrgUnitAvailability?.OrgUnitLocation) {
+                const { Latitude, Longitude } = selectedStore.OrgUnitAvailability.OrgUnitLocation;
+                this.setState({
+                    center: [Latitude!, Longitude!]
+                });
+            }
+        }
+    }
+
+    public render(): JSX.Element | null {
+        if (!ArrayExtensions.hasElements(this._stores)) {
+            return null;
+        }
+
+        return (
+            <div className='msc-store-selector-mapContainer'>
+                <Map height={300} center={this.state.center} defaultZoom={11} onBoundsChanged={({ center }) => this.setState({ center })}>
+                    <ZoomControl />
+                    {this._stores.map((store, index) => this._renderLocationPin(store, index))}
+                </Map>
+            </div>
+        );
+    }
+
+    private _renderLocationPin(store: IFullOrgUnitAvailability, index: number): JSX.Element | undefined {
+        const orgUnitLocation = store?.OrgUnitAvailability?.OrgUnitLocation;
+        const selectedStoreLocationId = this.props.selectedStoreLocationId;
+
+        if (orgUnitLocation) {
+            const isSelected = selectedStoreLocationId === orgUnitLocation.OrgUnitNumber;
+            const color = isSelected ? '#ec008c' : '#807D7E';
+            return (
+                <Marker
+                    key={index}
+                    width={50}
+                    anchor={[orgUnitLocation.Latitude!, orgUnitLocation.Longitude!]}
+                    color={color}
+                    onClick={() => this._handleMarkerClick(index, orgUnitLocation)}
+                />
+            );
+        }
+        return undefined;
+    }
+
+    private _sortStores(stores: IFullOrgUnitAvailability[]): IFullOrgUnitAvailability[] {
+        const isPreferredStore = (value: IFullOrgUnitAvailability) =>
+            this.props.isPreferredStoreEnabled &&
+            this.props.preferredStoreLocationId &&
+            value.OrgUnitAvailability?.OrgUnitLocation?.OrgUnitNumber === this.props.preferredStoreLocationId;
+
+        return [...stores.filter(isPreferredStore), ...stores.filter(store => !isPreferredStore(store))];
+    }
+
+    private _updateStores(locations?: IFullOrgUnitAvailability[]): void {
+        if (locations) {
+            this._stores = this._sortStores(locations);
+        }
+    }
+
+    private _handleMarkerClick(index: number, orgUnitLocation: OrgUnitLocation | undefined): void {
+        this.setState({ center: [orgUnitLocation?.Latitude!, orgUnitLocation?.Longitude!], selectedMarkerIndex: index });
+        this.props.onClick(orgUnitLocation?.OrgUnitNumber);
+    }
 }

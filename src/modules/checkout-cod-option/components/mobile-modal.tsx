@@ -124,6 +124,7 @@ const MobileModal: React.FC<MobileModalProps> = ({ isOpen, resources, props, cod
 
         if (isOtpValid) {
             setOtpSuccessMessage(resources.otpVerificationSuccessMessage);
+            setOtpErrorMessage('');
             // Handle successful OTP verification
             setTimeout(() => {
                 props.setOTPVerified(isOtpValid);
@@ -133,6 +134,7 @@ const MobileModal: React.FC<MobileModalProps> = ({ isOpen, resources, props, cod
             }, 3000);
         } else {
             setOtpErrorMessage(resources.otpVerificationValidationMessage);
+            setOtpSuccessMessage('');
         }
     };
 
