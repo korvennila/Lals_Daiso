@@ -11,11 +11,12 @@ interface IStoreSelectorMapProps {
     isPreferredStoreEnabled?: boolean;
     selectedStoreLocationId?: string;
     onClick: (locationId: string | undefined) => void;
+    defaultZoom: number;
 }
 
 interface IStoreSelectorMapState {
     center: [number, number];
-    selectedMarkerIndex: number | null;
+    zoom: number; // Add zoom state
 }
 
 @observer
@@ -26,7 +27,7 @@ export class StoreSelectorMap extends Component<IStoreSelectorMapProps, IStoreSe
         super(props);
         this.state = {
             center: [50.879, 4.6997], // Default center
-            selectedMarkerIndex: null
+            zoom: this.props.defaultZoom // Default zoom level
         };
     }
 
@@ -57,7 +58,8 @@ export class StoreSelectorMap extends Component<IStoreSelectorMapProps, IStoreSe
             if (selectedStore?.OrgUnitAvailability?.OrgUnitLocation) {
                 const { Latitude, Longitude } = selectedStore.OrgUnitAvailability.OrgUnitLocation;
                 this.setState({
-                    center: [Latitude!, Longitude!]
+                    center: [Latitude!, Longitude!],
+                    zoom: this.props.defaultZoom // Increase zoom level when a store is selected
                 });
             }
         }
@@ -70,7 +72,12 @@ export class StoreSelectorMap extends Component<IStoreSelectorMapProps, IStoreSe
 
         return (
             <div className='msc-store-selector-mapContainer'>
-                <Map height={300} center={this.state.center} defaultZoom={11} onBoundsChanged={({ center }) => this.setState({ center })}>
+                <Map
+                    height={300}
+                    center={this.state.center}
+                    defaultZoom={this.state.zoom}
+                    onBoundsChanged={({ center, zoom }) => this.setState({ center, zoom })}
+                >
                     <ZoomControl />
                     {this._stores.map((store, index) => this._renderLocationPin(store, index))}
                 </Map>
@@ -114,7 +121,10 @@ export class StoreSelectorMap extends Component<IStoreSelectorMapProps, IStoreSe
     }
 
     private _handleMarkerClick(index: number, orgUnitLocation: OrgUnitLocation | undefined): void {
-        this.setState({ center: [orgUnitLocation?.Latitude!, orgUnitLocation?.Longitude!], selectedMarkerIndex: index });
+        this.setState({
+            center: [orgUnitLocation?.Latitude!, orgUnitLocation?.Longitude!],
+            zoom: this.props.defaultZoom // Increase zoom level when a marker is clicked
+        });
         this.props.onClick(orgUnitLocation?.OrgUnitNumber);
     }
 }

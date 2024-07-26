@@ -128,6 +128,13 @@
             "description": "Switch to turn display map",
             "type": "boolean",
             "default": false
+        },
+        "zoomMap": {
+            "friendlyName": "Zoom Map",
+            "description": "Control the zoom level on Map",
+            "type": "number",
+            "minimum": 11,
+            "default": 15
         }
     },
     "slots": {

@@ -621,6 +621,7 @@ class StoreSelector extends React.Component<ICustomStoreSelectorProps<ICustomSto
                     shouldShowIndex={hasMapSlot}
                     maps={hasMapSlot ? mapSlot[0] : undefined}
                     showMap={this.props.config.showMap ? this.props.config.showMap : false}
+                    defaultZoom={this.props.config.zoomMap ? this.props.config.zoomMap : 11}
                 />
             ) : (
                 undefined

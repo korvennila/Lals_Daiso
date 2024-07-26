@@ -32,6 +32,7 @@ interface Props {
     onLocationSelected(location: OrgUnitLocation | undefined): void;
     maps?: React.ReactNode;
     showMap: boolean;
+    defaultZoom: number;
 }
 
 const transformStoreLocations = (
@@ -111,6 +112,7 @@ const StoreSelectorCustomLocationLines: React.FC<Props> = props => {
                         isPreferredStoreEnabled={props.isPreferredStoreEnabled}
                         selectedStoreLocationId={props.selectedStoreLocationId}
                         onClick={props.onClick}
+                        defaultZoom={props.defaultZoom}
                     />
                 )}
             </div>

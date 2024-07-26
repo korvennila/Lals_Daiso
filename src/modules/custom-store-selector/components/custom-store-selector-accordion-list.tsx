@@ -22,12 +22,8 @@ const StoreSelectorAccordionList: React.FC<Props> = ({ data, onStateSelected }) 
     const toggleCountry = (country: string) => {
         if (selectedCountry === country) {
             setSelectedCountry(null);
-            // setSelectedState(null);
-            // onStateSelected([]);
         } else {
             setSelectedCountry(country);
-            // setSelectedState(null);
-            // onStateSelected([]);
         }
     };
 
@@ -44,31 +40,34 @@ const StoreSelectorAccordionList: React.FC<Props> = ({ data, onStateSelected }) 
 
     return (
         <div className='msc-our-stores-dropdown'>
-            {Object.keys(data.countries).map(country => (
-                <div key={country} className='msc-countries-dropdown'>
-                    <h2
-                        className={`msc-countries-title ${selectedCountry === country ? 'active' : ''}`}
-                        onClick={() => toggleCountry(country)}
-                    >
-                        <span className='msc-flag-icon'></span>
-                        {country}
-                    </h2>
-                    {selectedCountry === country && (
-                        <div className={`msc-states-container`} onMouseLeave={() => setSelectedCountry(null)}>
-                            {Object.keys(data.countries[country]).map(state => (
-                                <div key={state} className='msc-states-dropdown'>
-                                    <h3
-                                        className={`msc-states-title ${selectedState === state ? 'active' : ''}`}
-                                        onClick={() => toggleState(country, state)}
-                                    >
-                                        {state}
-                                    </h3>
-                                </div>
-                            ))}
-                        </div>
-                    )}
-                </div>
-            ))}
+            {Object.keys(data.countries).map(country => {
+                const countryClass = `msc-flag-${country.toLowerCase().replace(/\s+/g, '-')}`;
+                return (
+                    <div key={country} className='msc-countries-dropdown'>
+                        <h2
+                            className={`msc-countries-title ${selectedCountry === country ? 'active' : ''}`}
+                            onClick={() => toggleCountry(country)}
+                        >
+                            <span className={`msc-flag-icon ${countryClass}`}></span>
+                            {country}
+                        </h2>
+                        {selectedCountry === country && (
+                            <div className={`msc-states-container`} onMouseLeave={() => setSelectedCountry(null)}>
+                                {Object.keys(data.countries[country]).map(state => (
+                                    <div key={state} className='msc-states-dropdown'>
+                                        <h3
+                                            className={`msc-states-title ${selectedState === state ? 'active' : ''}`}
+                                            onClick={() => toggleState(country, state)}
+                                        >
+                                            {state}
+                                        </h3>
+                                    </div>
+                                ))}
+                            </div>
+                        )}
+                    </div>
+                );
+            })}
         </div>
     );
 };

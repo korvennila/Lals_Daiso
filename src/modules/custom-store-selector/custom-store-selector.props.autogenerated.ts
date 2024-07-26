@@ -39,6 +39,7 @@ export interface ICustomStoreSelectorConfig extends Msdyn365.IModuleConfig {
     clientRender?: boolean;
     additionalStoresString?: string;
     showMap?: boolean;
+    zoomMap?: number;
 }
 
 export interface ICustomStoreSelectorResources {
