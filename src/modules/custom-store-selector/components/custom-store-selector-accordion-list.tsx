@@ -12,6 +12,7 @@ const StoreSelectorAccordionList: React.FC<Props> = ({ data, onStateSelected }) 
 
     const [selectedCountry, setSelectedCountry] = useState<string | null>(firstCountry || null);
     const [selectedState, setSelectedState] = useState<string | null>(firstState || null);
+    const [activeCountry, setActiveCountry] = useState<string | null>(null);
 
     useEffect(() => {
         if (firstCountry && firstState) {
@@ -34,6 +35,7 @@ const StoreSelectorAccordionList: React.FC<Props> = ({ data, onStateSelected }) 
         } else {
             setSelectedState(state);
             setSelectedCountry(country);
+            setActiveCountry(country);
             onStateSelected(data.countries[country][state]);
         }
     };
@@ -45,7 +47,7 @@ const StoreSelectorAccordionList: React.FC<Props> = ({ data, onStateSelected }) 
                 return (
                     <div key={country} className='msc-countries-dropdown'>
                         <h2
-                            className={`msc-countries-title ${selectedCountry === country ? 'active' : ''}`}
+                            className={`msc-countries-title ${activeCountry === country ? 'active' : ''}`}
                             onClick={() => toggleCountry(country)}
                         >
                             <span className={`msc-flag-icon ${countryClass}`}></span>

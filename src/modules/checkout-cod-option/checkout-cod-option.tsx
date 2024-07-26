@@ -294,7 +294,7 @@ export class CheckoutGiftCard extends React.Component<ICheckoutGiftCardModulePro
         const cCartId = checkoutState?.checkoutCart.cart.Id;
         const cShippingCharge = checkoutState?.checkoutCart.cart.ShippingChargeAmount;
         const cTaxAmount = checkoutState?.checkoutCart.cart.TaxAmount;
-        const cCodChargesAmount = parseFloat(this.props.config.codChargesAmount ? this.props.config.codChargesAmount : '0');
+        const cCodChargesAmount = parseFloat(this.props.config.codChargesAmount ? this.props.config.codChargesAmount : '0').toFixed(2);
         const cAmountDue = checkoutState?.checkoutCart.cart.AmountDue;
         const cDeliveryMode = checkoutState?.checkoutCart.cart.DeliveryMode;
 

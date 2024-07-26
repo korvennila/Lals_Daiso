@@ -202,6 +202,7 @@ const MobileModal: React.FC<MobileModalProps> = ({ isOpen, resources, props, cod
                             />
                         </div>
                         {mobileNumberErrorMessage && <p className='error'>{mobileNumberErrorMessage}</p>}
+                        <p className='ms-mobile-number-codeMessage'>{resources.mobileNumberCodeMessage}</p>
                         <Button type='submit' disabled={isEmpty(mobileNumber)}>
                             {resources.mobileNumberGetOTPText}
                         </Button>

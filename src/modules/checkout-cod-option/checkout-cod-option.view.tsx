@@ -60,7 +60,7 @@ export const From: React.FC<IForm> = ({
                 {inputNumber}
                 <Node className='msc-cod-charges-label'>
                     {`${resources?.codChargesLabel} `}
-                    {parseFloat(config?.codChargesAmount!)}
+                    {parseFloat(config?.codChargesAmount!).toFixed(2)}
                 </Node>
             </Node>
         </>
