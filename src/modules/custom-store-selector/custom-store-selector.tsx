@@ -622,6 +622,7 @@ class StoreSelector extends React.Component<ICustomStoreSelectorProps<ICustomSto
                     maps={hasMapSlot ? mapSlot[0] : undefined}
                     showMap={this.props.config.showMap ? this.props.config.showMap : false}
                     defaultZoom={this.props.config.zoomMap ? this.props.config.zoomMap : 11}
+                    pigeonApiKey={this.props.config.pigeonMapsAPIKey ? this.props.config.pigeonMapsAPIKey : ''}
                 />
             ) : (
                 undefined

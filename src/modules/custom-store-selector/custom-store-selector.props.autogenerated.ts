@@ -40,6 +40,7 @@ export interface ICustomStoreSelectorConfig extends Msdyn365.IModuleConfig {
     additionalStoresString?: string;
     showMap?: boolean;
     zoomMap?: number;
+    pigeonMapsAPIKey?: string;
 }
 
 export interface ICustomStoreSelectorResources {

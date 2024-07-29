@@ -223,9 +223,9 @@ class CheckoutShippingAddress extends React.Component<ICheckoutAddressProps, ICh
         this.updateMetadataFieldFormatValidation(
             addressMetadata,
             AddressItemType.Phone,
-            '^[0-9]{9,15}$',
+            '^\\+971[1-9][0-9]{7,}$',
             resources.addressPhoneFormatErrorMessage,
-            10
+            15
         );
         // this.updateMetadataFieldFormatValidation(
         //     addressMetadata,

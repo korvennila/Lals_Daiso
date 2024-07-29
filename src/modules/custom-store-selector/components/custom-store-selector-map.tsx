@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Map, Marker, ZoomControl } from 'pigeon-maps';
+import { maptiler } from 'pigeon-maps/providers';
 import { IFullOrgUnitAvailability, ArrayExtensions } from '@msdyn365-commerce-modules/retail-actions';
 import { observer } from 'mobx-react';
 import { observable, reaction } from 'mobx';
@@ -12,6 +13,7 @@ interface IStoreSelectorMapProps {
     selectedStoreLocationId?: string;
     onClick: (locationId: string | undefined) => void;
     defaultZoom: number;
+    pigeonApiKey: string;
 }
 
 interface IStoreSelectorMapState {
@@ -72,15 +74,28 @@ export class StoreSelectorMap extends Component<IStoreSelectorMapProps, IStoreSe
 
         return (
             <div className='msc-store-selector-mapContainer'>
-                <Map
-                    height={300}
-                    center={this.state.center}
-                    defaultZoom={this.state.zoom}
-                    onBoundsChanged={({ center, zoom }) => this.setState({ center, zoom })}
-                >
-                    <ZoomControl />
-                    {this._stores.map((store, index) => this._renderLocationPin(store, index))}
-                </Map>
+                {this.props.pigeonApiKey ? (
+                    <Map
+                        height={300}
+                        center={this.state.center}
+                        defaultZoom={this.state.zoom}
+                        onBoundsChanged={({ center, zoom }) => this.setState({ center, zoom })}
+                        provider={maptiler(this.props.pigeonApiKey, 'streets')}
+                    >
+                        <ZoomControl />
+                        {this._stores.map((store, index) => this._renderLocationPin(store, index))}
+                    </Map>
+                ) : (
+                    <Map
+                        height={300}
+                        center={this.state.center}
+                        defaultZoom={this.state.zoom}
+                        onBoundsChanged={({ center, zoom }) => this.setState({ center, zoom })}
+                    >
+                        <ZoomControl />
+                        {this._stores.map((store, index) => this._renderLocationPin(store, index))}
+                    </Map>
+                )}
             </div>
         );
     }

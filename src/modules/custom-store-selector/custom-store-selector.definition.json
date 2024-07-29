@@ -135,6 +135,12 @@
             "type": "number",
             "minimum": 11,
             "default": 15
+        },
+        "pigeonMapsAPIKey": {
+            "friendlyName": "Pigeon Maps API Key",
+            "description": "Provide the Pigeon Maps API Key",
+            "type": "string",
+            "default": ""
         }
     },
     "slots": {

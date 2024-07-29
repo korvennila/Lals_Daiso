@@ -204,7 +204,7 @@
 		},
 		"addressPhoneFormatErrorMessage": {
 			"comment": "Error message to display when phone format is wrong",
-			"value": "Phone number must be 10 digits"
+			"value": "Phone number must be 9 digits"
 		},
 		"addressZipCodeLabel": {
 			"comment": "Label for the zipcode field",

@@ -33,6 +33,7 @@ interface Props {
     maps?: React.ReactNode;
     showMap: boolean;
     defaultZoom: number;
+    pigeonApiKey: string;
 }
 
 const transformStoreLocations = (
@@ -113,6 +114,7 @@ const StoreSelectorCustomLocationLines: React.FC<Props> = props => {
                         selectedStoreLocationId={props.selectedStoreLocationId}
                         onClick={props.onClick}
                         defaultZoom={props.defaultZoom}
+                        pigeonApiKey={props.pigeonApiKey}
                     />
                 )}
             </div>
