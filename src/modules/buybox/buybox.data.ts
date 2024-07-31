@@ -16,7 +16,9 @@ import {
     ProductCatalog,
     ProductDeliveryOptions,
     ProductPrice,
-    SimpleProduct
+    SimpleProduct,
+    AttributeValue,
+    MediaLocation
 } from '@msdyn365-commerce/retail-proxy';
 import { IStoreSelectorStateManager } from '@msdyn365-commerce-modules/bopis-utilities';
 import { IDimensionForSelectedVariant, IProductInventoryInformation, OrderTemplate } from '@msdyn365-commerce-modules/retail-actions';
@@ -40,4 +42,6 @@ export interface IBuyboxData {
     channelDeliveryOptionConfig: AsyncResult<ChannelDeliveryOptionConfiguration>;
     catalogs?: AsyncResult<ProductCatalog[]> | undefined;
     cartConfiguration?: AsyncResult<CartConfiguration>;
+    productSpecificationData: AsyncResult<AttributeValue[]>;
+    additionalMediaLocations: AsyncResult<MediaLocation[]>;
 }

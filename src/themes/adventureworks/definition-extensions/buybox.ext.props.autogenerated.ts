@@ -17,6 +17,11 @@ export const enum titleHeadingTag {
     h6 = 'h6'
 }
 
+export const enum displayStyle {
+    accordion = 'accordion',
+    table = 'table'
+}
+
 export interface IBuyboxConfig extends Msdyn365.IModuleConfig {
     titleHeadingTag?: titleHeadingTag;
     enableShopSimilarLooks?: boolean;
@@ -27,6 +32,11 @@ export interface IBuyboxConfig extends Msdyn365.IModuleConfig {
     maximumKeyInPrice?: number;
     className?: string;
     clientRender?: boolean;
+    headingProductSpec?: IHeadingProductSpecData;
+    displayStyle?: displayStyle;
+    hideEmptyProductSpec?: boolean;
+    classNameForProductSpec?: string;
+    clientRenderForProductSpec?: boolean;
     displayStockAvailability?: boolean;
     enableWishlist?: boolean;
 }
@@ -139,7 +149,24 @@ export interface IBuyboxResources {
     titleNotifyMeText: string;
     textForNotificationWhenAvailable: string;
     productSpecificationTitle: string;
+    trueValueText: string;
+    falseValueText: string;
+    additionalDownloadsText: string;
     ariaLabelForSelectedSwatchValue: string;
+}
+
+export const enum HeadingProductSpecTag {
+    h1 = 'h1',
+    h2 = 'h2',
+    h3 = 'h3',
+    h4 = 'h4',
+    h5 = 'h5',
+    h6 = 'h6'
+}
+
+export interface IHeadingProductSpecData {
+    text: string;
+    tag?: HeadingProductSpecTag;
 }
 
 export interface IBuyboxProps<T> extends Msdyn365.IModule<T> {
