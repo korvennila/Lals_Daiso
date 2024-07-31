@@ -29,7 +29,8 @@ export const From: React.FC<IForm> = ({
     // showGiftCardExpInput,
     // alertFieldLabel
     resources,
-    config
+    config,
+    codChargeAmount
 }) => (
     <Node {...formProps}>
         {alert}
@@ -58,10 +59,12 @@ export const From: React.FC<IForm> = ({
             {label}
             <Node className='msc-cod-charges-container'>
                 {inputNumber}
-                <Node className='msc-cod-charges-label'>
-                    {`${resources?.codChargesLabel} `}
-                    {parseFloat(config?.codChargesAmount!).toFixed(2)}
-                </Node>
+                {codChargeAmount && codChargeAmount > 0 && (
+                    <Node className='msc-cod-charges-label'>
+                        {`${resources?.codChargesLabel} `}
+                        {codChargeAmount?.toFixed(2)}
+                    </Node>
+                )}
             </Node>
         </>
         {/* )} */}
@@ -84,9 +87,9 @@ export const GiftCardList: React.FC<IList> = ({ listProps, list }) => (
     </Node>
 );
 
-export const AddResource: React.FC<IAddResource> = ({ form, list, resources, config }) => (
+export const AddResource: React.FC<IAddResource> = ({ form, list, resources, config, codChargeAmount }) => (
     <>
-        {form && <From {...form} resources={resources} config={config} />}
+        {form && <From {...form} resources={resources} config={config} codChargeAmount={codChargeAmount} />}
         {/* {list && <GiftCardList {...list} />} */}
     </>
 );
@@ -107,12 +110,23 @@ const CheckoutGiftCardView: React.FC<ICheckoutGiftCardViewProps> = props => {
         resources,
         codMobileNumber,
         config,
-        isAuthenticated
+        isAuthenticated,
+        codChargeAmount,
+        isLoading,
+        errorMessage
     } = props;
+
+    if (isLoading) {
+        return <div>Loading...</div>; // Display loading message while fetching data
+    }
+
+    if (errorMessage) {
+        return <div>{errorMessage}</div>; // Display error message if the fetch fails
+    }
 
     return (
         <Module {...checkoutGiftCardProps} ref={checkoutErrorRef}>
-            {addGiftCard && <AddResource {...addGiftCard} resources={resources} config={config} />}
+            {addGiftCard && <AddResource {...addGiftCard} resources={resources} config={config} codChargeAmount={codChargeAmount} />}
             {isMobileModalOpen && !isAuthenticated && (
                 <MobileModal isOpen={isMobileModalOpen} resources={resources} props={props} codMobileNumber={codMobileNumber} />
             )}

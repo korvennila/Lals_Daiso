@@ -68,6 +68,7 @@ export interface IForm {
     alertFieldLabel: React.ReactNode;
     config?: ICheckoutCodOptionConfig;
     resources?: ICheckoutCodOptionResources;
+    codChargeAmount?: number;
 }
 
 /**

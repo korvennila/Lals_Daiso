@@ -50,6 +50,8 @@ interface ICheckoutGiftCardState {
     isRadioButtonChecked: boolean;
     isOTPVerified: boolean;
     isPlaceOrderLoading?: boolean;
+    codChargeAmount: number;
+    isLoading: boolean;
 }
 
 enum SupportedGiftCardType {
@@ -70,6 +72,7 @@ export interface IAddResource {
     list?: IList;
     config?: ICheckoutCodOptionConfig;
     resources?: ICheckoutCodOptionResources;
+    codChargeAmount?: number;
 }
 
 export interface ICheckoutGiftCardViewProps extends ICheckoutCodOptionProps<{}>, ICheckoutGiftCardState {
@@ -117,7 +120,9 @@ export class CheckoutGiftCard extends React.Component<ICheckoutGiftCardModulePro
         mobileNumberOTP: '',
         isOTPVerified: false,
         isRadioButtonChecked: false,
-        isPlaceOrderLoading: false
+        isPlaceOrderLoading: false,
+        codChargeAmount: 0,
+        isLoading: false
     };
 
     private readonly inputRef: React.RefObject<HTMLInputElement> = React.createRef();
@@ -228,6 +233,7 @@ export class CheckoutGiftCard extends React.Component<ICheckoutGiftCardModulePro
         if (radioButton) {
             radioButton.addEventListener('click', this.handleClick);
         }
+        this.korGetCODChargeAmount();
     }
 
     public componentWillUnmount() {
@@ -236,6 +242,39 @@ export class CheckoutGiftCard extends React.Component<ICheckoutGiftCardModulePro
             radioButton.removeEventListener('click', this.handleClick);
         }
     }
+
+    private readonly korGetCODChargeAmount = async (): Promise<any> => {
+        const cRetailURL = this.props.context.request.apiSettings.baseUrl;
+        const cRetailOUN = this.props.context.request.apiSettings.oun ? this.props.context.request.apiSettings.oun : '';
+
+        const cKORGetCODChargeAmountUrl = `${cRetailURL}commerce/KORGetCODChargeAmount?api-version=7.3`;
+
+        try {
+            const response = await fetch(cKORGetCODChargeAmountUrl, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    OUN: cRetailOUN,
+                    'User-Agent': 'Mozilla/5.0 (Windows NT 6.3; Win64; x64; rv:58.0) Gecko/20100101 Firefox/58.0'
+                }
+            });
+
+            if (response.status === 200) {
+                const data = await response.json();
+                if (data.value) {
+                    this.setState({ codChargeAmount: data.value });
+                } else {
+                    this.setState({ errorMessage: 'Failed to fetch COD Charge' });
+                }
+            } else {
+                this.setState({ errorMessage: 'Failed to fetch data' });
+            }
+        } catch (error) {
+            this.setState({ errorMessage: 'Failed to fetch data' });
+        } finally {
+            this.setState({ isLoading: false });
+        }
+    };
 
     private handleClick = (event: Event) => {
         const radioButton = this.radioButtonRef.current;

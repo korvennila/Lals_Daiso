@@ -50,6 +50,12 @@ const MobileModal: React.FC<MobileModalProps> = ({ isOpen, resources, props, cod
         return () => clearTimeout(timer);
     }, [resendTimer]);
 
+    useEffect(() => {
+        if (mobileNumber.startsWith(countryCode)) {
+            setMobileNumber(mobileNumber.replace(countryCode, ''));
+        }
+    }, [mobileNumber]);
+
     const handleMobileNumberChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         setMobileNumber(e.target.value);
     };
