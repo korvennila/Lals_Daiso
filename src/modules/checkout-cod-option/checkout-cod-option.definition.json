@@ -166,11 +166,11 @@
         },
         "enterValidMobileNumber": {
             "comment": "Label for Enter a Valid Mobile Number",
-            "value": "Please enter a valid mobile number."
+            "value": "Please enter a valid mobile number and must be 9 digits."
         },
         "minMobileNumberLimit": {
             "comment": "Label for minimum mobile number length",
-            "value": "Mobile number must be at least 9 digits."
+            "value": "Mobile number must be 9 digits."
         },
         "otpVerificationHeadingLabel": {
             "comment": "Label for OTP Verification Section as Heading",

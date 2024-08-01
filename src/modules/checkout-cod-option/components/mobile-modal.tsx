@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { INodeProps, Node, Modal, Button } from '@msdyn365-commerce-modules/utilities';
 import { IImageData, Image } from '@msdyn365-commerce/core';
 import { ICheckoutGiftCardViewProps } from '../checkout-cod-option';
-import { PhoneRegex } from '@msdyn365-commerce-modules/retail-actions';
+// import { PhoneRegex } from '@msdyn365-commerce-modules/retail-actions';
 import { isEmpty } from '@msdyn365-commerce/retail-proxy';
 
 interface MobileModalProps {
@@ -39,6 +39,8 @@ const MobileModal: React.FC<MobileModalProps> = ({ isOpen, resources, props, cod
     const [loading, setLoading] = useState(false);
     const [resendTimer, setResendTimer] = useState(30);
     const [canResend, setCanResend] = useState(false);
+    // const mobileNumberPattern = new RegExp(PhoneRegex.defaultRegex);
+    const mobileNumberPattern = /^[1-9]\d{8}$/;
 
     useEffect(() => {
         let timer: NodeJS.Timeout;
@@ -57,7 +59,14 @@ const MobileModal: React.FC<MobileModalProps> = ({ isOpen, resources, props, cod
     }, [mobileNumber]);
 
     const handleMobileNumberChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-        setMobileNumber(e.target.value);
+        const value = e.target.value;
+        setMobileNumber(value);
+
+        if (!mobileNumberPattern.test(value)) {
+            setMobileNumberErrorMessage(resources.enterValidMobileNumber);
+        } else {
+            setMobileNumberErrorMessage('');
+        }
     };
 
     const handleOtpChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -68,14 +77,8 @@ const MobileModal: React.FC<MobileModalProps> = ({ isOpen, resources, props, cod
     };
 
     const sendOtp = async () => {
-        const mobileNumberPattern = new RegExp(PhoneRegex.defaultRegex); // Create RegExp object using the pattern
-        if (!mobileNumberPattern.test(mobileNumber)) {
+        if (!mobileNumberPattern.test(mobileNumber) || mobileNumber.length !== 9) {
             setMobileNumberErrorMessage(resources.enterValidMobileNumber);
-            return;
-        }
-
-        if (mobileNumber.length < 9) {
-            setMobileNumberErrorMessage(resources.minMobileNumberLimit);
             return;
         }
 
@@ -100,8 +103,9 @@ const MobileModal: React.FC<MobileModalProps> = ({ isOpen, resources, props, cod
             const result = await response.json();
 
             if (response.ok && result.value) {
+                const otpNumbers = result.value.match(/\d+/g)?.join('') || '';
                 setCurrentStep('verifyOtp');
-                setOtpFromResponse(result.value);
+                setOtpFromResponse(otpNumbers);
                 setMobileNumberErrorMessage('');
                 setResendTimer(30);
                 setCanResend(false);
