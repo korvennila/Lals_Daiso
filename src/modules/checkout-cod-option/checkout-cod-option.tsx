@@ -33,6 +33,7 @@ import TitleCompoent from './components/title';
 import { focusOnCheckoutError } from '@msdyn365-commerce-modules/checkout';
 import { getCartState } from '@msdyn365-commerce/global-state';
 import CodPaymentService from '../../shared/CodPaymentService';
+import { isEmpty } from '@msdyn365-commerce/retail-proxy';
 
 export * from './components/get-form';
 export * from './components/get-item';
@@ -51,7 +52,6 @@ interface ICheckoutGiftCardState {
     isOTPVerified: boolean;
     isPlaceOrderLoading?: boolean;
     codChargeAmount: number;
-    isLoading: boolean;
 }
 
 enum SupportedGiftCardType {
@@ -73,6 +73,7 @@ export interface IAddResource {
     config?: ICheckoutCodOptionConfig;
     resources?: ICheckoutCodOptionResources;
     codChargeAmount?: number;
+    error?: string;
 }
 
 export interface ICheckoutGiftCardViewProps extends ICheckoutCodOptionProps<{}>, ICheckoutGiftCardState {
@@ -100,6 +101,7 @@ export interface ICheckoutGiftCardViewProps extends ICheckoutCodOptionProps<{}>,
     setMobileNumberOTP(otpValue: string): void;
     setOTPVerified(verify: boolean): void;
     handleCODButtonCheck(value: boolean): void;
+    handleCODSelectedOption(value: string): void;
 }
 
 /**
@@ -121,8 +123,7 @@ export class CheckoutGiftCard extends React.Component<ICheckoutGiftCardModulePro
         isOTPVerified: false,
         isRadioButtonChecked: false,
         isPlaceOrderLoading: false,
-        codChargeAmount: 0,
-        isLoading: false
+        codChargeAmount: 0
     };
 
     private readonly inputRef: React.RefObject<HTMLInputElement> = React.createRef();
@@ -137,13 +138,17 @@ export class CheckoutGiftCard extends React.Component<ICheckoutGiftCardModulePro
 
     private handleCODOptionChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         const selectedOption = event.target.value;
-        const codPaymentService = CodPaymentService.getInstance();
-        codPaymentService.setSelectedOption(selectedOption);
+        this.handleCODSelectedOption(selectedOption);
 
         if (this.props.context.request.user.isAuthenticated && !this.state.isOTPVerified) {
             this.setCodSelected();
             this.handleCodClick();
         }
+    };
+
+    private handleCODSelectedOption = (selectedOption: string) => {
+        const codPaymentService = CodPaymentService.getInstance();
+        codPaymentService.setSelectedOption(selectedOption);
     };
 
     @computed get isDataReady(): boolean {
@@ -261,24 +266,22 @@ export class CheckoutGiftCard extends React.Component<ICheckoutGiftCardModulePro
 
             if (response.status === 200) {
                 const data = await response.json();
-                if (data.value) {
+                if (data.value !== undefined && data.value !== null) {
                     this.setState({ codChargeAmount: data.value });
                 } else {
-                    this.setState({ errorMessage: 'Failed to fetch COD Charge' });
+                    this.setState({ errorMessage: this.props.resources.codChargeAmountErrorMessage });
                 }
             } else {
-                this.setState({ errorMessage: 'Failed to fetch data' });
+                this.setState({ errorMessage: this.props.resources.codChargeAmountErrorMessage });
             }
         } catch (error) {
-            this.setState({ errorMessage: 'Failed to fetch data' });
-        } finally {
-            this.setState({ isLoading: false });
+            this.setState({ errorMessage: this.props.resources.codChargeAmountErrorMessage });
         }
     };
 
     private handleClick = (event: Event) => {
         const radioButton = this.radioButtonRef.current;
-        if (radioButton) {
+        if (radioButton && isEmpty(this.state.errorMessage)) {
             if (!this.props.context.request.user.isAuthenticated && !this.state.isOTPVerified) {
                 event.preventDefault();
                 this.setState({ isMobileModalOpen: true, isRadioButtonChecked: false });
@@ -372,17 +375,14 @@ export class CheckoutGiftCard extends React.Component<ICheckoutGiftCardModulePro
                         window.location.href = `${this.props.config.codOrderConfirmationLink?.linkUrl.destinationUrl}?orderid=${data.value}&iscod=true`;
                     }
                 } else {
-                    this.setError('Failed to Place Order');
-                    return null;
+                    this.setError(this.props.resources.placeOrderErrorMessage);
                 }
             } else {
-                this.setError('Failed to fetch data');
-                return null;
+                this.setError(this.props.resources.placeOrderErrorMessage);
             }
         } catch (error) {
-            this.setError('Failed to fetch data');
-            console.error('Fetch data error:', error);
-            return null;
+            this.setError(this.props.resources.placeOrderErrorMessage);
+            console.error('place order error:', error);
         } finally {
             this.setState({ isPlaceOrderLoading: false });
         }
@@ -489,7 +489,8 @@ export class CheckoutGiftCard extends React.Component<ICheckoutGiftCardModulePro
             isAuthenticated: cAuthenticated,
             setMobileNumberOTP: this.setMobileNumberOPT,
             handleCODButtonCheck: this.handleCODButtonCheck,
-            setOTPVerified: this.setOPTVerified
+            setOTPVerified: this.setOPTVerified,
+            handleCODSelectedOption: this.handleCODSelectedOption
         };
 
         return this.props.renderView(viewProps) as React.ReactElement;

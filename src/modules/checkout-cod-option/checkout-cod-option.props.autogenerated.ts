@@ -60,6 +60,8 @@ export interface ICheckoutCodOptionResources {
     otpResendButton: string;
     otpVerificationResendLabel: string;
     codChargesLabel: string;
+    codChargeAmountErrorMessage: string;
+    placeOrderErrorMessage: string;
 }
 
 export interface ICodOrderConfirmationLinkData {

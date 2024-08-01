@@ -4,6 +4,7 @@ import { IImageData, Image } from '@msdyn365-commerce/core';
 import { ICheckoutGiftCardViewProps } from '../checkout-cod-option';
 // import { PhoneRegex } from '@msdyn365-commerce-modules/retail-actions';
 import { isEmpty } from '@msdyn365-commerce/retail-proxy';
+import { CustomPaymentMethod } from '../../../shared/PaymentMethodEnum';
 
 interface MobileModalProps {
     isOpen: boolean;
@@ -141,6 +142,7 @@ const MobileModal: React.FC<MobileModalProps> = ({ isOpen, resources, props, cod
                 props.closeModal();
                 props.handleCODButtonCheck(true);
                 props.setCodSelected();
+                props.handleCODSelectedOption(CustomPaymentMethod.COD);
             }, 3000);
         } else {
             setOtpErrorMessage(resources.otpVerificationValidationMessage);

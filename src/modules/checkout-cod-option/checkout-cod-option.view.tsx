@@ -9,6 +9,7 @@ import * as React from 'react';
 
 import { IAddResource, ICheckoutGiftCardViewProps, IForm, IItem, IList, IShowResource } from './checkout-cod-option';
 import MobileModal from './components/mobile-modal';
+import { isEmpty } from '@msdyn365-commerce/retail-proxy';
 
 export const From: React.FC<IForm> = ({
     formProps,
@@ -30,7 +31,8 @@ export const From: React.FC<IForm> = ({
     // alertFieldLabel
     resources,
     config,
-    codChargeAmount
+    codChargeAmount,
+    error
 }) => (
     <Node {...formProps}>
         {alert}
@@ -57,13 +59,15 @@ export const From: React.FC<IForm> = ({
         ) : ( */}
         <>
             {label}
-            <Node className='msc-cod-charges-container'>
+            <Node className={`msc-cod-charges-container ${!isEmpty(error!) ? 'disabled' : ''}`}>
                 {inputNumber}
-                {codChargeAmount && codChargeAmount > 0 && (
+                {codChargeAmount && codChargeAmount > 0 && !isEmpty(error!) ? (
                     <Node className='msc-cod-charges-label'>
                         {`${resources?.codChargesLabel} `}
                         {codChargeAmount?.toFixed(2)}
                     </Node>
+                ) : (
+                    undefined
                 )}
             </Node>
         </>
@@ -87,9 +91,9 @@ export const GiftCardList: React.FC<IList> = ({ listProps, list }) => (
     </Node>
 );
 
-export const AddResource: React.FC<IAddResource> = ({ form, list, resources, config, codChargeAmount }) => (
+export const AddResource: React.FC<IAddResource> = ({ form, list, resources, config, codChargeAmount, error }) => (
     <>
-        {form && <From {...form} resources={resources} config={config} codChargeAmount={codChargeAmount} />}
+        {form && <From {...form} resources={resources} config={config} codChargeAmount={codChargeAmount} error={error} />}
         {/* {list && <GiftCardList {...list} />} */}
     </>
 );
@@ -112,21 +116,20 @@ const CheckoutGiftCardView: React.FC<ICheckoutGiftCardViewProps> = props => {
         config,
         isAuthenticated,
         codChargeAmount,
-        isLoading,
         errorMessage
     } = props;
 
-    if (isLoading) {
-        return <div>Loading...</div>; // Display loading message while fetching data
-    }
-
-    if (errorMessage) {
-        return <div>{errorMessage}</div>; // Display error message if the fetch fails
-    }
-
     return (
         <Module {...checkoutGiftCardProps} ref={checkoutErrorRef}>
-            {addGiftCard && <AddResource {...addGiftCard} resources={resources} config={config} codChargeAmount={codChargeAmount} />}
+            {addGiftCard && (
+                <AddResource
+                    {...addGiftCard}
+                    resources={resources}
+                    config={config}
+                    codChargeAmount={codChargeAmount}
+                    error={errorMessage}
+                />
+            )}
             {isMobileModalOpen && !isAuthenticated && (
                 <MobileModal isOpen={isMobileModalOpen} resources={resources} props={props} codMobileNumber={codMobileNumber} />
             )}

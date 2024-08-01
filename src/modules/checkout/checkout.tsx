@@ -60,6 +60,7 @@ export * from './components/get-line-items';
 export * from './components/get-order-summary';
 
 import CodPaymentService from '../../shared/CodPaymentService';
+import { CustomPaymentMethod } from '../../shared/PaymentMethodEnum';
 
 /**
  * Device type.
@@ -74,7 +75,7 @@ interface ICheckoutState {
     isValidationPassed: boolean;
     isPlaceOrderLoading?: boolean;
     isPlaceOrderClicked?: boolean;
-    isCODOptionSelected?: string;
+    isPaymentOptionSelected?: string;
 }
 
 /**
@@ -169,16 +170,19 @@ class Checkout extends React.PureComponent<ICheckoutModuleProps> {
 
         const disableForOBO = Msdyn365.isOboRequest(this.props.context.request) && !this.isPaidOffByCustomerAccount;
 
-        // const { isCODOptionSelected } = this.state;
+        const { isPaymentOptionSelected } = this.state;
 
         // If isTermsAndConditionAccepted is undefined means TermsAndCondition module is not added to page and we should able to place order.
         return (
-            this.props.moduleState.isReady &&
-            (isTermsAndConditionAccepted === undefined || isTermsAndConditionAccepted || shouldEnableSinglePaymentAuthorizationCheckout) &&
-            (this.state.errorMessage === '' ||
-                shouldEnableSinglePaymentAuthorizationCheckout ||
-                (this.props.data.checkout.result?.isPaymentVerificationRedirection ?? false)) &&
-            !(shouldEnableSinglePaymentAuthorizationCheckout && disableForOBO)
+            (this.props.moduleState.isReady &&
+                (isTermsAndConditionAccepted === undefined ||
+                    isTermsAndConditionAccepted ||
+                    shouldEnableSinglePaymentAuthorizationCheckout) &&
+                (this.state.errorMessage === '' ||
+                    shouldEnableSinglePaymentAuthorizationCheckout ||
+                    (this.props.data.checkout.result?.isPaymentVerificationRedirection ?? false)) &&
+                !(shouldEnableSinglePaymentAuthorizationCheckout && disableForOBO)) ||
+            (isPaymentOptionSelected !== CustomPaymentMethod.COD && isPaymentOptionSelected !== '')
         );
     }
 
@@ -210,7 +214,7 @@ class Checkout extends React.PureComponent<ICheckoutModuleProps> {
         isValidationPassed: false,
         isPlaceOrderLoading: false,
         isPlaceOrderClicked: false,
-        isCODOptionSelected: ''
+        isPaymentOptionSelected: ''
     };
 
     private readonly telemetryContent: ITelemetryContent = getTelemetryObject(
@@ -232,7 +236,7 @@ class Checkout extends React.PureComponent<ICheckoutModuleProps> {
         codPaymentService.addListener(this.handleRadioButtonChange);
 
         // Set initial state based on current selected option
-        this.setState({ isCODOptionSelected: codPaymentService.getSelectedOption() });
+        this.setState({ isPaymentOptionSelected: codPaymentService.getSelectedOption() });
 
         when(
             () => this.asyncResultStatus !== AsyncResultStatusCode.LOADING,
@@ -442,8 +446,8 @@ class Checkout extends React.PureComponent<ICheckoutModuleProps> {
         }
     }
 
-    public handleRadioButtonChange = (isCODOptionSelected: string) => {
-        this.setState({ isCODOptionSelected });
+    public handleRadioButtonChange = (isPaymentOptionSelected: string) => {
+        this.setState({ isPaymentOptionSelected });
     };
 
     // eslint-disable-next-line complexity -- ignore the complexity.

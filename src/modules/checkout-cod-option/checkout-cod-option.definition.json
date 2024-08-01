@@ -203,6 +203,14 @@
         "codChargesLabel": {
             "comment": "Label for COD Charges",
             "value": "COD Charges: AED"
+        },
+        "codChargeAmountErrorMessage": {
+            "comment": "Generic error message for COD Charge Amount API",
+            "value": "Something went wrong while fetching COD Charge Amount"
+        },
+        "placeOrderErrorMessage": {
+            "comment": "Generic error message for Place Order Checkout API",
+            "value": "Something went wrong while Creating the Order"
         }
     }
 }
