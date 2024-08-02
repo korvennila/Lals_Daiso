@@ -37,7 +37,7 @@ import {
     TelemetryConstant,
     Waiting
 } from '@msdyn365-commerce-modules/utilities';
-import { ErrorCode, ErrorLocation } from '@msdyn365-commerce/global-state';
+import { ErrorCode, ErrorLocation, IGiftCardExtend } from '@msdyn365-commerce/global-state';
 import classnames from 'classnames';
 import isEmpty from 'lodash/isEmpty';
 import { action, computed, get, reaction, when } from 'mobx';
@@ -162,6 +162,33 @@ class Checkout extends React.PureComponent<ICheckoutModuleProps> {
         return this.props.context.request.params.isEditor;
     }
 
+    @computed get getLoyaltyAmount(): number {
+        const checkoutState = this.props.data.checkout.result;
+        if (!checkoutState || !checkoutState.loyaltyAmount) {
+            return 0;
+        }
+        return checkoutState.loyaltyAmount;
+    }
+
+    @computed get getGiftCardTotalAmount(): number {
+        const checkoutState = this.props.data.checkout.result;
+        if (!checkoutState || !checkoutState.giftCardExtends) {
+            return 0;
+        }
+        return checkoutState.giftCardExtends.reduce((count: number, giftCard: IGiftCardExtend) => {
+            const balance: number = giftCard.Balance || 0;
+            return count + balance;
+        }, 0);
+    }
+
+    @computed get getTotalPrice(): boolean {
+        const cart = this.props.data.checkout.result ? this.props.data.checkout.result.checkoutCart.cart : undefined;
+        if (!cart) {
+            return true;
+        }
+        return (cart.TotalAmount || 0) - this.getLoyaltyAmount - this.getGiftCardTotalAmount > 0;
+    }
+
     @computed get canPlaceOrder(): boolean {
         const isTermsAndConditionAccepted = this.props.data.checkout.result && this.props.data.checkout.result?.isTermsAndConditionAccepted;
 
@@ -172,18 +199,20 @@ class Checkout extends React.PureComponent<ICheckoutModuleProps> {
 
         const { isPaymentOptionSelected } = this.state;
 
+        if (isPaymentOptionSelected === CustomPaymentMethod.COD && this.getTotalPrice) {
+            return false;
+        }
+
         // If isTermsAndConditionAccepted is undefined means TermsAndCondition module is not added to page and we should able to place order.
-        return (
-            (this.props.moduleState.isReady &&
-                (isTermsAndConditionAccepted === undefined ||
-                    isTermsAndConditionAccepted ||
-                    shouldEnableSinglePaymentAuthorizationCheckout) &&
-                (this.state.errorMessage === '' ||
-                    shouldEnableSinglePaymentAuthorizationCheckout ||
-                    (this.props.data.checkout.result?.isPaymentVerificationRedirection ?? false)) &&
-                !(shouldEnableSinglePaymentAuthorizationCheckout && disableForOBO)) ||
-            (isPaymentOptionSelected !== CustomPaymentMethod.COD && isPaymentOptionSelected !== '')
-        );
+        const canPlaceOrder =
+            this.props.moduleState.isReady &&
+            (isTermsAndConditionAccepted === undefined || isTermsAndConditionAccepted || shouldEnableSinglePaymentAuthorizationCheckout) &&
+            (this.state.errorMessage === '' ||
+                shouldEnableSinglePaymentAuthorizationCheckout ||
+                (this.props.data.checkout.result?.isPaymentVerificationRedirection ?? false)) &&
+            !(shouldEnableSinglePaymentAuthorizationCheckout && disableForOBO);
+
+        return canPlaceOrder;
     }
 
     @computed get isPaidOffByCustomerAccount(): boolean {

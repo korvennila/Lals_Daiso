@@ -154,7 +154,7 @@ const CheckoutView: React.FC<ICheckoutViewProps> = props => {
         hasInvoiceLine,
         bodyProps,
         mainProps,
-        mainControlProps,
+        // mainControlProps,
         sideProps,
         sideControlFirstProps,
         sideControlSecondProps,
@@ -187,13 +187,18 @@ const CheckoutView: React.FC<ICheckoutViewProps> = props => {
                     {canShow && (
                         <>
                             <Node {...mainProps}>
-                                {checkoutExpressPaymentContainer}
-                                {checkoutExpressPaymentContainer && <Node {...headerProps}>{title}</Node>}
-                                {guidedForm}
-                                <Node {...termsAndConditionsProps}>{termsAndConditions}</Node>
-                                <Node {...mainControlProps}>
-                                    {placeOrderButton}
-                                    {keepShoppingButton}
+                                <Node className='msc-guided-form-mainContainer'>
+                                    {checkoutExpressPaymentContainer}
+                                    {checkoutExpressPaymentContainer && <Node {...headerProps}>{title}</Node>}
+                                    {guidedForm}
+                                    <Node {...termsAndConditionsProps}>{termsAndConditions}</Node>
+                                    {/* <Node {...mainControlProps}>
+                                        {placeOrderButton}
+                                        {keepShoppingButton}
+                                    </Node> */}
+                                </Node>
+                                <Node className='msc-shopping-cart-mainContainer'>
+                                    {lineItems && <LineItemsComponent {...lineItems} />}
                                 </Node>
                             </Node>
                             <Node {...sideProps}>
@@ -205,7 +210,6 @@ const CheckoutView: React.FC<ICheckoutViewProps> = props => {
                                     {placeOrderButton}
                                     {keepShoppingButton}
                                 </Node>
-                                {lineItems && <LineItemsComponent {...lineItems} />}
                                 <Node {...sideControlSecondProps}>
                                     <Node {...termsAndConditionsProps}>{termsAndConditions}</Node>
                                     {placeOrderButton}
