@@ -34,6 +34,7 @@ import { focusOnCheckoutError } from '@msdyn365-commerce-modules/checkout';
 import { getCartState } from '@msdyn365-commerce/global-state';
 import CodPaymentService from '../../shared/CodPaymentService';
 import { isEmpty } from '@msdyn365-commerce/retail-proxy';
+import { CustomPaymentMethod } from '../../shared/PaymentMethodEnum';
 
 export * from './components/get-form';
 export * from './components/get-item';
@@ -146,7 +147,8 @@ export class CheckoutGiftCard extends React.Component<ICheckoutGiftCardModulePro
         }
     };
 
-    private handleCODSelectedOption = (selectedOption: string) => {
+    private handleCODSelectedOption = async (selectedOption: string) => {
+        await this.korApplyCODChargesRequest();
         const codPaymentService = CodPaymentService.getInstance();
         codPaymentService.setSelectedOption(selectedOption);
     };
@@ -211,6 +213,7 @@ export class CheckoutGiftCard extends React.Component<ICheckoutGiftCardModulePro
             () => this.isDataReady,
             () => {
                 this.init();
+                this.korGetCODChargeAmount();
             }
         );
 
@@ -238,7 +241,6 @@ export class CheckoutGiftCard extends React.Component<ICheckoutGiftCardModulePro
         if (radioButton) {
             radioButton.addEventListener('click', this.handleClick);
         }
-        this.korGetCODChargeAmount();
     }
 
     public componentWillUnmount() {
@@ -267,7 +269,15 @@ export class CheckoutGiftCard extends React.Component<ICheckoutGiftCardModulePro
             if (response.status === 200) {
                 const data = await response.json();
                 if (data.value !== undefined && data.value !== null) {
-                    this.setState({ codChargeAmount: data.value });
+                    this.setState({ codChargeAmount: data.value }, () => {
+                        // Check and call handleCODButtonCheck after setting the state
+                        if (this.state.codChargeAmount === this.props.data.checkout.result?.checkoutCart.cart.OtherChargeAmount) {
+                            const codPaymentService = CodPaymentService.getInstance();
+                            codPaymentService.setSelectedOption(CustomPaymentMethod.COD);
+                            this.handleCODButtonCheck(true);
+                            this.setCodSelected();
+                        }
+                    });
                 } else {
                     this.setState({ errorMessage: this.props.resources.codChargeAmountErrorMessage });
                 }
@@ -321,6 +331,45 @@ export class CheckoutGiftCard extends React.Component<ICheckoutGiftCardModulePro
 
     private setOPTVerified = (value: boolean) => {
         this.setState({ isOTPVerified: value });
+    };
+
+    private readonly korApplyCODChargesRequest = async (): Promise<any> => {
+        const cRetailURL = this.props.context.request.apiSettings.baseUrl;
+        const cRetailOUN = this.props.context.request.apiSettings.oun ? this.props.context.request.apiSettings.oun : '';
+
+        const cKORApplyCODChargesRequestUrl = `${cRetailURL}commerce/KORApplyCODChargesRequest?api-version=7.3`;
+        const checkoutState = this.props.data.checkout.result;
+        const currentCartState = await getCartState(this.props.context?.actionContext);
+
+        const cCartId = checkoutState?.checkoutCart.cart.Id;
+        const cCodChargesAmount = this.state.codChargeAmount ? this.state.codChargeAmount : 0;
+
+        try {
+            const response = await fetch(cKORApplyCODChargesRequestUrl, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    OUN: cRetailOUN,
+                    'User-Agent': 'Mozilla/5.0 (Windows NT 6.3; Win64; x64; rv:58.0) Gecko/20100101 Firefox/58.0'
+                },
+                body: JSON.stringify({
+                    // context: this.props.context,
+                    cartId: cCartId,
+                    CODCharges: cCodChargesAmount
+                })
+            });
+
+            if (response.status === 200) {
+                const data = await response.json();
+                await currentCartState.refreshCart({});
+                console.log('korApplyCODChargesRequest', data);
+            } else {
+                this.setError(this.props.resources.placeOrderErrorMessage);
+            }
+        } catch (error) {
+            this.setError(this.props.resources.placeOrderErrorMessage);
+            console.error('place order error:', error);
+        }
     };
 
     private readonly korPreCheckoutRequest = async (): Promise<any> => {
