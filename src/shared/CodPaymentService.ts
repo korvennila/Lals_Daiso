@@ -2,7 +2,8 @@
 class CodPaymentService {
     private static instance: CodPaymentService;
     private selectedOption: string = '';
-    private listeners: ((option: string) => void)[] = [];
+    private CODAmount: number = 0;
+    private listeners: ((option: string, amount: number) => void)[] = [];
 
     private constructor() {}
 
@@ -22,12 +23,21 @@ class CodPaymentService {
         return this.selectedOption;
     }
 
-    public addListener(listener: (option: string) => void): void {
+    public setCODAmount(amount: number): void {
+        this.CODAmount = amount;
+        this.notifyListeners();
+    }
+
+    public getCODAmount(): number {
+        return this.CODAmount;
+    }
+
+    public addListener(listener: (option: string, amount: number) => void): void {
         this.listeners.push(listener);
     }
 
     private notifyListeners(): void {
-        this.listeners.forEach(listener => listener(this.selectedOption));
+        this.listeners.forEach(listener => listener(this.selectedOption, this.CODAmount));
     }
 }
 

@@ -6,6 +6,7 @@
 /* eslint-disable no-duplicate-imports */
 import { Module, Node, Waiting } from '@msdyn365-commerce-modules/utilities';
 import * as React from 'react';
+import get from 'lodash/get';
 
 import {
     ICheckoutViewProps,
@@ -15,8 +16,12 @@ import {
     IOrderSummary,
     IPickUpAtStore,
     IEmailDelivery,
-    IInvoicePaymentSummary
+    IInvoicePaymentSummary,
+    ICheckoutResources,
+    ICustomOrderSummary
 } from './index';
+import { CustomPaymentMethod } from '../../shared/PaymentMethodEnum';
+import { ICheckoutState } from '@msdyn365-commerce/global-state';
 
 export const PickUpAtStoreComponent: React.FC<IPickUpAtStore> = ({ PickUpAtStore, label, location }) => (
     <Node {...PickUpAtStore}>
@@ -106,26 +111,48 @@ export const LineItemsComponent: React.FC<ILineItems> = ({
     </Node>
 );
 
-const OrderSummaryComponent: React.FC<IOrderSummary> = ({ heading, lines }) => (
-    <div className='msc-order-summary-wrapper'>
-        {heading}
-        <div className='msc-order-summary__items'>
-            {lines && (
-                <>
-                    {lines.subtotal}
-                    {lines.shipping}
-                    {lines.otherCharge}
-                    {lines.tax}
-                    {lines.totalDiscounts}
-                    {lines.loyalty}
-                    {lines.customerAccount}
-                    {lines.giftCard}
-                    {lines.orderTotal}
-                </>
-            )}
+const OrderSummaryComponent: React.FC<IOrderSummary & {
+    isPaymentOptionSelected: string | undefined;
+    resources: ICheckoutResources;
+    checkoutState: ICheckoutState | undefined;
+    customOrderSummaryLine: ICustomOrderSummary | undefined;
+}> = ({ heading, lines, isPaymentOptionSelected, resources, checkoutState, customOrderSummaryLine }) => {
+    console.log('checkoutState', checkoutState);
+    return (
+        <div className='msc-order-summary-wrapper'>
+            {heading}
+            <div className='msc-order-summary__items'>
+                {isPaymentOptionSelected && isPaymentOptionSelected === CustomPaymentMethod.COD ? (
+                    <>
+                        {customOrderSummaryLine?.subtotal}
+                        {customOrderSummaryLine?.otherCharge}
+                        {customOrderSummaryLine?.shipping}
+                        {customOrderSummaryLine?.tax}
+                        {customOrderSummaryLine?.totalDiscounts}
+                        {customOrderSummaryLine?.loyalty}
+                        {customOrderSummaryLine?.customerAccount}
+                        {customOrderSummaryLine?.giftCard}
+                        {customOrderSummaryLine?.orderTotal}
+                    </>
+                ) : (
+                    lines && (
+                        <>
+                            {lines.subtotal}
+                            {lines.shipping}
+                            {lines.otherCharge}
+                            {lines.tax}
+                            {lines.totalDiscounts}
+                            {lines.loyalty}
+                            {lines.customerAccount}
+                            {lines.giftCard}
+                            {lines.orderTotal}
+                        </>
+                    )
+                )}
+            </div>
         </div>
-    </div>
-);
+    );
+};
 
 const PaymentSummaryComponent: React.FC<IInvoicePaymentSummary> = ({ heading, lines }) => (
     <div className='msc-invoice-summary-wrapper'>
@@ -171,8 +198,15 @@ const CheckoutView: React.FC<ICheckoutViewProps> = props => {
         termsAndConditions,
         keepShoppingButton,
         checkoutExpressPaymentContainer,
-        checkoutErrorRef
+        checkoutErrorRef,
+        isPaymentOptionSelected,
+        resources,
+        data: { checkout },
+        customOrderSummaryLine
+        // isPlaceOrderForCustOrderSummary
     } = props;
+
+    const checkoutState = get(checkout, 'result');
 
     return (
         <Module {...checkoutProps} ref={checkoutErrorRef}>
@@ -203,18 +237,30 @@ const CheckoutView: React.FC<ICheckoutViewProps> = props => {
                             </Node>
                             <Node {...sideProps}>
                                 {!hasInvoiceLine
-                                    ? orderSummary && <OrderSummaryComponent {...orderSummary} />
+                                    ? orderSummary && (
+                                          <OrderSummaryComponent
+                                              {...orderSummary}
+                                              isPaymentOptionSelected={isPaymentOptionSelected}
+                                              resources={resources}
+                                              checkoutState={checkoutState}
+                                              customOrderSummaryLine={customOrderSummaryLine}
+                                          />
+                                      )
                                     : invoicePaymentSummary && <PaymentSummaryComponent {...invoicePaymentSummary} />}
-                                <Node {...sideControlFirstProps}>
-                                    <Node {...termsAndConditionsProps}>{termsAndConditions}</Node>
-                                    {placeOrderButton}
-                                    {keepShoppingButton}
-                                </Node>
-                                <Node {...sideControlSecondProps}>
-                                    <Node {...termsAndConditionsProps}>{termsAndConditions}</Node>
-                                    {placeOrderButton}
-                                    {keepShoppingButton}
-                                </Node>
+                                {isPaymentOptionSelected !== CustomPaymentMethod.COD && (
+                                    <>
+                                        <Node {...sideControlFirstProps}>
+                                            <Node {...termsAndConditionsProps}>{termsAndConditions}</Node>
+                                            {placeOrderButton}
+                                            {keepShoppingButton}
+                                        </Node>
+                                        <Node {...sideControlSecondProps}>
+                                            <Node {...termsAndConditionsProps}>{termsAndConditions}</Node>
+                                            {placeOrderButton}
+                                            {keepShoppingButton}
+                                        </Node>
+                                    </>
+                                )}
                             </Node>
                         </>
                     )}

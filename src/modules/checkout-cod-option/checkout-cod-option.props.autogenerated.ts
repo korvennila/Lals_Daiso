@@ -62,6 +62,7 @@ export interface ICheckoutCodOptionResources {
     codChargesLabel: string;
     codChargeAmountErrorMessage: string;
     placeOrderErrorMessage: string;
+    codApplyChargesErrorMessage: string;
 }
 
 export interface ICodOrderConfirmationLinkData {

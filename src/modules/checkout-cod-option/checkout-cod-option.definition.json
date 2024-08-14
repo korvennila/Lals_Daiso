@@ -211,6 +211,10 @@
         "placeOrderErrorMessage": {
             "comment": "Generic error message for Place Order Checkout API",
             "value": "Something went wrong while Creating the Order"
+        },
+        "codApplyChargesErrorMessage": {
+            "comment": "Generic error message for applying COD charges API",
+            "value": "Something went wrong with updating COD Charges to Order Summary"
         }
     }
 }

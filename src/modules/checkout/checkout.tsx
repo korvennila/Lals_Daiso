@@ -76,13 +76,26 @@ interface ICheckoutState {
     isPlaceOrderLoading?: boolean;
     isPlaceOrderClicked?: boolean;
     isPaymentOptionSelected?: string;
+    codChargeAmount?: number;
+}
+
+export interface ICustomOrderSummary {
+    subtotal: React.ReactNode;
+    shipping?: React.ReactNode;
+    otherCharge?: React.ReactNode;
+    tax: React.ReactNode;
+    orderTotal: React.ReactNode;
+    totalDiscounts?: React.ReactNode;
+    giftCard?: React.ReactNode;
+    loyalty?: React.ReactNode;
+    customerAccount?: React.ReactNode;
 }
 
 /**
  * The Checkout view props.
  * @extends ICheckoutProps<ICheckoutData>
  */
-export interface ICheckoutViewProps extends ICheckoutProps<ICheckoutData> {
+export interface ICheckoutViewProps extends ICheckoutProps<ICheckoutData>, ICheckoutState {
     className: string;
     canShow?: boolean;
     isEmptyCart?: boolean;
@@ -122,6 +135,8 @@ export interface ICheckoutViewProps extends ICheckoutProps<ICheckoutData> {
 
     checkoutExpressPaymentContainer?: React.ReactNode;
     checkoutErrorRef?: React.RefObject<HTMLElement>;
+    customOrderSummaryLine?: ICustomOrderSummary;
+    isPlaceOrderForCustOrderSummary?: boolean;
 }
 
 /**
@@ -230,6 +245,46 @@ class Checkout extends React.PureComponent<ICheckoutModuleProps> {
         );
     }
 
+    @computed get taxAmount(): number | undefined {
+        const cart = this.props.data.checkout?.result?.checkoutCart?.cart;
+        if (!cart || !cart.TotalAmount) {
+            return 0;
+        }
+        return cart.TaxAmount;
+    }
+
+    @computed get subTotal(): number | undefined {
+        const cart = this.props.data.checkout?.result?.checkoutCart?.cart;
+        if (!cart || !cart.SubtotalAmount) {
+            return 0;
+        }
+        return cart.SubtotalAmount - (this.taxAmount || 0);
+    }
+
+    @computed get codCharges(): number | undefined {
+        return this.state.codChargeAmount || 0;
+    }
+
+    @computed get otherCharges(): number | undefined {
+        const cart = this.props.data.checkout?.result?.checkoutCart?.cart;
+        if (!cart) {
+            return 0;
+        }
+        return cart.OtherChargeAmount || 0;
+    }
+
+    @computed get otherChargesWithCOD(): number | undefined {
+        return (this.otherCharges || 0) + (this.codCharges || 0);
+    }
+
+    @computed get shippingCharges(): number | undefined {
+        const cart = this.props.data.checkout?.result?.checkoutCart?.cart;
+        if (!cart || !cart.ShippingChargeAmount) {
+            return 0;
+        }
+        return cart.ShippingChargeAmount;
+    }
+
     public get expressPaymentDetailsFromCartPage(): IExpressPaymentDetails | null {
         const properties =
             this.props.data.checkout?.result?.checkoutCart?.cart?.ExtensionProperties?.find(
@@ -238,12 +293,101 @@ class Checkout extends React.PureComponent<ICheckoutModuleProps> {
         return properties ? (JSON.parse(properties) as IExpressPaymentDetails) : null;
     }
 
+    @computed get customerAccountAmount(): number {
+        const checkoutState = this.props.data.checkout.result;
+        return checkoutState && checkoutState.customerAccountAmount ? checkoutState.customerAccountAmount : 0;
+    }
+
+    @computed get giftCardTotalAmount(): number {
+        const checkoutState = this.props.data.checkout.result;
+        if (!checkoutState || !checkoutState.giftCardExtends) {
+            return 0;
+        }
+
+        // Calculate the total available gift card balance
+        return checkoutState.giftCardExtends.reduce((count: number, giftCard: IGiftCardExtend) => {
+            return count + (giftCard.Balance || 0);
+        }, 0);
+    }
+
+    @computed get isTotalAmountZero(): boolean {
+        const cart = this.props.data.checkout.result ? this.props.data.checkout.result.checkoutCart.cart : undefined;
+        if (!cart) {
+            return false;
+        }
+
+        // Base total amount before considering discounts or COD charges
+        const baseTotal = cart.TotalAmount || 0;
+        const giftCardTotal = this.giftCardTotalAmount;
+
+        return giftCardTotal >= baseTotal;
+    }
+
+    @computed get totalAmountWithoutDiscounts(): number {
+        const cart = this.props.data.checkout.result ? this.props.data.checkout.result.checkoutCart.cart : undefined;
+        if (!cart) {
+            return 0;
+        }
+
+        // Check if gift card alone can cover the total
+        if (this.isTotalAmountZero) {
+            return cart.TotalAmount || 0; // No COD charges applied if covered by gift card
+        }
+
+        return (cart.TotalAmount || 0) + (this.codCharges || 0);
+    }
+
+    @computed get applicableAmounts(): { giftCardAmount: number; storeCreditAmount: number } {
+        const totalAmount = this.totalAmountWithoutDiscounts;
+        const giftCardTotal = this.giftCardTotalAmount;
+        const storeCreditTotal = this.customerAccountAmount;
+
+        // Scenario 1: Apply store credits first, then gift card
+        let remainingTotal = totalAmount;
+        const appliedStoreCreditFirst = Math.min(remainingTotal, storeCreditTotal);
+        remainingTotal -= appliedStoreCreditFirst;
+        const appliedGiftCardAfterStoreCredit = Math.min(remainingTotal, giftCardTotal);
+
+        // Scenario 2: Apply gift card first, then store credits
+        remainingTotal = totalAmount;
+        const appliedGiftCardFirst = Math.min(remainingTotal, giftCardTotal);
+        remainingTotal -= appliedGiftCardFirst;
+        const appliedStoreCreditAfterGiftCard = Math.min(remainingTotal, storeCreditTotal);
+
+        // Choose the scenario that optimizes the usage of the credits
+        if (appliedStoreCreditFirst + appliedGiftCardAfterStoreCredit >= appliedGiftCardFirst + appliedStoreCreditAfterGiftCard) {
+            return {
+                giftCardAmount: appliedGiftCardAfterStoreCredit,
+                storeCreditAmount: appliedStoreCreditFirst
+            };
+        } else {
+            return {
+                giftCardAmount: appliedGiftCardFirst,
+                storeCreditAmount: appliedStoreCreditAfterGiftCard
+            };
+        }
+    }
+
+    @computed get totalAmount(): number {
+        const cart = this.props.data.checkout.result ? this.props.data.checkout.result.checkoutCart.cart : undefined;
+        if (!cart) {
+            return 0;
+        }
+
+        const totalAmount = this.totalAmountWithoutDiscounts || 0;
+        const { giftCardAmount, storeCreditAmount } = this.applicableAmounts;
+
+        // Subtract applicable gift card and store credits from the total amount
+        return Math.max(totalAmount - giftCardAmount - storeCreditAmount, 0);
+    }
+
     public state: ICheckoutState = {
         errorMessage: '',
         isValidationPassed: false,
         isPlaceOrderLoading: false,
         isPlaceOrderClicked: false,
-        isPaymentOptionSelected: ''
+        isPaymentOptionSelected: '',
+        codChargeAmount: 0
     };
 
     private readonly telemetryContent: ITelemetryContent = getTelemetryObject(
@@ -265,7 +409,10 @@ class Checkout extends React.PureComponent<ICheckoutModuleProps> {
         codPaymentService.addListener(this.handleRadioButtonChange);
 
         // Set initial state based on current selected option
-        this.setState({ isPaymentOptionSelected: codPaymentService.getSelectedOption() });
+        this.setState({
+            isPaymentOptionSelected: codPaymentService.getSelectedOption(),
+            codChargeAmount: codPaymentService.getCODAmount()
+        });
 
         when(
             () => this.asyncResultStatus !== AsyncResultStatusCode.LOADING,
@@ -475,8 +622,11 @@ class Checkout extends React.PureComponent<ICheckoutModuleProps> {
         }
     }
 
-    public handleRadioButtonChange = (isPaymentOptionSelected: string) => {
-        this.setState({ isPaymentOptionSelected });
+    private handleRadioButtonChange = (option: string, amount: number): void => {
+        this.setState({
+            isPaymentOptionSelected: option,
+            codChargeAmount: amount
+        });
     };
 
     // eslint-disable-next-line complexity -- ignore the complexity.
@@ -495,6 +645,7 @@ class Checkout extends React.PureComponent<ICheckoutModuleProps> {
         const { backToShopping, placeOrderText, confirmPaymentText, cookieConsentRequiredMessage, genericErrorMessage } = resources;
         const checkoutClass = classnames('ms-checkout', className);
         const allCheckoutInformation = this.getSlotItems('checkoutInformation');
+        //const currencyCode = get(this.props, 'context.request.channel.Currency');
 
         // @ts-expect-error - check the key of slot
         const checkoutInformation = allCheckoutInformation?.filter(info => !info?.key.includes('express-payment'));
@@ -565,6 +716,7 @@ class Checkout extends React.PureComponent<ICheckoutModuleProps> {
 
         let viewProps: ICheckoutViewProps = {
             ...this.props,
+            ...this.state,
             className: checkoutClass,
             checkoutErrorRef: this.checkoutErrorRef,
             isEmptyCart: this.isEmptyCart,
@@ -596,7 +748,63 @@ class Checkout extends React.PureComponent<ICheckoutModuleProps> {
             sideControlSecondProps: { className: 'ms-checkout__side-control-second' },
             termsAndConditionsProps: { className: 'ms-checkout__terms-and-conditions' },
             title: checkoutHeading && this.renderMsdyn365Text(checkoutHeading),
-            checkoutExpressPaymentContainer
+            checkoutExpressPaymentContainer,
+            customOrderSummaryLine:
+                this.props.moduleState.isReady || this.props.moduleState.isUpdating
+                    ? {
+                          subtotal: (
+                              <div className='msc-order-summary-subTotal'>
+                                  {resources.subTotalLabel}: AED {this.subTotal}
+                              </div>
+                          ),
+                          tax: this.taxAmount ? (
+                              <div className='msc-order-summary-tax'>
+                                  {resources.taxLabel}: AED {this.taxAmount}
+                              </div>
+                          ) : (
+                              undefined
+                          ),
+                          otherCharge: (
+                              <div className='msc-order-summary-otherCharge'>
+                                  {resources.otherCharges}: AED {this.isTotalAmountZero ? this.otherCharges : this.otherChargesWithCOD}
+                              </div>
+                          ),
+                          shipping: this.shippingCharges ? (
+                              <div className='msc-order-summary-subTotal'>
+                                  {resources.shippingLabel}: AED {this.shippingCharges}
+                              </div>
+                          ) : (
+                              undefined
+                          ),
+                          giftCard: this.applicableAmounts.giftCardAmount ? (
+                              <div className='msc-order-summary-giftCard'>
+                                  {resources.giftcardLabel}: - AED {this.applicableAmounts.giftCardAmount}
+                              </div>
+                          ) : (
+                              undefined
+                          ),
+                          loyalty: this.getLoyaltyAmount ? (
+                              <div className='msc-order-summary-loyalty'>
+                                  {resources.loyaltyLabel}: AED {this.getLoyaltyAmount}
+                              </div>
+                          ) : (
+                              undefined
+                          ),
+                          customerAccount: this.applicableAmounts.storeCreditAmount ? (
+                              <div className='msc-order-summary-customAcc'>
+                                  {resources.customerAccountLabel}: - AED {this.applicableAmounts.storeCreditAmount}
+                              </div>
+                          ) : (
+                              undefined
+                          ),
+                          orderTotal: (
+                              <div className='msc-order-summary-orderTotal'>
+                                  {resources.orderTotalLabel}: AED {this.totalAmount}
+                              </div>
+                          )
+                      }
+                    : undefined
+            // isPlaceOrderForCustOrderSummary: false
         };
 
         if (!isConsentGiven && isAuthenticated) {

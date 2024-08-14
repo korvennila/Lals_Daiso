@@ -77,6 +77,8 @@ export interface IAddResource {
     error?: string;
 }
 
+const codPaymentService = CodPaymentService.getInstance();
+
 export interface ICheckoutGiftCardViewProps extends ICheckoutCodOptionProps<{}>, ICheckoutGiftCardState {
     className?: string;
 
@@ -148,9 +150,9 @@ export class CheckoutGiftCard extends React.Component<ICheckoutGiftCardModulePro
     };
 
     private handleCODSelectedOption = async (selectedOption: string) => {
-        await this.korApplyCODChargesRequest();
-        const codPaymentService = CodPaymentService.getInstance();
+        // await this.korApplyCODChargesRequest();
         codPaymentService.setSelectedOption(selectedOption);
+        codPaymentService.setCODAmount(this.state.codChargeAmount);
     };
 
     @computed get isDataReady(): boolean {
@@ -200,6 +202,17 @@ export class CheckoutGiftCard extends React.Component<ICheckoutGiftCardModulePro
         return amountDue > 0;
     }
 
+    @computed get shouldEnableCODOption(): boolean {
+        const cart = this.props.data.checkout.result ? this.props.data.checkout.result.checkoutCart.cart : undefined;
+        if (!cart) {
+            return false;
+        }
+
+        // Use gift card card when loyalty points do not cover the total amount
+        const amountDue = (cart.TotalAmount || 0) - this.getLoyaltyAmount - this.getCustomerAccountAmount - this.getGiftCardTotalAmount;
+        return amountDue > 0;
+    }
+
     @computed get hasSelectedItem(): boolean {
         const {
             data: { checkout }
@@ -214,6 +227,30 @@ export class CheckoutGiftCard extends React.Component<ICheckoutGiftCardModulePro
             () => {
                 this.init();
                 this.korGetCODChargeAmount();
+            }
+        );
+
+        reaction(
+            () => this.shouldEnableCODOption, // Observable or computed value
+            shouldEnable => {
+                if (this.state.isOTPVerified) {
+                    if (!shouldEnable) {
+                        this.setState({ isRadioButtonChecked: false });
+                        const radioButton = this.radioButtonRef.current;
+                        if (radioButton) {
+                            radioButton.checked = false;
+                        }
+                        codPaymentService.setSelectedOption('');
+                        // codPaymentService.setCODAmount(0);
+                    } else {
+                        this.setState({ isRadioButtonChecked: true });
+                        const radioButton = this.radioButtonRef.current;
+                        if (radioButton) {
+                            radioButton.checked = true;
+                        }
+                        codPaymentService.setSelectedOption(CustomPaymentMethod.COD);
+                    }
+                }
             }
         );
 
@@ -272,7 +309,6 @@ export class CheckoutGiftCard extends React.Component<ICheckoutGiftCardModulePro
                     this.setState({ codChargeAmount: data.value }, () => {
                         // Check and call handleCODButtonCheck after setting the state
                         if (this.state.codChargeAmount === this.props.data.checkout.result?.checkoutCart.cart.OtherChargeAmount) {
-                            const codPaymentService = CodPaymentService.getInstance();
                             codPaymentService.setSelectedOption(CustomPaymentMethod.COD);
                             this.handleCODButtonCheck(true);
                             this.setCodSelected();
@@ -291,7 +327,7 @@ export class CheckoutGiftCard extends React.Component<ICheckoutGiftCardModulePro
 
     private handleClick = (event: Event) => {
         const radioButton = this.radioButtonRef.current;
-        if (radioButton && isEmpty(this.state.errorMessage)) {
+        if (radioButton && isEmpty(this.state.errorMessage) && this.shouldEnableCODOption) {
             if (!this.props.context.request.user.isAuthenticated && !this.state.isOTPVerified) {
                 event.preventDefault();
                 this.setState({ isMobileModalOpen: true, isRadioButtonChecked: false });
@@ -333,44 +369,44 @@ export class CheckoutGiftCard extends React.Component<ICheckoutGiftCardModulePro
         this.setState({ isOTPVerified: value });
     };
 
-    private readonly korApplyCODChargesRequest = async (): Promise<any> => {
-        const cRetailURL = this.props.context.request.apiSettings.baseUrl;
-        const cRetailOUN = this.props.context.request.apiSettings.oun ? this.props.context.request.apiSettings.oun : '';
+    // private readonly korApplyCODChargesRequest = async (): Promise<any> => {
+    //     const cRetailURL = this.props.context.request.apiSettings.baseUrl;
+    //     const cRetailOUN = this.props.context.request.apiSettings.oun ? this.props.context.request.apiSettings.oun : '';
 
-        const cKORApplyCODChargesRequestUrl = `${cRetailURL}commerce/KORApplyCODChargesRequest?api-version=7.3`;
-        const checkoutState = this.props.data.checkout.result;
-        const currentCartState = await getCartState(this.props.context?.actionContext);
+    //     const cKORApplyCODChargesRequestUrl = `${cRetailURL}commerce/KORApplyCODChargesRequest?api-version=7.3`;
+    //     const checkoutState = this.props.data.checkout.result;
+    //     // const currentCartState = await getCartState(this.props.context?.actionContext);
 
-        const cCartId = checkoutState?.checkoutCart.cart.Id;
-        const cCodChargesAmount = this.state.codChargeAmount ? this.state.codChargeAmount : 0;
+    //     const cCartId = checkoutState?.checkoutCart.cart.Id;
+    //     const cCodChargesAmount = this.state.codChargeAmount ? this.state.codChargeAmount : 0;
 
-        try {
-            const response = await fetch(cKORApplyCODChargesRequestUrl, {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                    OUN: cRetailOUN,
-                    'User-Agent': 'Mozilla/5.0 (Windows NT 6.3; Win64; x64; rv:58.0) Gecko/20100101 Firefox/58.0'
-                },
-                body: JSON.stringify({
-                    // context: this.props.context,
-                    cartId: cCartId,
-                    CODCharges: cCodChargesAmount
-                })
-            });
+    //     try {
+    //         const response = await fetch(cKORApplyCODChargesRequestUrl, {
+    //             method: 'POST',
+    //             headers: {
+    //                 'Content-Type': 'application/json',
+    //                 OUN: cRetailOUN,
+    //                 'User-Agent': 'Mozilla/5.0 (Windows NT 6.3; Win64; x64; rv:58.0) Gecko/20100101 Firefox/58.0'
+    //             },
+    //             body: JSON.stringify({
+    //                 // context: this.props.context,
+    //                 cartId: cCartId,
+    //                 CODCharges: cCodChargesAmount
+    //             })
+    //         });
 
-            if (response.status === 200) {
-                const data = await response.json();
-                await currentCartState.refreshCart({});
-                console.log('korApplyCODChargesRequest', data);
-            } else {
-                this.setError(this.props.resources.placeOrderErrorMessage);
-            }
-        } catch (error) {
-            this.setError(this.props.resources.placeOrderErrorMessage);
-            console.error('place order error:', error);
-        }
-    };
+    //         if (response.status === 200) {
+    //             const data = await response.json();
+    //             this.props.moduleState.onUpdating();
+    //             console.log('korApplyCODChargesRequest', data);
+    //         } else {
+    //             this.setError(this.props.resources.codApplyChargesErrorMessage);
+    //         }
+    //     } catch (error) {
+    //         this.setError(this.props.resources.codApplyChargesErrorMessage);
+    //         console.error('place order error:', error);
+    //     }
+    // };
 
     private readonly korPreCheckoutRequest = async (): Promise<any> => {
         this.setState({ isPlaceOrderLoading: true });
