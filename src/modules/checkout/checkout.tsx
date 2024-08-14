@@ -754,52 +754,56 @@ class Checkout extends React.PureComponent<ICheckoutModuleProps> {
                     ? {
                           subtotal: (
                               <div className='msc-order-summary-subTotal'>
-                                  {resources.subTotalLabel}: AED {this.subTotal}
+                                  <span>{`${resources.subTotalLabel}:`}</span> <span>{`AED ${this.subTotal}`}</span>
                               </div>
                           ),
                           tax: this.taxAmount ? (
                               <div className='msc-order-summary-tax'>
-                                  {resources.taxLabel}: AED {this.taxAmount}
+                                  <span>{`${resources.taxLabel}:`} </span>
+                                  <span>{`AED ${this.taxAmount}`}</span>
                               </div>
                           ) : (
                               undefined
                           ),
                           otherCharge: (
                               <div className='msc-order-summary-otherCharge'>
-                                  {resources.otherCharges}: AED {this.isTotalAmountZero ? this.otherCharges : this.otherChargesWithCOD}
+                                  <span>{`${resources.otherCharges}: `}</span>{' '}
+                                  <span>{`AED ${this.isTotalAmountZero ? this.otherCharges : this.otherChargesWithCOD}`}</span>
                               </div>
                           ),
                           shipping: this.shippingCharges ? (
                               <div className='msc-order-summary-subTotal'>
-                                  {resources.shippingLabel}: AED {this.shippingCharges}
+                                  <span>{`${resources.shippingLabel}:`}</span> <span>{` AED ${this.shippingCharges}`}</span>
                               </div>
                           ) : (
                               undefined
                           ),
                           giftCard: this.applicableAmounts.giftCardAmount ? (
                               <div className='msc-order-summary-giftCard'>
-                                  {resources.giftcardLabel}: - AED {this.applicableAmounts.giftCardAmount}
+                                  <span>{`${resources.giftcardLabel}:`}</span>{' '}
+                                  <span>{` - AED ${this.applicableAmounts.giftCardAmount}`}</span>
                               </div>
                           ) : (
                               undefined
                           ),
                           loyalty: this.getLoyaltyAmount ? (
                               <div className='msc-order-summary-loyalty'>
-                                  {resources.loyaltyLabel}: AED {this.getLoyaltyAmount}
+                                  <span>{`${resources.loyaltyLabel}:`}</span> <span>{` AED ${this.getLoyaltyAmount}`}</span>
                               </div>
                           ) : (
                               undefined
                           ),
                           customerAccount: this.applicableAmounts.storeCreditAmount ? (
                               <div className='msc-order-summary-customAcc'>
-                                  {resources.customerAccountLabel}: - AED {this.applicableAmounts.storeCreditAmount}
+                                  <span>{`${resources.customerAccountLabel}:`}</span>{' '}
+                                  <span>{` - AED ${this.applicableAmounts.storeCreditAmount}`}</span>
                               </div>
                           ) : (
                               undefined
                           ),
                           orderTotal: (
                               <div className='msc-order-summary-orderTotal'>
-                                  {resources.orderTotalLabel}: AED {this.totalAmount}
+                                  <span>{`${resources.orderTotalLabel}:`}</span> <span>{` AED ${this.totalAmount}`}</span>
                               </div>
                           )
                       }
