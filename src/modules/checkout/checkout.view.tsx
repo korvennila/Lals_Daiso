@@ -125,10 +125,10 @@ const OrderSummaryComponent: React.FC<IOrderSummary & {
                 {isPaymentOptionSelected && isPaymentOptionSelected === CustomPaymentMethod.COD ? (
                     <>
                         {customOrderSummaryLine?.subtotal}
+                        {customOrderSummaryLine?.totalDiscounts}
                         {customOrderSummaryLine?.otherCharge}
                         {customOrderSummaryLine?.shipping}
                         {customOrderSummaryLine?.tax}
-                        {customOrderSummaryLine?.totalDiscounts}
                         {customOrderSummaryLine?.loyalty}
                         {customOrderSummaryLine?.customerAccount}
                         {customOrderSummaryLine?.giftCard}

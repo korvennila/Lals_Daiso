@@ -253,6 +253,14 @@ class Checkout extends React.PureComponent<ICheckoutModuleProps> {
         return cart.TaxAmount;
     }
 
+    @computed get totalDiscount(): number {
+        const cart = this.props.data.checkout?.result?.checkoutCart?.cart;
+        if (!cart || !cart.DiscountAmount) {
+            return 0;
+        }
+        return cart.DiscountAmount;
+    }
+
     @computed get subTotal(): number | undefined {
         const cart = this.props.data.checkout?.result?.checkoutCart?.cart;
         if (!cart || !cart.SubtotalAmount) {
@@ -754,13 +762,21 @@ class Checkout extends React.PureComponent<ICheckoutModuleProps> {
                     ? {
                           subtotal: (
                               <div className='msc-order-summary-subTotal'>
-                                  <span>{`${resources.subTotalLabel}:`}</span> <span>{`AED ${this.subTotal}`}</span>
+                                  <span>{`${resources.subTotalLabel}:`}</span> <span>{`AED ${this.subTotal?.toFixed(2)}`}</span>
                               </div>
                           ),
                           tax: this.taxAmount ? (
                               <div className='msc-order-summary-tax'>
                                   <span>{`${resources.taxLabel}:`} </span>
-                                  <span>{`AED ${this.taxAmount}`}</span>
+                                  <span>{`AED ${this.taxAmount?.toFixed(2)}`}</span>
+                              </div>
+                          ) : (
+                              undefined
+                          ),
+                          totalDiscounts: this.totalDiscount ? (
+                              <div className='msc-order-summary-totalDiscount'>
+                                  <span>{`${resources.totalDiscountsLabel}:`}</span>{' '}
+                                  <span>{` - AED ${this.totalDiscount?.toFixed(2)}`}</span>
                               </div>
                           ) : (
                               undefined
@@ -768,12 +784,14 @@ class Checkout extends React.PureComponent<ICheckoutModuleProps> {
                           otherCharge: (
                               <div className='msc-order-summary-otherCharge'>
                                   <span>{`${resources.otherCharges}: `}</span>{' '}
-                                  <span>{`AED ${this.isTotalAmountZero ? this.otherCharges : this.otherChargesWithCOD}`}</span>
+                                  <span>{`AED ${
+                                      this.isTotalAmountZero ? this.otherCharges?.toFixed(2) : this.otherChargesWithCOD?.toFixed(2)
+                                  }`}</span>
                               </div>
                           ),
                           shipping: this.shippingCharges ? (
                               <div className='msc-order-summary-subTotal'>
-                                  <span>{`${resources.shippingLabel}:`}</span> <span>{` AED ${this.shippingCharges}`}</span>
+                                  <span>{`${resources.shippingLabel}:`}</span> <span>{` AED ${this.shippingCharges?.toFixed(2)}`}</span>
                               </div>
                           ) : (
                               undefined
@@ -781,14 +799,14 @@ class Checkout extends React.PureComponent<ICheckoutModuleProps> {
                           giftCard: this.applicableAmounts.giftCardAmount ? (
                               <div className='msc-order-summary-giftCard'>
                                   <span>{`${resources.giftcardLabel}:`}</span>{' '}
-                                  <span>{` - AED ${this.applicableAmounts.giftCardAmount}`}</span>
+                                  <span>{` - AED ${this.applicableAmounts.giftCardAmount?.toFixed(2)}`}</span>
                               </div>
                           ) : (
                               undefined
                           ),
                           loyalty: this.getLoyaltyAmount ? (
                               <div className='msc-order-summary-loyalty'>
-                                  <span>{`${resources.loyaltyLabel}:`}</span> <span>{` AED ${this.getLoyaltyAmount}`}</span>
+                                  <span>{`${resources.loyaltyLabel}:`}</span> <span>{` AED ${this.getLoyaltyAmount?.toFixed(2)}`}</span>
                               </div>
                           ) : (
                               undefined
@@ -796,14 +814,14 @@ class Checkout extends React.PureComponent<ICheckoutModuleProps> {
                           customerAccount: this.applicableAmounts.storeCreditAmount ? (
                               <div className='msc-order-summary-customAcc'>
                                   <span>{`${resources.customerAccountLabel}:`}</span>{' '}
-                                  <span>{` - AED ${this.applicableAmounts.storeCreditAmount}`}</span>
+                                  <span>{` - AED ${this.applicableAmounts.storeCreditAmount?.toFixed(2)}`}</span>
                               </div>
                           ) : (
                               undefined
                           ),
                           orderTotal: (
                               <div className='msc-order-summary-orderTotal'>
-                                  <span>{`${resources.orderTotalLabel}:`}</span> <span>{` AED ${this.totalAmount}`}</span>
+                                  <span>{`${resources.orderTotalLabel}:`}</span> <span>{` AED ${this.totalAmount?.toFixed(2)}`}</span>
                               </div>
                           )
                       }

@@ -202,14 +202,14 @@ export class CheckoutGiftCard extends React.Component<ICheckoutGiftCardModulePro
         return amountDue > 0;
     }
 
-    @computed get shouldEnableCODOption(): boolean {
+    @computed get isOtherPaymentsEnabled(): boolean {
         const cart = this.props.data.checkout.result ? this.props.data.checkout.result.checkoutCart.cart : undefined;
         if (!cart) {
             return false;
         }
 
         // Use gift card card when loyalty points do not cover the total amount
-        const amountDue = (cart.TotalAmount || 0) - this.getLoyaltyAmount - this.getCustomerAccountAmount - this.getGiftCardTotalAmount;
+        const amountDue = this.getLoyaltyAmount + this.getCustomerAccountAmount + this.getGiftCardTotalAmount;
         return amountDue > 0;
     }
 
@@ -231,24 +231,12 @@ export class CheckoutGiftCard extends React.Component<ICheckoutGiftCardModulePro
         );
 
         reaction(
-            () => this.shouldEnableCODOption, // Observable or computed value
-            shouldEnable => {
-                if (this.state.isOTPVerified) {
-                    if (!shouldEnable) {
+            () => this.isOtherPaymentsEnabled, // Observable or computed value
+            otherPaymentEnabled => {
+                if (this.state.isOTPVerified || this.state.isRadioButtonChecked) {
+                    if (otherPaymentEnabled) {
                         this.setState({ isRadioButtonChecked: false });
-                        const radioButton = this.radioButtonRef.current;
-                        if (radioButton) {
-                            radioButton.checked = false;
-                        }
                         codPaymentService.setSelectedOption('');
-                        // codPaymentService.setCODAmount(0);
-                    } else {
-                        this.setState({ isRadioButtonChecked: true });
-                        const radioButton = this.radioButtonRef.current;
-                        if (radioButton) {
-                            radioButton.checked = true;
-                        }
-                        codPaymentService.setSelectedOption(CustomPaymentMethod.COD);
                     }
                 }
             }
@@ -327,10 +315,20 @@ export class CheckoutGiftCard extends React.Component<ICheckoutGiftCardModulePro
 
     private handleClick = (event: Event) => {
         const radioButton = this.radioButtonRef.current;
-        if (radioButton && isEmpty(this.state.errorMessage) && this.shouldEnableCODOption) {
+        if (this.isOtherPaymentsEnabled) {
+            this.setError('COD is not applicable, Please try other payment methods');
+        } else {
+            this.setError('');
+        }
+        if (radioButton && isEmpty(this.state.errorMessage) && !this.isOtherPaymentsEnabled) {
             if (!this.props.context.request.user.isAuthenticated && !this.state.isOTPVerified) {
                 event.preventDefault();
                 this.setState({ isMobileModalOpen: true, isRadioButtonChecked: false });
+            } else if (!this.props.context.request.user.isAuthenticated && this.state.isOTPVerified) {
+                // this.setState({ isRadioButtonChecked: radioButton.checked });
+                this.handleCODOptionChange({ target: radioButton } as React.ChangeEvent<HTMLInputElement>);
+                this.handleCODButtonCheck(true);
+                // this.setCodSelected();
             } else {
                 this.setState({ isRadioButtonChecked: radioButton.checked });
                 this.handleCODOptionChange({ target: radioButton } as React.ChangeEvent<HTMLInputElement>);
@@ -419,10 +417,10 @@ export class CheckoutGiftCard extends React.Component<ICheckoutGiftCardModulePro
 
         const cGuestCheckoutEmail = checkoutState?.guestCheckoutEmail;
         const cCartId = checkoutState?.checkoutCart.cart.Id;
-        const cShippingCharge = checkoutState?.checkoutCart.cart.ShippingChargeAmount;
-        const cTaxAmount = checkoutState?.checkoutCart.cart.TaxAmount;
-        const cCodChargesAmount = this.state.codChargeAmount ? this.state.codChargeAmount : 0;
-        const cAmountDue = checkoutState?.checkoutCart.cart.AmountDue;
+        const cShippingCharge = checkoutState?.checkoutCart.cart.ShippingChargeAmount || 0;
+        const cTaxAmount = checkoutState?.checkoutCart.cart.TaxAmount || 0;
+        const cCodChargesAmount = this.state.codChargeAmount || 0;
+        const cAmountDue = (checkoutState?.checkoutCart.cart.AmountDue || 0) + cCodChargesAmount;
         const cDeliveryMode = checkoutState?.checkoutCart.cart.DeliveryMode;
 
         try {
@@ -438,10 +436,10 @@ export class CheckoutGiftCard extends React.Component<ICheckoutGiftCardModulePro
                     cartId: cCartId,
                     receiptEmail: cGuestCheckoutEmail,
                     modeOfDeliver: cDeliveryMode,
-                    shippingCharges: cShippingCharge,
-                    totalDueAmt: cAmountDue,
-                    CODCharges: cCodChargesAmount,
-                    taxAmount: cTaxAmount
+                    shippingCharges: Math.round(cShippingCharge * 100) / 100,
+                    totalDueAmt: Math.round(cAmountDue * 100) / 100,
+                    CODCharges: Math.round(cCodChargesAmount * 100) / 100,
+                    taxAmount: Math.round(cTaxAmount * 100) / 100
                 })
             });
 
