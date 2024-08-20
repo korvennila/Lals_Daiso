@@ -65,6 +65,12 @@
             "friendlyName": "COD Order Failure link",
             "description": "COD Order Failure link",
             "$ref": "@msdyn365-commerce-modules/definitions/dist/src/ActionLink.json#/definitions/actionLink"
+        },
+        "codIsNotApplicableMessage": {
+            "friendlyName": "COD Is Not Applicable Message",
+            "description": "Message to be displayed while chosing COD method with any other methods",
+            "type": "string",
+            "default": "COD is not applicable, Please try other payment methods"
         }
     },
     "resources": {
@@ -215,6 +221,10 @@
         "codApplyChargesErrorMessage": {
             "comment": "Generic error message for applying COD charges API",
             "value": "Something went wrong with updating COD Charges to Order Summary"
+        },
+        "codIsNotApplicableMessage": {
+            "comment": "Message to be displayed while chosing COD method with any other methods",
+            "value": "COD is not applicable, Please try other payment methods"
         }
     }
 }

@@ -23,6 +23,7 @@ export interface ICheckoutCodOptionConfig extends Msdyn365.IModuleConfig {
     otpVerificationImage?: Msdyn365.IImageData;
     codOrderConfirmationLink?: ICodOrderConfirmationLinkData;
     codOrderFailureLink?: ICodOrderFailureLinkData;
+    codIsNotApplicableMessage?: string;
 }
 
 export interface ICheckoutCodOptionResources {
@@ -63,6 +64,7 @@ export interface ICheckoutCodOptionResources {
     codChargeAmountErrorMessage: string;
     placeOrderErrorMessage: string;
     codApplyChargesErrorMessage: string;
+    codIsNotApplicableMessage: string;
 }
 
 export interface ICodOrderConfirmationLinkData {

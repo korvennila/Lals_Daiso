@@ -17,6 +17,8 @@ export interface ICheckoutConfig extends Msdyn365.IModuleConfig {
     imageSettings?: Msdyn365.IImageSettings;
     className?: string;
     clientRender?: boolean;
+    codOrderConfirmationLink?: ICodOrderConfirmationLinkData;
+    codOrderFailureLink?: ICodOrderFailureLinkData;
 }
 
 export interface ICheckoutResources {
@@ -86,6 +88,7 @@ export interface ICheckoutResources {
     subTotalLabel: string;
     shippingLabel: string;
     otherCharges: string;
+    codCharges: string;
     shippingCharges: string;
     freeText: string;
     taxLabel: string;
@@ -101,6 +104,7 @@ export interface ICheckoutResources {
     invoiceSummaryTitle: string;
     invoiceLabel: string;
     checkoutApiFailureErrorMessage: string;
+    placeOrderErrorMessage: string;
 }
 
 export const enum CheckoutHeadingTag {
@@ -143,6 +147,20 @@ export const enum OrderSummaryHeadingTag {
 export interface IOrderSummaryHeadingData {
     text: string;
     tag?: OrderSummaryHeadingTag;
+}
+
+export interface ICodOrderConfirmationLinkData {
+    linkText?: string;
+    linkUrl: Msdyn365.ILinkData;
+    ariaLabel?: string;
+    openInNewTab?: boolean;
+}
+
+export interface ICodOrderFailureLinkData {
+    linkText?: string;
+    linkUrl: Msdyn365.ILinkData;
+    ariaLabel?: string;
+    openInNewTab?: boolean;
 }
 
 export interface ICheckoutProps<T> extends Msdyn365.IModule<T> {

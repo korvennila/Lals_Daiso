@@ -3,7 +3,9 @@ class CodPaymentService {
     private static instance: CodPaymentService;
     private selectedOption: string = '';
     private CODAmount: number = 0;
-    private listeners: ((option: string, amount: number) => void)[] = [];
+    private isCODSelected: boolean = false;
+    private codOrderFailure: string = '';
+    private listeners: ((option: string, amount: number, isCODSelected: boolean, codOrderFailure: string) => void)[] = [];
 
     private constructor() {}
 
@@ -32,12 +34,40 @@ class CodPaymentService {
         return this.CODAmount;
     }
 
-    public addListener(listener: (option: string, amount: number) => void): void {
+    public setCODSelected(option: boolean): void {
+        this.isCODSelected = option;
+        this.notifyListeners();
+    }
+
+    public getCODSelected(): boolean {
+        return this.isCODSelected;
+    }
+
+    public setCODOrderFailure(codOrderFailure: string): void {
+        this.codOrderFailure = codOrderFailure;
+        this.notifyListeners();
+
+        // Clear the codOrderFailure message after 3 seconds
+        setTimeout(() => {
+            this.codOrderFailure = '';
+            this.notifyListeners();
+        }, 3000); // 3000 milliseconds = 3 seconds
+    }
+
+    public getCODOrderFailure(): string {
+        return this.codOrderFailure;
+    }
+
+    public addListener(listener: (option: string, amount: number, isCODSelected: boolean, codOrderFailure: string) => void): void {
         this.listeners.push(listener);
     }
 
     private notifyListeners(): void {
-        this.listeners.forEach(listener => listener(this.selectedOption, this.CODAmount));
+        this.listeners.forEach(listener => listener(this.selectedOption, this.CODAmount, this.isCODSelected, this.codOrderFailure));
+    }
+
+    public removeListener(listener: (option: string, amount: number, isCODSelected: boolean, codOrderFailure: string) => void): void {
+        this.listeners = this.listeners.filter(l => l !== listener);
     }
 }
 

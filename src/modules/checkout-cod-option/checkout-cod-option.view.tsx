@@ -61,7 +61,7 @@ export const From: React.FC<IForm> = ({
             {label}
             <Node className={`msc-cod-charges-container ${!isEmpty(error!) ? 'disabled' : ''}`}>
                 {inputNumber}
-                {codChargeAmount && codChargeAmount > 0 && isEmpty(error!) ? (
+                {codChargeAmount && codChargeAmount > 0 ? (
                     <Node className='msc-cod-charges-label'>
                         {`${resources?.codChargesLabel} `}
                         {codChargeAmount?.toFixed(2)}
@@ -72,7 +72,7 @@ export const From: React.FC<IForm> = ({
             </Node>
         </>
         {/* )} */}
-        {applyButton}
+        {/* {applyButton} */}
     </Node>
 );
 

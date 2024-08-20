@@ -126,6 +126,7 @@ const OrderSummaryComponent: React.FC<IOrderSummary & {
                     <>
                         {customOrderSummaryLine?.subtotal}
                         {customOrderSummaryLine?.totalDiscounts}
+                        {customOrderSummaryLine?.codCharges}
                         {customOrderSummaryLine?.otherCharge}
                         {customOrderSummaryLine?.shipping}
                         {customOrderSummaryLine?.tax}
@@ -202,7 +203,8 @@ const CheckoutView: React.FC<ICheckoutViewProps> = props => {
         isPaymentOptionSelected,
         resources,
         data: { checkout },
-        customOrderSummaryLine
+        customOrderSummaryLine,
+        codPlaceOrderButton
         // isPlaceOrderForCustOrderSummary
     } = props;
 
@@ -247,7 +249,7 @@ const CheckoutView: React.FC<ICheckoutViewProps> = props => {
                                           />
                                       )
                                     : invoicePaymentSummary && <PaymentSummaryComponent {...invoicePaymentSummary} />}
-                                {isPaymentOptionSelected !== CustomPaymentMethod.COD && (
+                                {isPaymentOptionSelected !== CustomPaymentMethod.COD ? (
                                     <>
                                         <Node {...sideControlFirstProps}>
                                             <Node {...termsAndConditionsProps}>{termsAndConditions}</Node>
@@ -257,6 +259,14 @@ const CheckoutView: React.FC<ICheckoutViewProps> = props => {
                                         <Node {...sideControlSecondProps}>
                                             <Node {...termsAndConditionsProps}>{termsAndConditions}</Node>
                                             {placeOrderButton}
+                                            {keepShoppingButton}
+                                        </Node>
+                                    </>
+                                ) : (
+                                    <>
+                                        <Node {...sideControlFirstProps}>
+                                            <Node {...termsAndConditionsProps}>{termsAndConditions}</Node>
+                                            {codPlaceOrderButton}
                                             {keepShoppingButton}
                                         </Node>
                                     </>

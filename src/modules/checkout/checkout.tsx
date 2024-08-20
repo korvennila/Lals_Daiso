@@ -37,7 +37,7 @@ import {
     TelemetryConstant,
     Waiting
 } from '@msdyn365-commerce-modules/utilities';
-import { ErrorCode, ErrorLocation, IGiftCardExtend } from '@msdyn365-commerce/global-state';
+import { ErrorCode, ErrorLocation, IGiftCardExtend, getCartState } from '@msdyn365-commerce/global-state';
 import classnames from 'classnames';
 import isEmpty from 'lodash/isEmpty';
 import { action, computed, get, reaction, when } from 'mobx';
@@ -61,6 +61,7 @@ export * from './components/get-order-summary';
 
 import CodPaymentService from '../../shared/CodPaymentService';
 import { CustomPaymentMethod } from '../../shared/PaymentMethodEnum';
+import CheckoutCODPlaceOrderButton from './components/cod-place-order-button';
 
 /**
  * Device type.
@@ -77,6 +78,7 @@ interface ICheckoutState {
     isPlaceOrderClicked?: boolean;
     isPaymentOptionSelected?: string;
     codChargeAmount?: number;
+    isCODSelected?: boolean;
 }
 
 export interface ICustomOrderSummary {
@@ -89,6 +91,7 @@ export interface ICustomOrderSummary {
     giftCard?: React.ReactNode;
     loyalty?: React.ReactNode;
     customerAccount?: React.ReactNode;
+    codCharges?: React.ReactNode;
 }
 
 /**
@@ -137,6 +140,11 @@ export interface ICheckoutViewProps extends ICheckoutProps<ICheckoutData>, IChec
     checkoutErrorRef?: React.RefObject<HTMLElement>;
     customOrderSummaryLine?: ICustomOrderSummary;
     isPlaceOrderForCustOrderSummary?: boolean;
+    codPlaceOrderButton?: React.ReactNode;
+}
+
+interface ICustomRequestContext extends Msdyn365.IRequestContext {
+    voucherId?: string;
 }
 
 /**
@@ -145,6 +153,8 @@ export interface ICheckoutViewProps extends ICheckoutProps<ICheckoutData>, IChec
 export interface ICheckoutModuleProps extends ICheckoutProps<ICheckoutData>, IModuleStateProps {}
 
 const expressPaymentSectionClassName = 'msc-express-payment-container';
+
+const codPaymentService = CodPaymentService.getInstance();
 
 /**
  *
@@ -389,13 +399,22 @@ class Checkout extends React.PureComponent<ICheckoutModuleProps> {
         return Math.max(totalAmount - giftCardAmount - storeCreditAmount, 0);
     }
 
+    @computed get disableCashOnDelivery(): boolean {
+        const cart = this.props.data.checkout.result ? this.props.data.checkout.result.checkoutCart.cart : undefined;
+        if (!cart) {
+            return true;
+        }
+        return this.getLoyaltyAmount + this.customerAccountAmount + this.getGiftCardTotalAmount > 0;
+    }
+
     public state: ICheckoutState = {
         errorMessage: '',
         isValidationPassed: false,
         isPlaceOrderLoading: false,
         isPlaceOrderClicked: false,
         isPaymentOptionSelected: '',
-        codChargeAmount: 0
+        codChargeAmount: 0,
+        isCODSelected: false
     };
 
     private readonly telemetryContent: ITelemetryContent = getTelemetryObject(
@@ -411,15 +430,14 @@ class Checkout extends React.PureComponent<ICheckoutModuleProps> {
             resources: { genericErrorMessage }
         } = this.props;
 
-        const codPaymentService = CodPaymentService.getInstance();
-
         // Listen for changes in radio button state
         codPaymentService.addListener(this.handleRadioButtonChange);
 
         // Set initial state based on current selected option
         this.setState({
             isPaymentOptionSelected: codPaymentService.getSelectedOption(),
-            codChargeAmount: codPaymentService.getCODAmount()
+            codChargeAmount: codPaymentService.getCODAmount(),
+            isCODSelected: codPaymentService.getCODSelected()
         });
 
         when(
@@ -630,10 +648,16 @@ class Checkout extends React.PureComponent<ICheckoutModuleProps> {
         }
     }
 
-    private handleRadioButtonChange = (option: string, amount: number): void => {
+    public componentWillUnmount(): void {
+        // Remove the listener when the component unmounts to prevent memory leaks
+        codPaymentService.removeListener(this.handleRadioButtonChange);
+    }
+
+    private handleRadioButtonChange = (option: string, amount: number, codSelected: boolean, codOrderFailure: string): void => {
         this.setState({
             isPaymentOptionSelected: option,
-            codChargeAmount: amount
+            codChargeAmount: amount,
+            isCODSelected: codSelected
         });
     };
 
@@ -781,13 +805,19 @@ class Checkout extends React.PureComponent<ICheckoutModuleProps> {
                           ) : (
                               undefined
                           ),
-                          otherCharge: (
+                          codCharges: this.codCharges ? (
                               <div className='msc-order-summary-otherCharge'>
-                                  <span>{`${resources.otherCharges}: `}</span>{' '}
-                                  <span>{`AED ${
-                                      this.isTotalAmountZero ? this.otherCharges?.toFixed(2) : this.otherChargesWithCOD?.toFixed(2)
-                                  }`}</span>
+                                  <span>{`${resources.codCharges}: `}</span> <span>{`AED ${this.codCharges?.toFixed(2)}`}</span>
                               </div>
+                          ) : (
+                              undefined
+                          ),
+                          otherCharge: this.otherCharges ? (
+                              <div className='msc-order-summary-otherCharge'>
+                                  <span>{`${resources.otherCharges}: `}</span> <span>{`AED ${this.otherCharges?.toFixed(2)}`}</span>
+                              </div>
+                          ) : (
+                              undefined
                           ),
                           shipping: this.shippingCharges ? (
                               <div className='msc-order-summary-subTotal'>
@@ -908,6 +938,17 @@ class Checkout extends React.PureComponent<ICheckoutModuleProps> {
                     >
                         {backToShopping}
                     </Button>
+                ),
+                codPlaceOrderButton: (
+                    <CheckoutCODPlaceOrderButton
+                        {...{
+                            resources: resources,
+                            handlePreCheckout: this.korPreCheckoutRequest,
+                            isCodSelected: this.state.isCODSelected || false,
+                            disableCashOnDelivery: this.disableCashOnDelivery,
+                            isPlaceOrderLoading: this.state.isPlaceOrderLoading
+                        }}
+                    />
                 )
             };
         }
@@ -1023,8 +1064,12 @@ class Checkout extends React.PureComponent<ICheckoutModuleProps> {
 
             const updatedCartVersion = await this.updateCartLineEmailAddress(this.props.data.checkout.result?.guestCheckoutEmail || '');
 
+            const customActionContext: Msdyn365.IActionContext = actionContext;
+            const customRequestContext: ICustomRequestContext = customActionContext.requestContext as ICustomRequestContext;
+            customRequestContext.voucherId = 'test';
+
             await placeOrder(
-                actionContext,
+                customActionContext,
                 this.props.data.checkout.result,
                 this.props.data.products.result,
                 !hasOrderConfirmation,
@@ -1035,6 +1080,71 @@ class Checkout extends React.PureComponent<ICheckoutModuleProps> {
             });
 
             await checkout.result?.updateIsPaymentSectionContainerReady({ newIsPaymentSectionContainerReady: false });
+        }
+    };
+
+    private readonly korPreCheckoutRequest = async (): Promise<any> => {
+        this.setState({ isPlaceOrderLoading: true });
+        const cRetailURL = this.props.context.request.apiSettings.baseUrl;
+        const cRetailOUN = this.props.context.request.apiSettings.oun ? this.props.context.request.apiSettings.oun : '';
+
+        const cKORPreCheckoutRequestUrl = `${cRetailURL}commerce/KORPreCheckoutRequest?api-version=7.3`;
+        const currentCartState = await getCartState(this.props.context?.actionContext);
+        const checkoutState = this.props.data.checkout.result;
+
+        const cGuestCheckoutEmail = checkoutState?.guestCheckoutEmail;
+        const cCartId = checkoutState?.checkoutCart.cart.Id;
+        const cShippingCharge = checkoutState?.checkoutCart.cart.ShippingChargeAmount || 0;
+        const cTaxAmount = checkoutState?.checkoutCart.cart.TaxAmount || 0;
+        const cCodChargesAmount = this.state.codChargeAmount || 0;
+        const cAmountDue = (checkoutState?.checkoutCart.cart.AmountDue || 0) + cCodChargesAmount;
+        const cDeliveryMode = checkoutState?.checkoutCart.cart.DeliveryMode;
+
+        try {
+            const response = await fetch(cKORPreCheckoutRequestUrl, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    OUN: cRetailOUN,
+                    'User-Agent': 'Mozilla/5.0 (Windows NT 6.3; Win64; x64; rv:58.0) Gecko/20100101 Firefox/58.0'
+                },
+                body: JSON.stringify({
+                    cartId: cCartId,
+                    receiptEmail: cGuestCheckoutEmail,
+                    modeOfDeliver: cDeliveryMode,
+                    shippingCharges: Math.round(cShippingCharge * 100) / 100,
+                    totalDueAmt: Math.round(cAmountDue * 100) / 100,
+                    CODCharges: Math.round(cCodChargesAmount * 100) / 100,
+                    taxAmount: Math.round(cTaxAmount * 100) / 100
+                })
+            });
+
+            if (response.status === 200) {
+                const data = await response.json();
+                const cCartLineIds: string[] = currentCartState.cart.CartLines
+                    ? currentCartState.cart.CartLines.map(line => line.LineId!.toString())
+                    : [];
+                const input = {
+                    cartLineIds: cCartLineIds
+                };
+                if (data && data.value) {
+                    await currentCartState.refreshCart({});
+                    await currentCartState.removeCartLines(input);
+                    await currentCartState.removeAllPromoCodes({});
+                    if (this.props.config.codOrderConfirmationLink) {
+                        window.location.href = `${this.props.config.codOrderConfirmationLink?.linkUrl.destinationUrl}?orderid=${data.value}&iscod=true`;
+                    }
+                } else {
+                    codPaymentService.setCODOrderFailure(this.props.resources.placeOrderErrorMessage);
+                }
+            } else {
+                codPaymentService.setCODOrderFailure(this.props.resources.placeOrderErrorMessage);
+            }
+        } catch (error) {
+            codPaymentService.setCODOrderFailure(this.props.resources.placeOrderErrorMessage);
+            console.error('COD place order error:', error);
+        } finally {
+            this.setState({ isPlaceOrderLoading: false });
         }
     };
 
