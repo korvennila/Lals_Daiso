@@ -40,6 +40,8 @@ export interface ICheckoutCustomerAccountPaymentState {
     amountVariable: string;
     errorMessage?: string;
     handleSaveAndContinue?: boolean;
+    voucherId: string;
+    creditBalance: number;
 }
 
 /**
@@ -144,7 +146,9 @@ export class CheckoutCustomerAccountPayment extends React.Component<
             isCreditSectionExpanded: false,
             customizedAmt: new Intl.NumberFormat(locale).format(this.maxPaymentAmount),
             amountVariable: this.maxPaymentAmount.toString(),
-            handleSaveAndContinue: false
+            handleSaveAndContinue: false,
+            voucherId: '',
+            creditBalance: 0
         };
     }
 
@@ -269,7 +273,9 @@ export class CheckoutCustomerAccountPayment extends React.Component<
                     this.props.context && this.props.context.request && this.props.context.request.locale
                         ? this.props.context.request.locale
                         : this.defaultLocale,
-                skipOnChangeLogic: this.props.context.request.features?.skipCheckoutOnChangeLogic
+                skipOnChangeLogic: this.props.context.request.features?.skipCheckoutOnChangeLogic,
+                handleVoucherIdChange: this.handleVoucherIdChange,
+                voucherId: this.state.voucherId
             }),
             summaryView: getAccountPaymentFormSummaryMode({
                 resources,
@@ -312,8 +318,55 @@ export class CheckoutCustomerAccountPayment extends React.Component<
         }
 
         this.setState({ handleSaveAndContinue: true });
-        this._clearError();
-        await checkoutState.updateCustomerAccountAmount({ newAmount: this.state.paymentAmount });
+
+        const cRetailURL = this.props.context.request.apiSettings.baseUrl;
+        const cRetailOUN = this.props.context.request.apiSettings.oun ? this.props.context.request.apiSettings.oun : '';
+
+        const cKORPreCheckoutRequestUrl = `${cRetailURL}commerce/KORStoreCreditVoucherEntity/KORGetVoucherBalanceRequest?$top=1&api-version=7.3`;
+        const customerInfo = this.props.data.customerInformation?.result;
+
+        try {
+            const response = await fetch(cKORPreCheckoutRequestUrl, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    OUN: cRetailOUN,
+                    'User-Agent': 'Mozilla/5.0 (Windows NT 6.3; Win64; x64; rv:58.0) Gecko/20100101 Firefox/58.0'
+                },
+                body: JSON.stringify({
+                    VoucherId: this.state.voucherId,
+                    CustomerAccount: customerInfo?.AccountNumber
+                })
+            });
+
+            if (response.status === 200) {
+                const data = await response.json();
+                const result = data.value[0];
+                console.log('KORGetVoucherBalanceRequest-->', data.value[0]);
+                if (result) {
+                    if (!result.Success) {
+                        this._setErrorMessage('The voucher is not valid.');
+                    } else if (result.Applied && result.Success) {
+                        this._setErrorMessage('The voucher is already applied or used.');
+                    } else {
+                        this._clearError();
+                        this.setState({ creditBalance: result.Balance }, async () => {
+                            let paymentAmount = 0;
+                            if (this.state.creditBalance <= this.orderTotal) {
+                                paymentAmount = result.Balance;
+                            } else if (this.state.creditBalance >= this.orderTotal) {
+                                paymentAmount = this.orderTotal;
+                            }
+                            await checkoutState.updateCustomerAccountAmount({ newAmount: paymentAmount });
+                        });
+                    }
+                }
+            } else {
+                this._setErrorMessage('Problem while applying store credits voucher');
+            }
+        } catch (error) {
+            console.error('place order error:', error);
+        }
         this.props.context.telemetry.information('customer account payment amount updated');
     };
 
@@ -321,6 +374,10 @@ export class CheckoutCustomerAccountPayment extends React.Component<
         this.setState({
             isCreditSectionExpanded: !this.state.isCreditSectionExpanded
         });
+    };
+
+    private handleVoucherIdChange = (value: string) => {
+        this.setState({ voucherId: value });
     };
 
     private readonly init = async (): Promise<void> => {

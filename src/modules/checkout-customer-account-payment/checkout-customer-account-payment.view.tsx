@@ -33,22 +33,17 @@ export const EditForm: React.FC<IAccountPaymentEditViewForm> = ({
     inputLabel,
     inputAmount,
     addPaymentButton,
-    customerName,
-    customerAccountNumber,
-    customerSince,
-    accountCredit,
+    // customerName,
+    // customerAccountNumber,
+    // customerSince,
+    // accountCredit,
     alert,
-    accountDetails,
+    // accountDetails,
     appliedLine,
     bottomBorder
 }) => (
     <Node {...formProps}>
         <>
-            {customerName}
-            {customerAccountNumber}
-            {customerSince}
-            {accountCredit}
-            {accountDetails}
             {inputLabel}
             {alert}
             {inputAmount}
@@ -60,11 +55,18 @@ export const EditForm: React.FC<IAccountPaymentEditViewForm> = ({
 );
 
 const CheckoutCustomerAccountView: React.FC<ICheckoutCustomerAccountPaymentViewProps> = props => {
-    const { checkoutCustomerAccount, checkoutErrorRef, summaryView, editView, moduleState, alert } = props;
+    const {
+        checkoutCustomerAccount,
+        checkoutErrorRef,
+        //summaryView,
+        editView,
+        moduleState,
+        alert
+    } = props;
     return (
         <Module {...checkoutCustomerAccount} ref={checkoutErrorRef}>
             {alert}
-            {moduleState.isReady && summaryView && <SummaryForm {...summaryView} />}
+            {/* {moduleState.isReady && summaryView && <SummaryForm {...summaryView} />} */}
             {!moduleState.isReady && editView && <EditForm {...editView} />}
         </Module>
     );

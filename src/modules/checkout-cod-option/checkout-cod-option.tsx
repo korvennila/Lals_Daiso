@@ -242,7 +242,7 @@ export class CheckoutGiftCard extends React.Component<ICheckoutGiftCardModulePro
         reaction(
             () => this.isOtherPaymentsEnabled, // Observable or computed value
             otherPaymentEnabled => {
-                if (this.state.isOTPVerified || this.state.isRadioButtonChecked) {
+                if (this.state.isOTPVerified || this.state.isRadioButtonChecked || this.props.context.request.user.isAuthenticated) {
                     if (otherPaymentEnabled) {
                         this.setState({ isRadioButtonChecked: false, isCodSelected: false });
                         codPaymentService.setSelectedOption('');
