@@ -1,120 +1,136 @@
 {
-	"$type": "contentModule",
-	"friendlyName": "Customer account payment (COPY)",
-	"name": "checkout-customer-account-payment",
-	"description": "This module allows the user to pay with their customer account at checkout",
-	"categories": [
-		"Purchase",
-		"Payment"
-	],
-	"tags": [
-		"Purchase",
-		"Payment",
-		"checkout_checkoutInformation",
-		"checkoutSectionContainer_primary"
-	],
-	"dataActions": {
-		"checkout": {
-			"path": "@msdyn365-commerce/global-state/dist/lib/data-actions/checkout-state-data-action",
-			"runOn": "client"
-		},
-		"customerInformation": {
-			"path": "@msdyn365-commerce-modules/retail-actions/dist/lib/get-customer"
-		},
-		"creditBalances": {
-			"path": "@msdyn365-commerce-modules/retail-actions/dist/lib/get-customer-balance"
-		}
-	},
-	"config": {
-		"clientRender": {
-			"friendlyName": "Render module client side",
-			"description": "Enabling this property will cause the module to load its Javascript chunk and render on the client based on the user view port. This property is recommended for modules which are generally hidden below the users view port (lower on the page) to increase page load performance.",
-			"type": "boolean",
-			"default": false
-		},
-		"isCheckoutCustomerAccountPaymentRequired": {
-			"friendlyName": "Require customer account payment",
-			"description": "Enabling this property will cause the payment module to require the shopper to use the customer account payment method. Checkouts will be blocked until the customer account payment is applied to the cart.",
-			"type": "boolean",
-			"default": false
-		}
-	},
-	"resources": {
-		"addPaymentButtonLabel": {
-			"comment": "The label that is displayed on the button to pay with customer account",
-			"value": "Apply"
-		},
-		"inputAmountLabel": {
-			"comment": "The label that is displayed above the input for the user to choose the amount to pay with customer account",
-			"value": "Apply credit balance"
-		},
-		"inputAmountSummaryLabel": {
-			"comment": "The label that is displayed above the input for the user to choose the amount to pay with customer account when in summary mode",
-			"value": "Account balance"
-		},
-		"inputAmountAriaLabel": {
-			"comment": "The aria label for accessability for the input for the user to choose the amount to pay with customer account",
-			"value": "amount to pay with customer account"
-		},
-		"customerSinceLabel": {
-			"comment": "The label for the date the customer has been a customer since",
-			"value": "Customer since "
-		},
-		"accountCreditLabel": {
-			"comment": "The label for the account credit",
-			"value": "Account credit: "
-		},
-		"invalidAmountMessage": {
-			"comment": "Message to be displayed when the amount is not valid.",
-			"value": "Invalid amount"
-		},
-		"invalidAmountExceedAmountDueMessage": {
-			"comment": "Message to be displayed when the amount is more than amount due.",
-			"value": "The Credit amount entered is more than the amount due. Please adjust the credit amount and try again."
-		},
-		"invalidAmountNegativeMessage": {
-			"comment": "Message to be displayed when the amount is negative.",
-			"value": "The Credit amount entered is negative. Please adjust the credit amount and try again."
-		},
-		"invalidAmountForOBOMessage": {
-			"comment": "Message to be displayed when the amount is different from amount due for OBO.",
-			"value": "The Credit amount entered is different from the amount due. Please adjust the credit amount and try again."
-		},
-		"creditDetailsSectionLabel": {
-			"comment": "The label for the credit details section",
-			"value": "Current order preview"
-		},
-		"availableCreditLabel": {
-			"comment": "The label for the total available credit line",
-			"value": "Total available credit"
-		},
-		"orderTotalLabel": {
-			"comment": "The label for the current total",
-			"value": "Current order total"
-		},
-		"creditExcessLabel": {
-			"comment": "The label for the excess that cannot be covered by credit",
-			"value": "Credit excess"
-		},
-		"appliedCustomerAccountPaymentLabel": {
-			"comment": "The label for the applied customer account line in summary view",
-			"value": "Applied:"
-		},
-		"removeCustomerAccountPaymentLabel": {
-			"comment": "The label for the remove button on a customer account payment",
-			"value": "Remove"
-		},
-		"accountCreditDetails": {
-			"comment": "The label for the toggle button on a customer account credit",
-			"value": "Account credit details"
-		},
-		"errorMessageTitle": {
-			"comment": "Localized text for error message title",
-			"value": "Error message"
-		},
-		"customerAccountCreditErrorMessage": {
-			"comment": "Payment information is not applied",
-			"value": "The payment information provided is not complete or has not been applied. Reference Code: CCR029"
-		}
-	}
+    "$type": "contentModule",
+    "friendlyName": "Customer account payment (COPY)",
+    "name": "checkout-customer-account-payment",
+    "description": "This module allows the user to pay with their customer account at checkout",
+    "categories": ["Purchase", "Payment"],
+    "tags": ["Purchase", "Payment", "checkout_checkoutInformation", "checkoutSectionContainer_primary"],
+    "dataActions": {
+        "checkout": {
+            "path": "@msdyn365-commerce/global-state/dist/lib/data-actions/checkout-state-data-action",
+            "runOn": "client"
+        },
+        "customerInformation": {
+            "path": "@msdyn365-commerce-modules/retail-actions/dist/lib/get-customer"
+        },
+        "creditBalances": {
+            "path": "@msdyn365-commerce-modules/retail-actions/dist/lib/get-customer-balance"
+        }
+    },
+    "config": {
+        "clientRender": {
+            "friendlyName": "Render module client side",
+            "description": "Enabling this property will cause the module to load its Javascript chunk and render on the client based on the user view port. This property is recommended for modules which are generally hidden below the users view port (lower on the page) to increase page load performance.",
+            "type": "boolean",
+            "default": false
+        },
+        "isCheckoutCustomerAccountPaymentRequired": {
+            "friendlyName": "Require customer account payment",
+            "description": "Enabling this property will cause the payment module to require the shopper to use the customer account payment method. Checkouts will be blocked until the customer account payment is applied to the cart.",
+            "type": "boolean",
+            "default": false
+        },
+        "voucherInvalidErrorMessage": {
+            "friendlyName": "Invalid Voucher Error Message",
+            "description": "Message to be displayed while applying invalid voucher id on Store Credits",
+            "type": "string",
+            "default": "The voucher is not valid."
+        },
+        "voucherAlreadyUsedErrorMessage": {
+            "friendlyName": "Voucher Already Used Error Message",
+            "description": "Message to be displayed while voucher id already used on Store Credits",
+            "type": "string",
+            "default": "The voucher is already applied or used."
+        }
+    },
+    "resources": {
+        "addPaymentButtonLabel": {
+            "comment": "The label that is displayed on the button to pay with customer account",
+            "value": "Apply"
+        },
+        "inputAmountLabel": {
+            "comment": "The label that is displayed above the input for the user to choose the amount to pay with customer account",
+            "value": "Apply credit balance"
+        },
+        "inputAmountSummaryLabel": {
+            "comment": "The label that is displayed above the input for the user to choose the amount to pay with customer account when in summary mode",
+            "value": "Account balance"
+        },
+        "inputAmountAriaLabel": {
+            "comment": "The aria label for accessability for the input for the user to choose the amount to pay with customer account",
+            "value": "amount to pay with customer account"
+        },
+        "customerSinceLabel": {
+            "comment": "The label for the date the customer has been a customer since",
+            "value": "Customer since "
+        },
+        "accountCreditLabel": {
+            "comment": "The label for the account credit",
+            "value": "Account credit: "
+        },
+        "invalidAmountMessage": {
+            "comment": "Message to be displayed when the amount is not valid.",
+            "value": "Invalid amount"
+        },
+        "invalidAmountExceedAmountDueMessage": {
+            "comment": "Message to be displayed when the amount is more than amount due.",
+            "value": "The Credit amount entered is more than the amount due. Please adjust the credit amount and try again."
+        },
+        "invalidAmountNegativeMessage": {
+            "comment": "Message to be displayed when the amount is negative.",
+            "value": "The Credit amount entered is negative. Please adjust the credit amount and try again."
+        },
+        "invalidAmountForOBOMessage": {
+            "comment": "Message to be displayed when the amount is different from amount due for OBO.",
+            "value": "The Credit amount entered is different from the amount due. Please adjust the credit amount and try again."
+        },
+        "creditDetailsSectionLabel": {
+            "comment": "The label for the credit details section",
+            "value": "Current order preview"
+        },
+        "availableCreditLabel": {
+            "comment": "The label for the total available credit line",
+            "value": "Total available credit"
+        },
+        "orderTotalLabel": {
+            "comment": "The label for the current total",
+            "value": "Current order total"
+        },
+        "creditExcessLabel": {
+            "comment": "The label for the excess that cannot be covered by credit",
+            "value": "Credit excess"
+        },
+        "appliedCustomerAccountPaymentLabel": {
+            "comment": "The label for the applied customer account line in summary view",
+            "value": "Applied:"
+        },
+        "removeCustomerAccountPaymentLabel": {
+            "comment": "The label for the remove button on a customer account payment",
+            "value": "Remove"
+        },
+        "accountCreditDetails": {
+            "comment": "The label for the toggle button on a customer account credit",
+            "value": "Account credit details"
+        },
+        "errorMessageTitle": {
+            "comment": "Localized text for error message title",
+            "value": "Error message"
+        },
+        "customerAccountCreditErrorMessage": {
+            "comment": "Payment information is not applied",
+            "value": "The payment information provided is not complete or has not been applied. Reference Code: CCR029"
+        },
+        "voucherInvalidErrorMessage": {
+            "comment": "Invalid Voucher Error Message",
+            "value": "The voucher is not valid."
+        },
+        "voucherAlreadyUsedErrorMessage": {
+            "comment": "Voucher Already Used Error Message",
+            "value": "The voucher is already applied or used."
+        },
+        "voucherApplyErrorMessage": {
+            "comment": "Error Message While Apply Voucher",
+            "value": "Problem while applying store credits voucher."
+        }
+    }
 }

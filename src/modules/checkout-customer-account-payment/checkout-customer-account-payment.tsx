@@ -9,7 +9,7 @@ import * as Msdyn365 from '@msdyn365-commerce/core';
 import { CustomerBalances } from '@msdyn365-commerce/retail-proxy';
 import { IModuleStateManager, withModuleState } from '@msdyn365-commerce-modules/checkout-utilities';
 import { IModuleProps } from '@msdyn365-commerce-modules/utilities';
-import { CheckoutModule, ErrorLocation } from '@msdyn365-commerce/global-state';
+import { CheckoutModule, ErrorLocation, IGiftCardExtend } from '@msdyn365-commerce/global-state';
 import classnames from 'classnames';
 import get from 'lodash/get';
 import { action, computed, reaction, when } from 'mobx';
@@ -22,6 +22,7 @@ import { getAccountPaymentFormEditMode, IAccountPaymentEditViewForm } from './co
 import { getAccountPaymentFormSummaryMode, IAccountPaymentSummaryViewForm } from './components/get-account-payment-form-summary-mode';
 import { ErrorComponent } from '@msdyn365-commerce-modules/checkout';
 import { focusOnCheckoutError } from '@msdyn365-commerce-modules/checkout';
+import StoreCreditsService from '../../shared/StoreCreditsService';
 
 export interface ICheckoutCustomerAccountPaymentViewProps
     extends ICheckoutCustomerAccountPaymentProps<ICheckoutCustomerAccountPaymentData> {
@@ -43,6 +44,8 @@ export interface ICheckoutCustomerAccountPaymentState {
     voucherId: string;
     creditBalance: number;
 }
+
+const storeCreditsService = StoreCreditsService.getInstance();
 
 /**
  *
@@ -81,6 +84,17 @@ export class CheckoutCustomerAccountPayment extends React.Component<
         return checkoutState.loyaltyAmount;
     }
 
+    @computed get getGiftCardTotalAmount(): number {
+        const checkoutState = this.props.data.checkout.result;
+        if (!checkoutState || !checkoutState.giftCardExtends) {
+            return 0;
+        }
+        return checkoutState.giftCardExtends.reduce((count: number, giftCard: IGiftCardExtend) => {
+            const balance: number = giftCard.Balance || 0;
+            return count + balance;
+        }, 0);
+    }
+
     @computed get maxPaymentAmount(): number {
         const cart = this.props.data.checkout.result ? this.props.data.checkout.result.checkoutCart.cart : undefined;
         if (!cart) {
@@ -95,6 +109,18 @@ export class CheckoutCustomerAccountPayment extends React.Component<
             return Math.min(this.getAvailableCredit(this.props.data.creditBalances?.result), amountDue);
         }
         return amountDue;
+    }
+
+    @computed get getRemainingAmountDue(): number {
+        const cart = this.props.data.checkout.result ? this.props.data.checkout.result.checkoutCart.cart : undefined;
+        if (!cart) {
+            return 0;
+        }
+
+        // Use customer account after loyalty and giftcard.
+        const amountDue = Math.max(0, (cart.TotalAmount || 0) - this.getLoyaltyAmount - this.getGiftCardTotalAmount);
+
+        return amountDue > 0 ? amountDue : 0;
     }
 
     @computed get errorMessage(): string | undefined {
@@ -157,6 +183,29 @@ export class CheckoutCustomerAccountPayment extends React.Component<
             () => this.isDataReady,
             async () => {
                 await this.init();
+            }
+        );
+
+        reaction(
+            () => this.getRemainingAmountDue, // Observable or computed value
+            async amountDue => {
+                if (amountDue >= 0) {
+                    const checkoutState = this.props.data.checkout.result;
+                    if (!checkoutState) {
+                        this.props.context.telemetry.error('checkout state not found');
+                        return;
+                    }
+                    let paymentAmount = 0;
+                    if (this.state.creditBalance <= this.getRemainingAmountDue) {
+                        paymentAmount = this.state.creditBalance;
+                    } else if (this.state.creditBalance >= this.getRemainingAmountDue) {
+                        paymentAmount = this.getRemainingAmountDue;
+                    }
+                    storeCreditsService.setVoucherId(this.state.voucherId);
+                    storeCreditsService.setVoucherAmount(this.state.creditBalance);
+                    storeCreditsService.setAppliedAmount(paymentAmount);
+                    await checkoutState.updateCustomerAccountAmount({ newAmount: paymentAmount });
+                }
             }
         );
 
@@ -322,11 +371,11 @@ export class CheckoutCustomerAccountPayment extends React.Component<
         const cRetailURL = this.props.context.request.apiSettings.baseUrl;
         const cRetailOUN = this.props.context.request.apiSettings.oun ? this.props.context.request.apiSettings.oun : '';
 
-        const cKORPreCheckoutRequestUrl = `${cRetailURL}commerce/KORStoreCreditVoucherEntity/KORGetVoucherBalanceRequest?$top=1&api-version=7.3`;
+        const cKORGetVoucherBalanceRequestUrl = `${cRetailURL}commerce/KORStoreCreditVoucherEntity/KORGetVoucherBalanceRequest?$top=1&api-version=7.3`;
         const customerInfo = this.props.data.customerInformation?.result;
 
         try {
-            const response = await fetch(cKORPreCheckoutRequestUrl, {
+            const response = await fetch(cKORGetVoucherBalanceRequestUrl, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -342,32 +391,38 @@ export class CheckoutCustomerAccountPayment extends React.Component<
             if (response.status === 200) {
                 const data = await response.json();
                 const result = data.value[0];
-                console.log('KORGetVoucherBalanceRequest-->', data.value[0]);
                 if (result) {
                     if (!result.Success) {
-                        this._setErrorMessage('The voucher is not valid.');
+                        this._setErrorMessage(
+                            this.props.config.voucherInvalidErrorMessage || this.props.resources.voucherInvalidErrorMessage
+                        );
                     } else if (result.Applied && result.Success) {
-                        this._setErrorMessage('The voucher is already applied or used.');
+                        this._setErrorMessage(
+                            this.props.config.voucherAlreadyUsedErrorMessage || this.props.resources.voucherAlreadyUsedErrorMessage
+                        );
                     } else {
                         this._clearError();
                         this.setState({ creditBalance: result.Balance }, async () => {
                             let paymentAmount = 0;
-                            if (this.state.creditBalance <= this.orderTotal) {
+                            if (this.state.creditBalance <= this.getRemainingAmountDue) {
                                 paymentAmount = result.Balance;
-                            } else if (this.state.creditBalance >= this.orderTotal) {
-                                paymentAmount = this.orderTotal;
+                            } else if (this.state.creditBalance >= this.getRemainingAmountDue) {
+                                paymentAmount = this.getRemainingAmountDue;
                             }
+                            storeCreditsService.setVoucherId(this.state.voucherId);
+                            storeCreditsService.setVoucherAmount(result.Balance);
+                            storeCreditsService.setAppliedAmount(paymentAmount);
                             await checkoutState.updateCustomerAccountAmount({ newAmount: paymentAmount });
+                            this.props.context.telemetry.information('customer account payment amount updated');
                         });
                     }
                 }
             } else {
-                this._setErrorMessage('Problem while applying store credits voucher');
+                this._setErrorMessage(this.props.resources.voucherApplyErrorMessage);
             }
         } catch (error) {
             console.error('place order error:', error);
         }
-        this.props.context.telemetry.information('customer account payment amount updated');
     };
 
     private readonly toggleCreditSection = (): void => {

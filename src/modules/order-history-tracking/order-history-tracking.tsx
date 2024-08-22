@@ -16,7 +16,7 @@ export interface IOrderHistoryTrackingViewProps extends IOrderHistoryTrackingPro
  * @extends {React.PureComponent<IOrderHistoryTrackingProps<IOrderHistoryTrackingData>>}
  */
 interface IOrderHistoryTrackingState {
-    orderHistory: any;
+    orderHistory: string | null;
     errorMessage: string | null;
 }
 
@@ -41,16 +41,32 @@ class OrderHistoryTracking extends React.PureComponent<IOrderHistoryTrackingProp
 
         this.setState({ errorMessage: null }); // Clear any previous error message
 
-        const apiUrl = `https://yourapiendpoint.com/orderhistory?orderId=${orderId}`;
+        const cRetailURL = this.props.context.request.apiSettings.baseUrl;
+        const cRetailOUN = this.props.context.request.apiSettings.oun ? this.props.context.request.apiSettings.oun : '';
+
+        const cKORGetOrderStatusRequestUrl = `${cRetailURL}commerce/KORGetOrderStatusRequest?api-version=7.3`;
+
         try {
-            const response = await fetch(apiUrl);
-            if (!response.ok) {
-                throw new Error(this.props.resources.networkResponseText);
+            const response = await fetch(cKORGetOrderStatusRequestUrl, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    OUN: cRetailOUN,
+                    'User-Agent': 'Mozilla/5.0 (Windows NT 6.3; Win64; x64; rv:58.0) Gecko/20100101 Firefox/58.0'
+                },
+                body: JSON.stringify({
+                    OrderId: orderId
+                })
+            });
+
+            if (response.status === 200) {
+                const data = await response.json();
+                console.log('KORGetOrderStatusRequest-->', data);
+                this.setState({ orderHistory: data.value, errorMessage: '' });
+            } else {
+                this.setState({ orderHistory: null, errorMessage: 'Failed to fetch order history. Please try again.' });
             }
-            const data = await response.json();
-            this.setState({ orderHistory: data });
         } catch (error) {
-            console.error('Failed to fetch order history:', error);
             this.setState({ orderHistory: null, errorMessage: 'Failed to fetch order history. Please try again.' });
         }
     };

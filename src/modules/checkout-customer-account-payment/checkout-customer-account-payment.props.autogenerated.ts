@@ -10,6 +10,8 @@ import * as Msdyn365 from '@msdyn365-commerce/core';
 export interface ICheckoutCustomerAccountPaymentConfig extends Msdyn365.IModuleConfig {
     clientRender?: boolean;
     isCheckoutCustomerAccountPaymentRequired?: boolean;
+    voucherInvalidErrorMessage?: string;
+    voucherAlreadyUsedErrorMessage?: string;
 }
 
 export interface ICheckoutCustomerAccountPaymentResources {
@@ -32,6 +34,9 @@ export interface ICheckoutCustomerAccountPaymentResources {
     accountCreditDetails: string;
     errorMessageTitle: string;
     customerAccountCreditErrorMessage: string;
+    voucherInvalidErrorMessage: string;
+    voucherAlreadyUsedErrorMessage: string;
+    voucherApplyErrorMessage: string;
 }
 
 export interface ICheckoutCustomerAccountPaymentProps<T> extends Msdyn365.IModule<T> {

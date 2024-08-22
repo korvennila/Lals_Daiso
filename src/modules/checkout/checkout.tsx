@@ -62,6 +62,7 @@ export * from './components/get-order-summary';
 import CodPaymentService from '../../shared/CodPaymentService';
 import { CustomPaymentMethod } from '../../shared/PaymentMethodEnum';
 import CheckoutCODPlaceOrderButton from './components/cod-place-order-button';
+import StoreCreditsService from '../../shared/StoreCreditsService';
 
 /**
  * Device type.
@@ -143,9 +144,11 @@ export interface ICheckoutViewProps extends ICheckoutProps<ICheckoutData>, IChec
     codPlaceOrderButton?: React.ReactNode;
 }
 
-interface ICustomRequestContext extends Msdyn365.IRequestContext {
-    voucherId?: string;
-}
+// interface ICustomRequestContext extends Msdyn365.IRequestContext {
+//     voucherId?: string;
+//     voucherBalance?: number;
+//     appliedBalance?: number;
+// }
 
 /**
  * The checkout module props interface.
@@ -155,6 +158,7 @@ export interface ICheckoutModuleProps extends ICheckoutProps<ICheckoutData>, IMo
 const expressPaymentSectionClassName = 'msc-express-payment-container';
 
 const codPaymentService = CodPaymentService.getInstance();
+const storeCreditsService = StoreCreditsService.getInstance();
 
 /**
  *
@@ -1065,12 +1069,44 @@ class Checkout extends React.PureComponent<ICheckoutModuleProps> {
             const updatedCartVersion = await this.updateCartLineEmailAddress(this.props.data.checkout.result?.guestCheckoutEmail || '');
 
             const customActionContext: Msdyn365.IActionContext = actionContext;
-            const customRequestContext: ICustomRequestContext = customActionContext.requestContext as ICustomRequestContext;
-            customRequestContext.voucherId = 'test';
+            // const customRequestContext: ICustomRequestContext = customActionContext.requestContext as ICustomRequestContext;
+            // customRequestContext.voucherId = storeCreditsService.getVoucherId();
+            // customRequestContext.voucherBalance = storeCreditsService.getVoucherAmount();
+            // customRequestContext.appliedBalance = storeCreditsService.getAppliedAmount();
+
+            const checkoutResult = this.props.data.checkout.result;
+            checkoutResult?.checkoutCart.updateExtensionProperties({
+                newExtensionProperties: [
+                    {
+                        Key: 'VoucherId',
+                        Value: {
+                            StringValue: storeCreditsService.getVoucherId()
+                        }
+                    },
+                    {
+                        Key: 'VoucherBalance',
+                        Value: {
+                            DecimalValue: storeCreditsService.getVoucherAmount()
+                        }
+                    },
+                    {
+                        Key: 'AppliedBalance',
+                        Value: {
+                            DecimalValue: storeCreditsService.getAppliedAmount()
+                        }
+                    },
+                    {
+                        Key: 'TenderID',
+                        Value: {
+                            IntegerValue: 15
+                        }
+                    }
+                ]
+            });
 
             await placeOrder(
                 customActionContext,
-                this.props.data.checkout.result,
+                checkoutResult,
                 this.props.data.products.result,
                 !hasOrderConfirmation,
                 updatedCartVersion,

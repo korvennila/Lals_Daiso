@@ -17,11 +17,7 @@ export default (props: IOrderHistoryTrackingViewProps) => {
                     <p>{errorMessage}</p>
                 </div>
             )}
-            {orderHistory && (
-                <div id='orderHistoryResponse'>
-                    {orderHistory ? <pre>{JSON.stringify(orderHistory, null, 2)}</pre> : <p>{resources.noResultText}</p>}
-                </div>
-            )}
+            {orderHistory && <div className='orderHistoryResponse'>{orderHistory}</div>}
             <button onClick={handleTrackOrder}>{resources.submitButtonText}</button>
         </div>
     );

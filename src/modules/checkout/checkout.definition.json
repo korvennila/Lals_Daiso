@@ -386,7 +386,7 @@
         },
         "customerAccountLabel": {
             "comment": "Label of customer credit account",
-            "value": "Customer Credit Amount "
+            "value": "Store Credits "
         },
         "giftcardLabel": {
             "comment": "Label of gift card",
