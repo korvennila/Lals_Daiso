@@ -12,6 +12,7 @@ export interface ICheckoutCustomerAccountPaymentConfig extends Msdyn365.IModuleC
     isCheckoutCustomerAccountPaymentRequired?: boolean;
     voucherInvalidErrorMessage?: string;
     voucherAlreadyUsedErrorMessage?: string;
+    storeCreditsHeadingLabel?: string;
 }
 
 export interface ICheckoutCustomerAccountPaymentResources {

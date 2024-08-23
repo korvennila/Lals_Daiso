@@ -61,8 +61,12 @@ class OrderHistoryTracking extends React.PureComponent<IOrderHistoryTrackingProp
 
             if (response.status === 200) {
                 const data = await response.json();
-                console.log('KORGetOrderStatusRequest-->', data);
-                this.setState({ orderHistory: data.value, errorMessage: '' });
+                let status: string = data.value;
+                if (status.toLowerCase() === 'order not found') {
+                    this.setState({ orderHistory: null, errorMessage: data.value });
+                } else {
+                    this.setState({ orderHistory: data.value, errorMessage: '' });
+                }
             } else {
                 this.setState({ orderHistory: null, errorMessage: 'Failed to fetch order history. Please try again.' });
             }

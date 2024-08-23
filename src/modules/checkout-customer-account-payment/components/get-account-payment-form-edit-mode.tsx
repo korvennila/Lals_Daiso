@@ -39,6 +39,7 @@ export interface IGetAccountPaymentEditViewFormInput {
     skipOnChangeLogic?: boolean;
     handleVoucherIdChange(value: string): void;
     voucherId: string;
+    storeCreditsHeadingLabel: string;
 }
 
 export interface IAccountPaymentEditViewForm {
@@ -116,12 +117,13 @@ export const getAccountPaymentFormEditMode = (options: IGetAccountPaymentEditVie
         // locale,
         // skipOnChangeLogic,
         handleVoucherIdChange,
-        voucherId
+        voucherId,
+        storeCreditsHeadingLabel
     } = options;
 
     const {
         addPaymentButtonLabel,
-        inputAmountLabel,
+        // inputAmountLabel,
         // inputAmountAriaLabel,
         customerSinceLabel,
         accountCreditLabel,
@@ -140,7 +142,7 @@ export const getAccountPaymentFormEditMode = (options: IGetAccountPaymentEditVie
 
     const inputLabel = (
         <span id='ms-checkout-customer-account__label' className='ms-checkout-customer-account__input-label'>
-            {inputAmountLabel}
+            {storeCreditsHeadingLabel}
         </span>
     );
 

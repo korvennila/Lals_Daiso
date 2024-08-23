@@ -1047,7 +1047,8 @@ class Checkout extends React.PureComponent<ICheckoutModuleProps> {
                 }
             },
             slots: { orderConfirmation },
-            data: { checkout, products }
+            data: { checkout, products },
+            config: { tenderIdForStoreCredits }
         } = this.props;
 
         this.props.telemetry.information('Checkout onPlaceOrder is called.');
@@ -1074,35 +1075,39 @@ class Checkout extends React.PureComponent<ICheckoutModuleProps> {
             // customRequestContext.voucherBalance = storeCreditsService.getVoucherAmount();
             // customRequestContext.appliedBalance = storeCreditsService.getAppliedAmount();
 
+            const appliedBalance = storeCreditsService.getAppliedAmount();
+
             const checkoutResult = this.props.data.checkout.result;
-            checkoutResult?.checkoutCart.updateExtensionProperties({
-                newExtensionProperties: [
-                    {
-                        Key: 'VoucherId',
-                        Value: {
-                            StringValue: storeCreditsService.getVoucherId()
+            if (appliedBalance > 0) {
+                checkoutResult?.checkoutCart.updateExtensionProperties({
+                    newExtensionProperties: [
+                        {
+                            Key: 'VoucherId',
+                            Value: {
+                                StringValue: storeCreditsService.getVoucherId()
+                            }
+                        },
+                        {
+                            Key: 'VoucherBalance',
+                            Value: {
+                                DecimalValue: storeCreditsService.getVoucherAmount()
+                            }
+                        },
+                        {
+                            Key: 'AppliedBalance',
+                            Value: {
+                                DecimalValue: storeCreditsService.getAppliedAmount()
+                            }
+                        },
+                        {
+                            Key: 'TenderID',
+                            Value: {
+                                IntegerValue: tenderIdForStoreCredits!
+                            }
                         }
-                    },
-                    {
-                        Key: 'VoucherBalance',
-                        Value: {
-                            DecimalValue: storeCreditsService.getVoucherAmount()
-                        }
-                    },
-                    {
-                        Key: 'AppliedBalance',
-                        Value: {
-                            DecimalValue: storeCreditsService.getAppliedAmount()
-                        }
-                    },
-                    {
-                        Key: 'TenderID',
-                        Value: {
-                            IntegerValue: 15
-                        }
-                    }
-                ]
-            });
+                    ]
+                });
+            }
 
             await placeOrder(
                 customActionContext,

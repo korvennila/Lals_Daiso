@@ -41,6 +41,12 @@
             "description": "Message to be displayed while voucher id already used on Store Credits",
             "type": "string",
             "default": "The voucher is already applied or used."
+        },
+        "storeCreditsHeadingLabel": {
+            "friendlyName": "Store Credits Heading Label",
+            "description": "The label that is displayed above the input for the user to enter voucher to pay with customer account",
+            "type": "string",
+            "default": "Store Credits"
         }
     },
     "resources": {
@@ -50,7 +56,7 @@
         },
         "inputAmountLabel": {
             "comment": "The label that is displayed above the input for the user to choose the amount to pay with customer account",
-            "value": "Apply credit balance"
+            "value": "Store Credits"
         },
         "inputAmountSummaryLabel": {
             "comment": "The label that is displayed above the input for the user to choose the amount to pay with customer account when in summary mode",

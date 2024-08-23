@@ -12,11 +12,7 @@ export default (props: IOrderHistoryTrackingViewProps) => {
         <div className='order-history-tracking'>
             <h2>{config.showText}</h2>
             <input type='text' ref={orderIdInputRef} name='order-number' placeholder={resources.textBoxPlaceholder} />
-            {errorMessage && (
-                <div className='error-message'>
-                    <p>{errorMessage}</p>
-                </div>
-            )}
+            {errorMessage && <div className='orderHistory-error-message'>{errorMessage}</div>}
             {orderHistory && <div className='orderHistoryResponse'>{orderHistory}</div>}
             <button onClick={handleTrackOrder}>{resources.submitButtonText}</button>
         </div>

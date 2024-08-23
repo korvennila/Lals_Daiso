@@ -19,6 +19,7 @@ export interface ICheckoutConfig extends Msdyn365.IModuleConfig {
     clientRender?: boolean;
     codOrderConfirmationLink?: ICodOrderConfirmationLinkData;
     codOrderFailureLink?: ICodOrderFailureLinkData;
+    tenderIdForStoreCredits?: number;
 }
 
 export interface ICheckoutResources {

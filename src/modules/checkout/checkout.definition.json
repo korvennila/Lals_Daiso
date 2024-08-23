@@ -97,6 +97,13 @@
             "friendlyName": "COD Order Failure link",
             "description": "COD Order Failure link",
             "$ref": "@msdyn365-commerce-modules/definitions/dist/src/ActionLink.json#/definitions/actionLink"
+        },
+        "tenderIdForStoreCredits": {
+            "friendlyName": "Tender Id For Store Credits",
+            "type": "number",
+            "description": "This defines the tender id for Store Credits",
+            "default": 4,
+            "scope": "module"
         }
     },
     "resources": {

@@ -324,7 +324,8 @@ export class CheckoutCustomerAccountPayment extends React.Component<
                         : this.defaultLocale,
                 skipOnChangeLogic: this.props.context.request.features?.skipCheckoutOnChangeLogic,
                 handleVoucherIdChange: this.handleVoucherIdChange,
-                voucherId: this.state.voucherId
+                voucherId: this.state.voucherId,
+                storeCreditsHeadingLabel: this.props.config.storeCreditsHeadingLabel || resources.inputAmountLabel
             }),
             summaryView: getAccountPaymentFormSummaryMode({
                 resources,
