@@ -7,9 +7,12 @@
 import { AsyncResult } from '@msdyn365-commerce/retail-proxy';
 import { IStoreSelectorStateManager } from '@msdyn365-commerce-modules/bopis-utilities';
 import { IFullOrgUnitAvailability } from '@msdyn365-commerce-modules/retail-actions';
+import { IDistributorSelectorStateManager } from '@msdyn365-commerce-modules/distributor-utilities';
 
 export interface ICustomStoreSelectorData {
     storeSelectorStateManager: AsyncResult<IStoreSelectorStateManager>;
     availabilitiesWithHours: AsyncResult<IFullOrgUnitAvailability[]>;
     storeLocations: AsyncResult<IFullOrgUnitAvailability[]>;
+    actionResponse: { text: string };
+    distributorSelectorStateManager?: AsyncResult<IDistributorSelectorStateManager>;
 }

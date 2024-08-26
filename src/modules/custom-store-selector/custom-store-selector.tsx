@@ -31,7 +31,7 @@ import {
     VariantType
 } from '@msdyn365-commerce-modules/utilities';
 import classname from 'classnames';
-import { reaction, when } from 'mobx';
+import { reaction, when, observable } from 'mobx';
 import { observer } from 'mobx-react';
 import * as React from 'react';
 
@@ -49,6 +49,7 @@ import { ICustomStoreSelectorData } from './custom-store-selector.data';
 import {
     ICustomStoreSelectorProps,
     ICustomStoreSelectorResources,
+    IPushpinOptionsData,
     mode as modeEnum,
     searchRadiusUnit as SearchRadiusUnit,
     style as styleEnum
@@ -111,6 +112,9 @@ export interface IStoreSelectorViewProps extends ICustomStoreSelectorProps<ICust
         setOrgUnitStoreInformation(location: OrgUnitLocation | undefined): Promise<void>;
     };
     countryLevelList?: React.ReactElement;
+    MapModuleProps: IModuleProps;
+    MapProps: INodeProps;
+    Map: Microsoft.Maps.Map | undefined;
 }
 
 /**
@@ -202,6 +206,7 @@ export interface IStoreSelectorLocationLineItemProps {
  */
 @observer
 class StoreSelector extends React.Component<ICustomStoreSelectorProps<ICustomStoreSelectorData>, IStoreSelectorState> {
+    @observable public map: Microsoft.Maps.Map | undefined;
     private autoSuggestManager: Microsoft.Maps.AutosuggestManager | undefined;
 
     private readonly telemetryContent: ITelemetryContent;
@@ -209,6 +214,10 @@ class StoreSelector extends React.Component<ICustomStoreSelectorProps<ICustomSto
     private storeCounter: number;
 
     private isPreferredStoreEnabled?: boolean;
+
+    private readonly mapRef: React.RefObject<HTMLElement> = React.createRef<HTMLElement>();
+
+    private timeout: number = 500;
 
     public constructor(props: ICustomStoreSelectorProps<ICustomStoreSelectorData>) {
         super(props);
@@ -225,12 +234,102 @@ class StoreSelector extends React.Component<ICustomStoreSelectorProps<ICustomSto
     public async componentDidMount(): Promise<void> {
         const {
             context: {
+                telemetry,
                 actionContext: {
                     requestContext: { channel }
                 }
             },
             config: { autoSuggestionEnabled: isAutoSuggestionEnabled }
         } = this.props;
+
+        if (channel && !channel.BingMapsApiKey) {
+            telemetry.error('BingMapsApiKey is missing.');
+            return;
+        }
+
+        if (channel && !channel.BingMapsEnabled) {
+            telemetry.error('Map is disabled from HQ.');
+            return;
+        }
+
+        const loadMapAPIInput = {
+            key: channel?.BingMapsApiKey,
+            lang: this.props.context.actionContext.requestContext.locale,
+            market: this.props.context?.actionContext?.requestContext?.channel?.ChannelCountryRegionISOCode
+        };
+
+        if (
+            this.props.data.storeSelectorStateManager?.result?.isMapApiLoaded ||
+            this.props.data.distributorSelectorStateManager?.result?.isMapApiLoaded
+        ) {
+            this._initMap();
+            if (this.props.data.distributorSelectorStateManager?.result?.isDistributorSelectorDialogOpen) {
+                this._updateMapsForDistributor();
+            } else {
+                this._updateMap();
+            }
+        }
+        when(
+            () => !!this.props.data.storeSelectorStateManager?.result?.setMapModuleLoaded,
+            () => {
+                this.props.data.storeSelectorStateManager?.result?.setMapModuleLoaded(true);
+            }
+        );
+
+        when(
+            () => !!this.props.data.distributorSelectorStateManager?.result?.setMapModuleLoaded,
+            () => {
+                this.props.data.distributorSelectorStateManager?.result?.setMapModuleLoaded(true);
+            }
+        );
+
+        reaction(
+            () =>
+                this.props.data.storeSelectorStateManager?.result?.loadMapApi ||
+                this.props.data.distributorSelectorStateManager?.result?.loadMapApi,
+            () => {
+                if (this.props.data.distributorSelectorStateManager?.result?.loadMapApi) {
+                    this.props.data.distributorSelectorStateManager?.result?.loadMapApi(loadMapAPIInput);
+                } else {
+                    this.props.data.storeSelectorStateManager?.result?.loadMapApi(loadMapAPIInput);
+                }
+            }
+        );
+
+        reaction(
+            () =>
+                this.props.data.storeSelectorStateManager?.result?.isMapApiLoaded ||
+                this.props.data.distributorSelectorStateManager?.result?.isMapApiLoaded,
+            () => {
+                this._initMap();
+            }
+        );
+
+        reaction(
+            () => {
+                return [
+                    this.props.data.storeSelectorStateManager.result?.context?.orgUnitStoreInformation,
+                    this.props.data.storeSelectorStateManager.result?.selectedStoreLocationId,
+                    this.map
+                ];
+            },
+            () => {
+                this._updateMap();
+            }
+        );
+
+        reaction(
+            () => {
+                return [
+                    this.props.data.distributorSelectorStateManager?.result?.distributorList,
+                    this.props.data.distributorSelectorStateManager?.result?.selectedDistributorId,
+                    this.map
+                ];
+            },
+            () => {
+                this._updateMapsForDistributor();
+            }
+        );
 
         // Adding Timeout to make sure it loads the data based upon the preferred store.
         setTimeout(() => {
@@ -306,6 +405,191 @@ class StoreSelector extends React.Component<ICustomStoreSelectorProps<ICustomSto
         }
     }
 
+    private readonly _initMap = () => {
+        const {
+            context: {
+                actionContext: {
+                    requestContext: { channel }
+                }
+            },
+            data
+        } = this.props;
+
+        if (data.storeSelectorStateManager?.result?.isMapApiLoaded || data.distributorSelectorStateManager?.result?.isMapApiLoaded) {
+            const mapLoadOptions = {
+                credentials: channel?.BingMapsApiKey,
+                pushpinAccessible: true
+            };
+            this.map = new Microsoft.Maps.Map(this.mapRef.current as HTMLElement, mapLoadOptions);
+            Microsoft.Maps.Events.addHandler(this.map, 'click', async () => {
+                if (data.distributorSelectorStateManager?.result?.isDistributorSelectorDialogOpen) {
+                    // Hide the distributor details that appear below the screen size of 768px.
+                    data.distributorSelectorStateManager?.result?.updateDistributorMapVisibility(false);
+                    await data.distributorSelectorStateManager?.result?.setSelectedDistributorId(undefined);
+                } else {
+                    await data.storeSelectorStateManager?.result?.setSelectedStoreLocationId(undefined);
+                }
+            });
+        }
+    };
+
+    private readonly _updateMapsForDistributor = () => {
+        const pushpinOptions = this.props.config.pushpinOptions;
+        const distributorSelectorStateManager = this.props.data.distributorSelectorStateManager?.result;
+        const distributorInfoList = distributorSelectorStateManager?.distributorList;
+        const selectedDistributorId = distributorSelectorStateManager?.selectedDistributorId;
+
+        if (this.map && ArrayExtensions.hasElements(distributorInfoList)) {
+            let mapLocation: OrgUnitLocation | undefined;
+            this.map.entities.clear();
+            const pushpins: Microsoft.Maps.IPrimitive[] = [];
+
+            const distributorList = distributorInfoList.filter(distributor => distributor.OrgUnit !== undefined);
+
+            for (const [index, distributorInfo] of distributorList.entries()) {
+                const orgUnit = distributorInfo.OrgUnit;
+
+                if (orgUnit?.Latitude && orgUnit.Longitude) {
+                    const isLocationSelected = selectedDistributorId === orgUnit?.RecordId;
+                    const options = this._getPushpinOptions(isLocationSelected, index, pushpinOptions);
+                    const pushpin = new Microsoft.Maps.Pushpin(new Microsoft.Maps.Location(orgUnit?.Latitude, orgUnit.Longitude), options);
+
+                    Microsoft.Maps.Events.addHandler(pushpin, 'click', () => {
+                        this.handleDistributorPushpinClick(orgUnit.RecordId);
+                    });
+                    isLocationSelected ? pushpins.unshift(pushpin) : pushpins.push(pushpin);
+
+                    if (isLocationSelected) {
+                        mapLocation = orgUnit;
+                    }
+                }
+            }
+            if (mapLocation) {
+                const currentLocation = new Microsoft.Maps.Location(mapLocation.Latitude, mapLocation.Longitude);
+                this.map.setView({ center: currentLocation });
+            } else {
+                this.map.setView({
+                    bounds: Microsoft.Maps.LocationRect?.fromShapes(pushpins)
+                });
+            }
+
+            this.map.setOptions({ pushpinAccessible: true } as Microsoft.Maps.IMapOptions);
+            this.map.entities.push(pushpins);
+        }
+    };
+
+    /**
+     * Update the map.
+     */
+    private readonly _updateMap = () => {
+        const pushpinOptions = this.props.config.pushpinOptions;
+        const storeSelectorStateManager = this.props.data.storeSelectorStateManager?.result;
+        const orgUnitStoreInformation = storeSelectorStateManager?.context?.orgUnitStoreInformation;
+        const selectedStoreLocationId = storeSelectorStateManager?.selectedStoreLocationId;
+
+        if (this.map && orgUnitStoreInformation) {
+            let mapLocation: OrgUnitLocation | undefined;
+            this.map.entities.clear();
+            const pushpins: Microsoft.Maps.IPrimitive[] = [];
+
+            const storeLocationList = orgUnitStoreInformation.filter(store => store.OrgUnitAvailability !== undefined);
+
+            for (const [index, unitStoreInfo] of storeLocationList.entries()) {
+                const storeLocation = unitStoreInfo.OrgUnitAvailability?.OrgUnitLocation;
+
+                if (storeLocation?.Latitude && storeLocation.Longitude) {
+                    const isSelectedLocation = selectedStoreLocationId === storeLocation.OrgUnitNumber;
+                    const options = this._getPushpinOptions(isSelectedLocation, index, pushpinOptions);
+                    const pushpin = new Microsoft.Maps.Pushpin(
+                        new Microsoft.Maps.Location(storeLocation.Latitude, storeLocation.Longitude),
+                        options
+                    );
+
+                    Microsoft.Maps.Events.addHandler(pushpin, 'click', () => {
+                        this.handleClickEvent(storeLocation.OrgUnitNumber);
+                    });
+                    isSelectedLocation ? pushpins.unshift(pushpin) : pushpins.push(pushpin);
+
+                    if (isSelectedLocation) {
+                        mapLocation = storeLocation;
+                    }
+                }
+            }
+
+            if (mapLocation) {
+                const currentLocation = new Microsoft.Maps.Location(mapLocation.Latitude, mapLocation.Longitude);
+                this.map.setView({ center: currentLocation });
+            } else {
+                // Create a LocationRect from array of pushpins and set the map view.
+                this.map.setView({
+                    bounds: Microsoft.Maps.LocationRect?.fromShapes(pushpins)
+                });
+            }
+
+            this.map.setOptions({ pushpinAccessible: true } as Microsoft.Maps.IMapOptions);
+            this.map.entities.push(pushpins);
+        }
+    };
+
+    /**
+     * Handle click event.
+     * @param orgUnitNumber - Organization unit number.
+     */
+    private readonly handleClickEvent = (orgUnitNumber: string | undefined): void => {
+        const storeSelectorStateManager = this.props.data.storeSelectorStateManager.result;
+        storeSelectorStateManager?.setSelectedStoreLocationId(undefined);
+        if (orgUnitNumber) {
+            setTimeout(() => {
+                storeSelectorStateManager?.setSelectedStoreLocationId(orgUnitNumber);
+            }, this.timeout);
+        }
+    };
+
+    /**
+     * Handle the click event of the pushpin for distributors on the maps.
+     * @param recordId - RecordId.
+     */
+    private readonly handleDistributorPushpinClick = (recordId: number | undefined): void => {
+        const distributorSelectorStateManager = this.props.data.distributorSelectorStateManager?.result;
+        // Show the distributor details that appear below the screen size of 768px.
+        distributorSelectorStateManager?.updateDistributorMapVisibility(true);
+        distributorSelectorStateManager?.setSelectedDistributorId(undefined);
+        if (recordId) {
+            setTimeout(() => {
+                distributorSelectorStateManager?.setSelectedDistributorId(recordId);
+            }, this.timeout);
+        }
+    };
+
+    /**
+     * Get the pushpin option.
+     * @param isSelectedLocation - Is selected location.
+     * @param index - Index.
+     * @param pushpinOptions - PushpinOptions.
+     * @returns - The pushpin options.
+     */
+    private readonly _getPushpinOptions = (isSelectedLocation: boolean, index: number, pushpinOptions?: IPushpinOptionsData) => {
+        const text = pushpinOptions?.showIndex ? (index + 1).toString() : undefined;
+
+        const size = pushpinOptions?.size || 1;
+        const color = isSelectedLocation ? pushpinOptions?.selectionColor || pushpinOptions?.color : pushpinOptions?.color;
+        const icon = this._getSvgIcon(size, color, text);
+
+        return {
+            // Fallback if icon doesn't render properly
+            color: isSelectedLocation ? pushpinOptions?.selectionColor : pushpinOptions?.color,
+            icon
+        };
+    };
+
+    private readonly _getSvgIcon = (size: number, color?: string, text?: string) => {
+        const baseValue: number = 32;
+        return `<svg xmlns="http://www.w3.org/2000/svg" width="${baseValue * size}" height="${baseValue * size}" viewBox="0 0 365 560">
+                    <path fill="${color}" d="M182.9,551.7c0,0.1,0.2,0.3,0.2,0.3S358.3,283,358.3,194.6c0-130.1-88.8-186.7-175.4-186.9 C96.3,7.9,7.5,64.5,7.5,194.6c0,88.4,175.3,357.4,175.3,357.4S182.9,551.7,182.9,551.7z" />
+                    ${text ? `<text x="185" y="280" style="font-size:220px;fill:#ffffff;" text-anchor="middle">${text}</text>` : ''}
+                </svg>`;
+    };
+
     public shouldComponentUpdate(): boolean {
         const {
             data: {
@@ -368,7 +652,8 @@ class StoreSelector extends React.Component<ICustomStoreSelectorProps<ICustomSto
                 availabilitiesWithHours: { result: availabilitiesWithHours },
                 storeSelectorStateManager: { result: storeSelectorStateManager },
                 storeLocations: { result: storeLocations }
-            }
+            },
+            data
         } = this.props;
 
         this.storeCounter = 0;
@@ -435,6 +720,12 @@ class StoreSelector extends React.Component<ICustomStoreSelectorProps<ICustomSto
 
         const hasMapSlot = ArrayExtensions.hasElements(mapSlot);
         const dialogClassName = hasMapSlot ? 'ms-store-select__map' : '';
+
+        const shouldDisplayMap = data.storeSelectorStateManager?.result?.isDialogOpen
+            ? data.storeSelectorStateManager?.result?.listMapViewState.displayMap
+            : data.distributorSelectorStateManager?.result?.isDistributorSelectorDialogOpen
+            ? data.distributorSelectorStateManager?.result?.listMapViewState.displayMap
+            : false;
         const viewProps: IStoreSelectorViewProps = {
             ...(this.props as ICustomStoreSelectorProps<ICustomStoreSelectorData>),
             state: this.state,
@@ -623,10 +914,22 @@ class StoreSelector extends React.Component<ICustomStoreSelectorProps<ICustomSto
                     showMap={this.props.config.showMap ? this.props.config.showMap : false}
                     defaultZoom={this.props.config.zoomMap ? this.props.config.zoomMap : 11}
                     pigeonApiKey={this.props.config.pigeonMapsAPIKey ? this.props.config.pigeonMapsAPIKey : ''}
+                    props={this.props}
                 />
             ) : (
                 undefined
-            )
+            ),
+            MapModuleProps: {
+                tag: 'div',
+                moduleProps: this.props,
+                className: classname('ms-map', { show: shouldDisplayMap }, className)
+            },
+            MapProps: {
+                tag: 'div',
+                className: 'ms-map__body',
+                ref: this.mapRef
+            },
+            Map: this.map
         } as IStoreSelectorViewProps;
 
         return this.props.renderView(viewProps) as React.ReactElement;

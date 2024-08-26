@@ -41,6 +41,9 @@ export interface ICustomStoreSelectorConfig extends Msdyn365.IModuleConfig {
     showMap?: boolean;
     zoomMap?: number;
     pigeonMapsAPIKey?: string;
+    pushpinOptions?: IPushpinOptionsData;
+    mapClassName?: string;
+    mapClientRender?: boolean;
 }
 
 export interface ICustomStoreSelectorResources {
@@ -106,6 +109,13 @@ export interface ITermsOfServiceLinkData {
 
 export interface IAutoSuggestOptionsData {
     maxResults?: number;
+}
+
+export interface IPushpinOptionsData {
+    size?: number;
+    color?: string;
+    selectionColor?: string;
+    showIndex?: boolean;
 }
 
 export interface ICustomStoreSelectorProps<T> extends Msdyn365.IModule<T> {
