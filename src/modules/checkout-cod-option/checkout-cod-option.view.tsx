@@ -35,7 +35,6 @@ export const From: React.FC<IForm> = ({
     error
 }) => (
     <Node {...formProps}>
-        {alert}
         {/* {supportExternalGiftCard ? (
             <Node {...inputProps}>
                 <Node {...inputNumProps}>
@@ -58,8 +57,14 @@ export const From: React.FC<IForm> = ({
             </Node>
         ) : ( */}
         <>
-            {label}
+            <Node className='msc-cod-titleContainer'>
+                {label}
+                <span className='msc-cod-accordion-toggle'>
+                    <i className='msc-toggle-icon'></i>
+                </span>
+            </Node>
             <Node className={`msc-cod-charges-container ${!isEmpty(error!) ? 'disabled' : ''}`}>
+                {alert}
                 {inputNumber}
                 {codChargeAmount && codChargeAmount > 0 ? (
                     <Node className='msc-cod-charges-label'>

@@ -44,12 +44,19 @@ export const EditForm: React.FC<IAccountPaymentEditViewForm> = ({
 }) => (
     <Node {...formProps}>
         <>
-            {inputLabel}
-            {alert}
-            {inputAmount}
-            {addPaymentButton}
-            {appliedLine}
-            {bottomBorder}
+            <Node className='msc-store-credits-titleContainer'>
+                {inputLabel}
+                <span className='msc-store-credits-accordion-toggle'>
+                    <i className='msc-toggle-icon'></i>
+                </span>
+            </Node>
+            <Node className='msc-store-credits-container'>
+                {alert}
+                {inputAmount}
+                {addPaymentButton}
+                {appliedLine}
+                {bottomBorder}
+            </Node>
         </>
     </Node>
 );
