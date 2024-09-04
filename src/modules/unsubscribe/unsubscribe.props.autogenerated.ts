@@ -9,6 +9,7 @@ import * as Msdyn365 from '@msdyn365-commerce/core';
 
 export interface IUnsubscribeConfig extends Msdyn365.IModuleConfig {
     showText?: string;
+    unsubscribeRedirectionLink?: IUnsubscribeRedirectionLinkData;
 }
 
 export interface IUnsubscribeResources {
@@ -19,6 +20,13 @@ export interface IUnsubscribeResources {
     unsubscriptionSuccessMessage: string;
     unsubscriptionAlreadySenteMessage: string;
     unsubscriptionFailureMessage: string;
+}
+
+export interface IUnsubscribeRedirectionLinkData {
+    linkText?: string;
+    linkUrl: Msdyn365.ILinkData;
+    ariaLabel?: string;
+    openInNewTab?: boolean;
 }
 
 export interface IUnsubscribeProps<T> extends Msdyn365.IModule<T> {

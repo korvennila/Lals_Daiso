@@ -14,6 +14,11 @@
             "default": "Example Config Value",
             "scope": "module",
             "group": "Layout Properties"
+        },
+        "unsubscribeRedirectionLink": {
+            "friendlyName": "Unsubscription Redirection Link",
+            "description": "Unsubscription redirection link",
+            "$ref": "@msdyn365-commerce-modules/definitions/dist/src/ActionLink.json#/definitions/actionLink"
         }
     },
     "resources": {

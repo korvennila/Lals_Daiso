@@ -98,7 +98,9 @@ class Unsubscribe extends React.PureComponent<IUnsubscribeProps<IUnsubscribeData
 
             // Redirect to home page after a delay
             setTimeout(() => {
-                window.location.href = '/';
+                window.location.href = this.props.config.unsubscribeRedirectionLink
+                    ? `${this.props.config.unsubscribeRedirectionLink?.linkUrl.destinationUrl}`
+                    : '#';
             }, 3000);
         } catch (error) {
             console.error('Failed to unsubscribe:', error);
