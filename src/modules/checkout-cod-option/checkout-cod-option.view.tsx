@@ -63,17 +63,21 @@ export const From: React.FC<IForm> = ({
                     <i className='msc-toggle-icon'></i>
                 </span>
             </Node>
-            <Node className={`msc-cod-charges-container ${!isEmpty(error!) ? 'disabled' : ''}`}>
-                {alert}
-                {inputNumber}
-                {codChargeAmount && codChargeAmount > 0 ? (
-                    <Node className='msc-cod-charges-label'>
-                        {`${resources?.codChargesLabel} `}
-                        {codChargeAmount?.toFixed(2)}
+            <Node className={`msc-cod-charges-container`}>
+                <Node className={`msc-cod-charges-mainSection ${!isEmpty(error!) ? 'disabled' : ''}`}>
+                    <Node className={`msc-cod-charges-radioSection`}>
+                        {inputNumber}
+                        {codChargeAmount && codChargeAmount > 0 ? (
+                            <Node className='msc-cod-charges-label'>
+                                {`${resources?.codChargesLabel} `}
+                                {codChargeAmount?.toFixed(2)}
+                            </Node>
+                        ) : (
+                            undefined
+                        )}
                     </Node>
-                ) : (
-                    undefined
-                )}
+                    {alert}
+                </Node>
             </Node>
         </>
         {/* )} */}

@@ -462,7 +462,7 @@ export class CheckoutGiftCard extends React.Component<ICheckoutGiftCardModulePro
 
         const supportExternalGiftCard = supportedGiftCardType !== SupportedGiftCardType.Internal;
 
-        const moduleClassName = classname('ms-checkout-gift-card', className, isReady ? 'show' : 'add');
+        const moduleClassName = classname('ms-checkout-gift-card ms-checkout-cash-on-delivery', className, isReady ? 'show' : 'add');
 
         const viewProps: ICheckoutGiftCardViewProps = {
             ...this.props,
