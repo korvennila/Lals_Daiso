@@ -28,7 +28,7 @@ export const SummaryForm: React.FC<IAccountPaymentSummaryViewForm> = ({
     </Node>
 );
 
-export const EditForm: React.FC<IAccountPaymentEditViewForm> = ({
+export const EditForm: React.FC<IAccountPaymentEditViewForm & { errorAlert: React.ReactNode }> = ({
     formProps,
     inputLabel,
     inputAmount,
@@ -40,7 +40,8 @@ export const EditForm: React.FC<IAccountPaymentEditViewForm> = ({
     alert,
     // accountDetails,
     appliedLine,
-    bottomBorder
+    bottomBorder,
+    errorAlert
 }) => (
     <Node {...formProps}>
         <>
@@ -51,6 +52,7 @@ export const EditForm: React.FC<IAccountPaymentEditViewForm> = ({
                 </span>
             </Node>
             <Node className='msc-store-credits-container'>
+                {errorAlert}
                 {alert}
                 {inputAmount}
                 {addPaymentButton}
@@ -72,9 +74,9 @@ const CheckoutCustomerAccountView: React.FC<ICheckoutCustomerAccountPaymentViewP
     } = props;
     return (
         <Module {...checkoutCustomerAccount} ref={checkoutErrorRef}>
-            {alert}
+            {/* {alert} */}
             {/* {moduleState.isReady && summaryView && <SummaryForm {...summaryView} />} */}
-            {!moduleState.isReady && editView && <EditForm {...editView} />}
+            {!moduleState.isReady && editView && <EditForm errorAlert={alert} {...editView} />}
         </Module>
     );
 };

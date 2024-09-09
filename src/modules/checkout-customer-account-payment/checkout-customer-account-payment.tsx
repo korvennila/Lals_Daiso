@@ -401,6 +401,8 @@ export class CheckoutCustomerAccountPayment extends React.Component<
                         this._setErrorMessage(
                             this.props.config.voucherAlreadyUsedErrorMessage || this.props.resources.voucherAlreadyUsedErrorMessage
                         );
+                    } else if (!result.Applied && result.Success) {
+                        result.Message && this._setErrorMessage(result.Message);
                     } else {
                         this._clearError();
                         this.setState({ creditBalance: result.Balance }, async () => {

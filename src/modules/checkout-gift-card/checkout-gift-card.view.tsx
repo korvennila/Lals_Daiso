@@ -29,7 +29,6 @@ export const From: React.FC<IForm> = ({
     alertFieldLabel
 }) => (
     <Node {...formProps}>
-        {alert}
         {supportExternalGiftCard ? (
             <Node {...inputProps}>
                 <Node {...inputNumProps}>
@@ -42,6 +41,7 @@ export const From: React.FC<IForm> = ({
                     <Node className='msc-gift-card-container'>
                         {inputNumber}
                         {applyButton}
+                        {alert}
                     </Node>
                 </Node>
                 {showGiftCardPinInput && (
@@ -69,6 +69,7 @@ export const From: React.FC<IForm> = ({
                 <Node className='msc-gift-card-container'>
                     {inputNumber}
                     {applyButton}
+                    {alert}
                 </Node>
             </>
         )}
