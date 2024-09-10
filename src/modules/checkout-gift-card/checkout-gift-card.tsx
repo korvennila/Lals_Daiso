@@ -148,7 +148,8 @@ export class CheckoutGiftCard extends React.Component<ICheckoutGiftCardModulePro
         }
 
         // Use gift card card when loyalty points do not cover the total amount
-        const amountDue = (cart.TotalAmount || 0) - this.getLoyaltyAmount - this.getCustomerAccountAmount;
+        // const amountDue = (cart.TotalAmount || 0) - this.getLoyaltyAmount - this.getCustomerAccountAmount;
+        const amountDue = cart.TotalAmount || 0;
         return amountDue > 0;
     }
 

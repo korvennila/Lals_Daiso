@@ -401,7 +401,7 @@ export class CheckoutCustomerAccountPayment extends React.Component<
                         this._setErrorMessage(
                             this.props.config.voucherAlreadyUsedErrorMessage || this.props.resources.voucherAlreadyUsedErrorMessage
                         );
-                    } else if (!result.Applied && result.Success) {
+                    } else if (!result.Applied && result.Success && result.Balance <= 0) {
                         result.Message && this._setErrorMessage(result.Message);
                     } else {
                         this._clearError();
@@ -512,7 +512,8 @@ export class CheckoutCustomerAccountPayment extends React.Component<
         }
 
         this.setState({
-            paymentAmount: 0
+            paymentAmount: 0,
+            voucherId: ''
         });
 
         this.onChangePaymentAmount('', NaN, '0');

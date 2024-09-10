@@ -380,18 +380,19 @@ class Cart extends React.Component<ICartProps<ICartData>> {
         const freeShippingTitle = this.props.config.freeShippingTitle || '';
         const freeShippingPriceString = this.props.config.freeShippingPrice?.toString() || '0';
         const freeShippingPrice = parseInt(freeShippingPriceString, 10);
-        let totalPrice = 0;
+        const amountDue = this.props.data.cart.result?.cart.AmountDue || 0;
+        // let totalPrice = 0;
 
-        if (cartLines) {
-            cartLines.forEach(cartLine => {
-                const lineTotal =
-                    cartLine.data?.cartline?.Quantity && cartLine.data.cartline.Price
-                        ? cartLine.data.cartline.Quantity * cartLine.data.cartline.Price
-                        : 0;
-                totalPrice += lineTotal;
-            });
-        }
-        const remainingForFreeShipping = freeShippingPrice - totalPrice;
+        // if (cartLines) {
+        //     cartLines.forEach(cartLine => {
+        //         const lineTotal =
+        //             cartLine.data?.cartline?.Quantity && cartLine.data.cartline.Price
+        //                 ? cartLine.data.cartline.Quantity * cartLine.data.cartline.Price
+        //                 : 0;
+        //         totalPrice += lineTotal;
+        //     });
+        // }
+        const remainingForFreeShipping = freeShippingPrice - amountDue;
 
         const remainingMessage =
             remainingForFreeShipping > 0 ? `Spend ${remainingForFreeShipping.toFixed(2)} more for free shipping!` : freeShippingTitle;
