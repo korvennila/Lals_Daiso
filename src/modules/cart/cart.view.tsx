@@ -93,7 +93,7 @@ const renderBopisBlock = (
                 </div>
             )}
             <Button
-                className='msc-cart-line__bopis-btn'
+                className='msc-cart-line__bopis-btn msc-btn-ship-item'
                 {...puckUpinStoreAttribute}
                 onClick={toggleBopisHandler(cartLine, isBopisSelected)}
             >
@@ -140,7 +140,7 @@ const renderGroupBopisBlock = (
             ) : null}
             <Button
                 role='link'
-                className='msc-cart-line__remove-item msc-btn'
+                className='msc-cart-line__remove-item msc-btn msc-btn-ship-item'
                 {...puckUpinStoreAttribute}
                 onClick={toggleBopisHandler(cartLine, isBopisSelected)}
             >
@@ -425,13 +425,13 @@ const renderCartLinesGroup = (props: ICartViewProps & ICartExtensionProps<{}>, r
                         );
                     })}
 
-                    <div className='msc-cart__free-shipping-container'>
+                    <Node className='msc-cart__free-shipping-container'>
                         {!props.cartDataResult && (
                             <Node className='msc-cart__free-shipping-info'>
                                 <h1>{props.freeShippingContent}</h1>
                             </Node>
                         )}
-                    </div>
+                    </Node>
                 </div>
             </>
         );
