@@ -143,6 +143,12 @@ export interface ICartResources {
     salesAgreementPricePrompt: string;
     checkoutBlockedDueToUnavailableFundsTitle: string;
     checkoutBlockedDueToUnavailableFundsMessage: string;
+    cartProductDetailsText: string;
+    cartPriceText: string;
+    cartQuantityText: string;
+    cartTotalPriceText: string;
+    cartActionText: string;
+    cartAvailFreeShippingText: string;
 }
 
 export interface IButtonLinkData {

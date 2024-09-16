@@ -360,17 +360,15 @@ const renderCartLinesGroupHeader = (
  * Render Cart Lines static group header.
  * @returns JSX Element.
  */
-const renderCartLinesGroupHeaderStatic = () => {
+const renderCartLinesGroupHeaderStatic = (resources: ICartResources): JSX.Element | undefined => {
     return (
-        <>
-            <div className='msc-cart-lines-group-wrapper__bopis-heading'>
-                <div>Product Details</div>
-                <div>Price</div>
-                <div>Quantity</div>
-                <div>Total Price</div>
-                <div>Action</div>
-            </div>
-        </>
+        <Node className='msc-cart-lines-group-wrapper__bopis-heading'>
+            <div>{resources.cartProductDetailsText}</div>
+            <div>{resources.cartPriceText}</div>
+            <div>{resources.cartQuantityText}</div>
+            <div>{resources.cartTotalPriceText}</div>
+            <div>{resources.cartActionText}</div>
+        </Node>
     );
 };
 
@@ -408,7 +406,7 @@ const renderCartLinesGroup = (props: ICartViewProps & ICartExtensionProps<{}>, r
                                     countItems(cartlines),
                                     props.context.actionContext.requestContext.channel?.EmailDeliveryModeCode
                                 )}
-                                {renderCartLinesGroupHeaderStatic()}
+                                {renderCartLinesGroupHeaderStatic(resources)}
                                 {renderCartlines(
                                     props,
                                     cartlines,

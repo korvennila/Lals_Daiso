@@ -610,6 +610,30 @@
         "checkoutBlockedDueToUnavailableFundsMessage": {
             "value": "To enable checkout, work with the Business partner to ensure funds have been allocated to this account.",
             "comment": "Text of message to be shown when an employee working on behalf of customer is warned that the current cart cannot be checked out."
+        },
+        "cartProductDetailsText": {
+            "value": "Product Details",
+            "comment": "Product Details text for cart"
+        },
+        "cartPriceText": {
+            "value": "Price",
+            "comment": "Price text for cart"
+        },
+        "cartQuantityText": {
+            "value": "Quantity",
+            "comment": "Quantity text for cart"
+        },
+        "cartTotalPriceText": {
+            "value": "Total Price",
+            "comment": "Total Price text for cart"
+        },
+        "cartActionText": {
+            "value": "Action",
+            "comment": "Action text for cart"
+        },
+        "cartAvailFreeShippingText": {
+            "value": "Spend {0} more for free shipping!",
+            "comment": "Label to avail for free shipping"
         }
     },
     "slots": {

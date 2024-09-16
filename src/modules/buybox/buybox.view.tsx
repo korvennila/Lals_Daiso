@@ -501,6 +501,7 @@ const BuyboxView: React.FC<IBuyboxViewProps & IBuyboxExtentionProps<IBuyboxData>
     /* Context Variables */
     const cRetailURL = props.context.request.apiSettings.baseUrl;
     const cRetailOUN = props.context.request.apiSettings.oun ? props.context.request.apiSettings.oun : '';
+    const cRetailChannelId = props.context.request.apiSettings.channelId ? props.context.request.apiSettings.channelId : '';
     const cCustomerAccount = props.context.request.user.customerAccountNumber ? props.context.request.user.customerAccountNumber : '';
     const cCustomerEmailAddress = props.context.request.user.emailAddress ? props.context.request.user.emailAddress : '';
 
@@ -519,7 +520,6 @@ const BuyboxView: React.FC<IBuyboxViewProps & IBuyboxExtentionProps<IBuyboxData>
         setLoading(true);
 
         const itemId = product.result?.ItemId;
-        console.log('SIMPLE PRODUCT ITEM ID>>>', itemId);
 
         if (!email || !validateEmail(email)) {
             setValidEmail('daiso_ntfy_error-message');
@@ -535,7 +535,8 @@ const BuyboxView: React.FC<IBuyboxViewProps & IBuyboxExtentionProps<IBuyboxData>
         var data = JSON.stringify({
             CustAccount: cCustomerAccount,
             Email: email,
-            ItemId: itemId
+            ItemId: itemId,
+            Channel: cRetailChannelId
         });
 
         var xhr = new XMLHttpRequest();

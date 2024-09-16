@@ -251,6 +251,7 @@ const ProductCard: React.FC<IProductComponentProps> = ({
 
     const siteContext = context as ICoreContext<IDimensionsApp>;
     const dimensionToPreSelectInProductCard = siteContext.app.config.dimensionToPreSelectInProductCard;
+    const [addToBagLoading, setAddToBagLoading] = useState(false);
 
     /**
      * Updates the product page and Image url based on swatch selected.
@@ -408,6 +409,7 @@ const ProductCard: React.FC<IProductComponentProps> = ({
     }
 
     async function productAddToCart(product: ProductSearchResult) {
+        setAddToBagLoading(true);
         const currentCartState = await getCartState(context?.actionContext);
 
         const cartLines = [
@@ -431,10 +433,6 @@ const ProductCard: React.FC<IProductComponentProps> = ({
                 // ]
             }
         ];
-        if (currentCartState) {
-            console.log('currentCartState.cart.Id---', currentCartState.cart.Id);
-            console.log('currentCartState.cart.Version---', currentCartState.cart.Version!);
-        }
 
         try {
             return addCartLinesAsync(
@@ -448,6 +446,8 @@ const ProductCard: React.FC<IProductComponentProps> = ({
             });
         } catch (err) {
             console.log(err);
+        } finally {
+            setAddToBagLoading(false);
         }
     }
 
@@ -492,7 +492,9 @@ const ProductCard: React.FC<IProductComponentProps> = ({
                             )}
                         </div>
                         <div className='msc-product__title_description'>
-                            <h5 className='msc-product__title__text' title={product.Name}>{product.Name}</h5>
+                            <h5 className='msc-product__title__text' title={product.Name}>
+                                {product.Name}
+                            </h5>
 
                             {isUnitOfMeasureEnabled && renderProductUnitOfMeasure(product.DefaultUnitOfMeasure)}
                             {renderDescription(product.Description)}
@@ -523,41 +525,9 @@ const ProductCard: React.FC<IProductComponentProps> = ({
                         )}
                     </div>
                     <div className='msc-product__details'>
-                        <h5 className='msc-product__title' title={product.Name}>{product.Name}</h5>
-                        {/* <div className='msc-product__price-conatiner'>
-                            {renderPrice(
-                                context,
-                                typeName,
-                                id,
-                                product.BasePrice,
-                                product.Price,
-                                savingsText,
-                                freePriceText,
-                                originalPriceText,
-                                currentPriceText
-                            )}
-                            {stockAvailability === true ? (
-                                <div>
-                                    <div className='ms-addToBag'>
-                                        <button
-                                            className='ms-addToBag__button'
-                                            title='ADD TO BAG'
-                                            onClick={() => productAddToCart(product)}
-                                        >
-                                            +
-                                        </button>
-                                    </div>
-                                </div>
-                            ) : (
-                                <div>
-                                    <div className='ms-soldOut'>
-                                        <button className='ms-soldOut__button' title='SOLD OUT'>
-                                            +
-                                        </button>
-                                    </div>
-                                </div>
-                            )}
-                        </div> */}
+                        <h5 className='msc-product__title' title={product.Name}>
+                            {product.Name}
+                        </h5>
                         {isUnitOfMeasureEnabled && renderProductUnitOfMeasure(product.DefaultUnitOfMeasure)}
                     </div>
                 </a>
@@ -579,7 +549,11 @@ const ProductCard: React.FC<IProductComponentProps> = ({
                 {stockAvailability === true ? (
                     <div>
                         <div className='ms-addToBag'>
-                            <button className='ms-addToBag__button' title='ADD TO BAG' onClick={() => productAddToCart(product)}>
+                            <button
+                                className={`ms-addToBag__button ${addToBagLoading ? 'add-to-bag-loading' : ''} `}
+                                title='ADD TO BAG'
+                                onClick={() => productAddToCart(product)}
+                            >
                                 +
                             </button>
                         </div>
