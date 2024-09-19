@@ -69,6 +69,7 @@ export class HeaderView extends React.PureComponent<IHeaderViewProps & IHeaderPr
                         {this.props.currentDistributor}
                         {this._renderAccountBlock(this.props)}
                         <Node {...Divider} />
+                        {this.props.wishListIconDesktop}
                         {this.props.cartIcon}
                         {this._renderReactFragment(this.props.siteOptions)}
                     </Node>

@@ -81,7 +81,7 @@ const StoreSelectorCustomLocationLines: React.FC<Props> = props => {
     return (
         <div className='msc-our-stores-mainContainer'>
             <div className='msc-country-mainContainer'>
-                <StoreSelectorAccordionList data={data} onStateSelected={handleStateSelected} />
+                <StoreSelectorAccordionList data={data} onStateSelected={handleStateSelected} resources={props.resources} />
             </div>
             <div className='msc-address-mainContainer'>
                 <div className='msc-addressLineItems-mainContainer'>

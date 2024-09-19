@@ -98,6 +98,7 @@ export interface ICustomStoreSelectorResources {
     pickupFilterByHeading: string;
     pickupFilterMenuHeading: string;
     pickupDeliveryOptionErrorMessage: string;
+    dropdownUAETitle: string;
 }
 
 export interface ITermsOfServiceLinkData {

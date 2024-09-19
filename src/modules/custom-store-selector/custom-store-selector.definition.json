@@ -404,6 +404,10 @@
         "pickupDeliveryOptionErrorMessage": {
             "value": "The selected store does not support this action. Please select a different store and try again.",
             "comment": "Text for pickup delivery option error message. "
+        },
+        "dropdownUAETitle": {
+            "value": "United Arab Emirates",
+            "comment": "Title for ARE country in the dropdown"
         }
     }
 }
