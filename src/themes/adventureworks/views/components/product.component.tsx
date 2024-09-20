@@ -48,6 +48,7 @@ import { getCartState } from '@msdyn365-commerce/global-state';
 import { addCartLinesAsync } from '@msdyn365-commerce/retail-proxy/dist/DataActions/CartsDataActions.g';
 import { createInventoryAvailabilitySearchCriteria } from '@msdyn365-commerce-modules/retail-actions';
 import { getEstimatedAvailabilityAsync } from '@msdyn365-commerce/retail-proxy/dist/DataActions/ProductsDataActions.g';
+import CustomPopup from './custom-popup';
 
 export interface IProductComponentProps extends IComponentProps<{ product?: ProductSearchResult }> {
     className?: string;
@@ -252,6 +253,23 @@ const ProductCard: React.FC<IProductComponentProps> = ({
     const siteContext = context as ICoreContext<IDimensionsApp>;
     const dimensionToPreSelectInProductCard = siteContext.app.config.dimensionToPreSelectInProductCard;
     const [addToBagLoading, setAddToBagLoading] = useState(false);
+    const [isPopupVisible, setIsPopupVisible] = useState(false); // State to control popup visibility
+    const [popupMessage, setPopupMessage] = useState(''); // Message to display in the popup
+
+    // Function to show the popup with a custom message and auto-close after 5 seconds
+    const showPopup = (message: string) => {
+        setPopupMessage(message);
+        setIsPopupVisible(true);
+
+        // Auto-close the popup after 5 seconds
+        // setTimeout(() => {
+        //     setIsPopupVisible(false);
+        // }, 2000);
+    };
+
+    const closePopup = () => {
+        setIsPopupVisible(false);
+    };
 
     /**
      * Updates the product page and Image url based on swatch selected.
@@ -442,10 +460,12 @@ const ProductCard: React.FC<IProductComponentProps> = ({
                 currentCartState.cart.Version!
             ).then(async result => {
                 console.log('cart response--->', result);
+                showPopup('Product added to the bag successfully!');
                 await currentCartState.refreshCart({});
             });
         } catch (err) {
             console.log(err);
+            showPopup('Failed to add product to the bag.');
         } finally {
             setAddToBagLoading(false);
         }
@@ -568,6 +588,8 @@ const ProductCard: React.FC<IProductComponentProps> = ({
                     </div>
                 )}
             </div>
+            {/* Custom Popup */}
+            <CustomPopup message={popupMessage} isVisible={isPopupVisible} onClose={closePopup} />
             {renderProductDimensions(product.AttributeValues)}
             {!context.app.config.hideRating &&
                 renderRating(context, typeName, id, product.AverageRating, product.TotalRatings, ratingAriaLabel, ratingCountAriaLabel)}

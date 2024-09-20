@@ -687,20 +687,32 @@ export default class SearchResultContainer extends React.PureComponent<
     private readonly _getRefineMenu = (): IRefineMenuViewProps => {
         const { data, context, config } = this.props;
         const tempRangeTypeTODO = context.request.query && context.request.query.inputRange ? 'input' : 'slider';
-        const validRefiners =
+        // Filter valid refiners with additional condition for "Category" key
+        var validRefiners =
             this.props.config.updateRefinerPanel && ArrayExtensions.hasElements(this.state.refiners)
                 ? this.state.refiners.filter(refiner => {
-                      return ArrayExtensions.hasElements(refiner.Values) && !this._shouldHideFromRefiners(refiner);
+                      return (
+                          ArrayExtensions.hasElements(refiner.Values) &&
+                          !this._shouldHideFromRefiners(refiner) &&
+                          // Exclude only "Category" refiners with single value
+                          (refiner.KeyName !== 'Category' || refiner.Values.length > 1)
+                      );
                   })
                 : data.refiners.result &&
                   data.refiners.result.filter(refiner => {
-                      return ArrayExtensions.hasElements(refiner.Values) && !this._shouldHideFromRefiners(refiner);
+                      return (
+                          ArrayExtensions.hasElements(refiner.Values) &&
+                          !this._shouldHideFromRefiners(refiner) &&
+                          // Exclude only "Category" refiners with single value
+                          (refiner.KeyName !== 'Category' || refiner.Values.length > 1)
+                      );
                   });
 
         const activeRefiners = (data.listPageState.result && data.listPageState.result.activeFilters) || [];
 
         this._getexpandRefinerCount(validRefiners && validRefiners.length, config.expandRefinersCount);
         const expandedRefiners = this.expandrefinerCount;
+
         const subMenus =
             validRefiners &&
             validRefiners.map((productRefinerHierarchy: IProductRefinerHierarchy, index: number) => {
