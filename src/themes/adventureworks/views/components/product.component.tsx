@@ -262,9 +262,9 @@ const ProductCard: React.FC<IProductComponentProps> = ({
         setIsPopupVisible(true);
 
         // Auto-close the popup after 5 seconds
-        // setTimeout(() => {
-        //     setIsPopupVisible(false);
-        // }, 2000);
+        setTimeout(() => {
+            setIsPopupVisible(false);
+        }, 2000);
     };
 
     const closePopup = () => {
@@ -460,12 +460,12 @@ const ProductCard: React.FC<IProductComponentProps> = ({
                 currentCartState.cart.Version!
             ).then(async result => {
                 console.log('cart response--->', result);
-                showPopup('Product added to the bag successfully!');
+                showPopup('Product has been added to the cart successfully!');
                 await currentCartState.refreshCart({});
             });
         } catch (err) {
             console.log(err);
-            showPopup('Failed to add product to the bag.');
+            showPopup('Failed to add the product to the cart.');
         } finally {
             setAddToBagLoading(false);
         }

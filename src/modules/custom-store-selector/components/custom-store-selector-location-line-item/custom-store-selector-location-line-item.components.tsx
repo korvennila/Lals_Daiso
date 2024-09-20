@@ -362,7 +362,7 @@ const storeSelectorLocationLineItem: React.FC<IStoreSelectorLocationLineItemProp
             <div className='ms-store-select__location-line-item-header'>
                 {(shouldShowIndex || storeLocatorView) && <span className='ms-store-select__location-line-item-store-index'>{index}</span>}
                 <span className='ms-store-select__location-line-item-store-name'>
-                    {index}: {storeName}
+                    {index}. {storeName}
                 </span>
                 {distanceAsString ? <span className='ms-store-select__location-line-item-store-distance'> {distanceAsString}</span> : false}
             </div>
