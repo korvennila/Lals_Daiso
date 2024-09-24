@@ -7,6 +7,8 @@ import { ICustomStoreSelectorProps, ICustomStoreSelectorResources } from '../cus
 import { ITelemetryContent } from '@msdyn365-commerce-modules/utilities';
 import { ICustomStoreSelectorData } from '../custom-store-selector.data';
 import StoreSelectorBingMap from './custom-store-slector-bing-map';
+import StoreSelectorAutoCompleteSearch from './custom-store-auto-search';
+import { LocationProvider } from './custom-store-location-context';
 // import { StoreSelectorMap } from './custom-store-selector-map';
 
 interface Props {
@@ -79,37 +81,46 @@ const StoreSelectorCustomLocationLines: React.FC<Props> = props => {
     };
 
     return (
-        <div className='msc-our-stores-mainContainer'>
-            <div className='msc-country-mainContainer'>
-                <StoreSelectorAccordionList data={data} onStateSelected={handleStateSelected} resources={props.resources} />
-            </div>
-            <div className='msc-address-mainContainer'>
-                <div className='msc-addressLineItems-mainContainer'>
-                    <StoreSelectorLocationLines
-                        locations={selectedLocations}
-                        resources={props.resources}
-                        preferredDistanceUnit={props.preferredDistanceUnit}
-                        alreadySelectedLocation={props.alreadySelectedLocation}
-                        outOfStockThreshold={props.outOfStockThreshold}
-                        enableOutOfStockCheck={props.enableOutOfStockCheck}
-                        onLocationSelected={props.onLocationSelected}
-                        storeLocatorView={props.storeLocatorView}
-                        selectedStoreLocationId={props.selectedStoreLocationId}
-                        onClick={props.onClick}
-                        preferredStoreLocationId={props.preferredStoreLocationId}
-                        onSetAsPreferredStore={props.onSetAsPreferredStore}
-                        onRemovePreferredStore={props.onRemovePreferredStore}
-                        isPreferredStoreEnabled={props.isPreferredStoreEnabled}
-                        displayList={props.displayList}
-                        telemetryContent={props.telemetryContent}
-                        isLocationDisabled={props.isLocationDisabled}
-                        productPickUpDeliveryOptions={props.productPickUpDeliveryOptions}
-                        filteredPickupMode={props.filteredPickupMode}
-                        shouldShowIndex={props.shouldShowIndex}
+        <LocationProvider>
+            <div className='msc-our-stores-mainContainer'>
+                <div className='msc-country-mainContainer'>
+                    <StoreSelectorAccordionList data={data} onStateSelected={handleStateSelected} resources={props.resources} />
+                </div>
+                <div className='msc-autoSearch-mainContainer'>
+                    <StoreSelectorAutoCompleteSearch
+                        {...props.props}
+                        dataLocation={data}
+                        locations={props.locations}
+                        onStateSelected={handleStateSelected}
                     />
                 </div>
-                {/* {props.maps} */}
-                {/* {props.showMap && (
+                <div className='msc-address-mainContainer'>
+                    <div className='msc-addressLineItems-mainContainer'>
+                        <StoreSelectorLocationLines
+                            locations={selectedLocations}
+                            resources={props.resources}
+                            preferredDistanceUnit={props.preferredDistanceUnit}
+                            alreadySelectedLocation={props.alreadySelectedLocation}
+                            outOfStockThreshold={props.outOfStockThreshold}
+                            enableOutOfStockCheck={props.enableOutOfStockCheck}
+                            onLocationSelected={props.onLocationSelected}
+                            storeLocatorView={props.storeLocatorView}
+                            selectedStoreLocationId={props.selectedStoreLocationId}
+                            onClick={props.onClick}
+                            preferredStoreLocationId={props.preferredStoreLocationId}
+                            onSetAsPreferredStore={props.onSetAsPreferredStore}
+                            onRemovePreferredStore={props.onRemovePreferredStore}
+                            isPreferredStoreEnabled={props.isPreferredStoreEnabled}
+                            displayList={props.displayList}
+                            telemetryContent={props.telemetryContent}
+                            isLocationDisabled={props.isLocationDisabled}
+                            productPickUpDeliveryOptions={props.productPickUpDeliveryOptions}
+                            filteredPickupMode={props.filteredPickupMode}
+                            shouldShowIndex={props.shouldShowIndex}
+                        />
+                    </div>
+                    {/* {props.maps} */}
+                    {/* {props.showMap && (
                     <StoreSelectorMap
                         locations={selectedLocations}
                         preferredStoreLocationId={props.preferredStoreLocationId}
@@ -120,9 +131,10 @@ const StoreSelectorCustomLocationLines: React.FC<Props> = props => {
                         pigeonApiKey={props.pigeonApiKey}
                     />
                 )} */}
-                <StoreSelectorBingMap {...props.props} locations={selectedLocations} />
+                    <StoreSelectorBingMap {...props.props} locations={selectedLocations} />
+                </div>
             </div>
-        </div>
+        </LocationProvider>
     );
 };
 
