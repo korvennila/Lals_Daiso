@@ -37,6 +37,7 @@ export interface IBuyboxConfig extends Msdyn365.IModuleConfig {
     hideEmptyProductSpec?: boolean;
     classNameForProductSpec?: string;
     clientRenderForProductSpec?: boolean;
+    estimatedDeliveryDate?: string;
 }
 
 export interface IBuyboxResources {
@@ -150,6 +151,7 @@ export interface IBuyboxResources {
     trueValueText: string;
     falseValueText: string;
     additionalDownloadsText: string;
+    estimatedDeliveryDate: string;
 }
 
 export const enum HeadingProductSpecTag {

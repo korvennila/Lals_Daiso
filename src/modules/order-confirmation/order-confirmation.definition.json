@@ -98,7 +98,7 @@
 		},
 		"confirmationIdLabel": {
 			"comment": "Confirmation ID label",
-			"value": "Your Order ID is:"
+			"value": "Your Reference No:"
 		},
 		"orderSummaryTitle": {
 			"comment": "Title for order summary",

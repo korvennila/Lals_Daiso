@@ -872,6 +872,13 @@ const BuyboxView: React.FC<IBuyboxViewProps & IBuyboxExtentionProps<IBuyboxData>
                     {props.config.displayStockAvailability && preferredStoreId && renderAvailabilityAtPreferredStore()}
                     {inventoryLabel}
                     {renderAddToCart(addToCart, props, setOpen)}
+                    {
+                        <Node className={'msc-delivery-date-container'}>
+                            <div className='msc-delivery-date-content'>
+                                {props.config.estimatedDeliveryDate || props.resources.estimatedDeliveryDate}
+                            </div>
+                        </Node>
+                    }
                     {findInStore && renderFindInStore(findInStore)}
                     {productComparisonButton}
                     {addToOrderTemplate && renderAddToOrderTemplate(props, state, callbacks)}

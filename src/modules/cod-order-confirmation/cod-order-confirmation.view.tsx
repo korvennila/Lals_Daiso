@@ -15,7 +15,7 @@ export default (props: ICodOrderConfirmationViewProps) => {
 
     return (
         <div className='row'>
-            <div className='msc-cod-order-confirmation-container'>{isCod && orderId && <h2>Order ID: {orderId}</h2>}</div>
+            <div className='msc-cod-order-confirmation-container'>{isCod && orderId && <h2>Your Reference No: {orderId}</h2>}</div>
         </div>
     );
 };

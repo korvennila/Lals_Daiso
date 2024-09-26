@@ -101,7 +101,7 @@ const StoreSelectorAutoCompleteSearch: React.FC<IStoreSelectorAutoCompleteSearch
     return (
         <div className='msc-custom-store-autocomplete-search'>
             <input type='search' value={searchInput} onChange={handleInputChange} placeholder='Search locations...' />
-            {isLoading && <div>Loading...</div>}
+            {isLoading && <div className='msc-search-loader'>Loading...</div>}
             {searchResults.length > 0 && showResults && (
                 <ul className='msc-custom-store-autocomplete-result'>
                     {searchResults.map((result, index) => (

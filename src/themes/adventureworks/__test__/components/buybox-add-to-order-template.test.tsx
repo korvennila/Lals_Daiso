@@ -184,7 +184,8 @@ describe('Add To Order Template Button unit tests - View', () => {
         productSpecificationTitle: '',
         trueValueText: '',
         falseValueText: '',
-        additionalDownloadsText: ''
+        additionalDownloadsText: '',
+        estimatedDeliveryDate: ''
     };
 
     // @ts-expect-error partial mock
