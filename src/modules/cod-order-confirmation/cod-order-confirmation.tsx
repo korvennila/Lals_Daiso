@@ -34,20 +34,36 @@ class CodOrderConfirmation extends React.PureComponent<ICodOrderConfirmationProp
         }, 1000); // Simulating a delay for loading, adjust as needed
     }
 
-    private getQueryParams(): URLSearchParams {
+    private getQueryParams(): { orderId: string | null; isCod: boolean } {
         if (typeof window !== 'undefined') {
-            return new URLSearchParams(window.location.search);
+            const url = window.location.href;
+
+            // Find the first occurrence of '?' and consider the rest as the query string
+            const queryStringStartIndex = url.indexOf('?');
+            let queryString = queryStringStartIndex !== -1 ? url.slice(queryStringStartIndex + 1) : '';
+
+            // Replace any additional '?' with '&' to handle incorrectly formatted URLs
+            queryString = queryString.replace(/\?/g, '&');
+
+            // Now create URLSearchParams with the cleaned-up query string
+            const params = new URLSearchParams(queryString);
+
+            // Extract the 'orderid' and 'iscod' values
+            const orderId = params.get('orderid');
+            const isCod = params.get('iscod') === 'true';
+
+            return { orderId, isCod };
         }
-        return new URLSearchParams(); // Return empty params on server-side
+
+        // Default return for server-side or if window is undefined
+        return { orderId: null, isCod: false };
     }
 
     public render(): JSX.Element | null {
         const { isLoading } = this.state;
-        const queryParams = this.getQueryParams();
-        const isCod = queryParams.get('iscod') === 'true';
-        const orderId = queryParams.get('orderid');
+        const { orderId, isCod } = this.getQueryParams();
 
-        return this.props.renderView({ ...this.props, queryParams, isCod, orderId, isLoading });
+        return this.props.renderView({ ...this.props, orderId, isCod, isLoading });
     }
 }
 
