@@ -68,19 +68,19 @@ const StoreSelectorAutoCompleteSearch: React.FC<IStoreSelectorAutoCompleteSearch
 
         // Safely access the properties
         if (orgUnitLocation) {
-            const { OrgUnitNumber, Country, State, StateName, OrgUnitName } = orgUnitLocation;
+            const { OrgUnitNumber, Country, StateName, OrgUnitName } = orgUnitLocation;
 
             // Check if Country and State are available
-            if (Country && State) {
+            if (Country && StateName) {
                 // Set selected country and state via context
                 setSelectedCountry(Country);
                 setActiveCountry(Country);
-                setSelectedState(State);
+                setSelectedState(StateName);
                 setSelectedFromDropdown(false);
                 setSearchInput(`${OrgUnitName}, ${StateName}, ${Country}`);
 
                 // Call the parent component's method
-                props.onStateSelected(props.dataLocation.countries[Country][State]);
+                props.onStateSelected(props.dataLocation.countries[Country][StateName]);
 
                 handleDistributorLocationClick(OrgUnitNumber);
                 setShowResults(false);
