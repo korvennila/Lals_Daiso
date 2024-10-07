@@ -372,7 +372,7 @@ class Buybox extends React.PureComponent<IBuyboxProps<IBuyboxData>, IBuyboxCusto
             unitOfMeasure: getBuyboxProductUnitOfMeasure(props),
             configure: getBuyboxProductConfigure(props, this.state, this.buyboxCallbacks),
             findInStore: getBuyboxFindInStore(this.props, this.state, this.buyboxCallbacks),
-            price: getBuyboxProductPrice(props, this.state),
+            price: product.IsGiftCard ? undefined : getBuyboxProductPrice(props, this.state),
             addToCart: getBuyboxAddToCart(
                 props,
                 this.state,

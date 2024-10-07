@@ -91,7 +91,8 @@ const formatCurrency = (
     }
 
     if (shouldUseFreePriceText && price === freePrice && props.freePriceText) {
-        return props.freePriceText;
+        // return props.freePriceText;
+        return '';
     }
 
     return props.context.cultureFormatter.formatCurrency(price, currencyCode);
@@ -266,10 +267,12 @@ const Price: React.FC<IPriceComponentProps> = (props: IPriceComponentProps): JSX
 /**
  * The PriceComponent.
  */
-export const PriceComponent: React.FunctionComponent<IPriceComponentProps> = msdyn365Commerce.createComponentOverride<IPriceComponent>('Price', {
-    component: Price,
-    ...priceComponentActions
-});
-
+export const PriceComponent: React.FunctionComponent<IPriceComponentProps> = msdyn365Commerce.createComponentOverride<IPriceComponent>(
+    'Price',
+    {
+        component: Price,
+        ...priceComponentActions
+    }
+);
 
 export default PriceComponent;
