@@ -229,10 +229,14 @@ const renderBodyContent = (props: IQuickviewViewProps & IQuickviewPropsExtend<{}
             </Node>
             <Node {...ProductInfoContainerProps}>
                 <Node className='msc-quickview__price-section'>
-                    <Node className='msc-quickview__price-section-text'>
-                        {props.resources.priceText}
-                        {price}
-                    </Node>
+                    {price ? (
+                        <Node className='msc-quickview__price-section-text'>
+                            {props.resources.priceText}
+                            {price}
+                        </Node>
+                    ) : (
+                        <Node className='msc-quickview__price-section-text'></Node>
+                    )}
                     {addToWishlist && renderAddToWishlist(props, state, callbacks)}
                 </Node>
                 {configure && renderConfigure(configure)}

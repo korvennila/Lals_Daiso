@@ -387,7 +387,7 @@ class Quickview extends React.Component<IQuickviewExtentedProps<IQuickviewData>,
             configure: this.state.isDataLoaded
                 ? getBuyboxProductConfigure(props, this.state, this.quickViewCallbacks, this.productDetails, this.props.selectedDimensions)
                 : undefined,
-            price: this.state.isDataLoaded && getBuyboxProductPrice(props, this.state),
+            price: product?.IsGiftCard ? undefined : this.state.isDataLoaded && getBuyboxProductPrice(props, this.state),
             unitOfMeasure: this.state.isDataLoaded && getBuyboxProductUnitOfMeasure(props, this.productDetails),
             rating:
                 this.state.isDataLoaded && !this.props.context.app.config.hideRating && getBuyboxProductRating(props, this.productDetails),
