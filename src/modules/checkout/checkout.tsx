@@ -62,7 +62,7 @@ export * from './components/get-order-summary';
 import CodPaymentService from '../../shared/CodPaymentService';
 import { CustomPaymentMethod } from '../../shared/PaymentMethodEnum';
 import CheckoutCODPlaceOrderButton from './components/cod-place-order-button';
-// import StoreCreditsService from '../../shared/StoreCreditsService';
+import StoreCreditsService from '../../shared/StoreCreditsService';
 
 /**
  * Device type.
@@ -144,11 +144,11 @@ export interface ICheckoutViewProps extends ICheckoutProps<ICheckoutData>, IChec
     codPlaceOrderButton?: React.ReactNode;
 }
 
-// interface ICustomRequestContext extends Msdyn365.IRequestContext {
-//     voucherId?: string;
-//     voucherBalance?: number;
-//     appliedBalance?: number;
-// }
+interface ICustomRequestContext extends Msdyn365.IRequestContext {
+    voucherId?: string;
+    voucherBalance?: number;
+    appliedBalance?: number;
+}
 
 /**
  * The checkout module props interface.
@@ -158,7 +158,7 @@ export interface ICheckoutModuleProps extends ICheckoutProps<ICheckoutData>, IMo
 const expressPaymentSectionClassName = 'msc-express-payment-container';
 
 const codPaymentService = CodPaymentService.getInstance();
-// const storeCreditsService = StoreCreditsService.getInstance();
+const storeCreditsService = StoreCreditsService.getInstance();
 
 /**
  *
@@ -1047,8 +1047,8 @@ class Checkout extends React.PureComponent<ICheckoutModuleProps> {
                 }
             },
             slots: { orderConfirmation },
-            data: { checkout, products }
-            // config: { tenderIdForStoreCredits }
+            data: { checkout, products },
+            config: { tenderIdForStoreCredits }
         } = this.props;
 
         this.props.telemetry.information('Checkout onPlaceOrder is called.');
@@ -1070,45 +1070,86 @@ class Checkout extends React.PureComponent<ICheckoutModuleProps> {
             const updatedCartVersion = await this.updateCartLineEmailAddress(this.props.data.checkout.result?.guestCheckoutEmail || '');
 
             const customActionContext: Msdyn365.IActionContext = actionContext;
-            // const customRequestContext: ICustomRequestContext = customActionContext.requestContext as ICustomRequestContext;
-            // customRequestContext.voucherId = storeCreditsService.getVoucherId();
-            // customRequestContext.voucherBalance = storeCreditsService.getVoucherAmount();
-            // customRequestContext.appliedBalance = storeCreditsService.getAppliedAmount();
+            const customRequestContext: ICustomRequestContext = customActionContext.requestContext as ICustomRequestContext;
+            customRequestContext.voucherId = storeCreditsService.getVoucherId();
+            customRequestContext.voucherBalance = storeCreditsService.getVoucherAmount();
+            customRequestContext.appliedBalance = storeCreditsService.getAppliedAmount();
 
-            // const appliedBalance = storeCreditsService.getAppliedAmount();
+            const appliedBalance = storeCreditsService.getAppliedAmount();
 
             const checkoutResult = this.props.data.checkout.result;
             // const cStoreCredits = this.korStoreCreditsPreCheckoutRequest();
-            // if (appliedBalance > 0) {
-            //     checkoutResult?.checkoutCart.updateExtensionProperties({
-            //         newExtensionProperties: [
-            //             {
-            //                 Key: 'VoucherId',
-            //                 Value: {
-            //                     StringValue: storeCreditsService.getVoucherId()
-            //                 }
-            //             },
-            //             {
-            //                 Key: 'VoucherBalance',
-            //                 Value: {
-            //                     DecimalValue: storeCreditsService.getVoucherAmount()
-            //                 }
-            //             },
-            //             {
-            //                 Key: 'AppliedBalance',
-            //                 Value: {
-            //                     DecimalValue: storeCreditsService.getAppliedAmount()
-            //                 }
-            //             },
-            //             {
-            //                 Key: 'TenderID',
-            //                 Value: {
-            //                     IntegerValue: tenderIdForStoreCredits!
-            //                 }
-            //             }
-            //         ]
-            //     });
-            // }
+            if (appliedBalance > 0) {
+                // checkoutResult?.checkoutCart.updateCart({
+                //     newCartObject: {
+                //         AttributeValues: [
+                //             {
+                //                 Name: 'StoreCreditsAttributes',
+                //                 ExtensionProperties: [
+                //                     {
+                //                         Key: 'VoucherId',
+                //                         Value: {
+                //                             StringValue: storeCreditsService.getVoucherId()
+                //                         }
+                //                     },
+                //                     {
+                //                         Key: 'VoucherBalance',
+                //                         Value: {
+                //                             DecimalValue: storeCreditsService.getVoucherAmount()
+                //                         }
+                //                     },
+                //                     {
+                //                         Key: 'AppliedBalance',
+                //                         Value: {
+                //                             DecimalValue: storeCreditsService.getAppliedAmount()
+                //                         }
+                //                     },
+                //                     {
+                //                         Key: 'TenderID',
+                //                         Value: {
+                //                             IntegerValue: tenderIdForStoreCredits!
+                //                         }
+                //                     }
+                //                 ]
+                //             }
+                //         ],
+                //         Id: checkoutResult?.checkoutCart.cart.Id
+                //     }
+                // });
+                checkoutResult?.checkoutCart.updateAttributeValues({
+                    newAttributeValues: [
+                        {
+                            Name: 'StoreCreditsAttributes',
+                            ExtensionProperties: [
+                                {
+                                    Key: 'VoucherId',
+                                    Value: {
+                                        StringValue: storeCreditsService.getVoucherId()
+                                    }
+                                },
+                                {
+                                    Key: 'VoucherBalance',
+                                    Value: {
+                                        DecimalValue: storeCreditsService.getVoucherAmount()
+                                    }
+                                },
+                                {
+                                    Key: 'AppliedBalance',
+                                    Value: {
+                                        DecimalValue: storeCreditsService.getAppliedAmount()
+                                    }
+                                },
+                                {
+                                    Key: 'TenderID',
+                                    Value: {
+                                        IntegerValue: tenderIdForStoreCredits!
+                                    }
+                                }
+                            ]
+                        }
+                    ]
+                });
+            }
 
             await placeOrder(
                 customActionContext,
