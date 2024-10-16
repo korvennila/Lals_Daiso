@@ -144,11 +144,11 @@ export interface ICheckoutViewProps extends ICheckoutProps<ICheckoutData>, IChec
     codPlaceOrderButton?: React.ReactNode;
 }
 
-interface ICustomRequestContext extends Msdyn365.IRequestContext {
-    voucherId?: string;
-    voucherBalance?: number;
-    appliedBalance?: number;
-}
+// interface ICustomRequestContext extends Msdyn365.IRequestContext {
+//     voucherId?: string;
+//     voucherBalance?: number;
+//     appliedBalance?: number;
+// }
 
 /**
  * The checkout module props interface.
@@ -1067,56 +1067,17 @@ class Checkout extends React.PureComponent<ICheckoutModuleProps> {
         } else {
             const hasOrderConfirmation = orderConfirmation && orderConfirmation.length > 0;
 
-            const updatedCartVersion = await this.updateCartLineEmailAddress(this.props.data.checkout.result?.guestCheckoutEmail || '');
-
             const customActionContext: Msdyn365.IActionContext = actionContext;
-            const customRequestContext: ICustomRequestContext = customActionContext.requestContext as ICustomRequestContext;
-            customRequestContext.voucherId = storeCreditsService.getVoucherId();
-            customRequestContext.voucherBalance = storeCreditsService.getVoucherAmount();
-            customRequestContext.appliedBalance = storeCreditsService.getAppliedAmount();
+            // const customRequestContext: ICustomRequestContext = customActionContext.requestContext as ICustomRequestContext;
+            // customRequestContext.voucherId = storeCreditsService.getVoucherId();
+            // customRequestContext.voucherBalance = storeCreditsService.getVoucherAmount();
+            // customRequestContext.appliedBalance = storeCreditsService.getAppliedAmount();
 
             const appliedBalance = storeCreditsService.getAppliedAmount();
 
             const checkoutResult = this.props.data.checkout.result;
-            // const cStoreCredits = this.korStoreCreditsPreCheckoutRequest();
             if (appliedBalance > 0) {
-                // checkoutResult?.checkoutCart.updateCart({
-                //     newCartObject: {
-                //         AttributeValues: [
-                //             {
-                //                 Name: 'StoreCreditsAttributes',
-                //                 ExtensionProperties: [
-                //                     {
-                //                         Key: 'VoucherId',
-                //                         Value: {
-                //                             StringValue: storeCreditsService.getVoucherId()
-                //                         }
-                //                     },
-                //                     {
-                //                         Key: 'VoucherBalance',
-                //                         Value: {
-                //                             DecimalValue: storeCreditsService.getVoucherAmount()
-                //                         }
-                //                     },
-                //                     {
-                //                         Key: 'AppliedBalance',
-                //                         Value: {
-                //                             DecimalValue: storeCreditsService.getAppliedAmount()
-                //                         }
-                //                     },
-                //                     {
-                //                         Key: 'TenderID',
-                //                         Value: {
-                //                             IntegerValue: tenderIdForStoreCredits!
-                //                         }
-                //                     }
-                //                 ]
-                //             }
-                //         ],
-                //         Id: checkoutResult?.checkoutCart.cart.Id
-                //     }
-                // });
-                checkoutResult?.checkoutCart.updateAttributeValues({
+                await checkoutResult?.checkoutCart.updateAttributeValues({
                     newAttributeValues: [
                         {
                             Name: 'StoreCreditsAttributes',
@@ -1151,6 +1112,8 @@ class Checkout extends React.PureComponent<ICheckoutModuleProps> {
                 });
             }
 
+            const updatedCartVersion = await this.updateCartLineEmailAddress(this.props.data.checkout.result?.guestCheckoutEmail || '');
+
             await placeOrder(
                 customActionContext,
                 checkoutResult,
@@ -1165,84 +1128,6 @@ class Checkout extends React.PureComponent<ICheckoutModuleProps> {
             await checkout.result?.updateIsPaymentSectionContainerReady({ newIsPaymentSectionContainerReady: false });
         }
     };
-
-    // private readonly korStoreCreditsPreCheckoutRequest = async (): Promise<{ voucherId?: string, balance?: number, cartId?: string } | null> => {
-    //     this.setState({ isPlaceOrderLoading: true });
-    //     const cRetailURL = this.props.context.request.apiSettings.baseUrl;
-    //     const cRetailOUN = this.props.context.request.apiSettings.oun ? this.props.context.request.apiSettings.oun : '';
-
-    //     const cKORPreCheckoutRequestUrl = `${cRetailURL}commerce/KORPreCheckoutRequest?api-version=7.3`;
-    //     const currentCartState = await getCartState(this.props.context?.actionContext);
-    //     const checkoutState = this.props.data.checkout.result;
-
-    //     const cGuestCheckoutEmail = checkoutState?.guestCheckoutEmail;
-    //     const cCartId = checkoutState?.checkoutCart.cart.Id;
-    //     const cShippingCharge = checkoutState?.checkoutCart.cart.ShippingChargeAmount || 0;
-    //     const cTaxAmount = checkoutState?.checkoutCart.cart.TaxAmount || 0;
-    //     const cCodChargesAmount = this.state.codChargeAmount || 0;
-    //     const cAmountDue = (checkoutState?.checkoutCart.cart.AmountDue || 0) + cCodChargesAmount;
-    //     const cDeliveryMode = checkoutState?.checkoutCart.cart.DeliveryMode;
-
-    //     try {
-    //         const response = await fetch(cKORPreCheckoutRequestUrl, {
-    //             method: 'POST',
-    //             headers: {
-    //                 'Content-Type': 'application/json',
-    //                 OUN: cRetailOUN,
-    //                 'User-Agent': 'Mozilla/5.0 (Windows NT 6.3; Win64; x64; rv:58.0) Gecko/20100101 Firefox/58.0'
-    //             },
-    //             body: JSON.stringify({
-    //                 cartId: cCartId,
-    //                 receiptEmail: cGuestCheckoutEmail,
-    //                 modeOfDeliver: cDeliveryMode,
-    //                 shippingCharges: Math.round(cShippingCharge * 100) / 100,
-    //                 totalDueAmt: Math.round(cAmountDue * 100) / 100,
-    //                 CODCharges: Math.round(cCodChargesAmount * 100) / 100,
-    //                 taxAmount: Math.round(cTaxAmount * 100) / 100
-    //             })
-    //         });
-
-    //         if (response.status === 200) {
-    //             const data = await response.json();
-
-    //             const cCartLineIds: string[] = currentCartState.cart.CartLines
-    //                 ? currentCartState.cart.CartLines.map(line => line.LineId!.toString())
-    //                 : [];
-
-    //             const input = {
-    //                 cartLineIds: cCartLineIds
-    //             };
-
-    //             if (data && data.value) {
-    //                 const { voucherId, balance, cartId } = data.value;
-
-    //                 // Perform necessary actions with the cart (e.g., removing cart lines, refreshing the cart)
-    //                 await currentCartState.refreshCart({});
-    //                 await currentCartState.removeCartLines(input);
-    //                 await currentCartState.removeAllPromoCodes({});
-
-    //                 // Redirect to the confirmation link with voucher and balance details if needed
-    //                 if (this.props.config.codOrderConfirmationLink) {
-    //                     window.location.href = `${this.props.config.codOrderConfirmationLink?.linkUrl.destinationUrl}?orderid=${cartId}&iscod=true`;
-    //                 }
-
-    //                 // Return the extracted data
-    //                 return { voucherId, balance, cartId };
-    //             } else {
-    //                 codPaymentService.setCODOrderFailure(this.props.resources.placeOrderErrorMessage);
-    //             }
-    //         } else {
-    //             codPaymentService.setCODOrderFailure(this.props.resources.placeOrderErrorMessage);
-    //         }
-    //     } catch (error) {
-    //         codPaymentService.setCODOrderFailure(this.props.resources.placeOrderErrorMessage);
-    //         console.error('COD place order error:', error);
-    //     } finally {
-    //         this.setState({ isPlaceOrderLoading: false });
-    //     }
-
-    //     return null; // Return null in case of failure or error
-    // };
 
     private readonly korPreCheckoutRequest = async (): Promise<any> => {
         this.setState({ isPlaceOrderLoading: true });
