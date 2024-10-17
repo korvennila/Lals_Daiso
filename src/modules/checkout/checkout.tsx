@@ -144,12 +144,6 @@ export interface ICheckoutViewProps extends ICheckoutProps<ICheckoutData>, IChec
     codPlaceOrderButton?: React.ReactNode;
 }
 
-// interface ICustomRequestContext extends Msdyn365.IRequestContext {
-//     voucherId?: string;
-//     voucherBalance?: number;
-//     appliedBalance?: number;
-// }
-
 /**
  * The checkout module props interface.
  */
@@ -1068,48 +1062,79 @@ class Checkout extends React.PureComponent<ICheckoutModuleProps> {
             const hasOrderConfirmation = orderConfirmation && orderConfirmation.length > 0;
 
             const customActionContext: Msdyn365.IActionContext = actionContext;
-            // const customRequestContext: ICustomRequestContext = customActionContext.requestContext as ICustomRequestContext;
-            // customRequestContext.voucherId = storeCreditsService.getVoucherId();
-            // customRequestContext.voucherBalance = storeCreditsService.getVoucherAmount();
-            // customRequestContext.appliedBalance = storeCreditsService.getAppliedAmount();
 
             const appliedBalance = storeCreditsService.getAppliedAmount();
 
             const checkoutResult = this.props.data.checkout.result;
             if (appliedBalance > 0) {
-                await checkoutResult?.checkoutCart.updateAttributeValues({
-                    newAttributeValues: [
-                        {
-                            Name: 'StoreCreditsAttributes',
-                            ExtensionProperties: [
-                                {
-                                    Key: 'VoucherId',
-                                    Value: {
-                                        StringValue: storeCreditsService.getVoucherId()
+                try {
+                    const updateAttributeValues = await checkoutResult?.checkoutCart.updateAttributeValues({
+                        newAttributeValues: [
+                            {
+                                Name: 'StoreCreditsAttributes',
+                                ExtensionProperties: [
+                                    {
+                                        Key: 'VoucherId',
+                                        Value: {
+                                            StringValue: storeCreditsService.getVoucherId()
+                                        }
+                                    },
+                                    {
+                                        Key: 'VoucherBalance',
+                                        Value: {
+                                            DecimalValue: storeCreditsService.getVoucherAmount()
+                                        }
+                                    },
+                                    {
+                                        Key: 'AppliedBalance',
+                                        Value: {
+                                            DecimalValue: storeCreditsService.getAppliedAmount()
+                                        }
+                                    },
+                                    {
+                                        Key: 'TenderID',
+                                        Value: {
+                                            IntegerValue: tenderIdForStoreCredits!
+                                        }
                                     }
-                                },
-                                {
-                                    Key: 'VoucherBalance',
-                                    Value: {
-                                        DecimalValue: storeCreditsService.getVoucherAmount()
-                                    }
-                                },
-                                {
-                                    Key: 'AppliedBalance',
-                                    Value: {
-                                        DecimalValue: storeCreditsService.getAppliedAmount()
-                                    }
-                                },
-                                {
-                                    Key: 'TenderID',
-                                    Value: {
-                                        IntegerValue: tenderIdForStoreCredits!
-                                    }
+                                ]
+                            }
+                        ]
+                    });
+
+                    const updateExtensionProperties = await checkoutResult?.checkoutCart.updateExtensionProperties({
+                        newExtensionProperties: [
+                            {
+                                Key: 'VoucherId',
+                                Value: {
+                                    StringValue: storeCreditsService.getVoucherId()
                                 }
-                            ]
-                        }
-                    ]
-                });
+                            },
+                            {
+                                Key: 'VoucherBalance',
+                                Value: {
+                                    DecimalValue: storeCreditsService.getVoucherAmount()
+                                }
+                            },
+                            {
+                                Key: 'AppliedBalance',
+                                Value: {
+                                    DecimalValue: storeCreditsService.getAppliedAmount()
+                                }
+                            },
+                            {
+                                Key: 'TenderID',
+                                Value: {
+                                    IntegerValue: tenderIdForStoreCredits!
+                                }
+                            }
+                        ]
+                    });
+
+                    console.log('Cart update result:', updateAttributeValues, updateExtensionProperties);
+                } catch (error) {
+                    console.error('Error updating cart:', error);
+                }
             }
 
             const updatedCartVersion = await this.updateCartLineEmailAddress(this.props.data.checkout.result?.guestCheckoutEmail || '');
