@@ -347,35 +347,19 @@ const ProductCard: React.FC<IProductComponentProps> = ({
                     const siteContext = context as ICoreContext<IDimensionsApp>;
                     const dimensionToPreSelectInProductCard = siteContext.app.config.dimensionToPreSelectInProductCard;
                     const dimensionType = dimensionTypeValue as DimensionTypes;
-                    const availableSwatch = item.Swatches?.find(swatchItem => {
-                        const isDisabled =
-                            enableStockCheck &&
-                            dimensionAvailabilities?.find(
-                                dimensionAvailability => dimensionAvailability.value === (swatchItem.SwatchValue ?? '')
-                            )?.isDisabled;
-
-                        if (!isDisabled) {
-                            setProdAvailRecordId(item.RecordId); // Set the first available item ID in the state
-                            setProdAvailDimension(true); // Enable "Add to Cart"
-                            return true; // Stop after finding the first available swatch
-                        }
-
-                        return false;
-                    });
-
-                    console.log('dimensionTypeValue--->', availableSwatch);
 
                     const swatches =
                         item.Swatches?.map<ISwatchItem>(swatchItem => {
-                            const isDisabled =
-                                enableStockCheck &&
-                                dimensionAvailabilities?.find(
-                                    dimensionAvailability => dimensionAvailability.value === (swatchItem.SwatchValue ?? '')
-                                )?.isDisabled;
-
-                            if (!isDisabled) {
-                                setProdAvailRecordId(item.RecordId); // Set the first available item ID
-                                setProdAvailDimension(true);
+                            if (!prodAvailDimension) {
+                                setProdAvailRecordId(item.RecordId); // Set the first available item ID in the state
+                                setProdAvailDimension(
+                                    !(
+                                        enableStockCheck &&
+                                        dimensionAvailabilities?.find(
+                                            dimensionAvailability => dimensionAvailability.value === (swatchItem.SwatchValue ?? '')
+                                        )?.isDisabled
+                                    )
+                                ); // Enable "Add to Cart"
                             }
                             return {
                                 itemId: `${item.RecordId ?? ''}-${dimensionTypeValue}-${swatchItem.SwatchValue ?? ''}`,
