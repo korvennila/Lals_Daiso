@@ -256,6 +256,9 @@ const ProductCard: React.FC<IProductComponentProps> = ({
     const [isPopupVisible, setIsPopupVisible] = useState(false); // State to control popup visibility
     const [popupMessage, setPopupMessage] = useState(''); // Message to display in the popup
 
+    const [prodAvailRecordId, setProdAvailRecordId] = useState<number | undefined>();
+    const [prodAvailDimension, setProdAvailDimension] = useState(false);
+
     // Function to show the popup with a custom message and auto-close after 5 seconds
     const showPopup = (message: string) => {
         setPopupMessage(message);
@@ -344,8 +347,36 @@ const ProductCard: React.FC<IProductComponentProps> = ({
                     const siteContext = context as ICoreContext<IDimensionsApp>;
                     const dimensionToPreSelectInProductCard = siteContext.app.config.dimensionToPreSelectInProductCard;
                     const dimensionType = dimensionTypeValue as DimensionTypes;
+                    const availableSwatch = item.Swatches?.find(swatchItem => {
+                        const isDisabled =
+                            enableStockCheck &&
+                            dimensionAvailabilities?.find(
+                                dimensionAvailability => dimensionAvailability.value === (swatchItem.SwatchValue ?? '')
+                            )?.isDisabled;
+
+                        if (!isDisabled) {
+                            setProdAvailRecordId(item.RecordId); // Set the first available item ID in the state
+                            setProdAvailDimension(true); // Enable "Add to Cart"
+                            return true; // Stop after finding the first available swatch
+                        }
+
+                        return false;
+                    });
+
+                    console.log('dimensionTypeValue--->', availableSwatch);
+
                     const swatches =
                         item.Swatches?.map<ISwatchItem>(swatchItem => {
+                            const isDisabled =
+                                enableStockCheck &&
+                                dimensionAvailabilities?.find(
+                                    dimensionAvailability => dimensionAvailability.value === (swatchItem.SwatchValue ?? '')
+                                )?.isDisabled;
+
+                            if (!isDisabled) {
+                                setProdAvailRecordId(item.RecordId); // Set the first available item ID
+                                setProdAvailDimension(true);
+                            }
                             return {
                                 itemId: `${item.RecordId ?? ''}-${dimensionTypeValue}-${swatchItem.SwatchValue ?? ''}`,
                                 value: swatchItem.SwatchValue ?? '',
@@ -399,7 +430,8 @@ const ProductCard: React.FC<IProductComponentProps> = ({
     }
 
     /** StockAvailability */
-    const [stockAvailability, setStockAvailability] = useState<boolean>(true);
+    // const [stockAvailability, setStockAvailability] = useState<boolean>(true);
+    const [, setStockAvailability] = useState<boolean>(true);
 
     async function getStockAvailability(item: ProductSearchResult) {
         const searchCriteria = createInventoryAvailabilitySearchCriteria(context && context.actionContext, [item.RecordId], true);
@@ -429,11 +461,12 @@ const ProductCard: React.FC<IProductComponentProps> = ({
     async function productAddToCart(product: ProductSearchResult) {
         setAddToBagLoading(true);
         const currentCartState = await getCartState(context?.actionContext);
+        let productRecordId = prodAvailDimension ? prodAvailRecordId : product.RecordId;
 
         const cartLines = [
             {
                 ItemId: product.ItemId,
-                ProductId: product.RecordId,
+                ProductId: productRecordId,
                 Quantity: 1,
                 TrackingId: ''
                 // 'AttributeValues@odata.type': '#Collection(Microsoft.Dynamics.Commerce.Runtime.DataModel.AttributeValueBase)',
@@ -566,7 +599,7 @@ const ProductCard: React.FC<IProductComponentProps> = ({
                     isPriceMinMaxEnabled,
                     priceResources
                 )}
-                {stockAvailability === true ? (
+                {enableStockCheck || prodAvailDimension ? (
                     <div>
                         <div className='ms-addToBag'>
                             <button
