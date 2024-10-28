@@ -47,7 +47,10 @@ import React, { useState } from 'react';
 import { getCartState } from '@msdyn365-commerce/global-state';
 import { addCartLinesAsync } from '@msdyn365-commerce/retail-proxy/dist/DataActions/CartsDataActions.g';
 import { createInventoryAvailabilitySearchCriteria } from '@msdyn365-commerce-modules/retail-actions';
-import { getEstimatedAvailabilityAsync } from '@msdyn365-commerce/retail-proxy/dist/DataActions/ProductsDataActions.g';
+import {
+    getEstimatedAvailabilityAsync,
+    getDimensionValuesWithEstimatedAvailabilitiesAsync
+} from '@msdyn365-commerce/retail-proxy/dist/DataActions/ProductsDataActions.g';
 import CustomPopup from './custom-popup';
 
 export interface IProductComponentProps extends IComponentProps<{ product?: ProductSearchResult }> {
@@ -350,17 +353,6 @@ const ProductCard: React.FC<IProductComponentProps> = ({
 
                     const swatches =
                         item.Swatches?.map<ISwatchItem>(swatchItem => {
-                            if (!prodAvailDimension) {
-                                setProdAvailRecordId(item.RecordId); // Set the first available item ID in the state
-                                setProdAvailDimension(
-                                    !(
-                                        enableStockCheck &&
-                                        dimensionAvailabilities?.find(
-                                            dimensionAvailability => dimensionAvailability.value === (swatchItem.SwatchValue ?? '')
-                                        )?.isDisabled
-                                    )
-                                ); // Enable "Add to Cart"
-                            }
                             return {
                                 itemId: `${item.RecordId ?? ''}-${dimensionTypeValue}-${swatchItem.SwatchValue ?? ''}`,
                                 value: swatchItem.SwatchValue ?? '',
@@ -442,6 +434,30 @@ const ProductCard: React.FC<IProductComponentProps> = ({
         }
     }
 
+    async function getDimensionValuesWithEstimatedAvailabilities(item: ProductSearchResult) {
+        const cCatalogId = getCatalogId(context.request);
+        const productDimensions = await getDimensionValuesWithEstimatedAvailabilitiesAsync(
+            { callerContext: context && context.actionContext },
+            item.RecordId,
+            {
+                CatalogId: cCatalogId,
+                DefaultWarehouseOnly: true,
+                InventoryAccuracyValue: 1,
+                RequestedDimensionTypeValues: [1, 2, 3, 4]
+            }
+        );
+
+        const availableItem = productDimensions.find(item => item.TotalAvailableInventoryLevelCode === 'AVAIL');
+
+        // If such an item exists, set the first ProductId to state
+        if (availableItem) {
+            if (availableItem.ProductIds && availableItem.ProductIds.length > 0) {
+                setProdAvailRecordId(availableItem.ProductIds[0]);
+                setProdAvailDimension(true);
+            }
+        }
+    }
+
     async function productAddToCart(product: ProductSearchResult) {
         setAddToBagLoading(true);
         const currentCartState = await getCartState(context?.actionContext);
@@ -490,6 +506,7 @@ const ProductCard: React.FC<IProductComponentProps> = ({
 
     React.useEffect(() => {
         getStockAvailability(product);
+        getDimensionValuesWithEstimatedAvailabilities(product);
     }, []);
 
     // Construct telemetry attribute to render
