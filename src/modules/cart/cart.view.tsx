@@ -180,9 +180,11 @@ const renderCartLine = (
     if (isMultiplePickUp) {
         return (
             <Node className='msc-cart-line-group__extra-actions'>
-                {renderGroupBopisBlock(cartLine, resources, storeSelector, telemetryContent, emailDeliveryModeCode)}
-                {cartLine.addToOrderTemplate}
-                {cartLine.addToWishlist}
+                <Node className={'msc-cart-line-group__more-actions'}>
+                    {renderGroupBopisBlock(cartLine, resources, storeSelector, telemetryContent, emailDeliveryModeCode)}
+                    {cartLine.addToOrderTemplate}
+                    {cartLine.addToWishlist}
+                </Node>
                 {cartLine.remove}
             </Node>
         );

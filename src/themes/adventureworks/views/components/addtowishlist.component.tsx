@@ -16,6 +16,7 @@ import { Alert, UncontrolledTooltip } from '@msdyn365-commerce-modules/utilities
 import classnames from 'classnames';
 import * as Popper from 'popper.js';
 import React, { useState } from 'react';
+import CustomPopup from './custom-popup';
 
 export interface IAddToWishlistComponentProps extends IComponentProps<IAddtoWishlistData> {
     className?: string;
@@ -104,6 +105,9 @@ const onClick = async (
 
     await (doesProductExistInWishlist(product, props) ? removeFromWishlist(product, props, state) : addToWishlist(product, props, state));
     state.setWaiting(false);
+    setTimeout(() => {
+        AddToWishlistComponentActions.onDismiss(state);
+    }, 2000);
 };
 
 const onDismiss = (state: IAddToWishlistStateManager): void => {
@@ -211,6 +215,12 @@ const AddToWishlist: React.FC<IAddToWishlistComponentProps> = (props: IAddToWish
                         </UncontrolledTooltip>
                     )}
                 </>
+            )}
+            {/* Custom Popup */}
+            {state.content.showAlert && showMessage ? (
+                <CustomPopup message={state.content.wishlistTextMessage!} isVisible={state.content.showAlert!} onClose={onDismissHandler} />
+            ) : (
+                ''
             )}
             {state.content.showAlert && showMessage ? (
                 <div className='ms-wishlist-items__product-status'>
@@ -424,6 +434,5 @@ export const AddToWishlistComponent: React.FunctionComponent<IAddToWishlistCompo
     // @ts-expect-error
     IAddtoWishlistComponent
 >('AddToWishlist', { component: AddToWishlist, ...AddToWishlistComponentActions });
-
 
 export default AddToWishlistComponent;
