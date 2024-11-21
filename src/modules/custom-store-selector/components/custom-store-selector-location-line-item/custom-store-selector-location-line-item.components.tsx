@@ -368,7 +368,7 @@ const storeSelectorLocationLineItem: React.FC<IStoreSelectorLocationLineItemProp
             </div>
             <div className='ms-store-select__location-line-item-content'>
                 <div className='ms-store-select__location-line-item-contact-info'>
-                    <p className='ms-store-select__location-line-header'>{resources.contactInfoHeader}</p>
+                    {/* <p className='ms-store-select__location-line-header'>{resources.contactInfoHeader}</p> */}
                     {storeAddress && (
                         <div className='ms-store-select__location-line-shop-address-section'>
                             <span className='msi msi-map-marker-alt ms-store-select__location-line-shop-address-glyph-icon' />

@@ -62,8 +62,8 @@ const StoreSelectorAccordionList: React.FC<Props> = ({ data, onStateSelected, re
             {Object.keys(data.countries).map(country => {
                 const countryClass = `msc-flag-${country.toLowerCase().replace(/\s+/g, '-')}`;
 
-                // Custom label for United Arab Emirates if country code is "ARE"
-                const displayCountryName = country === 'ARE' ? resources.dropdownUAETitle : country;
+                // Custom label for United Arab Emirates if country code is "UAE"
+                const displayCountryName = country === 'UAE' ? resources.dropdownUAETitle : country;
                 return (
                     <div key={country} className='msc-countries-dropdown'>
                         <h2
