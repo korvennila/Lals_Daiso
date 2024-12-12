@@ -222,6 +222,14 @@ export class CheckoutGiftCard extends React.Component<ICheckoutGiftCardModulePro
         return !!giftCards && giftCards.length > 0;
     }
 
+    @computed get hasElectronicDelivery(): boolean {
+        const {
+            data: { checkout }
+        } = this.props;
+        const cartLines = (checkout.result && checkout.result.checkoutCart.cart.CartLines) || [];
+        return cartLines.some(line => line.DeliveryMode === 'ELECTRONIC');
+    }
+
     private handleKorCODPlaceOrderTrigger = (option: string, amount: number, codSelected: boolean, codOrderFailure: string): void => {
         this.setState({ errorMessage: codOrderFailure });
     };
@@ -244,7 +252,7 @@ export class CheckoutGiftCard extends React.Component<ICheckoutGiftCardModulePro
             () => this.isOtherPaymentsEnabled, // Observable or computed value
             otherPaymentEnabled => {
                 if (this.state.isOTPVerified || this.state.isRadioButtonChecked || this.props.context.request.user.isAuthenticated) {
-                    if (otherPaymentEnabled) {
+                    if (otherPaymentEnabled || this.hasElectronicDelivery) {
                         this.setState({ isRadioButtonChecked: false, isCodSelected: false });
                         codPaymentService.setSelectedOption('');
                     }
@@ -270,6 +278,11 @@ export class CheckoutGiftCard extends React.Component<ICheckoutGiftCardModulePro
                     }
                 }
             );
+        }
+
+        // Initial check for electronic delivery
+        if (this.hasElectronicDelivery) {
+            this.setState({ isRadioButtonChecked: false });
         }
 
         const radioButton = this.radioButtonRef.current;
@@ -319,12 +332,12 @@ export class CheckoutGiftCard extends React.Component<ICheckoutGiftCardModulePro
 
     private handleClick = (event: Event) => {
         const radioButton = this.radioButtonRef.current;
-        if (this.isOtherPaymentsEnabled) {
+        if (this.isOtherPaymentsEnabled || this.hasElectronicDelivery) {
             this.setError(this.props.config.codIsNotApplicableMessage || this.props.resources.codIsNotApplicableMessage);
         } else {
             this.setError('');
         }
-        if (radioButton && isEmpty(this.state.errorMessage) && !this.isOtherPaymentsEnabled) {
+        if (radioButton && isEmpty(this.state.errorMessage) && !this.isOtherPaymentsEnabled && !this.hasElectronicDelivery) {
             if (!this.props.context.request.user.isAuthenticated && !this.state.isOTPVerified) {
                 event.preventDefault();
                 this.setState({ isMobileModalOpen: true, isRadioButtonChecked: false });

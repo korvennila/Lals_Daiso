@@ -211,6 +211,7 @@ const MobileModal: React.FC<MobileModalProps> = ({ isOpen, resources, props, cod
                                 value={mobileNumber}
                                 onChange={handleMobileNumberChange}
                                 placeholder={resources.mobileNumberInputLabel}
+                                readOnly
                             />
                         </div>
                         {mobileNumberErrorMessage && <p className='error'>{mobileNumberErrorMessage}</p>}
