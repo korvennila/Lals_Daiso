@@ -168,7 +168,7 @@ class CheckoutBillingAddress extends React.Component<IProps, ICheckoutBillingAdd
             AddressItemType.Phone,
             '^\\+971[1-9][0-9]{8}$',
             resources.addressPhoneFormatErrorMessage,
-            12
+            13
         );
         // this.updateMetadataFieldFormatValidation(
         //     addressMetadata,
