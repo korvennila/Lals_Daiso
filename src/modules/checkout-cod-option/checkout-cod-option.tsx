@@ -227,7 +227,12 @@ export class CheckoutGiftCard extends React.Component<ICheckoutGiftCardModulePro
             data: { checkout }
         } = this.props;
         const cartLines = (checkout.result && checkout.result.checkoutCart.cart.CartLines) || [];
-        return cartLines.some(line => line.DeliveryMode === 'ELECTRONIC');
+        return cartLines.some(
+            line =>
+                line.DeliveryMode?.toLowerCase() === 'electronic' ||
+                line.DeliveryMode?.toLowerCase() === 'email' ||
+                line.DeliveryMode?.toLowerCase() === 'pickup'
+        );
     }
 
     private handleKorCODPlaceOrderTrigger = (option: string, amount: number, codSelected: boolean, codOrderFailure: string): void => {
