@@ -5,7 +5,11 @@
 
 /* eslint-disable no-duplicate-imports */
 import * as Msdyn365 from '@msdyn365-commerce/core';
-import { EmailRegex, PasswordRegex, PhoneRegex } from '@msdyn365-commerce-modules/retail-actions';
+import {
+    EmailRegex,
+    PasswordRegex
+    // , PhoneRegex
+} from '@msdyn365-commerce-modules/retail-actions';
 import { IModuleProps, INodeProps, Modal, ModalBody } from '@msdyn365-commerce-modules/utilities';
 import classnames from 'classnames';
 import { observable } from 'mobx';
@@ -67,7 +71,7 @@ export interface ISignUpLocalAccount {
     localAccount: INodeProps;
     items: ISignUpItem[];
     emailVerification: ISignUpEmailVerification;
-    // phoneVerification: ISignUpPhoneVerification;
+    phoneVerification: ISignUpPhoneVerification;
     givenNameVerification: ISignUpGivenNameVerification;
     surnameVerification: ISignUpSurnameVerification;
     buttons: React.ReactNode[];
@@ -95,10 +99,7 @@ export interface ISignUpViewProps {
 
 export interface ISignUpPhoneVerification {
     isRequired: boolean;
-    phoneNumber: ISignUpItem;
-    buttonWrapper: INodeProps;
-    buttons: React.ReactNode[];
-    successMessage: React.ReactNode[];
+    Phonenum: ISignUpItem;
     errorMessage: React.ReactNode[];
     verificationControlWrapper: INodeProps;
 }
@@ -130,9 +131,9 @@ class SignUp extends React.Component<ICustomSignUpProps<ICustomSignUpConfig>> {
 
     @observable private templateVersion: string;
 
-    // @observable private isPhoneVerificationRequired: boolean;
+    @observable private isPhoneVerificationRequired: boolean;
 
-    @observable private phoneRegex: string;
+    // @observable private phoneRegex: string;
 
     @observable private phoneTemplateVersion: string;
 
@@ -150,8 +151,8 @@ class SignUp extends React.Component<ICustomSignUpProps<ICustomSignUpConfig>> {
         this.isSurnameVerificationRequried = false;
         this.isInitialized = false;
         this.templateVersion = '';
-        // this.isPhoneVerificationRequired = false;
-        this.phoneRegex = PhoneRegex.defaultRegex;
+        this.isPhoneVerificationRequired = false;
+        // this.phoneRegex = PhoneRegex.defaultRegex;
         this.phoneTemplateVersion = '';
     }
 
@@ -276,17 +277,14 @@ class SignUp extends React.Component<ICustomSignUpProps<ICustomSignUpConfig>> {
                             this.templateVersion = 'v1';
                             break;
                         }
-                        // case 'phoneverificationcontrol': {
-                        //     this.isPhoneVerificationRequired = true;
-                        //     this.phoneTemplateVersion = 'v2';
-                        //     break;
-                        // }
-                        // case 'phoneNumber': {
-                        //     this.phoneRegex = obj.PAT;
-                        //     this.isPhoneVerificationRequired = obj.VERIFY;
-                        //     this.phoneTemplateVersion = 'v1';
-                        //     break;
-                        // }
+                        case 'phonenumverificationcontrol': {
+                            this.isPhoneVerificationRequired = true;
+                            break;
+                        }
+                        case 'phonenum': {
+                            this.isPhoneVerificationRequired = obj.VERIFY;
+                            break;
+                        }
                         case 'givennameverificationcontrol': {
                             this.isGivenNameVerificationRequried = true;
                             break;
@@ -365,7 +363,7 @@ class SignUp extends React.Component<ICustomSignUpProps<ICustomSignUpConfig>> {
                 this._renderInput('givenName', 'text', resources.firstNameLabelText, resources.firstNameMaxLength),
                 this._renderInput('surname', 'text', resources.lastNameLabelText, resources.lastNameMaxLength),
                 this._renderInput('email', 'email', resources.emailAddressLabelText, undefined, this.emailRegex),
-                this._renderInput('phoneNumber', 'tel', resources.phoneNumberLabelText, undefined, this.phoneRegex),
+                this._renderInput('Phonenum', 'tel', resources.phoneNumberLabelText, undefined),
                 this._renderInput('newPassword', 'password', resources.passwordLabelText, undefined, this.newPasswordRegex),
                 this._renderInput('reenterPassword', 'password', resources.confirmPasswordLabelText, undefined, this.reenterPasswordRegex)
             ],
@@ -483,123 +481,29 @@ class SignUp extends React.Component<ICustomSignUpProps<ICustomSignUpConfig>> {
                     />
                 ]
             },
-            // phoneVerification: {
-            //     isRequired: this.isPhoneVerificationRequired,
-            //     phoneNumber: this._renderInput(
-            //         this.getValue('phone_ver_input', 'phoneVerificationCode'),
-            //         'text',
-            //         resources.phoneVerificationLabelText,
-            //         undefined,
-            //         undefined,
-            //         'VerificationCode'
-            //     ),
-            //     verificationControlWrapper: {
-            //         id: 'phoneVerificationControl',
-            //         className: `${this.moduleClassName}__verification-control-content verificationControlContent`
-            //     },
-            //     buttonWrapper: {
-            //         className: `${this.moduleClassName}__phone-verification-buttons ${this.getValue('verify', '')}`,
-            //         'data-claim_id': 'phoneNumber'
-            //     },
-            //     buttons: [
-            //         // Customize buttons as per your requirement
-            //         <SignUpButtonComponent
-            //             key='phone_ver_but_send'
-            //             id={this.getValue('phone_ver_but_send', 'phoneVerificationControl_but_send_code')}
-            //             className={`${this.moduleClassName}__phone-verification-button ${
-            //                 this.moduleClassName
-            //             }__verify-phone-send-button ${this.getValue('sendButton', 'sendNewCode')}`}
-            //             ariaLabel={resources.sendCodeButtonAriaLabel}
-            //             text={resources.sendCodeButtonText}
-            //         />,
-            //         <SignUpButtonComponent
-            //             key='phone_ver_but_verify'
-            //             id={this.getValue('phone_ver_but_verify', 'phoneVerificationControl_but_verify_code')}
-            //             className={`${this.moduleClassName}__phone-verification-button ${
-            //                 this.moduleClassName
-            //             }__verify-phone-verify-button ${this.getValue('verifyButton', 'verifyCode')}`}
-            //             ariaLabel={resources.verifyCodeButtonAriaLabel}
-            //             text={resources.verifyCodeButtonText}
-            //         />,
-            //         <SignUpButtonComponent
-            //             key='phone_ver_but_resend'
-            //             id={this.getValue('phone_ver_but_resend', 'phoneVerificationControl_but_send_new_code')}
-            //             className={`${this.moduleClassName}__phone-verification-button ${
-            //                 this.moduleClassName
-            //             }__verify-phone-resend-button ${this.getValue('sendButton', 'sendNewCode')}`}
-            //             ariaLabel={resources.resendCodeButtonAriaLabel}
-            //             text={resources.resendCodeButtonText}
-            //         />,
-            //         <SignUpButtonComponent
-            //             key='phone_ver_but_edit'
-            //             id={this.getValue('phone_ver_but_edit', 'phoneVerificationControl_but_change_claims')}
-            //             className={`${this.moduleClassName}__phone-verification-button ${
-            //                 this.moduleClassName
-            //             }__verify-phone-edit-button ${this.getValue('editButton', 'changeClaims')}`}
-            //             ariaLabel={resources.changeEmailButtonAriaLabel}
-            //             text={resources.changeEmailButtonText}
-            //         />
-            //     ],
-            //     successMessage: [
-            //         // Customize success messages as per your requirement
-            //         <SignUpSuccessComponent
-            //             key='phone_info'
-            //             id={this.getValue('phone_info', 'phoneVerificationControl_info_message')}
-            //             className={this.moduleClassName}
-            //             message={resources.verificationCodeSendSuccess}
-            //         />,
-            //         <SignUpSuccessComponent
-            //             key='phone_success'
-            //             id={this.getValue('phone_success', 'phoneVerificationControl_success_message')}
-            //             className={this.moduleClassName}
-            //             message={resources.phoneNumberVerifiedSuccess}
-            //         />
-            //     ],
-            //     errorMessage: [
-            //         // Customize error messages as per your requirement
-            //         <SignUpErrorComponent
-            //             key='phoneVerificationControl_error_message'
-            //             id='phoneVerificationControl_error_message'
-            //             className={this.moduleClassName}
-            //         />,
-            //         <SignUpErrorComponent
-            //             key='phone_fail_retry'
-            //             id='phone_fail_retry'
-            //             className={this.moduleClassName}
-            //             message={resources.retryError}
-            //         />,
-            //         <SignUpErrorComponent
-            //             key='phone_fail_no_retry'
-            //             id='phone_fail_no_retry'
-            //             className={this.moduleClassName}
-            //             message={resources.retryNotAllowedError}
-            //         />,
-            //         <SignUpErrorComponent
-            //             key='phone_fail_throttled'
-            //             id='phone_fail_throttled'
-            //             className={this.moduleClassName}
-            //             message={resources.throttledError}
-            //         />,
-            //         <SignUpErrorComponent
-            //             key='phone_fail_code_expired'
-            //             id='phone_fail_code_expired'
-            //             className={this.moduleClassName}
-            //             message={resources.codeExpiredError}
-            //         />,
-            //         <SignUpErrorComponent
-            //             key='phone_fail_server'
-            //             id='phone_fail_server'
-            //             className={this.moduleClassName}
-            //             message={resources.serverError}
-            //         />,
-            //         <SignUpErrorComponent
-            //             key='phone_incorrect_format'
-            //             id='phone_incorrect_format'
-            //             className={this.moduleClassName}
-            //             message={resources.invalidEmailError}
-            //         />
-            //     ]
-            // },
+            phoneVerification: {
+                isRequired: this.isPhoneVerificationRequired,
+                Phonenum: this._renderInput(
+                    this.getValue('Phonenum_ver_input', 'PhonenumVerificationCode'),
+                    'text',
+                    resources.phoneVerificationLabelText,
+                    undefined,
+                    undefined,
+                    'VerificationCode'
+                ),
+                verificationControlWrapper: {
+                    id: 'PhonenumVerificationControl',
+                    className: `${this.moduleClassName}__verification-control-content verificationControlContent`
+                },
+                errorMessage: [
+                    <SignUpErrorComponent
+                        key='requiredFieldMissing'
+                        id='requiredFieldMissing'
+                        className={this.moduleClassName}
+                        message={resources.requiredFieldMissingSummaryError}
+                    />
+                ]
+            },
             givenNameVerification: {
                 isRequired: this.isGivenNameVerificationRequried,
                 givenName: this._renderInput(

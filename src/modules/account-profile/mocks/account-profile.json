@@ -1,0 +1,18 @@
+{
+	"id": "account-profile__1",
+	"config": {},
+	"data": {
+		"heading": {
+			"headingTag": "h1",
+			"text": "Account Profile",
+			"textSize": "sm"
+		},
+		"nameSectionHeading": {
+			"text": "Name"
+		},
+		"emailAddressSectionHeading": {
+			"text": "Email"
+		}
+	},
+	"typeName": "account-profile"
+}

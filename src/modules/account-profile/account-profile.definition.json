@@ -1,0 +1,197 @@
+{
+    "$type": "contentModule",
+    "friendlyName": "User profile details (COPY)",
+    "name": "account-profile",
+    "description": "User profile shows user account details such as name, email, preferences etc.",
+    "categories": ["Account management", "User profile"],
+    "dataActions": {
+        "customerInformation": {
+            "path": "@msdyn365-commerce-modules/retail-actions/dist/lib/get-customer"
+        },
+        "attributeDefinitions": {
+            "path": "@msdyn365-commerce-modules/retail-actions/dist/lib/get-attribute-definitions"
+        }
+    },
+    "config": {
+        "heading": {
+            "friendlyName": "Heading",
+            "description": "Module heading",
+            "$ref": "@msdyn365-commerce-modules/definitions/dist/src/Heading.json#/definitions/heading",
+            "required": true
+        },
+        "nameSectionHeading": {
+            "friendlyName": "Name section heading",
+            "description": "Name section heading",
+            "$ref": "@msdyn365-commerce-modules/definitions/dist/src/Heading.json#/definitions/heading"
+        },
+        "emailAddressSectionHeading": {
+            "friendlyName": "Email address section heading",
+            "description": "Email address section heading",
+            "$ref": "@msdyn365-commerce-modules/definitions/dist/src/Heading.json#/definitions/heading"
+        },
+        "showPhone": {
+            "friendlyName": "Show phone",
+            "description": "Flag to show/hide phone",
+            "type": "boolean",
+            "default": false,
+            "required": false
+        },
+        "phoneSectionHeading": {
+            "friendlyName": "Phone section heading",
+            "description": "Phone section heading",
+            "$ref": "@msdyn365-commerce-modules/definitions/dist/src/Heading.json#/definitions/heading"
+        },
+        "showVatNumber": {
+            "friendlyName": "Show vat number",
+            "description": "Flag to show/hide vat number",
+            "type": "boolean",
+            "default": false,
+            "required": false
+        },
+        "vatNumberSectionHeading": {
+            "friendlyName": "Vat number section heading",
+            "description": "Vat number section heading",
+            "$ref": "@msdyn365-commerce-modules/definitions/dist/src/Heading.json#/definitions/heading"
+        },
+        "preferencesSectionHeading": {
+            "friendlyName": "Preference section heading",
+            "description": "Preference section heading",
+            "$ref": "@msdyn365-commerce-modules/definitions/dist/src/Heading.json#/definitions/heading"
+        },
+        "personalizationSectionHeading": {
+            "friendlyName": "Personalization preference section heading",
+            "description": "Personalization preference section heading",
+            "$ref": "@msdyn365-commerce-modules/definitions/dist/src/Heading.json#/definitions/heading"
+        },
+        "webTrackingSectionHeading": {
+            "friendlyName": "Web tracking preference section heading",
+            "description": "Web Tracking preference section heading",
+            "$ref": "@msdyn365-commerce-modules/definitions/dist/src/Heading.json#/definitions/heading"
+        },
+        "showAttributes": {
+            "friendlyName": "Show customer account attributes",
+            "description": "Add comma separated list of attributes to show",
+            "type": "string",
+            "default": ""
+        },
+        "additionalInformationSectionHeading": {
+            "friendlyName": "Additional information section heading",
+            "description": "Additional information section heading",
+            "$ref": "@msdyn365-commerce-modules/definitions/dist/src/Heading.json#/definitions/heading"
+        },
+        "className": {
+            "friendlyName": "Custom CSS class name",
+            "description": "Provide a custom css class name defined in the theme pack to target the CSS for this module",
+            "type": "string",
+            "default": ""
+        },
+        "clientRender": {
+            "friendlyName": "Render module client side",
+            "description": "Enabling this property will cause the module to load its Javascript chunk and render on the client based on the user view port. This property is recommended for modules which are generally hidden below the users view port (lower on the page) to increase page load performance.",
+            "type": "boolean",
+            "default": false
+        }
+    },
+    "resources": {
+        "accountProcessingPendingInfoMessage": {
+            "value": "Your information is being processed. Your account will be available to edit within 24 hours.",
+            "comment": "Info message displayed when async customer account is pending processing so user cannot edit profile information."
+        },
+        "attributeInputValueExceedsMaximumErrorText": {
+            "value": "{0} exceeds maximum limit of {1}",
+            "comment": "Attribute value exceeds maxmium error text."
+        },
+        "attributeInputValueExceedsMinimumErrorText": {
+            "value": "{0} exceeds minimum limit of {1}",
+            "comment": "Attribute value exceeds minimum error text."
+        },
+        "attributeInputStringMaxLengthErrorText": {
+            "value": "{0} exceeds maximum limit of {1} characters",
+            "comment": "Attribute input string maximum length error text."
+        },
+        "attributeInputMandatoryErrorText": {
+            "value": "{0} should not be empty",
+            "comment": "Attribute input mandatory error text."
+        },
+        "attributeInputRangeErrorText": {
+            "value": "{0} should be in the range of {1}-{2}",
+            "comment": "Attribute input range error text."
+        },
+        "attributeInputTypeErrorText": {
+            "value": "{0} should be of {1} type",
+            "comment": "Attribute input type error text."
+        },
+        "attributesCancelButtonAriaLabel": {
+            "value": "Cancel",
+            "comment": "Attributes cancel button aria label."
+        },
+        "attributesCancelButtonText": {
+            "value": "Cancel",
+            "comment": "Attributes cancel button text."
+        },
+        "attributesEditButtonAriaLabel": {
+            "value": "Edit",
+            "comment": "Attributes edit button aria label."
+        },
+        "attributesEditButtonText": {
+            "value": "Edit",
+            "comment": "Attributes edit button text."
+        },
+        "attributesSaveButtonAriaLabel": {
+            "value": "Save",
+            "comment": "Attributes save button aria label."
+        },
+        "attributesSaveButtonText": {
+            "value": "Save",
+            "comment": "Attributes save button text."
+        },
+        "attributesSaveExceptionMessage": {
+            "value": "Something went wrong, please try again.",
+            "comment": "Attributes save exception message."
+        },
+        "attributeToggleButtonAriaLabel": {
+            "value": "Enable {0}",
+            "comment": "Attribute toggle button aria label."
+        },
+        "editButtonText": {
+            "value": "Edit",
+            "comment": "Edit button text."
+        },
+        "editButtonAriaLabel": {
+            "value": "Edit profile",
+            "comment": "Edit button aria label."
+        },
+        "toggleEnableText": {
+            "value": "Yes",
+            "comment": "Label for turned-on state of toggle button."
+        },
+        "toggleDisableText": {
+            "value": "No",
+            "comment": "Label for turned-off state of toggle button."
+        },
+        "personalizationDescription": {
+            "value": "Allow personalized recommendations",
+            "comment": "Personalization description."
+        },
+        "personalizationEnableButtonAriaLabel": {
+            "value": "Enable personalization",
+            "comment": "Enable personalization button aria label."
+        },
+        "personalizationDisableButtonAriaLabel": {
+            "value": "Disable personalization",
+            "comment": "Disable personalization button aria label."
+        },
+        "webTrackingDescription": {
+            "value": "Enable browsing activity to be logged to enhance the browsing experience",
+            "comment": "Web Tracking description."
+        },
+        "webTrackingEnableButtonAriaLabel": {
+            "value": "Enable browsing activity to be logged",
+            "comment": "Enable browsing activity button aria label."
+        },
+        "webTrackingDisableButtonAriaLabel": {
+            "value": "Disable browsing activity to be logged",
+            "comment": "Disable browsing activity button aria label."
+        }
+    }
+}
