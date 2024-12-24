@@ -31,10 +31,10 @@ const LocalAccount: React.FC<ISignInLocalAccount> = ({ localAccount, items, forg
                         </Node>
                     );
                 })}
-            {forgetPassword}
             {disclaimer}
             {error}
             {signInButton}
+            {forgetPassword}
         </Node>
     );
 };

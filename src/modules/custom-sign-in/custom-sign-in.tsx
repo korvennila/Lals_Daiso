@@ -234,12 +234,12 @@ class SignIn extends React.Component<ICustomSignInProps<ICustomSignInConfig>> {
                     //     resources.facebookButtonAriaLabel,
                     //     config.facebookIcon
                     // ),
-                    this._renderSocialAccount(
-                        'GoogleExchange',
-                        resources.googleButtonText,
-                        resources.googleButtonAriaLabel,
-                        config.googleIcon
-                    )
+                    // this._renderSocialAccount(
+                    //     'GoogleExchange',
+                    //     resources.googleButtonText,
+                    //     resources.googleButtonAriaLabel,
+                    //     config.googleIcon
+                    // )
                     // this._renderSocialAccount(
                     //     'MicrosoftAccountExchange',
                     //     resources.microsoftButtonText,
@@ -394,24 +394,24 @@ class SignIn extends React.Component<ICustomSignInProps<ICustomSignInConfig>> {
         };
     }
 
-    private _renderSocialAccount(id: string, text: string, ariaLabel: string, iconImage?: Msdyn365.IImageData): ISignInSocialItem {
-        return {
-            key: id,
-            button: {
-                id,
-                tag: 'button',
-                className: classnames(
-                    `${this.moduleClassName}__social-account`,
-                    `${this.moduleClassName}__social-account-${id}`,
-                    'accountButton',
-                    'msc-btn'
-                ),
-                'aria-label': ariaLabel
-            },
-            image: this._createImageMarkup(iconImage),
-            text: <SignInTextComponent className={`${this.moduleClassName}__social-account-text`} text={text} />
-        };
-    }
+    // private _renderSocialAccount(id: string, text: string, ariaLabel: string, iconImage?: Msdyn365.IImageData): ISignInSocialItem {
+    //     return {
+    //         key: id,
+    //         button: {
+    //             id,
+    //             tag: 'button',
+    //             className: classnames(
+    //                 `${this.moduleClassName}__social-account`,
+    //                 `${this.moduleClassName}__social-account-${id}`,
+    //                 'accountButton',
+    //                 'msc-btn'
+    //             ),
+    //             'aria-label': ariaLabel
+    //         },
+    //         image: this._createImageMarkup(iconImage),
+    //         text: <SignInTextComponent className={`${this.moduleClassName}__social-account-text`} text={text} />
+    //     };
+    // }
 
     private _renderB2BSocialAccount(
         id: string,
@@ -439,28 +439,28 @@ class SignIn extends React.Component<ICustomSignInProps<ICustomSignInConfig>> {
         return null;
     }
 
-    private _createImageMarkup(iconImage?: Msdyn365.IImageData): React.ReactNode | null {
-        if (iconImage) {
-            const imageProps = {
-                gridSettings: this.props.context.request.gridSettings || {},
-                imageSettings: iconImage && iconImage.imageSettings
-            };
-            const pictureClassName = `${this.moduleClassName}__social-account-picture`;
-            return (
-                <div className={pictureClassName}>
-                    <Msdyn365.Image
-                        className={`${pictureClassName}__image`}
-                        {...iconImage}
-                        {...imageProps}
-                        requestContext={this.props.context.request}
-                        editProps={{ key: iconImage || {}, requestContext: this.props.context.request }}
-                        shouldSkipToMainImage
-                    />
-                </div>
-            );
-        }
-        return null;
-    }
+    // private _createImageMarkup(iconImage?: Msdyn365.IImageData): React.ReactNode | null {
+    //     if (iconImage) {
+    //         const imageProps = {
+    //             gridSettings: this.props.context.request.gridSettings || {},
+    //             imageSettings: iconImage && iconImage.imageSettings
+    //         };
+    //         const pictureClassName = `${this.moduleClassName}__social-account-picture`;
+    //         return (
+    //             <div className={pictureClassName}>
+    //                 <Msdyn365.Image
+    //                     className={`${pictureClassName}__image`}
+    //                     {...iconImage}
+    //                     {...imageProps}
+    //                     requestContext={this.props.context.request}
+    //                     editProps={{ key: iconImage || {}, requestContext: this.props.context.request }}
+    //                     shouldSkipToMainImage
+    //                 />
+    //             </div>
+    //         );
+    //     }
+    //     return null;
+    // }
 }
 
 export default SignIn;

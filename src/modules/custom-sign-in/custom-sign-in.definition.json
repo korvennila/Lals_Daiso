@@ -130,11 +130,11 @@
             "comment": "signUp button aria label."
         },
         "forgotPasswordButtonText": {
-            "value": "Forgotten password?",
+            "value": "Forgot Password? Reset",
             "comment": "Forgot password button text."
         },
         "forgotPasswordButtonAriaLabel": {
-            "value": "Forgotten password?",
+            "value": "Forgot Password? Reset",
             "comment": "Forgot password button aria label."
         },
         "requriedEmailError": {
