@@ -331,6 +331,10 @@
             "comment": "String associated with order total line display text",
             "value": "Total"
         },
+        "includeVATLabel": {
+            "comment": "String associated with order VAT include display text",
+            "value": "(Including VAT)"
+        },
         "otherCharges": {
             "comment": "String associated with other charge line display text",
             "value": "Other charges"

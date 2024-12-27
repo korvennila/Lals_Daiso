@@ -18,6 +18,7 @@ export interface ICartIconConfig extends Msdyn365.IModuleConfig {
     cartLinesSortOrder?: cartLinesSortOrder;
     isAnonymousCheckout?: boolean;
     clientRender?: boolean;
+    showCheckout?: boolean;
 }
 
 export interface ICartIconResources {

@@ -73,6 +73,7 @@ export interface ICartResources {
     conditionsText: string;
     yetToBeCalculatedText: string;
     orderTotal: string;
+    includeVATLabel: string;
     otherCharges: string;
     notApplicationForCartOrderSummary: string;
     totalDiscountsLabel: string;

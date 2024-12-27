@@ -71,6 +71,12 @@
             "description": "Enabling this property will cause the module to load its Javascript chunk and render on the client based on the user view port. This property is recommended for modules which are generally hidden below the users view port (lower on the page) to increase page load performance.",
             "type": "boolean",
             "default": false
+        },
+        "showCheckout": {
+            "friendlyName": "Allow checkout to be enabled",
+            "description": "When this property is enabled, mini-cart will allow checkout",
+            "type": "boolean",
+            "default": false
         }
     },
     "resources": {

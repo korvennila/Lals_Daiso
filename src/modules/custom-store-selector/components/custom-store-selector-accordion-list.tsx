@@ -57,6 +57,24 @@ const StoreSelectorAccordionList: React.FC<Props> = ({ data, onStateSelected, re
         }
     };
 
+    const handleOutsideTouch = (event: TouchEvent | MouseEvent) => {
+        const dropdown = document.querySelector('.msc-states-container');
+        if (dropdown && !dropdown.contains(event.target as Node)) {
+            setSelectedCountry(null);
+            setCountrySelected(null);
+        }
+    };
+
+    useEffect(() => {
+        document.addEventListener('touchstart', handleOutsideTouch);
+        document.addEventListener('mousedown', handleOutsideTouch);
+
+        return () => {
+            document.removeEventListener('touchstart', handleOutsideTouch);
+            document.removeEventListener('mousedown', handleOutsideTouch);
+        };
+    }, []);
+
     return (
         <div className='msc-our-stores-dropdown'>
             {Object.keys(data.countries).map(country => {
@@ -77,6 +95,11 @@ const StoreSelectorAccordionList: React.FC<Props> = ({ data, onStateSelected, re
                             <div
                                 className={`msc-states-container`}
                                 onMouseLeave={() => {
+                                    setSelectedCountry(null);
+                                    setCountrySelected(null);
+                                }}
+                                tabIndex={0}
+                                onBlur={() => {
                                     setSelectedCountry(null);
                                     setCountrySelected(null);
                                 }}

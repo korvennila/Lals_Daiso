@@ -256,11 +256,11 @@
 		},
 		"addressStreetLabel": {
 			"comment": "Label for the Street field",
-			"value": "Street *"
+			"value": "Buiding Name / Apartment No / Street *"
 		},
 		"addressStreetRequiredErrorMessage": {
 			"comment": "Error message to display when street is not provided",
-			"value": "Street is required"
+			"value": "Buiding Name / Apartment No / Street is required"
 		},
 		"addressDistrictLabel": {
 			"comment": "Label for the District field",

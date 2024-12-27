@@ -512,6 +512,11 @@ const renderOrderSummarylines = (
             {orderSummaryLines.otherCharge}
             {orderSummaryLines.tax}
             {orderSummaryLines.orderTotal}
+            <Node className='msc-order-summary__line-include-vat'>
+                <span className='msc-price msc-order-summary__value'>
+                    <span className='msc-price__actual'>{props.resources.includeVATLabel}</span>
+                </span>
+            </Node>
         </Node>
     );
 };

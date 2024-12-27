@@ -142,7 +142,7 @@ class CartIcon extends React.Component<ICartIconProps<ICartIconData>, IMiniCartS
         const {
             id,
             typeName,
-            config: { enableHoverCart, isAnonymousCheckout },
+            config: { enableHoverCart, isAnonymousCheckout, showCheckout },
             context: {
                 request: {
                     user: { isAuthenticated, signInUrl }
@@ -233,7 +233,7 @@ class CartIcon extends React.Component<ICartIconProps<ICartIconData>, IMiniCartS
             // Checkout button will display by default to maintain backward compatibility.  When Anonymous user checkout is enabled &&
             // user is authenticated then we will show the checkout button otherwise we will show the guest checkout button.
             checkoutAsSignInUserButton:
-                !isCartEmpty && !hasInvoiceLine && (!isAnonymousCheckout || isAuthenticated) ? (
+                !isCartEmpty && !hasInvoiceLine && (!isAnonymousCheckout || isAuthenticated) && showCheckout ? (
                     <Button
                         disabled={hasError}
                         className='ms-cart-icon__btn-checkout'
@@ -245,7 +245,7 @@ class CartIcon extends React.Component<ICartIconProps<ICartIconData>, IMiniCartS
                     </Button>
                 ) : null,
             checkoutAsGuestButton:
-                isAnonymousCheckout && !isCartEmpty && !isAuthenticated ? (
+                isAnonymousCheckout && !isCartEmpty && !isAuthenticated && showCheckout ? (
                     <Button
                         disabled={hasError}
                         className='ms-cart-icon__btn-guestcheckout'

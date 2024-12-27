@@ -621,7 +621,7 @@ class StoreSelector extends React.Component<ICustomStoreSelectorProps<ICustomSto
         }
 
         const combinedStores = storeLocationList ? [...storeLocationList, ...additionalStores] : additionalStores;
-        console.log('Combined Stores:', combinedStores);
+        // console.log('Combined Stores:', combinedStores);
 
         return this._sortStores(combinedStores, this.isPreferredStoreEnabled, preferredStoreLocationId);
     }
