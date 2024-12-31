@@ -75,11 +75,11 @@
 		},
 		"signUpButtonText": {
 			"comment": "Sign-up button text",
-			"value": "Sign up"
+			"value": "Create An Account"
 		},
 		"signUpButtonArialabel": {
 			"comment": "Sign-up button aria label",
-			"value": "Sign up"
+			"value": "Create An Account"
 		},
 		"cancelButtonText": {
 			"comment": "Cancel button text",

@@ -17,11 +17,18 @@ import {
     getFallbackImageUrl,
     StringExtensions
 } from '@msdyn365-commerce-modules/retail-actions';
-import { Alert, Button, getPayloadObject, getTelemetryAttributes, ITelemetryContent } from '@msdyn365-commerce-modules/utilities';
+import {
+    // Alert,
+    Button,
+    getPayloadObject,
+    getTelemetryAttributes,
+    ITelemetryContent
+} from '@msdyn365-commerce-modules/utilities';
 import * as React from 'react';
 
 import { IWishlistItemActionMessageState } from '../wishlist-items';
 import { WishlistItemDimension } from './wishlist-items-dimensions';
+import CustomPopup from '../../../themes/adventureworks/views/components/custom-popup';
 
 export interface IWishlistItemProps extends CommerceListLine {
     product: SimpleProduct;
@@ -303,12 +310,19 @@ export const WishlistItem = (input: IWishlistItemProps): IWishlistItemViewProps 
             productStatusMessage: wishlistState &&
                 wishlistState.isOpen &&
                 wishlistState.productId === RecordId &&
+                // wishlistState.itemKey === itemKey && (
+                //     <div className='ms-wishlist-items__product-status'>
+                //         <Alert color={wishlistState.statusCssString} isOpen={wishlistState.isOpen} toggle={handlers.onDismiss}>
+                //             <span>{wishlistState.userMessage}</span>
+                //         </Alert>
+                //     </div>
+                // )
                 wishlistState.itemKey === itemKey && (
-                    <div className='ms-wishlist-items__product-status'>
-                        <Alert color={wishlistState.statusCssString} isOpen={wishlistState.isOpen} toggle={handlers.onDismiss}>
-                            <span>{wishlistState.userMessage}</span>
-                        </Alert>
-                    </div>
+                    <CustomPopup
+                        isVisible={wishlistState.isOpen}
+                        onClose={handlers.onDismiss}
+                        message={wishlistState.userMessage}
+                    ></CustomPopup>
                 )
         };
     }

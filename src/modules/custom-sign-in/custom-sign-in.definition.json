@@ -122,11 +122,11 @@
             "comment": "Login button aria label."
         },
         "signUpButtonText": {
-            "value": "Sign Up",
+            "value": "Create An Account",
             "comment": "signUp button text."
         },
         "signUpButtonAriaLabel": {
-            "value": "Sign Up",
+            "value": "Create An Account",
             "comment": "signUp button aria label."
         },
         "forgotPasswordButtonText": {

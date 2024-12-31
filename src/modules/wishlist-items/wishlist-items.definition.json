@@ -93,8 +93,8 @@
             "value": "Remove from wishlist"
         },
         "addToCartButtonText": {
-            "comment": "Text for the add to cart button",
-            "value": "Add to cart"
+            "comment": "Text for the add to bag button",
+            "value": "Add to bag"
         },
         "addFavouritesButtonText": {
             "comment": "Text for the add favourites button",
@@ -117,8 +117,8 @@
             "value": "Added to your cart"
         },
         "addedToCartFailureMessage": {
-            "comment": "Message to show when add to cart fails",
-            "value": "Add to cart failed. Please refresh and retry"
+            "comment": "Message to show when add to bag fails",
+            "value": "Add to bag failed. Please refresh and retry"
         },
         "maxQuantityLimitText": {
             "comment": "String to show message that you've reached max quantity",

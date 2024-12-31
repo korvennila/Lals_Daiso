@@ -298,7 +298,7 @@ class WishlistItems extends React.Component<IWishlistItemsProps<IWishlistItemsDa
                         deliveryOptions[0].DeliveryOptions[0].Code === emailDeliveryModeCode
                 };
 
-                cart.result
+                await cart.result
                     .addProductToCart(addProductToCartInput)
                     .then(async result => {
                         if (result.status === 'SUCCESS') {
@@ -367,6 +367,10 @@ class WishlistItems extends React.Component<IWishlistItemsProps<IWishlistItemsDa
                             isOpen: true
                         });
                     });
+
+                setTimeout(() => {
+                    this._onDismiss();
+                }, 2000);
             }
         }
     };

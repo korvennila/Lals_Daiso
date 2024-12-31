@@ -32,6 +32,7 @@ import classnames from 'classnames';
 import React, { useState } from 'react';
 
 import { PriceComponent, IItemsAddedToCartResources, ItemsAddedToCartDialogComponent, ItemSuccessfullyAddedToCartNotification, MultiItemsSuccessfullyAddedToCartNotification, OrderDetailsProduct } from '@msdyn365-commerce/components';
+import CustomPopup from './custom-popup';
 
 /**
  * Interface for add to cart resources.
@@ -282,7 +283,8 @@ const getAddToCartInputFromProps = async (props: IAddToCartComponentProps) => {
 const addOneItemToCart = async (
     props: IAddToCartComponentProps,
     setDisabled: (disabled: boolean) => void,
-    openModal: (opened: boolean) => void
+    openModal: (opened: boolean) => void,
+    setShowAlert: (visible: boolean) => void
 ): Promise<void> => {
     // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-unsafe-member-access -- read config file.
     const addToCartBehavior = props.context.app.config.addToCartBehavior;
@@ -335,6 +337,8 @@ const addOneItemToCart = async (
         ) {
             window.location.assign(props.navigationUrl);
         } else {
+            setShowAlert(true);
+            setTimeout(() => setShowAlert(false), 2000);
             setDisabled(false);
         }
         propagateResult(props, addToCartResult);
@@ -366,6 +370,7 @@ const handleAddItemsToCartSuccess = async (
     setDisabled: (disabled: boolean) => void,
     setItemsAddedToCartDialogOpen: (opened: boolean) => void,
     setErrorMessage: (message: string) => void,
+    setShowAlert: (visible: boolean) => void,
     cartState: ICartState,
     addToCartInput: {
         product: SimpleProduct;
@@ -424,6 +429,8 @@ const handleAddItemsToCartSuccess = async (
     ) {
         window.location.assign(props.navigationUrl);
     } else {
+        setShowAlert(true);
+        setTimeout(() => setShowAlert(false), 2000);
         setDisabled(false);
     }
     propagateResult(props, addToCartResult);
@@ -440,7 +447,8 @@ const addItemsToCart = async (
     props: IAddToCartComponentProps,
     setDisabled: (disabled: boolean) => void,
     setItemsAddedToCartDialogOpen: (opened: boolean) => void,
-    setErrorMessage: (message: string) => void
+    setErrorMessage: (message: string) => void,
+    setShowAlert: (visible: boolean) => void,
 ): Promise<void> => {
     const addToCartInput = await getAddToCartInputFromProps(props);
 
@@ -457,6 +465,7 @@ const addItemsToCart = async (
             setDisabled,
             setItemsAddedToCartDialogOpen,
             setErrorMessage,
+            setShowAlert,
             cartState,
             addToCartInput,
             addToCartResult
@@ -506,7 +515,8 @@ const onClick = async (
     setDisabled: (disabled: boolean) => void,
     openModal: (opened: boolean) => void,
     setItemsAddedToCartDialogOpen: (opened: boolean) => void,
-    setErrorMessage: (message: string) => void
+    setErrorMessage: (message: string) => void,
+    setShowAlert: (visible: boolean) => void
 ): Promise<void> => {
     if (!ArrayExtensions.hasElements(props.products)) {
         const cartError = addToCartError(props);
@@ -526,9 +536,9 @@ const onClick = async (
     const hasMultipleProducts = hasOrderDetailsProducts || hasProducts;
 
     if (props.shouldSkipSiteSettings && hasMultipleProducts) {
-        await addItemsToCart(props, setDisabled, setItemsAddedToCartDialogOpen, setErrorMessage);
+        await addItemsToCart(props, setDisabled, setItemsAddedToCartDialogOpen, setErrorMessage, setShowAlert);
     } else {
-        await addOneItemToCart(props, setDisabled, openModal);
+        await addOneItemToCart(props, setDisabled, openModal, setShowAlert);
     }
 };
 
@@ -549,6 +559,7 @@ export const AddToCartFunctionalComponent: React.FC<IAddToCartComponentProps> = 
     const [modalOpen, setModalOpen] = useState(false);
     const [isItemsAddedToCartDialogOpen, setItemsAddedToCartDialogOpen] = useState(false);
     const [errorMessage, setErrorMessage] = useState('');
+    const [showAlert, setShowAlert] = useState(false);
     const [addToCartInput, setAddToCartInput] = useState<
         {
             product: SimpleProduct;
@@ -557,7 +568,15 @@ export const AddToCartFunctionalComponent: React.FC<IAddToCartComponentProps> = 
     >([]);
 
     const onClickHandler = async (event: React.MouseEvent<HTMLElement>) => {
-        await AddToCartComponentActions.onClick(event, props, setDisabled, setModalOpen, setItemsAddedToCartDialogOpen, setErrorMessage);
+        await AddToCartComponentActions.onClick(
+            event,
+            props,
+            setDisabled,
+            setModalOpen,
+            setItemsAddedToCartDialogOpen,
+            setErrorMessage,
+            setShowAlert
+        );
     };
 
     /**
@@ -651,6 +670,13 @@ export const AddToCartFunctionalComponent: React.FC<IAddToCartComponentProps> = 
                 isModalOpen={isItemsAddedToCartDialogOpen}
                 onClose={closeItemsAddedToCartDialog}
             />
+            {showAlert && (
+                <CustomPopup
+                    message={'Product has been added to the cart successfully!'}
+                    isVisible={showAlert}
+                    onClose={() => setShowAlert(false)}
+                />
+            )}
         </>
     );
 };
