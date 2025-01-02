@@ -809,7 +809,11 @@ const BuyboxView: React.FC<IBuyboxViewProps & IBuyboxExtentionProps<IBuyboxData>
                 <Node {...ProductInfoContainerProps}>
                     {catalogs && catalogs[0].Name}
                     {title}
-                    {keyInPrice && <Node className={''}>{renderKeyInPrice(keyInPrice)}</Node>}
+                    <Node className='msc-buybox__price-section'>
+                        <div className='msc-buybox__price-section-text'>{props.resources.priceText}</div>
+                        {price}
+                    </Node>
+                    {keyInPrice && renderKeyInPrice(keyInPrice)}
                     {configure && renderConfigure(configure)}
                     <Node className='msc-buybox__description-section'>
                         <Node className='msc-buybox__description-container'>
@@ -845,10 +849,6 @@ const BuyboxView: React.FC<IBuyboxViewProps & IBuyboxExtentionProps<IBuyboxData>
                     <Node className='msc-buybox__ratings-section'>
                         <div className='msc-buybox__ratings-section-sku-text'>{skuText}</div>
                         {rating}
-                    </Node>
-                    <Node className='msc-buybox__price-section'>
-                        <div className='msc-buybox__price-section-text'>{props.resources.priceText}</div>
-                        {price}
                     </Node>
                     <Node className='msc-buybox__bulk-purchase-section'>
                         <div className='msc-buybox__bulk-purchase-button-text'>

@@ -50,6 +50,7 @@ export interface IAccountProfileResources {
     webTrackingDescription: string;
     webTrackingEnableButtonAriaLabel: string;
     webTrackingDisableButtonAriaLabel: string;
+    accountProfilePhoneFormatErrorMessage: string;
 }
 
 export const enum HeadingTag {

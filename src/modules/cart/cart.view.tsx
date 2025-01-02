@@ -555,6 +555,7 @@ const renderOrderSummaryCheckout = (props: ICartViewProps): JSX.Element | undefi
                 ) : null}
             </Node>
             {props.createTemplateFromCartButton}
+            {props.giftcardErrorContent}
         </Node>
     );
 };

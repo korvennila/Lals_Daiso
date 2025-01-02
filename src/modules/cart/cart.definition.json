@@ -120,6 +120,12 @@
             "friendlyName": "Continue shopping link",
             "description": "Continue shopping link",
             "$ref": "@msdyn365-commerce-modules/definitions/dist/src/ActionLink.json#/definitions/actionLink"
+        },
+        "cartGiftCardContentText": {
+            "friendlyName": "Gift card with other products error message",
+            "description": "This allows user to see the error message when the giftcard along with other products",
+            "type": "string",
+            "default": ""
         }
     },
     "resources": {
@@ -638,6 +644,10 @@
         "cartAvailFreeShippingText": {
             "value": "Spend {0} more for free shipping!",
             "comment": "Label to avail for free shipping"
+        },
+        "cartGiftCardContentText": {
+            "value": "Giftcard is not allowed with other products.",
+            "comment": "Label to Giftcard error content"
         }
     },
     "slots": {

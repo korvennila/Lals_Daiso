@@ -150,6 +150,7 @@ export interface ICartResources {
     cartTotalPriceText: string;
     cartActionText: string;
     cartAvailFreeShippingText: string;
+    cartGiftCardContentText: string;
 }
 
 export interface IButtonLinkData {

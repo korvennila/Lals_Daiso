@@ -109,7 +109,7 @@ class AccountProfileAttributes extends React.Component<IAccountProfileAttributes
 
     private readonly maxVATNumberLength: number = 20;
 
-    private readonly maxPhoneLength: number = 25;
+    private readonly maxPhoneLength: number = 14;
 
     private readonly editAsyncCustomerFeatureName: string = 'Dynamics.AX.Application.RetailEnableAsyncCustomerEditFeature';
 
@@ -526,9 +526,19 @@ class AccountProfileAttributes extends React.Component<IAccountProfileAttributes
         };
     };
 
+    private readonly _validatePhoneNumber = (phone: string): boolean => {
+        // Updated regex for UAE phone number validation
+        const regex = /^\+971[1-9][0-9]{8}$/;
+        return regex.test(phone);
+    };
+
     private readonly _onPhoneChange = (event: React.ChangeEvent<HTMLInputElement>): void => {
         const value = event.target.value;
-        this.setState({ phone: value });
+        const isValid = this._validatePhoneNumber(value);
+        this.setState({
+            phone: value,
+            attributeError: { ['phone']: !isValid ? this.props.accountProfileProps.resources.accountProfilePhoneFormatErrorMessage : '' }
+        });
     };
 
     private readonly _onVatNumberChange = (event: React.ChangeEvent<HTMLInputElement>): void => {

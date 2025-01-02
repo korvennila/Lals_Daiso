@@ -92,6 +92,7 @@ export interface ICartViewProps extends ICartProps<ICartData> {
     removeItemClickHandler(cartlineToRemove: CartLine): void;
     moveToWishlistSuccessHandler(result: IWishlistActionSuccessResult, cartlineId: CartLine): void;
     freeShippingContent?: string;
+    giftcardErrorContent?: React.ReactNode;
 }
 
 /**
@@ -225,7 +226,8 @@ class Cart extends React.Component<ICartProps<ICartData>> {
                     user: { isAuthenticated, signInUrl }
                 }
             },
-            resources
+            resources,
+            config
         } = this.props;
 
         const guestCheckoutUrl = getUrlSync('checkout', this.props.context.actionContext) || '';
@@ -263,6 +265,8 @@ class Cart extends React.Component<ICartProps<ICartData>> {
         const checkoutByGuestAttributes = getTelemetryAttributes(this.telemetryContent, this.payLoad);
         this.payLoad.contentAction.etext = TelemetryConstant.BackToShopping;
         const backtoShoppingAttributes = getTelemetryAttributes(this.telemetryContent, this.payLoad);
+        const hasGiftCards = cartLines?.some(cartLine => cartLine.data?.product?.IsGiftCard === true);
+        const hasNonGiftCards = cartLines?.some(cartLine => cartLine.data?.product?.IsGiftCard === false);
 
         // If there's inventory issues across multiple cart lines then update the error and display as part of the order summary
         if (validInventoryAcrossCartLines && !validInventoryAcrossCartLines.isValid) {
@@ -370,7 +374,13 @@ class Cart extends React.Component<ICartProps<ICartData>> {
             cartDataResult: this.props.data.cart.result && this.props.data.cart.result.isEmpty,
             OrderSummaryErrors: this._getOrderSummaryErrors(cartLines),
             telemetryContent: this.telemetryContent,
-            freeShippingContent: this.freeShippingUpdate(cartLines)
+            freeShippingContent: this.freeShippingUpdate(cartLines),
+            giftcardErrorContent:
+                hasError && hasGiftCards && hasNonGiftCards ? (
+                    <div className='msc-order-summary__giftcard-content'>
+                        {config.cartGiftCardContentText || resources.cartGiftCardContentText}
+                    </div>
+                ) : null
         };
 
         return this.props.renderView(viewProps) as React.ReactElement;
