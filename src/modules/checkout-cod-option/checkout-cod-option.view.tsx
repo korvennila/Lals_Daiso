@@ -125,7 +125,8 @@ const CheckoutGiftCardView: React.FC<ICheckoutGiftCardViewProps> = props => {
         config,
         isAuthenticated,
         codChargeAmount,
-        errorMessage
+        errorMessage,
+        isShippingPhoneNew
     } = props;
 
     return (
@@ -139,7 +140,7 @@ const CheckoutGiftCardView: React.FC<ICheckoutGiftCardViewProps> = props => {
                     error={errorMessage}
                 />
             )}
-            {isMobileModalOpen && !isAuthenticated && (
+            {isMobileModalOpen && (!isAuthenticated || isShippingPhoneNew) && (
                 <MobileModal isOpen={isMobileModalOpen} resources={resources} props={props} codMobileNumber={codMobileNumber} />
             )}
         </Module>

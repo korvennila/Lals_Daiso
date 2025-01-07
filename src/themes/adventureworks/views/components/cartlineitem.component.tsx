@@ -845,6 +845,18 @@ const CartLine: React.FC<ICartLineProps> = (props: ICartLineProps) => {
         }
     };
 
+    const capitalizeWords = (string: string | undefined): string => {
+        if (!string) return '';
+
+        const finalString = string
+            .toLowerCase()
+            .trim()
+            .split(' ')
+            .map(word => word.charAt(0).toUpperCase() + word.slice(1))
+            .join(' ');
+        return finalString;
+    };
+
     return (
         <div className='msc-cart-line'>
             {MsDyn365.isBrowser ? (
@@ -866,7 +878,7 @@ const CartLine: React.FC<ICartLineProps> = (props: ICartLineProps) => {
                     <CatalogLabelComponent {...props} />
                     {MsDyn365.isBrowser ? (
                         <a className='msc-cart-line__product-title' href={productUrl} {...productAttribute}>
-                            {productName}
+                            {capitalizeWords(productName)}
                         </a>
                     ) : null}
                     {ArrayExtensions.hasElements(productDimensions) ? (

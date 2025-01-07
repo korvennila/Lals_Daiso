@@ -18,6 +18,7 @@ export interface ICartConfig extends Msdyn365.IModuleConfig {
     freeShippingPrice?: string;
     freeShippingTitle?: string;
     buttonLink?: IButtonLinkData;
+    cartGiftCardContentText?: string;
 }
 
 export interface ICartResources {

@@ -5,8 +5,9 @@
 
 /* eslint-disable no-duplicate-imports */
 import { ICheckoutState } from '@msdyn365-commerce/global-state';
-import { AsyncResult } from '@msdyn365-commerce/retail-proxy';
+import { AsyncResult, Customer } from '@msdyn365-commerce/retail-proxy';
 
 export interface ICheckoutCodOptionData {
     checkout: AsyncResult<ICheckoutState>;
+    customerInformation: AsyncResult<Customer>;
 }

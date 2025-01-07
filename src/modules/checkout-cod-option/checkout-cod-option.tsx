@@ -38,6 +38,7 @@ import { isEmpty } from '@msdyn365-commerce/retail-proxy';
 export * from './components/get-form';
 export * from './components/get-item';
 export * from './components/get-list';
+import get from 'lodash/get';
 
 interface ICheckoutGiftCardState {
     isFetchingGiftCard: boolean;
@@ -104,6 +105,7 @@ export interface ICheckoutGiftCardViewProps extends ICheckoutCodOptionProps<{}>,
     setOTPVerified(verify: boolean): void;
     handleCODButtonCheck(value: boolean): void;
     handleCODSelectedOption(value: string): void;
+    isShippingPhoneNew?: boolean;
 }
 
 /**
@@ -235,6 +237,26 @@ export class CheckoutGiftCard extends React.Component<ICheckoutGiftCardModulePro
         );
     }
 
+    @computed get customerInfoPhone(): string {
+        const customerInfo = get(this.props, 'data.customerInformation.result');
+        const customerPhone = customerInfo?.Phone ? customerInfo.Phone : '';
+        return customerPhone;
+    }
+
+    @computed get isShippingPhoneNew(): boolean {
+        const {
+            data: { checkout }
+        } = this.props;
+        const codMobileNumber = checkout.result?.shippingAddress?.Phone ? checkout.result?.shippingAddress?.Phone : '';
+        const customerInfoPhone = this.customerInfoPhone;
+
+        // Extract the last 9 digits from the shipping phone number
+        const shippingPhoneLast9 = codMobileNumber.match(/\d{9}$/)?.[0];
+        const customerPhoneLast9 = customerInfoPhone.match(/\d{9}$/)?.[0];
+
+        return shippingPhoneLast9 !== customerPhoneLast9;
+    }
+
     private handleKorCODPlaceOrderTrigger = (option: string, amount: number, codSelected: boolean, codOrderFailure: string): void => {
         this.setState({ errorMessage: codOrderFailure });
     };
@@ -344,6 +366,9 @@ export class CheckoutGiftCard extends React.Component<ICheckoutGiftCardModulePro
         }
         if (radioButton && isEmpty(this.state.errorMessage) && !this.isOtherPaymentsEnabled && !this.hasElectronicDelivery) {
             if (!this.props.context.request.user.isAuthenticated && !this.state.isOTPVerified) {
+                event.preventDefault();
+                this.setState({ isMobileModalOpen: true, isRadioButtonChecked: false });
+            } else if (this.props.context.request.user.isAuthenticated && this.isShippingPhoneNew && !this.state.isOTPVerified) {
                 event.preventDefault();
                 this.setState({ isMobileModalOpen: true, isRadioButtonChecked: false });
             } else if (!this.props.context.request.user.isAuthenticated && this.state.isOTPVerified) {
@@ -557,7 +582,8 @@ export class CheckoutGiftCard extends React.Component<ICheckoutGiftCardModulePro
             setMobileNumberOTP: this.setMobileNumberOPT,
             handleCODButtonCheck: this.handleCODButtonCheck,
             setOTPVerified: this.setOPTVerified,
-            handleCODSelectedOption: this.handleCODSelectedOption
+            handleCODSelectedOption: this.handleCODSelectedOption,
+            isShippingPhoneNew: this.isShippingPhoneNew
         };
 
         return this.props.renderView(viewProps) as React.ReactElement;
