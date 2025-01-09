@@ -608,6 +608,8 @@ const cartLineItemFunctions = {
 const CartLine: React.FC<ICartLineProps> = (props: ICartLineProps) => {
     const { isSalesLine, productUrl, resources } = props;
     const { product, cartLine } = props.data;
+    const defaultMaxQuantity: number = 10;
+    const singleQuantity: number = 1;
 
     const destructDimensionStrings = {
         sizeString: resources.sizeString,
@@ -642,12 +644,21 @@ const CartLine: React.FC<ICartLineProps> = (props: ICartLineProps) => {
     const imgeClassName = props.data.cartLine.IsInvoiceLine ? 'msc-cart-line__invoice-image' : 'msc-cart-line__product-image';
     const cartLineContentClassName = props.data.cartLine.IsInvoiceLine ? 'msc-cart-line__invoice-content' : 'msc-cart-line__content';
 
+    // Max Limit Reached Error Handling
+    const [maxLimitReached, setMaxLimitReached] = React.useState(false);
+
     /**
      * Render other charges.
      * @param newValue - The cart line props.
      * @returns Boolean.
      */
     const onChange = (newValue: number): boolean => {
+        if (newValue >= (props.maxQuantity ?? defaultMaxQuantity)) {
+            setMaxLimitReached(true);
+        } else {
+            setMaxLimitReached(false);
+        }
+
         if (props.quantityOnChange) {
             return props.quantityOnChange(props.data.cartLine, newValue);
         }
@@ -664,6 +675,19 @@ const CartLine: React.FC<ICartLineProps> = (props: ICartLineProps) => {
                 <div className='msc-alert__header'>
                     <span className='msi-exclamation-triangle' />
                     <span>{props.errorMessage}</span>
+                </div>
+            );
+        }
+
+        return null;
+    };
+
+    const generateMaxErrorMessage = (): JSX.Element | null => {
+        if (maxLimitReached) {
+            return (
+                <div className='msc-alert__header'>
+                    <span className='msi-exclamation-triangle' />
+                    <span>{`Only ${props.maxQuantity ?? defaultMaxQuantity} items left! select a quantity within the available range`}</span>
                 </div>
             );
         }
@@ -744,8 +768,6 @@ const CartLine: React.FC<ICartLineProps> = (props: ICartLineProps) => {
      */
     const generateQuantityAndPrice = (): JSX.Element[] | null => {
         const nodes = [];
-        const defaultMaxQuantity: number = 10;
-        const singleQuantity: number = 1;
         const unitOfMeasure = renderUnitOfMeasure();
 
         // No quantity selector for invoice line
@@ -756,6 +778,7 @@ const CartLine: React.FC<ICartLineProps> = (props: ICartLineProps) => {
                         <div className='msc-cart-line__product-quantity-label'>{resources.quantityDisplayString}</div>
 
                         {generateErrorMessage()}
+                        {generateMaxErrorMessage()}
 
                         <IncrementalQuantity
                             id={`msc-cart-line__quantity_${props.data.product.RecordId}-

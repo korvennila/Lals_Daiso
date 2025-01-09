@@ -5,6 +5,9 @@
     "description": "Gift card allows the user to pay for the order using a gift card",
     "categories": ["Purchase", "Payment", "checkout_checkoutInformation", "checkoutSectionContainer_primary"],
     "dataActions": {
+        "customerInformation": {
+            "path": "@msdyn365-commerce-modules/retail-actions/dist/lib/get-customer"
+        },
         "checkout": {
             "path": "@msdyn365-commerce/global-state/dist/lib/data-actions/checkout-state-data-action",
             "runOn": "client"
