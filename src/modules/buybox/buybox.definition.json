@@ -435,11 +435,11 @@
             "comment": "Error message to show when product is out of stock"
         },
         "errorMessageOutOfRangeOneLeft": {
-            "value": "There is only one product left. Please choose quantity within the available range",
+            "value": "Only one item left! select a quantity within the available range",
             "comment": "Error message to show when quantity selected is more than the quantity left, and only one product is left"
         },
         "errorMessageOutOfRangeFormat": {
-            "value": "There are only {numLeft} products left. Please choose quantity within the available range",
+            "value": "Only {numLeft} items left! select a quantity within the available range",
             "comment": "Error message to show when quantity selected is more than the quantity left. {numLeft} is the number of products left."
         },
         "productDimensionTypeColorErrorMessage": {

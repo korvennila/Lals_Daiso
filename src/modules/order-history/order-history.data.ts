@@ -4,7 +4,14 @@
  *--------------------------------------------------------------*/
 
 /* eslint-disable no-duplicate-imports */
-import { AsyncResult, ChannelDeliveryOptionConfiguration, ChannelIdentity, Customer, FeatureState, OrgUnitLocation } from '@msdyn365-commerce/retail-proxy';
+import {
+    AsyncResult,
+    ChannelDeliveryOptionConfiguration,
+    ChannelIdentity,
+    Customer,
+    FeatureState,
+    OrgUnitLocation
+} from '@msdyn365-commerce/retail-proxy';
 
 export interface IOrderHistoryData {
     channels: AsyncResult<{
