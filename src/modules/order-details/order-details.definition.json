@@ -1,0 +1,603 @@
+{
+	"$type": "contentModule",
+	"friendlyName": "Order details (COPY)",
+	"name": "order-details",
+	"description": "Order details shows the items purchased in the order along with shipping and payment information for the order",
+	"categories": [
+		"Account management",
+		"Order management"
+	],
+	"dataActions": {
+		"orderHydration": {
+			"path": "@msdyn365-commerce-modules/order-management/dist/lib/actions/get-sales-order-with-hydrations",
+			"runOn": "server"
+		},
+		"tenderTypes": {
+			"path": "@msdyn365-commerce-modules/order-management/dist/lib/actions/get-tender-types",
+			"runOn": "server"
+		},
+		"loyaltyCard": {
+			"path": "@msdyn365-commerce-modules/retail-actions/dist/lib/get-loyalty-card",
+			"runOn": "client"
+		},
+		"channels": {
+			"path": "@msdyn365-commerce-modules/order-management/dist/lib/actions/get-channels",
+			"runOn": "server"
+		},
+		"orgUnitLocations": {
+			"path": "@msdyn365-commerce-modules/order-management/dist/lib/actions/get-org-unit-locations",
+			"runOn": "server"
+		},
+		"channelDeliveryOptionConfig": {
+			"path": "@msdyn365-commerce-modules/retail-actions/dist/lib/get-channel-delivery-option-configuration",
+			"runOn": "server"
+		},
+		"featureState": {
+			"path": "@msdyn365-commerce-modules/retail-actions/dist/lib/get-feature-state",
+			"runOn": "server"
+		},
+		"customerInformation": {
+			"path": "@msdyn365-commerce-modules/retail-actions/dist/lib/get-customer"
+		},
+		"orderOriginators": {
+			"path": "@msdyn365-commerce-modules/order-management/dist/lib/actions/get-sales-order-originators",
+			"runOn": "server"
+		},
+		"catalogs": {
+			"path": "@msdyn365-commerce-modules/retail-actions/dist/lib/get-catalogs",
+			"runOn": "server"
+		}
+	},
+	"config": {
+		"heading": {
+			"friendlyName": "Heading",
+			"description": "Heading",
+			"$ref": "@msdyn365-commerce-modules/definitions/dist/src/Heading.json#/definitions/heading"
+		},
+		"shouldShowQrCode": {
+			"friendlyName": "Show QR code",
+			"description": "Show QR code for the order",
+			"type": "boolean",
+			"default": true,
+			"scope": "module"
+		},
+		"showChannelInfo": {
+			"friendlyName": "Show channel information",
+			"description": "Show channel information for the order",
+			"type": "boolean",
+			"default": true,
+			"scope": "module"
+		},
+		"addressOptions": {
+			"friendlyName": "Show address",
+			"description": "Shows delivery and pick up address in a single or multiple lines format",
+			"type": "string",
+			"default": "showAddressWithSingleLine",
+			"enum": {
+				"showAddressWithSingleLine": "Single line",
+				"showAddressWithMultiplelines": "Multiple lines"
+			}
+		},
+		"showTimeslot": {
+			"friendlyName": "Show pickup time slot information",
+			"description": "Show pickup time slot information if available",
+			"type": "boolean",
+			"default": false,
+			"scope": "module"
+		},
+		"showShippingChargesForLineItems": {
+			"friendlyName": "Show shipping charges for line items",
+			"description": " If shipping charges are available at the line level, display the charges",
+			"type": "boolean",
+			"default": false
+		},
+		"contactNumber": {
+			"friendlyName": "Contact number",
+			"description": "Contact number for help",
+			"type": "string"
+		},
+		"imageSettings": {
+			"friendlyName": "Order details image settings",
+			"description": "Image settings for order details",
+			"type": "imageSettings"
+		},
+		"isReorderingEnabled": {
+			"friendlyName": "Enable reordering",
+			"description": "Enables reordering flow order details",
+			"type": "boolean",
+			"default": false
+		},
+		"isGridViewEnabled": {
+			"friendlyName": "Enable grid view",
+			"description": "Enables grid view functionality for order details",
+			"type": "boolean",
+			"default": false
+		},
+		"className": {
+			"friendlyName": "Custom CSS class name",
+			"description": "Provide a custom css class name defined in the theme pack to target the CSS for this module",
+			"type": "string",
+			"default": ""
+		},
+		"clientRender": {
+			"friendlyName": "Render module client side",
+			"description": "Enabling this property will cause the module to load its Javascript chunk and render on the client based on the user view port. This property is recommended for modules which are generally hidden below the users view port (lower on the page) to increase page load performance.",
+			"type": "boolean",
+			"default": false
+		},
+        "orderPlacedText": {
+            "friendlyName": "Order Placed Text",
+            "description": "This allows user to see the text of order placed",
+            "type": "string",
+            "default": "Open Order"
+        },
+        "orderConfirmedText": {
+            "friendlyName": "Order Confirmed Text",
+            "description": "This allows user to see the text of order placed",
+            "type": "string",
+            "default": "Confirmed"
+        },
+        "readyToShipText": {
+            "friendlyName": "Ready to Ship Text",
+            "description": "This allows user to see the text of order placed",
+            "type": "string",
+            "default": "Ready to Ship"
+        },
+        "shippedText": {
+            "friendlyName": "Shipped Text",
+            "description": "This allows user to see the text of order placed",
+            "type": "string",
+            "default": "Shipped"
+        },
+        "outForDeliveryText": {
+            "friendlyName": "Out for Delivery Text",
+            "description": "This allows user to see the text of order placed",
+            "type": "string",
+            "default": "Out for Delivery"
+        },
+        "deliveredText": {
+            "friendlyName": "Delivered Text",
+            "description": "This allows user to see the text of order placed",
+            "type": "string",
+            "default": "Delivered"
+        }
+	},
+	"resources": {
+		"loadingLabel": {
+			"comment": "Loading message",
+			"value": "Loading..."
+		},
+		"genericErrorMessage": {
+			"comment": "Localized generic error message for Payment instrument module",
+			"value": "Something went wrong. Please try again later."
+		},
+		"orderItemLabel": {
+			"comment": "total items in order",
+			"value": "item"
+		},
+		"orderItemsLabel": {
+			"comment": "total items in order",
+			"value": "items"
+		},
+		"orderIdLabel": {
+			"comment": "Order ID label",
+			"value": "Order#"
+		},
+		"orderPlacedByText": {
+			"comment": "Order placed by text",
+			"value": "Placed by"
+		},
+		"orderPlacedByFullText": {
+			"comment": "Order placed by text",
+			"value": "Order placed by"
+		},
+		"orderOnBehalfOfText": {
+			"comment": "On behalf of text",
+			"value": "on behalf of"
+		},
+		"orderPlacedByYouText": {
+			"comment": "Text to be shown in table row when order placed by you",
+			"value": " (You)"
+		},
+		"confirmationIdLabel": {
+			"comment": "Confirmation ID label",
+			"value": "Confirmation ID:"
+		},
+		"orderSummaryTitle": {
+			"comment": "Title for order summary",
+			"value": "Order summary"
+		},
+		"paymentMethodsTitle": {
+			"comment": "Title for payment methods",
+			"value": "Payment method"
+		},
+		"shippingAddressTitle": {
+			"comment": "Title for shipping address",
+			"value": "Shipping address"
+		},
+		"noSalesOrderDetailsText": {
+			"comment": "Text describes no sales order found",
+			"value": "No order details found"
+		},
+		"creditCardEndingLabel": {
+			"comment": "Credit card ending label",
+			"value": "card ending in"
+		},
+		"giftCardEndingLabel": {
+			"comment": "Gift card ending label",
+			"value": "Gift card ending in"
+		},
+		"amountCoveredLabel": {
+			"comment": "Amount covered label",
+			"value": "Amount covered:"
+		},
+		"loyaltyCardUsedLabel": {
+			"comment": "Loyalty card used label",
+			"value": "Loyalty card used "
+		},
+		"cashUsedLabel": {
+			"comment": "Cash used label",
+			"value": "Cash"
+		},
+		"customerAccountUsedLabel": {
+			"comment": "Customer Account used label",
+			"value": "Customer Account"
+		},
+		"freePriceText": {
+			"comment": "Free price text",
+			"value": "FREE"
+		},
+		"orderSummaryItemsTotalLabel": {
+			"comment": "Order summary items total label",
+			"value": "Subtotal"
+		},
+		"orderSummaryShippingFeeLabel": {
+			"comment": "Order summary shipping fee label",
+			"value": "Shipping"
+		},
+		"orderSummaryTaxLabel": {
+			"comment": "Order summary tax label",
+			"value": "Tax"
+		},
+		"orderSummaryGrandTotalLabel": {
+			"comment": "Order summary grand total label",
+			"value": "Total"
+		},
+		"salesLineQuantityText": {
+			"comment": "Sales line quantity label",
+			"value": "Qty"
+		},
+		"processingLabel": {
+			"comment": "Text for order in processing state",
+			"value": "Processing"
+		},
+		"needHelpLabel": {
+			"comment": "Need help label",
+			"value": "Need help?"
+		},
+		"helpLineNumberLabel": {
+			"comment": "Help line number label",
+			"value": "Call"
+		},
+		"helpLineContactAriaLabel": {
+			"comment": "Localized text for contact link aria label",
+			"value": "Need help, call"
+		},
+		"pickedUpSalesLines": {
+			"comment": "Store pickup title",
+			"value": "Store pickup"
+		},
+		"deliveredSalesLines": {
+			"comment": "Delivery at home",
+			"value": "Delivery"
+		},
+		"carryOutSalesLines": {
+			"comment": "Customer carry out",
+			"value": "Purchased"
+		},
+		"orderStatusReadyForPickup": {
+			"comment": "Order status for order pickup",
+			"value": "Ready for pickup"
+		},
+		"orderStatusProcessing": {
+			"comment": "Order status for order processing",
+			"value": "Processing"
+		},
+		"orderStatusShipped": {
+			"comment": "Order status for order shipped",
+			"value": "Shipped"
+		},
+		"orderStatusPickedUp": {
+			"comment": "Order status for order picked up",
+			"value": "Picked up"
+		},
+		"orderStatusCanceled": {
+			"comment": "Order status for order canceled",
+			"value": "Canceled"
+		},
+		"emailSalesLines": {
+			"comment": "Email delivery title",
+			"value": "Email delivery"
+		},
+		"orderStatusEmailed": {
+			"comment": "Order status for order emailed",
+			"value": "Emailed"
+		},
+		"phoneAriaLabel": {
+			"comment": "Aria label for phone",
+			"value": "phone"
+		},
+		"buyItAgainLabel": {
+			"comment": "text for buy it again link",
+			"value": "Buy it again"
+		},
+		"buyItAgainAriaLabel": {
+			"comment": "text for buy it again aria label",
+			"value": "Buy it again for {productName}"
+		},
+		"shipToLabel": {
+			"comment": "Ship to label",
+			"value": "Ship to"
+		},
+		"storeLabel": {
+			"comment": "Store label",
+			"value": "Store"
+		},
+		"productDimensionTypeColor": {
+			"comment": "String that corresponds to the Color Product Dimension Type (1)",
+			"value": "Color"
+		},
+		"productDimensionTypeSize": {
+			"comment": "String that corresponds to the Size Product Dimension Type (3)",
+			"value": "Size"
+		},
+		"productDimensionTypeStyle": {
+			"comment": "String that corresponds to the Style Product Dimension Type (4)",
+			"value": "Style"
+		},
+		"productDimensionTypeAmount": {
+			"comment": "String that corresponds to the Style Product Dimension Type (4) for gift card product",
+			"value": "Amount"
+		},
+		"trackingLabel": {
+			"comment": "tracking number label for orders",
+			"value": "Tracking number: "
+		},
+		"trackingComingSoonLabel": {
+			"comment": "tracking number coming soon",
+			"value": "Not yet available"
+		},
+		"trackingAriaLabel": {
+			"comment": "aria label for tracking number link",
+			"value": "track your order"
+		},
+		"pointsEarnedLabel": {
+			"comment": "Label for the amount of loyalty points earned",
+			"value": "Points earned"
+		},
+		"receiptEmailMessage": {
+			"comment": "Label for reciept email",
+			"value": "Confirmation email sent to "
+		},
+		"receiptIdLabel": {
+			"comment": "Receipt id label",
+			"value": "Receipt#"
+		},
+		"backToShopping": {
+			"comment": "Back to shopping label",
+			"value": "Back to shopping"
+		},
+		"configString": {
+			"comment": "Configuration text",
+			"value": "Configuration"
+		},
+		"phoneLabel": {
+			"comment": "Phone label",
+			"value": "Phone: "
+		},
+		"orderSummaryHeading": {
+			"comment": "Order summary heading",
+			"value": "Order summary"
+		},
+		"discountStringText": {
+			"comment": "String to show discount offer string",
+			"value": "Savings "
+		},
+		"posChannelNameText": {
+			"comment": "String to show POS channel name",
+			"value": "Purchased at "
+		},
+		"onlineStoreChannelNameText": {
+			"comment": "String to show online store channel name",
+			"value": "Online purchase"
+		},
+		"pickupDateTimeslotText": {
+			"comment": "Label for pickup date and timeslot",
+			"value": "Pickup date and time slot"
+		},
+		"pickupTimeslotPlaceHolder": {
+			"comment": "Placeholder for time slot data, in the format of from start time to end time, e.g., 9:00 - 10:00",
+			"value": "{0} - {1}"
+		},
+		"shippingCharges": {
+			"comment": "String associated with shipping charges line display text",
+			"value": "Shipping charges"
+		},
+		"orderDetailsListViewModeAriaLabel": {
+			"value": "List view",
+			"comment": "Aria-label for order details list view"
+		},
+		"orderDetailsDetailedViewModeAriaLabel": {
+			"value": "Details view",
+			"comment": "Aria-label for order details detailed view"
+		},
+		"orderDetailsProductNumberText": {
+			"value": "Product number",
+			"comment": "Product number column text for order details table view header"
+		},
+		"orderDetailsProductText": {
+			"value": "Product",
+			"comment": "Product column text for order details table view header"
+		},
+		"orderDetailsUnitPriceText": {
+			"value": "Unit price",
+			"comment": "Unit price column text for order details table view header"
+		},
+		"orderDetailsModeOfDeliveryText": {
+			"value": "Mode of delivery",
+			"comment": "Mode of delivery column text for order details table view header"
+		},
+		"orderDetailsStatusText": {
+			"value": "Status",
+			"comment": "Status column text for order details table view header"
+		},
+		"orderDetailsQuantityText": {
+			"value": "Quantity",
+			"comment": "Quantity column text for order details table view header"
+		},
+		"orderDetailsUnitOfMeasureText": {
+			"value": "UOM",
+			"comment": "Unit of measure column text for order details table view header"
+		},
+		"orderDetailsTotalText": {
+			"value": "Total",
+			"comment": "Total column text for order details table view header"
+		},
+		"orderDetailsActionsText": {
+			"value": "Actions",
+			"comment": "Actions column text for order details table view header"
+		},
+		"orderDetailsViewDetailsButtonText": {
+			"value": "View details",
+			"comment": "View details button text for extra actions popup in the mobile view"
+		},
+		"orderDetailsViewDetailsButtonAriaLabel": {
+			"value": "View details",
+			"comment": "View details button aria label for extra actions popup in the mobile view"
+		},
+		"orderDetailsProductDimensionsSeparator": {
+			"value": ", ",
+			"comment": "Separator for product dimensions"
+		},
+		"orderDetailsQuantityMobileText": {
+			"value": "Quantity: {0}",
+			"comment": "Quantity text for order details table view"
+		},
+		"orderDetailsBuySelectedButtonText": {
+			"value": "Add selected to bag",
+			"comment": "Add selected to bag button text"
+		},
+		"orderDetailsBuySelectedButtonAriaLabel": {
+			"value": "Add selected to bag",
+			"comment": "Add selected to bag button aria label"
+		},
+		"orderDetailsDisableSelectionButtonText": {
+			"value": "Back to order details",
+			"comment": "Disable selection button button text"
+		},
+		"orderDetailsDisableSelectionButtonAriaLabel": {
+			"value": "Back to order details",
+			"comment": "Disable selection button aria label"
+		},
+		"orderDetailsEnableSelectionButtonText": {
+			"value": "Buy all items again",
+			"comment": "Enable selection button text"
+		},
+		"orderDetailsEnableSelectionButtonAriaLabel": {
+			"value": "Buy all items again",
+			"comment": "Enable selection button aria label"
+		},
+		"orderDetailsSelectAllRadioAriaLabelText": {
+			"value": "Select all",
+			"comment": "Select all aria label text for products selection for order details"
+		},
+		"orderDetailsSelectRadioAriaLabelText": {
+			"value": "Select product line {0}",
+			"comment": "Select a product aria label text for products selection for order details"
+		},
+		"orderDetailsBuySelectedAddingToCartErrorNotificationTitle": {
+			"value": "Failed to add selected lines to cart",
+			"comment": "Text for error notification title which is shown in case adding to cart failed"
+		},
+		"orderDetailsBuySelectedAddingToCartErrorNotificationCloseAriaLabel": {
+			"value": "Close",
+			"comment": "Aria label for close error notification button"
+		},
+		"orderDetailsBuyItAgainButtonText": {
+			"value": "Buy it again",
+			"comment": "Buy current item again button text"
+		},
+		"orderDetailsBuyItAgainButtonAriaLabel": {
+			"value": "Buy it again for {0}",
+			"comment": "Buy current item again button aria label"
+		},
+		"orderDetailsGoToCartText": {
+			"value": "View bag and checkout",
+			"comment": "Text to show on Button to view cart"
+		},
+		"orderDetailsDialogCloseText": {
+			"value": "Close",
+			"comment": "Text to show on close button for item added dialog"
+		},
+		"orderDetailsSingleItemText": {
+			"value": "1 item",
+			"comment": "Text to show if one item is added"
+		},
+		"orderDetailsMultiLineItemFormatText": {
+			"value": "{0} items",
+			"comment": "Text to show if multiple items added"
+		},
+		"orderDetailsMultiLinesFormatText": {
+			"value": "{0} lines",
+			"comment": "Text to show multiple lines added"
+		},
+		"orderDetailsHeaderMessageText": {
+			"value": " added to bag",
+			"comment": "Text to show if a item is added to the bag"
+		},
+		"addedQuantityText": {
+			"value": "Quantity: {0}",
+			"comment": "Label to display the quantity for product details"
+		},
+		"originalPriceText": {
+			"value": "Original price",
+			"comment": "String that corresponds to the original price screen reader text"
+		},
+		"currentPriceText": {
+			"value": "Current price",
+			"comment": "String that corresponds to the current price screen reader text"
+		},
+		"orderDetailsBuyItemsAgainHeaderText": {
+			"value": "Choose items to buy again",
+			"comment": "Text for buy again heading on order details page"
+		},
+		"qrCodeSrText": {
+			"comment": "Screen reader text for QR Code",
+			"value": "Scan QR Code"
+		},
+		"orderDetailsMultiItemsValidationErrorMessage": {
+			"value": "There are {0} validation {1} in cart, please go to cart page for more details.",
+			"comment": "Text for multi items added to cart with validation errors."
+		},
+		"orderDetailsOneErrorText": {
+			"value": "error",
+			"comment": "Text for single validation error."
+		},
+		"orderDetailsMultiErrorText": {
+			"value": "errors",
+			"comment": "Text for multiple validation errors."
+		},
+		"orderDetailsUnavailableProductText": {
+			"value": "This product is not available at the moment.",
+			"comment": "Aria label for unassorted products"
+		},
+		"orderDetailsConfirmedShipDateText": {
+			"value": "Delivery Date: ",
+			"comment": "Label for confirmed ship date"
+		},
+		"orderDetailsConfirmedShipDateTextForTableHeader": {
+			"value": "Delivery Date ",
+			"comment": "Label for confirmed ship date"
+		}
+	}
+}

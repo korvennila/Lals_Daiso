@@ -121,6 +121,42 @@
             "description": "Enabling this property will cause the module to load its Javascript chunk and render on the client based on the user view port. This property is recommended for modules which are generally hidden below the users view port (lower on the page) to increase page load performance.",
             "type": "boolean",
             "default": false
+        },
+        "orderPlacedText": {
+            "friendlyName": "Order Placed Text",
+            "description": "This allows user to see the text of order placed",
+            "type": "string",
+            "default": "Open Order"
+        },
+        "orderConfirmedText": {
+            "friendlyName": "Order Confirmed Text",
+            "description": "This allows user to see the text of order placed",
+            "type": "string",
+            "default": "Order Confirmed"
+        },
+        "readyToShipText": {
+            "friendlyName": "Ready to Ship Text",
+            "description": "This allows user to see the text of order placed",
+            "type": "string",
+            "default": "Ready to Ship"
+        },
+        "shippedText": {
+            "friendlyName": "Shipped Text",
+            "description": "This allows user to see the text of order placed",
+            "type": "string",
+            "default": "Shipped"
+        },
+        "outForDeliveryText": {
+            "friendlyName": "Out for Delivery Text",
+            "description": "This allows user to see the text of order placed",
+            "type": "string",
+            "default": "Out for Delivery"
+        },
+        "deliveredText": {
+            "friendlyName": "Delivered Text",
+            "description": "This allows user to see the text of order placed",
+            "type": "string",
+            "default": "Delivered"
         }
     },
     "resources": {

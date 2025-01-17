@@ -137,7 +137,8 @@ const OrderDetailsView: React.FC<IOrderDetailsViewProps> = ({
     orderSummary,
     payment,
     help,
-    groups
+    groups,
+    orderProgressTracker
 }) => {
     return (
         <Module {...moduleProps}>
@@ -145,6 +146,7 @@ const OrderDetailsView: React.FC<IOrderDetailsViewProps> = ({
             {heading}
             {alert}
             {loading}
+            {orderProgressTracker}
             {orderInfomation && <OrderDetailsOrderInfomation {...orderInfomation} />}
             {tableViewActions}
             {viewModes}

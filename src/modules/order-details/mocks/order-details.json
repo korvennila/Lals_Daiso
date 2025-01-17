@@ -1,0 +1,10 @@
+{
+	"id": "OrderDetailsModule_1",
+	"config": {},
+	"data": {
+		"orderHistoryUrl": {
+			"text": "/order-history"
+		}
+	},
+	"typeName": "order-details"
+}

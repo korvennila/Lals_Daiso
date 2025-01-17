@@ -1,0 +1,39 @@
+[
+    {
+        "RecordId": 22565430654,
+        "ItemId": "81307",
+        "Name": "Red Leather Bag",
+        "Description": "Whether you need a carry-everything or evening clutch, our selection covers all of your needs with a variety of handbags to match any occasion.",
+        "ProductTypeValue": 4,
+        "DefaultUnitOfMeasure": "ea",
+        "BasePrice": 300,
+        "Price": 300,
+        "AdjustedPrice": 300,
+        "MasterProductId": null,
+        "Components": [],
+        "Dimensions": [],
+        "Behavior": {
+            "HasSerialNumber": false,
+            "IsDiscountAllowed": true,
+            "IsManualDiscountAllowed": true,
+            "IsKitDisassemblyAllowed": false,
+            "IsNegativeQuantityAllowed": false,
+            "IsReturnAllowed": true,
+            "IsSaleAtPhysicalStoresAllowed": true,
+            "IsZeroSalePriceAllowed": false,
+            "KeyInPriceValue": 0,
+            "KeyInQuantityValue": 0,
+            "MustKeyInComment": false,
+            "MustPrintIndividualShelfLabelsForVariants": false,
+            "MustPromptForSerialNumberOnlyAtSale": false,
+            "MustWeighProductAtSale": false,
+            "ValidFromDateForSaleAtPhysicalStores": "1900-01-01T00:00:00Z",
+            "ValidToDateForSaleAtPhysicalStores": "2154-12-31T00:00:00Z",
+            "IsBlankSerialNumberAllowed": false,
+            "ExtensionProperties": []
+        },
+        "LinkedProducts": [],
+        "PrimaryImageUrl": "https://images-us-ppe.cms.commerce.dynamics.com/cms/api/gfhwnkhdlh/imageFileData/MCsD5",
+        "ExtensionProperties": []
+    }
+]

@@ -29,6 +29,42 @@
             },
             "default": "h1",
             "scope": "module"
+        },
+        "orderPlacedText": {
+            "friendlyName": "Order Placed Text",
+            "description": "This allows user to see the text of order placed",
+            "type": "string",
+            "default": "Open Order"
+        },
+        "orderConfirmedText": {
+            "friendlyName": "Order Confirmed Text",
+            "description": "This allows user to see the text of order placed",
+            "type": "string",
+            "default": "Confirmed"
+        },
+        "readyToShipText": {
+            "friendlyName": "Ready to Ship Text",
+            "description": "This allows user to see the text of order placed",
+            "type": "string",
+            "default": "Ready to Ship"
+        },
+        "shippedText": {
+            "friendlyName": "Shipped Text",
+            "description": "This allows user to see the text of order placed",
+            "type": "string",
+            "default": "Shipped"
+        },
+        "outForDeliveryText": {
+            "friendlyName": "Out for Delivery Text",
+            "description": "This allows user to see the text of order placed",
+            "type": "string",
+            "default": "Out for Delivery"
+        },
+        "deliveredText": {
+            "friendlyName": "Delivered Text",
+            "description": "This allows user to see the text of order placed",
+            "type": "string",
+            "default": "Delivered"
         }
     },
     "resources": {

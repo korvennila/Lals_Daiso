@@ -25,6 +25,12 @@ export interface ICustomOrderDetailsConfig extends Msdyn365.IModuleConfig {
     isGridViewEnabled?: boolean;
     className?: string;
     clientRender?: boolean;
+    orderPlacedText?: string;
+    orderConfirmedText?: string;
+    readyToShipText?: string;
+    shippedText?: string;
+    outForDeliveryText?: string;
+    deliveredText?: string;
 }
 
 export interface ICustomOrderDetailsResources {

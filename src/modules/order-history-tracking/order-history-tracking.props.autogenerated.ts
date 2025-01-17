@@ -19,6 +19,12 @@ export const enum titleHeadingTag {
 export interface IOrderHistoryTrackingConfig extends Msdyn365.IModuleConfig {
     showText?: string;
     titleHeadingTag?: titleHeadingTag;
+    orderPlacedText?: string;
+    orderConfirmedText?: string;
+    readyToShipText?: string;
+    shippedText?: string;
+    outForDeliveryText?: string;
+    deliveredText?: string;
 }
 
 export interface IOrderHistoryTrackingResources {
