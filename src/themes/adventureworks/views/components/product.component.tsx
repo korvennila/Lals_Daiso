@@ -212,6 +212,20 @@ function getProductPageUrlFromDefaultSwatch(
     return updateProductUrl(productUrl, coreContext, queryString);
 }
 
+const capitalizeWords = (string: string | undefined): string => {
+    if (!string) {
+        return '';
+    }
+
+    const finalString = string
+        .toLowerCase()
+        .trim()
+        .split(' ')
+        .map(word => word.charAt(0).toUpperCase() + word.slice(1))
+        .join(' ');
+    return finalString;
+};
+
 const ProductCard: React.FC<IProductComponentProps> = ({
     data,
     context,
@@ -579,8 +593,8 @@ const ProductCard: React.FC<IProductComponentProps> = ({
                         )}
                     </div>
                     <div className='msc-product__details'>
-                        <h5 className='msc-product__title' title={product.Name}>
-                            {product.Name}
+                        <h5 className='msc-product__title' title={capitalizeWords(product.Name)}>
+                            {capitalizeWords(product.Name)}
                         </h5>
                         {isUnitOfMeasureEnabled && renderProductUnitOfMeasure(product.DefaultUnitOfMeasure)}
                     </div>

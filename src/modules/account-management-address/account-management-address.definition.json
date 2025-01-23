@@ -194,11 +194,11 @@
         },
         "addressCityLabel": {
             "comment": "Label for the city field",
-            "value": "City *"
+            "value": "Area *"
         },
         "addressCityRequiredErrorMessage": {
             "comment": "Error message to display when city is not provided",
-            "value": "City is required"
+            "value": "Area is required"
         },
         "addressCountyLabel": {
             "comment": "Label for the County field",
@@ -210,11 +210,11 @@
         },
         "addressStateLabel": {
             "comment": "Label for the State field",
-            "value": "State *"
+            "value": "Emirate *"
         },
         "addressStateRequiredErrorMessage": {
             "comment": "Error message to display when zip code is not provided",
-            "value": "State is required"
+            "value": "Emirate is required"
         },
         "addressThreeLetterISORegionNameLabel": {
             "comment": "Label for the country field",

@@ -687,7 +687,8 @@ const CartLine: React.FC<ICartLineProps> = (props: ICartLineProps) => {
             return (
                 <div className='msc-alert__header'>
                     <span className='msi-exclamation-triangle' />
-                    <span>{`Only ${props.maxQuantity ?? defaultMaxQuantity} items left! select a quantity within the available range`}</span>
+                    <span>{`Only ${props.maxQuantity ??
+                        defaultMaxQuantity} items left! select a quantity within the available range`}</span>
                 </div>
             );
         }
@@ -869,7 +870,9 @@ const CartLine: React.FC<ICartLineProps> = (props: ICartLineProps) => {
     };
 
     const capitalizeWords = (string: string | undefined): string => {
-        if (!string) return '';
+        if (!string) {
+            return '';
+        }
 
         const finalString = string
             .toLowerCase()
