@@ -9,6 +9,8 @@ export interface IStoreSelectorAutoCompleteSearchProps extends ICustomStoreSelec
     locations?: IFullOrgUnitAvailability[];
     onStateSelected: (locations: IFullOrgUnitAvailability[]) => void;
     dataLocation: { countries: { [key: string]: { [key: string]: IFullOrgUnitAvailability[] } } };
+    isMobileDevice: boolean;
+    setShowMobileMap: (visible: boolean) => void;
 }
 
 const StoreSelectorAutoCompleteSearch: React.FC<IStoreSelectorAutoCompleteSearchProps> = props => {
@@ -94,6 +96,9 @@ const StoreSelectorAutoCompleteSearch: React.FC<IStoreSelectorAutoCompleteSearch
         if (orgUnitNumber) {
             setTimeout(() => {
                 storeSelectorStateManager?.setSelectedStoreLocationId(orgUnitNumber);
+                if (props.isMobileDevice) {
+                    props.setShowMobileMap(false);
+                }
             }, 500);
         }
     };

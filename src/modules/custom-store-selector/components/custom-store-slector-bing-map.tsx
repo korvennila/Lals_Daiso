@@ -20,6 +20,8 @@ import { ICustomStoreSelectorData } from '../custom-store-selector.data';
  * StoreSelectorBingMap View Props Interface.
  */
 export interface IStoreSelectorViewProps extends ICustomStoreSelectorProps<ICustomStoreSelectorData> {
+    isMobileDevice?: boolean;
+    setShowMobileMap?: (visible: boolean) => void;
     locations?: IFullOrgUnitAvailability[];
 }
 
@@ -302,6 +304,9 @@ class StoreSelectorBingMap extends React.Component<IStoreSelectorViewProps> {
         if (orgUnitNumber) {
             setTimeout(() => {
                 storeSelectorStateManager?.setSelectedStoreLocationId(orgUnitNumber);
+                if (this.props.isMobileDevice && this.props.setShowMobileMap) {
+                    this.props.setShowMobileMap(false);
+                }
             }, this.timeout);
         }
     };
@@ -318,6 +323,9 @@ class StoreSelectorBingMap extends React.Component<IStoreSelectorViewProps> {
         if (recordId) {
             setTimeout(() => {
                 distributorSelectorStateManager?.setSelectedDistributorId(recordId);
+                if (this.props.isMobileDevice && this.props.setShowMobileMap) {
+                    this.props.setShowMobileMap(false);
+                }
             }, this.timeout);
         }
     };

@@ -7,9 +7,11 @@ interface Props {
     data: { countries: { [key: string]: { [key: string]: IFullOrgUnitAvailability[] } } };
     onStateSelected: (locations: IFullOrgUnitAvailability[]) => void;
     resources: ICustomStoreSelectorResources;
+    isMobileDevice?: boolean;
+    accordionTitle?: string;
 }
 
-const StoreSelectorAccordionList: React.FC<Props> = ({ data, onStateSelected, resources }) => {
+const StoreSelectorAccordionList: React.FC<Props> = ({ data, onStateSelected, resources, isMobileDevice, accordionTitle }) => {
     const firstCountry = Object.keys(data.countries)[0];
     const firstState = firstCountry ? Object.keys(data.countries[firstCountry])[0] : null;
 
@@ -28,12 +30,17 @@ const StoreSelectorAccordionList: React.FC<Props> = ({ data, onStateSelected, re
     // const [activeCountry, setActiveCountry] = useState<string | null>(null);
 
     const [countrySelect, setCountrySelected] = useState<string | null>(null);
+    const [isAccordionOpen, setIsAccordionOpen] = useState(false); // Controls the entire accordion
 
     useEffect(() => {
         if (firstCountry && firstState) {
             onStateSelected(data.countries[firstCountry][firstState]);
         }
     }, [firstCountry, firstState]);
+
+    const toggleAccordion = () => {
+        setIsAccordionOpen(!isAccordionOpen); // Toggle the accordion open/close
+    };
 
     const toggleCountry = (country: string) => {
         if (selectedCountry === country) {
@@ -62,6 +69,9 @@ const StoreSelectorAccordionList: React.FC<Props> = ({ data, onStateSelected, re
         if (dropdown && !dropdown.contains(event.target as Node)) {
             setSelectedCountry(null);
             setCountrySelected(null);
+            if (isMobileDevice) {
+                setIsAccordionOpen(false); // Close the accordion after a state is selected
+            }
         }
     };
 
@@ -76,50 +86,114 @@ const StoreSelectorAccordionList: React.FC<Props> = ({ data, onStateSelected, re
     }, []);
 
     return (
-        <div className='msc-our-stores-dropdown'>
-            {Object.keys(data.countries).map(country => {
-                const countryClass = `msc-flag-${country.toLowerCase().replace(/\s+/g, '-')}`;
-
-                // Custom label for United Arab Emirates if country code is "UAE"
-                const displayCountryName = country === 'UAE' ? resources.dropdownUAETitle : country;
-                return (
-                    <div key={country} className='msc-countries-dropdown'>
-                        <h2
-                            className={`msc-countries-title ${activeCountry === country ? 'active' : ''}`}
-                            onClick={() => toggleCountry(country)}
-                        >
-                            <span className={`msc-flag-icon ${countryClass}`}></span>
-                            {displayCountryName}
+        <>
+            {isMobileDevice ? (
+                <div className='msc-our-stores-dropdown'>
+                    {/* Accordion Header */}
+                    <div className={`msc-accordion-header ${isAccordionOpen ? 'active' : ''}`} onClick={toggleAccordion}>
+                        <h2 className='msc-accordion-title'>
+                            {accordionTitle}{' '}
+                            <span className={`${isAccordionOpen ? 'msc-country-accordion-hide' : 'msc-country-accordion-show'}`}></span>
                         </h2>
-                        {countrySelect === country && (
-                            <div
-                                className={`msc-states-container`}
-                                onMouseLeave={() => {
-                                    setSelectedCountry(null);
-                                    setCountrySelected(null);
-                                }}
-                                tabIndex={0}
-                                onBlur={() => {
-                                    setSelectedCountry(null);
-                                    setCountrySelected(null);
-                                }}
-                            >
-                                {Object.keys(data.countries[country]).map(state => (
-                                    <div key={state} className='msc-states-dropdown'>
-                                        <h3
-                                            className={`msc-states-title ${selectedState === state ? 'active' : ''}`}
-                                            onClick={() => toggleState(country, state)}
-                                        >
-                                            {state}
-                                        </h3>
-                                    </div>
-                                ))}
-                            </div>
-                        )}
                     </div>
-                );
-            })}
-        </div>
+
+                    {/* Accordion Content */}
+                    {isAccordionOpen && (
+                        <div className='msc-accordion-content'>
+                            {Object.keys(data.countries).map(country => {
+                                const countryClass = `msc-flag-${country.toLowerCase().replace(/\s+/g, '-')}`;
+
+                                // Custom label for United Arab Emirates if country code is "UAE"
+                                const displayCountryName = country === 'UAE' ? resources.dropdownUAETitle : country;
+                                return (
+                                    <div key={country} className='msc-countries-dropdown'>
+                                        <h2
+                                            className={`msc-countries-title ${activeCountry === country ? 'active' : ''}`}
+                                            onClick={() => toggleCountry(country)}
+                                        >
+                                            <span className={`msc-flag-icon ${countryClass}`}></span>
+                                            {displayCountryName}
+                                        </h2>
+                                        {countrySelect === country && (
+                                            <div
+                                                className={`msc-states-container`}
+                                                onMouseLeave={() => {
+                                                    setSelectedCountry(null);
+                                                    setCountrySelected(null);
+                                                    setIsAccordionOpen(false);
+                                                }}
+                                                tabIndex={0}
+                                                onBlur={() => {
+                                                    setSelectedCountry(null);
+                                                    setCountrySelected(null);
+                                                    setIsAccordionOpen(false);
+                                                }}
+                                            >
+                                                {Object.keys(data.countries[country]).map(state => (
+                                                    <div key={state} className='msc-states-dropdown'>
+                                                        <h3
+                                                            className={`msc-states-title ${selectedState === state ? 'active' : ''}`}
+                                                            onClick={() => toggleState(country, state)}
+                                                        >
+                                                            {state}
+                                                        </h3>
+                                                    </div>
+                                                ))}
+                                            </div>
+                                        )}
+                                    </div>
+                                );
+                            })}
+                        </div>
+                    )}
+                </div>
+            ) : (
+                <div className='msc-our-stores-dropdown'>
+                    {Object.keys(data.countries).map(country => {
+                        const countryClass = `msc-flag-${country.toLowerCase().replace(/\s+/g, '-')}`;
+
+                        // Custom label for United Arab Emirates if country code is "UAE"
+                        const displayCountryName = country === 'UAE' ? resources.dropdownUAETitle : country;
+                        return (
+                            <div key={country} className='msc-countries-dropdown'>
+                                <h2
+                                    className={`msc-countries-title ${activeCountry === country ? 'active' : ''}`}
+                                    onClick={() => toggleCountry(country)}
+                                >
+                                    <span className={`msc-flag-icon ${countryClass}`}></span>
+                                    {displayCountryName}
+                                </h2>
+                                {countrySelect === country && (
+                                    <div
+                                        className={`msc-states-container`}
+                                        onMouseLeave={() => {
+                                            setSelectedCountry(null);
+                                            setCountrySelected(null);
+                                        }}
+                                        tabIndex={0}
+                                        onBlur={() => {
+                                            setSelectedCountry(null);
+                                            setCountrySelected(null);
+                                        }}
+                                    >
+                                        {Object.keys(data.countries[country]).map(state => (
+                                            <div key={state} className='msc-states-dropdown'>
+                                                <h3
+                                                    className={`msc-states-title ${selectedState === state ? 'active' : ''}`}
+                                                    onClick={() => toggleState(country, state)}
+                                                >
+                                                    {state}
+                                                </h3>
+                                            </div>
+                                        ))}
+                                    </div>
+                                )}
+                            </div>
+                        );
+                    })}
+                </div>
+            )}
+        </>
     );
 };
 

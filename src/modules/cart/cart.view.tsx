@@ -508,9 +508,9 @@ const renderOrderSummarylines = (
         <Node {...orderSummaryItems}>
             {orderSummaryLines.subtotal}
             {orderSummaryLines.totalDiscounts ? orderSummaryLines.totalDiscounts : null}
-            {orderSummaryLines.shipping}
+            {/* {orderSummaryLines.shipping}
             {orderSummaryLines.otherCharge}
-            {orderSummaryLines.tax}
+            {orderSummaryLines.tax} */}
             {orderSummaryLines.orderTotal}
             <Node className='msc-order-summary__line-include-vat'>
                 <span className='msc-price msc-order-summary__value'>

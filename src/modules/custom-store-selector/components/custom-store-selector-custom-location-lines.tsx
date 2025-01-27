@@ -39,6 +39,10 @@ interface Props {
     defaultZoom: number;
     pigeonApiKey: string;
     props: ICustomStoreSelectorProps<ICustomStoreSelectorData>;
+    isMobileDevice: boolean;
+    isShowMobileMap: boolean;
+    setShowMobileMap: (visible: boolean) => void;
+    configHeading: string;
 }
 
 const transformStoreLocations = (
@@ -70,6 +74,7 @@ const transformStoreLocations = (
 const StoreSelectorCustomLocationLines: React.FC<Props> = props => {
     const [data, setData] = useState<{ countries: { [key: string]: { [key: string]: IFullOrgUnitAvailability[] } } }>({ countries: {} });
     const [selectedLocations, setSelectedLocations] = useState<IFullOrgUnitAvailability[]>([]);
+    // const [showMap, setShowMap] = useState<boolean>(true);
 
     useEffect(() => {
         const transformedData = transformStoreLocations(props.locations);
@@ -84,7 +89,13 @@ const StoreSelectorCustomLocationLines: React.FC<Props> = props => {
         <LocationProvider>
             <div className='msc-our-stores-mainContainer'>
                 <div className='msc-country-mainContainer'>
-                    <StoreSelectorAccordionList data={data} onStateSelected={handleStateSelected} resources={props.resources} />
+                    <StoreSelectorAccordionList
+                        data={data}
+                        onStateSelected={handleStateSelected}
+                        resources={props.resources}
+                        isMobileDevice={props.isMobileDevice}
+                        accordionTitle={props.configHeading}
+                    />
                 </div>
                 <div className='msc-autoSearch-mainContainer'>
                     <StoreSelectorAutoCompleteSearch
@@ -92,6 +103,8 @@ const StoreSelectorCustomLocationLines: React.FC<Props> = props => {
                         dataLocation={data}
                         locations={props.locations}
                         onStateSelected={handleStateSelected}
+                        isMobileDevice={props.isMobileDevice}
+                        setShowMobileMap={props.setShowMobileMap}
                     />
                 </div>
                 <div className='msc-address-mainContainer'>
@@ -130,8 +143,28 @@ const StoreSelectorCustomLocationLines: React.FC<Props> = props => {
                         defaultZoom={props.defaultZoom}
                         pigeonApiKey={props.pigeonApiKey}
                     />
-                )} */}
-                    <StoreSelectorBingMap {...props.props} locations={selectedLocations} />
+                    )} */}
+                    {props.isMobileDevice && (
+                        <div className='msc-mobileMap-toggleContainer'>
+                            {props.isShowMobileMap ? (
+                                <button className='msc-hide-map' onClick={() => props.setShowMobileMap(false)}>
+                                    Hide Map
+                                </button>
+                            ) : (
+                                <button className='msc-view-map' onClick={() => props.setShowMobileMap(true)}>
+                                    View Map
+                                </button>
+                            )}
+                        </div>
+                    )}
+                    {props.isShowMobileMap && (
+                        <StoreSelectorBingMap
+                            {...props.props}
+                            locations={selectedLocations}
+                            isMobileDevice={props.isMobileDevice}
+                            setShowMobileMap={props.setShowMobileMap}
+                        />
+                    )}
                 </div>
             </div>
         </LocationProvider>

@@ -66,6 +66,7 @@ export interface IStoreSelectorState {
     isSeeAllStoreValue: boolean;
     isLocationDisabled?: boolean;
     filteredPickupMode?: string;
+    showMobileMap: boolean;
 }
 
 /**
@@ -223,7 +224,13 @@ class StoreSelector extends React.Component<ICustomStoreSelectorProps<ICustomSto
     public constructor(props: ICustomStoreSelectorProps<ICustomStoreSelectorData>) {
         super(props);
         // eslint-disable-next-line react/no-unused-state -- State is used in the view.
-        this.state = { isSearchInProgress: true, searchTerm: '', isSeeAllStoreValue: false, filteredPickupMode: undefined };
+        this.state = {
+            isSearchInProgress: true,
+            searchTerm: '',
+            isSeeAllStoreValue: false,
+            filteredPickupMode: undefined,
+            showMobileMap: true
+        };
         this.telemetryContent = getTelemetryObject(
             this.props.context.request.telemetryPageName!,
             this.props.friendlyName,
@@ -918,6 +925,10 @@ class StoreSelector extends React.Component<ICustomStoreSelectorProps<ICustomSto
                     defaultZoom={this.props.config.zoomMap ? this.props.config.zoomMap : 11}
                     pigeonApiKey={this.props.config.pigeonMapsAPIKey ? this.props.config.pigeonMapsAPIKey : ''}
                     props={this.props}
+                    isMobileDevice={isMobileDevice}
+                    isShowMobileMap={this.state.showMobileMap}
+                    setShowMobileMap={this._setShowMobileMap}
+                    configHeading={configHeading}
                 />
             ) : (
                 undefined
@@ -1270,6 +1281,14 @@ class StoreSelector extends React.Component<ICustomStoreSelectorProps<ICustomSto
         }
 
         await storeSelectorStateManager.setSelectedStoreLocationId(storeId);
+    };
+
+    /**
+     * On Selecting Store for pickup.
+     * @param storeId - Store Id.
+     */
+    private readonly _setShowMobileMap = (visible: boolean): void => {
+        this.setState({ showMobileMap: visible });
     };
 
     /**

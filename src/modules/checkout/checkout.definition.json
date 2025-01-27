@@ -385,7 +385,7 @@
         },
         "taxLabel": {
             "comment": "Label of estimated tax",
-            "value": "Tax (5%)"
+            "value": "Tax"
         },
         "loyaltyLabel": {
             "comment": "Label of loyalty rewards",
