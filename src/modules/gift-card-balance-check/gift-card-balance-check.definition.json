@@ -104,7 +104,7 @@
 		},
 		"giftCardAvailableBalanceLabel": {
 			"comment": "Label about gift card entered with balance and giftCardIssueAmount",
-			"value": "Available balance"
+			"value": "Available balance:"
 		},
 		"enteredGiftCardLabel": {
 			"comment": "Label about gift card entered with balance and giftCardIssueAmount",

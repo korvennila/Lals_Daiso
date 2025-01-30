@@ -34,7 +34,10 @@ import {
     getProductPageUrlSync,
     IDimensionsApp,
     StringExtensions,
-    validateCatalogId
+    validateCatalogId,
+    getSelectedVariant,
+    SelectedVariantInput,
+    ISelectedProduct
 } from '@msdyn365-commerce-modules/retail-actions';
 import {
     format,
@@ -273,8 +276,11 @@ const ProductCard: React.FC<IProductComponentProps> = ({
     const [isPopupVisible, setIsPopupVisible] = useState(false); // State to control popup visibility
     const [popupMessage, setPopupMessage] = useState(''); // Message to display in the popup
 
-    const [prodAvailRecordId, setProdAvailRecordId] = useState<number | undefined>();
-    const [prodAvailDimension, setProdAvailDimension] = useState(false);
+    // const [prodAvailRecordId, setProdAvailRecordId] = useState<number | undefined>();
+    // const [prodAvailDimension, setProdAvailDimension] = useState(false);
+
+    const [, setProdAvailRecordId] = useState<number | undefined>();
+    const [, setProdAvailDimension] = useState(false);
 
     // Function to show the popup with a custom message and auto-close after 5 seconds
     const showPopup = (message: string) => {
@@ -419,9 +425,40 @@ const ProductCard: React.FC<IProductComponentProps> = ({
         return React.cloneElement(quickview as React.ReactElement, { selectedProductId: item, selectedDimensions });
     }
 
+    async function _updateDimensionsNewProduct() {
+        const selectedDimensions: ProductDimension[] = selectedSwatchItems.getValues().map<ProductDimension>(swatches => {
+            return {
+                DimensionTypeValue: convertDimensionTypeToProductDimensionType(swatches.dimensionType),
+                DimensionValue: {
+                    RecordId: 0,
+                    Value: swatches.value
+                }
+            };
+        });
+
+        if (product) {
+            const selectedProduct = new Promise<ISelectedProduct | null>(async resolve => {
+                const newProduct = await getSelectedVariant(
+                    new SelectedVariantInput(
+                        product.MasterProductId ? product.MasterProductId : product.RecordId,
+                        context.request.apiSettings.channelId,
+                        selectedDimensions,
+                        undefined,
+                        context.request
+                    ),
+                    context.actionContext
+                );
+
+                resolve(newProduct);
+            });
+            const variantProduct = await selectedProduct;
+            console.log('variantProduct--->', variantProduct);
+        }
+    }
+
     /** StockAvailability */
-    // const [stockAvailability, setStockAvailability] = useState<boolean>(true);
-    const [, setStockAvailability] = useState<boolean>(true);
+    const [stockAvailability, setStockAvailability] = useState<boolean>(true);
+    // const [, setStockAvailability] = useState<boolean>(true);
 
     async function getStockAvailability(item: ProductSearchResult) {
         const searchCriteria = createInventoryAvailabilitySearchCriteria(context && context.actionContext, [item.RecordId], true);
@@ -475,12 +512,13 @@ const ProductCard: React.FC<IProductComponentProps> = ({
     async function productAddToCart(product: ProductSearchResult) {
         setAddToBagLoading(true);
         const currentCartState = await getCartState(context?.actionContext);
-        let productRecordId = prodAvailDimension ? prodAvailRecordId : product.RecordId;
+        // let productRecordId = prodAvailDimension ? prodAvailRecordId : product.RecordId;
 
         const cartLines = [
             {
                 ItemId: product.ItemId,
-                ProductId: productRecordId,
+                // ProductId: productRecordId,
+                ProductId: product.RecordId,
                 Quantity: 1,
                 TrackingId: ''
                 // 'AttributeValues@odata.type': '#Collection(Microsoft.Dynamics.Commerce.Runtime.DataModel.AttributeValueBase)',
@@ -505,11 +543,17 @@ const ProductCard: React.FC<IProductComponentProps> = ({
                 currentCartState.cart.Id,
                 cartLines,
                 currentCartState.cart.Version!
-            ).then(async result => {
-                console.log('cart response--->', result);
-                showPopup('Product has been added to the cart successfully!');
-                await currentCartState.refreshCart({});
-            });
+            )
+                .then(async result => {
+                    console.log('cart response--->', result);
+                    showPopup('Product has been added to the cart successfully!');
+                    await currentCartState.refreshCart({});
+                })
+                .catch(() => {
+                    // Default error message
+                    let errorMessage = 'Unable to add the product to the cart.';
+                    showPopup(errorMessage);
+                });
         } catch (err) {
             console.log(err);
             showPopup('Failed to add the product to the cart.');
@@ -521,7 +565,12 @@ const ProductCard: React.FC<IProductComponentProps> = ({
     React.useEffect(() => {
         getStockAvailability(product);
         getDimensionValuesWithEstimatedAvailabilities(product);
+        _updateDimensionsNewProduct();
     }, []);
+
+    React.useEffect(() => {
+        _updateDimensionsNewProduct();
+    }, [selectedSwatchItems]);
 
     // Construct telemetry attribute to render
     const payLoad = getPayloadObject('click', telemetryContent!, '', product.RecordId.toString());
@@ -614,7 +663,7 @@ const ProductCard: React.FC<IProductComponentProps> = ({
                     isPriceMinMaxEnabled,
                     priceResources
                 )}
-                {enableStockCheck || prodAvailDimension ? (
+                {enableStockCheck || stockAvailability ? (
                     <div>
                         <div className='ms-addToBag'>
                             <button

@@ -653,12 +653,6 @@ const CartLine: React.FC<ICartLineProps> = (props: ICartLineProps) => {
      * @returns Boolean.
      */
     const onChange = (newValue: number): boolean => {
-        if (newValue >= (props.maxQuantity ?? defaultMaxQuantity)) {
-            setMaxLimitReached(true);
-        } else {
-            setMaxLimitReached(false);
-        }
-
         if (props.quantityOnChange) {
             return props.quantityOnChange(props.data.cartLine, newValue);
         }
@@ -683,7 +677,7 @@ const CartLine: React.FC<ICartLineProps> = (props: ICartLineProps) => {
     };
 
     const generateMaxErrorMessage = (): JSX.Element | null => {
-        if (maxLimitReached) {
+        if (maxLimitReached && !props.errorMessage) {
             return (
                 <div className='msc-alert__header'>
                     <span className='msi-exclamation-triangle' />
@@ -779,7 +773,7 @@ const CartLine: React.FC<ICartLineProps> = (props: ICartLineProps) => {
                         <div className='msc-cart-line__product-quantity-label'>{resources.quantityDisplayString}</div>
 
                         {generateErrorMessage()}
-                        {generateMaxErrorMessage()}
+                        {!props.errorMessage && generateMaxErrorMessage()}
 
                         <IncrementalQuantity
                             id={`msc-cart-line__quantity_${props.data.product.RecordId}-
@@ -882,6 +876,12 @@ const CartLine: React.FC<ICartLineProps> = (props: ICartLineProps) => {
             .join(' ');
         return finalString;
     };
+
+    React.useEffect(() => {
+        if (props.currentQuantity !== undefined && props.maxQuantity !== undefined && props.maxQuantity !== 0) {
+            setMaxLimitReached(props.currentQuantity >= (props.maxQuantity ?? defaultMaxQuantity));
+        }
+    }, [props.currentQuantity, props.maxQuantity]);
 
     return (
         <div className='msc-cart-line'>

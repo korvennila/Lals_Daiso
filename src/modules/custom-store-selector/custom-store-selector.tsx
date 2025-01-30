@@ -229,7 +229,7 @@ class StoreSelector extends React.Component<ICustomStoreSelectorProps<ICustomSto
             searchTerm: '',
             isSeeAllStoreValue: false,
             filteredPickupMode: undefined,
-            showMobileMap: true
+            showMobileMap: false
         };
         this.telemetryContent = getTelemetryObject(
             this.props.context.request.telemetryPageName!,

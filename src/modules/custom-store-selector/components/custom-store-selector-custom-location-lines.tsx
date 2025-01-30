@@ -157,7 +157,15 @@ const StoreSelectorCustomLocationLines: React.FC<Props> = props => {
                             )}
                         </div>
                     )}
-                    {props.isShowMobileMap && (
+                    {!props.isMobileDevice && (
+                        <StoreSelectorBingMap
+                            {...props.props}
+                            locations={selectedLocations}
+                            isMobileDevice={props.isMobileDevice}
+                            setShowMobileMap={props.setShowMobileMap}
+                        />
+                    )}
+                    {props.isMobileDevice && props.isShowMobileMap && (
                         <StoreSelectorBingMap
                             {...props.props}
                             locations={selectedLocations}

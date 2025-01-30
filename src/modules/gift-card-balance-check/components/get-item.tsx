@@ -48,12 +48,12 @@ export const getItem = ({
 
     const selectedGiftCard = (
         <span className='ms-gift-card-balance-check__item-text'>
-            {enteredGiftCardLabel}
+            {giftCardAvailableBalanceLabel}
             {` `}
-            {giftCardLast4Digit}
-            {` `}({giftCardAvailableBalanceLabel}
+            <span className='ms-gift-card-balance-check__balance'>{balance}</span>
+            {` `}({enteredGiftCardLabel}
             {` `}
-            <span className='ms-gift-card-balance-check__balance'>{balance}</span>)
+            {giftCardLast4Digit})
         </span>
     );
 

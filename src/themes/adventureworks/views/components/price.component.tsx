@@ -91,8 +91,8 @@ const formatCurrency = (
     }
 
     if (shouldUseFreePriceText && price === freePrice && props.freePriceText) {
-        // return props.freePriceText;
-        return '';
+        return props.freePriceText;
+        // return '';
     }
 
     return props.context.cultureFormatter.formatCurrency(price, currencyCode);
