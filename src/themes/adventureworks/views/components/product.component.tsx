@@ -663,7 +663,7 @@ const ProductCard: React.FC<IProductComponentProps> = ({
                     isPriceMinMaxEnabled,
                     priceResources
                 )}
-                {enableStockCheck || stockAvailability ? (
+                {enableStockCheck && stockAvailability ? (
                     <div>
                         <div className='ms-addToBag'>
                             <button
