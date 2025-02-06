@@ -96,7 +96,7 @@ class AccountManagementAddress extends React.Component<IAccountManagementAddress
 
         this.resources = resources;
         this.currentOperation = AddressOperation.List;
-        this.countryRegions = data.countryRegions.result || [];
+        this.countryRegions = data.countryRegions.result?.filter(country => country.CountryRegionId === 'ARE') || [];
         this.addressPurposes = data.addressPurposes.result || [];
         this.customerAddresses = data.address.result || [];
         this.addUpdateAddress = {};
@@ -327,7 +327,7 @@ class AccountManagementAddress extends React.Component<IAccountManagementAddress
         reaction(
             () => data.countryRegions.result,
             () => {
-                this.countryRegions = data.countryRegions.result ?? [];
+                this.countryRegions = data.countryRegions.result?.filter(country => country.CountryRegionId === 'ARE') ?? [];
             }
         );
 

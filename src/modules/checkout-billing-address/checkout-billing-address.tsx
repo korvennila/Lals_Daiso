@@ -123,7 +123,7 @@ class CheckoutBillingAddress extends React.Component<IProps, ICheckoutBillingAdd
         this.resources = resources;
         this.currentOperation = AddressOperation.List;
         this.addressPurposes = data.addressPurposes.result || [];
-        this.countryRegions = data.countryRegions.result || [];
+        this.countryRegions = data.countryRegions.result?.filter(country => country.CountryRegionId === 'ARE') || [];
         this.stateProvinceInfo = data.countryStates.result || [];
         this.addressCommon = new AddressCommon(context, resources, telemetry);
         // this.addressFormat = new AddressFormat(
@@ -488,7 +488,7 @@ class CheckoutBillingAddress extends React.Component<IProps, ICheckoutBillingAdd
         reaction(
             () => data.countryRegions.result,
             () => {
-                this.countryRegions = data.countryRegions.result ?? [];
+                this.countryRegions = data.countryRegions.result?.filter(country => country.CountryRegionId === 'ARE') ?? [];
             }
         );
 

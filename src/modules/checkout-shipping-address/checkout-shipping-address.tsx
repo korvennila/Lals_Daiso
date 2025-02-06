@@ -181,7 +181,7 @@ class CheckoutShippingAddress extends React.Component<ICheckoutAddressProps, ICh
         this.addUpdateAddress = {};
         this.resources = resources;
         this.currentOperation = AddressOperation.List;
-        this.countryRegions = data.countryRegions.result || [];
+        this.countryRegions = data.countryRegions.result?.filter(country => country.CountryRegionId === 'ARE') || [];
         this.addressPurposes = data.addressPurposes.result || [];
         this.customerAddresses = data.address.result || [];
         this.stateProvinceInfo = data.countryStates.result || [];
@@ -629,7 +629,7 @@ class CheckoutShippingAddress extends React.Component<ICheckoutAddressProps, ICh
         reaction(
             () => data.countryRegions.result,
             () => {
-                this.countryRegions = data.countryRegions.result ?? [];
+                this.countryRegions = data.countryRegions.result?.filter(country => country.CountryRegionId === 'ARE') ?? [];
             }
         );
 
