@@ -415,7 +415,7 @@ const ProductCard: React.FC<IProductComponentProps> = ({
         }
 
         return attributeValues.some(
-            item => shouldDisplayDimension(item.KeyName?.toLowerCase() ?? '') && Array.isArray(item.Swatches) && item.Swatches.length > 0
+            item => shouldDisplayDimension(item.KeyName?.toLowerCase() ?? '') && item.Swatches && item.Swatches?.length > 0
         );
     }
 
