@@ -409,6 +409,16 @@ const ProductCard: React.FC<IProductComponentProps> = ({
         );
     }
 
+    function hasProductSwatches(attributeValues?: AttributeValue[]): boolean {
+        if (!attributeValues || attributeValues.length === 0) {
+            return false;
+        }
+
+        return attributeValues.some(
+            item => shouldDisplayDimension(item.KeyName?.toLowerCase() ?? '') && Array.isArray(item.Swatches) && item.Swatches.length > 0
+        );
+    }
+
     function renderQuickView(quickview: React.ReactNode, item?: number): JSX.Element | undefined {
         if (quickview === null) {
             return undefined;
@@ -580,6 +590,8 @@ const ProductCard: React.FC<IProductComponentProps> = ({
     // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access -- -- Do not need type check for appsettings
     const isUnitOfMeasureEnabled = context.app.config && context.app.config.unitOfMeasureDisplayType === 'buyboxAndBrowse';
 
+    const hasSwatches = hasProductSwatches(product.AttributeValues);
+
     return (
         <>
             {isEnabledProductDescription ? (
@@ -663,8 +675,29 @@ const ProductCard: React.FC<IProductComponentProps> = ({
                     isPriceMinMaxEnabled,
                     priceResources
                 )}
-                {enableStockCheck && stockAvailability ? (
-                    <div>
+                <div>
+                    {hasSwatches ? (
+                        <div className='ms-addToBag'>
+                            <a
+                                href={productPageUrl}
+                                onClick={onTelemetryClick(telemetryContent!, payLoad, product.Name!)}
+                                aria-label={renderLabel(
+                                    product.Name,
+                                    context.cultureFormatter.formatCurrency(product.Price),
+                                    product.AverageRating,
+                                    ratingAriaLabel,
+                                    product.TotalRatings,
+                                    ratingCountAriaLabel
+                                )}
+                                className='msc-product'
+                                {...attribute}
+                            >
+                                <button className='ms-selectVarient__button' title='Select Variant'>
+                                    Select Variant
+                                </button>
+                            </a>
+                        </div>
+                    ) : enableStockCheck && stockAvailability ? (
                         <div className='ms-addToBag'>
                             <button
                                 className={`ms-addToBag__button ${addToBagLoading ? 'add-to-bag-loading' : ''} `}
@@ -674,16 +707,14 @@ const ProductCard: React.FC<IProductComponentProps> = ({
                                 +
                             </button>
                         </div>
-                    </div>
-                ) : (
-                    <div>
+                    ) : (
                         <div className='ms-soldOut'>
                             <button className='ms-soldOut__button' title='SOLD OUT'>
                                 +
                             </button>
                         </div>
-                    </div>
-                )}
+                    )}
+                </div>
             </div>
             {/* Custom Popup */}
             <CustomPopup message={popupMessage} isVisible={isPopupVisible} onClose={closePopup} />
