@@ -27,6 +27,7 @@ export interface ISearchResultContainerConfig extends Msdyn365.IModuleConfig {
     updateRefinerPanel?: boolean;
     className?: string;
     clientRender?: boolean;
+    searchTextPrefix?: string;
 }
 
 export interface ISearchResultContainerResources {

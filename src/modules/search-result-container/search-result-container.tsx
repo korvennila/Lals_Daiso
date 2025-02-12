@@ -553,7 +553,11 @@ export default class SearchResultContainer extends React.PureComponent<
     };
 
     private readonly _getCollectionTitle = (): ITitleViewProps => {
-        const { data, context, resources } = this.props;
+        const {
+            data,
+            context, // resources,
+            config
+        } = this.props;
 
         let collectionTitle: string | undefined = '';
         if (context && context.request && context.request.query && context.request.query.q) {
@@ -583,7 +587,7 @@ export default class SearchResultContainer extends React.PureComponent<
             productCountText = format(this.props.resources.numberOfProducts, 0);
         }
         const pageName = context.request.telemetryPageName ? `result-count-${context.request.telemetryPageName.toLowerCase()}` : '';
-        const titlePrefix = <Title className='ms-search-result__collection-title-prefix' text={resources.searchTextPrefix} />;
+        const titlePrefix = <Title className='ms-search-result__collection-title-prefix' text={config.searchTextPrefix || ''} />;
         const titleText = collectionTitle && <Title className='ms-search-result__collection-title-text' text={collectionTitle} />;
         const titleCount = <Title className='ms-search-result__collection-title-count' text={productCountText} />;
 
