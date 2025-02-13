@@ -207,7 +207,11 @@ const renderAddToCart = (
     setOpen: React.Dispatch<React.SetStateAction<boolean>>
 ): JSX.Element => {
     // eslint-disable-next-line @typescript-eslint/naming-convention -- Dependency from Buybox.tsx file
-    const { ContainerProps, errorBlock, button } = addToCart;
+    const {
+        ContainerProps,
+        // errorBlock,
+        button
+    } = addToCart;
     const { context } = props;
 
     let buttonProps: IAddToCartComponentProps = {
@@ -228,7 +232,7 @@ const renderAddToCart = (
 
     return (
         <Node {...ContainerProps}>
-            {errorBlock}
+            {/* {errorBlock} */}
             {/* {button} */}
             {shouldShowOutOfStock(buttonProps, false) ? (
                 <div className={buttonProps.className}>
@@ -246,6 +250,18 @@ const renderAddToCart = (
             )}
         </Node>
     );
+};
+
+/**
+ * RenderAddToCart.
+ * @param addToCart - AddToCart.
+ * @returns -- Returns.
+ */
+const renderAddToCartErrorBlock = (addToCart: IBuyboxAddToCartViewProps): JSX.Element => {
+    // eslint-disable-next-line @typescript-eslint/naming-convention -- Dependency from Buybox.tsx file
+    const { ContainerProps, errorBlock } = addToCart;
+
+    return <Node {...ContainerProps}>{errorBlock}</Node>;
 };
 
 /**
@@ -850,28 +866,31 @@ const BuyboxView: React.FC<IBuyboxViewProps & IBuyboxExtentionProps<IBuyboxData>
                         <div className='msc-buybox__ratings-section-sku-text'>{skuText}</div>
                         {rating}
                     </Node>
-                    <Node className='msc-buybox__bulk-purchase-section'>
-                        <div className='msc-buybox__bulk-purchase-button-text'>
-                            {quantity &&
-                                renderQuantity(
-                                    quantity,
-                                    callbacks,
-                                    props,
-                                    state,
-                                    resources,
-                                    quantityLimitsMessages,
-                                    min,
-                                    max,
-                                    applyDefaultOrderSettings,
-                                    telemetryContent,
-                                    unitOfMeasure
-                                )}
-                            {props.bulkPurchaseLink}
-                        </div>
+                    <Node className='msc-buybox__combine-quantity-addToCart'>
+                        <Node className='msc-buybox__bulk-purchase-section'>
+                            <div className='msc-buybox__bulk-purchase-button-text'>
+                                {quantity &&
+                                    renderQuantity(
+                                        quantity,
+                                        callbacks,
+                                        props,
+                                        state,
+                                        resources,
+                                        quantityLimitsMessages,
+                                        min,
+                                        max,
+                                        applyDefaultOrderSettings,
+                                        telemetryContent,
+                                        unitOfMeasure
+                                    )}
+                                {props.bulkPurchaseLink}
+                            </div>
+                        </Node>
+                        {renderAddToCart(addToCart, props, setOpen)}
                     </Node>
                     {props.config.displayStockAvailability && preferredStoreId && renderAvailabilityAtPreferredStore()}
                     {inventoryLabel}
-                    {renderAddToCart(addToCart, props, setOpen)}
+                    {renderAddToCartErrorBlock(addToCart)}
                     {
                         <Node className={'msc-delivery-date-container'}>
                             <div className='msc-delivery-date-content'>
