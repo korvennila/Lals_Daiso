@@ -716,7 +716,15 @@ export class CheckoutPaymentInstrument extends React.PureComponent<ICheckoutPaym
         }
 
         const redirectInfo = JSON.parse(paymentVerificationPostData);
-        const { url, data } = redirectInfo;
+
+        // Extension start - support get redirection
+        const { url, data, method } = redirectInfo;
+        if (method && method.toUpperCase() === 'GET') {
+            window.location.assign(url);
+            return;
+        }
+        // Extension end
+
         const form = document.createElement('form');
 
         form.method = 'POST';
@@ -774,7 +782,9 @@ export class CheckoutPaymentInstrument extends React.PureComponent<ICheckoutPaym
             if (config.paymenTenderType === checkout.result?.paymentTenderType) {
                 const { requestFormData, query } = this.props.context.request;
 
-                const formData = btoa(JSON.stringify(requestFormData ?? { redirectResult: query?.redirectResult }));
+                // Extension start - read all query parameters in get redirection
+                const formData = btoa(JSON.stringify(requestFormData ?? { ...query, redirectResult: query?.redirectResult }));
+                // Extension end
 
                 this.setState({
                     isPaymentProcessing: true
