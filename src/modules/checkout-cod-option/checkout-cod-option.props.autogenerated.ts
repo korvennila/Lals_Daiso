@@ -24,6 +24,7 @@ export interface ICheckoutCodOptionConfig extends Msdyn365.IModuleConfig {
     codOrderConfirmationLink?: ICodOrderConfirmationLinkData;
     codOrderFailureLink?: ICodOrderFailureLinkData;
     codIsNotApplicableMessage?: string;
+    disableCashOnDelivery?: boolean;
 }
 
 export interface ICheckoutCodOptionResources {

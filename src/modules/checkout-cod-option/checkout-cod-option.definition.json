@@ -74,6 +74,12 @@
             "description": "Message to be displayed while chosing COD method with any other methods",
             "type": "string",
             "default": "COD is not applicable, Please try other payment methods"
+        },
+        "disableCashOnDelivery": {
+            "friendlyName": "Disable Cash on delivery module",
+            "description": "Disabling this property for Cash on delivery module",
+            "type": "boolean",
+            "default": false
         }
     },
     "resources": {

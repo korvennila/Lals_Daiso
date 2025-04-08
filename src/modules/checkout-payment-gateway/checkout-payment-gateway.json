@@ -1,0 +1,24 @@
+{
+    "$type": "contentModule",
+    "friendlyName": "checkout-customer-account-payment",
+    "name": "checkout-customer-account-payment",
+    "description": "This module allows the user to pay with their customer account at checkout",
+    "categories": ["checkout-customer-account-payment"],
+    "tags": ["Purchase", "Payment"],
+    "dataActions": {    
+        "checkout": {
+            "path": "@msdyn365-commerce/global-state/dist/lib/data-actions/checkout-state-data-action",
+            "runOn": "client"
+        }    
+    },
+    "resources": {
+        "addPaymentButtonLabel": {
+            "comment": "The label that is displayed on the button to pay with customer account",
+            "value": "Pay with customer account"
+        },
+        "inputAmountLabel": {
+            "comment": "The label that is displayed above the input for the user to choose the amount to pay with customer account",
+            "value": "Customer account payment"
+        }
+    }
+}

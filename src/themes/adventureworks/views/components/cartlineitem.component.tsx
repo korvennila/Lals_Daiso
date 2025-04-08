@@ -772,8 +772,8 @@ const CartLine: React.FC<ICartLineProps> = (props: ICartLineProps) => {
                     <div className='msc-cart-line__product-quantity'>
                         <div className='msc-cart-line__product-quantity-label'>{resources.quantityDisplayString}</div>
 
-                        {generateErrorMessage()}
-                        {!props.errorMessage && generateMaxErrorMessage()}
+                        {/* {generateErrorMessage()}
+                        {!props.errorMessage && generateMaxErrorMessage()} */}
 
                         <IncrementalQuantity
                             id={`msc-cart-line__quantity_${props.data.product.RecordId}-
@@ -805,7 +805,7 @@ const CartLine: React.FC<ICartLineProps> = (props: ICartLineProps) => {
                             {': '}
                         </label>
 
-                        {generateErrorMessage()}
+                        {/* {generateErrorMessage()} */}
 
                         <span className='quantity-value'>{props.data.cartLine.Quantity}</span>
                     </div>
@@ -940,6 +940,8 @@ const CartLine: React.FC<ICartLineProps> = (props: ICartLineProps) => {
                     </div>
                     {renderInventoryLabel}
                     {renderDiscountLines}
+                    {generateErrorMessage()}
+                    {!props.errorMessage && generateMaxErrorMessage()}
                     {props.showShippingChargesForLineItems && <div className='msc-cart-line__freight'>{renderShippingLabel}</div>}
                     {renderOtherCharges}
                     {renderSalesAgreementPrompt}
