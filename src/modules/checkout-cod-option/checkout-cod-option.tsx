@@ -79,6 +79,8 @@ export interface IAddResource {
 
 const codPaymentService = CodPaymentService.getInstance();
 
+// var incrementProperty = 0;
+
 export interface ICheckoutGiftCardViewProps extends ICheckoutCodOptionProps<{}>, ICheckoutGiftCardState {
     className?: string;
 
@@ -110,11 +112,11 @@ export interface ICheckoutGiftCardViewProps extends ICheckoutCodOptionProps<{}>,
 
 /**
  *
- * CheckoutGiftCard component.
+ * checkoutCODOption component.
  * @extends {React.Component<ICheckoutCodOptionProps<ICheckoutCodOptionData>, ICheckoutGiftCardState>}
  */
 @observer
-export class CheckoutGiftCard extends React.Component<ICheckoutGiftCardModuleProps, ICheckoutGiftCardState> {
+export class checkoutCODOption extends React.Component<ICheckoutGiftCardModuleProps, ICheckoutGiftCardState> {
     public state: ICheckoutGiftCardState = {
         isFetchingGiftCard: false,
         errorMessage: '',
@@ -261,9 +263,17 @@ export class CheckoutGiftCard extends React.Component<ICheckoutGiftCardModulePro
         this.setState({ errorMessage: codOrderFailure });
     };
 
+    private handlePaymentMethodChange = (selectedOption: string, amount: number, isCODSelected: boolean, codOrderFailure: string): void => {
+        if (selectedOption === 'PG' && this.state.isRadioButtonChecked) {
+            this.setState({ isRadioButtonChecked: false, isCodSelected: false });
+            this.props.context.telemetry.information('COD unchecked due to Payment Gateway selection');
+        }
+    };
+
     public componentDidMount(): void {
         // Listen for changes in radio button state
         codPaymentService.addListener(this.handleKorCODPlaceOrderTrigger);
+        codPaymentService.addListener(this.handlePaymentMethodChange); // Add listener
 
         // Set initial state based on current selected option
         this.setState({ errorMessage: codPaymentService.getCODOrderFailure() });
@@ -324,6 +334,7 @@ export class CheckoutGiftCard extends React.Component<ICheckoutGiftCardModulePro
             radioButton.removeEventListener('click', this.handleClick);
         }
         codPaymentService.removeListener(this.handleKorCODPlaceOrderTrigger);
+        codPaymentService.removeListener(this.handlePaymentMethodChange); // Remove listener
     }
 
     private readonly korGetCODChargeAmount = async (): Promise<any> => {
@@ -357,13 +368,56 @@ export class CheckoutGiftCard extends React.Component<ICheckoutGiftCardModulePro
         }
     };
 
-    private handleClick = (event: Event) => {
+    private readonly removeCustomerPayment = async (): Promise<void> => {
+        const checkoutState = this.props.data.checkout.result;
+
+        if (!checkoutState) {
+            this.props.context.telemetry.error('checkout state not found');
+            return;
+        }
+
+        await checkoutState.updateCustomerAccountAmount({ newAmount: 0 });
+        this.props.context.telemetry.information('customer account payment removed');
+    };
+
+    private readonly removeGiftCards = async (): Promise<void> => {
+        this.props.telemetry.information('Payment section gift card remove is called for all gift cards.');
+
+        const checkoutState = this.props.data.checkout.result;
+        if (!checkoutState) {
+            return;
+        }
+
+        const giftCards = this.props.data.checkout.result?.giftCards || [];
+        const giftCardIds = giftCards.map(card => card.Id).filter((id): id is string => id !== undefined); // Filter out undefined
+
+        if (giftCardIds.length === 0) {
+            this.props.telemetry.information('No gift cards to remove.');
+            return;
+        }
+
+        try {
+            await Promise.all(giftCardIds.map(giftCardId => checkoutState.removeGiftCard({ giftCardNumber: giftCardId })));
+            this.props.telemetry.information(`Removed ${giftCardIds.length} gift cards.`);
+        } catch (error) {
+            this.props.telemetry.error('Error removing gift cards:', error);
+        }
+    };
+
+    private handleClick = async (event: Event) => {
         const radioButton = this.radioButtonRef.current;
-        if (this.isOtherPaymentsEnabled || this.hasElectronicDelivery) {
+        // if (this.isOtherPaymentsEnabled || this.hasElectronicDelivery) {
+        if (this.hasElectronicDelivery) {
             this.setError(this.props.config.codIsNotApplicableMessage || this.props.resources.codIsNotApplicableMessage);
         } else {
             this.setError('');
         }
+
+        if (this.isOtherPaymentsEnabled) {
+            await this.removeCustomerPayment();
+            await this.removeGiftCards();
+        }
+
         if (radioButton && isEmpty(this.state.errorMessage) && !this.isOtherPaymentsEnabled && !this.hasElectronicDelivery) {
             if (!this.props.context.request.user.isAuthenticated && !this.state.isOTPVerified) {
                 event.preventDefault();
@@ -901,4 +955,4 @@ export class CheckoutGiftCard extends React.Component<ICheckoutGiftCardModulePro
     };
 }
 
-export default withModuleState(CheckoutGiftCard);
+export default withModuleState(checkoutCODOption);

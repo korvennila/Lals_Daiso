@@ -141,7 +141,7 @@
         },
         "checkoutTimeoutErrorMessage": {
             "comment": "Checkout timeout error message",
-            "value": "An error occurred when processing the payment. Please contact Customer Support for additional assistance. Reference Code: CCR025"
+            "value": "The payment couldn’t be completed. Please try again or try with a different card."
         },
         "customerAccountLimitSignDifferentFromAmountDueErrorMessage": {
             "comment": "Customer account limit sign different from amount due error message",
@@ -169,7 +169,7 @@
         },
         "fraudRiskErrorMessage": {
             "comment": "Fraud risk error message",
-            "value": "An error occurred when processing the payment. Please try again later. Reference Code: CCR024"
+            "value": "The payment couldn’t be completed. Please try again or try with a different card."
         },
         "genericErrorMessage": {
             "comment": "Generic error message",
@@ -189,7 +189,7 @@
         },
         "invalidCartVersionErrorMessage": {
             "comment": "Invalid cart version error message",
-            "value": "A cart error occurred when processing the payment. Please refresh browser and retry. Reference Code: CCR027"
+            "value": "A cart error occurred when processing the payment. Please refresh browser and retry."
         },
         "invalidLoyaltyCardNumberErrorMessage": {
             "comment": "Invalid loyalty card number error message",
@@ -201,7 +201,7 @@
         },
         "invalidPaymentRequestErrorMessage": {
             "comment": "Invalid payment request error message",
-            "value": "An error occurred when contacting the payment gateway. Please try again later. Reference Code: CCR006"
+            "value": "The payment couldn’t be completed. Please try again or try with a different card."
         },
         "missingRequiredCartTenderLinesErrorMessage": {
             "comment": "Missing required cart tender lines error message",
@@ -229,7 +229,7 @@
         },
         "paymentAlreadyVoidedErrorMessage": {
             "comment": "Payment already voided error message",
-            "value": "An error occurred when processing the payment. Please try again later. Reference Code: CCR023"
+            "value": "The payment couldn’t be completed. Please try again or try with a different card."
         },
         "paymentAmountExceedsGiftBalanceErrorMessage": {
             "comment": "Payment amount exceeds gift balance error message",
@@ -241,7 +241,7 @@
         },
         "paymentRequiresMerchantPropertiesErrorMessage": {
             "comment": "Payment requires merchant properties error message",
-            "value": "An error occurred when processing the payment. Please try again later. Reference Code: CCR005"
+            "value": "The payment couldn’t be completed. Please try again or try with a different card."
         },
         "paymentUsingUnauthorizedAccountErrorMessage": {
             "comment": "Payment using unauthorized account error message",
@@ -269,11 +269,11 @@
         },
         "unableToReadCardTokenInfoErrorMessage": {
             "comment": "Unable to read card token info error message",
-            "value": "An error occurred when processing the payment. Please try again later. Reference Code: CCR014"
+            "value": "The payment couldn’t be completed. Please try again or try with a different card."
         },
         "unableToRetrieveCardPaymentAcceptResultErrorMessage": {
             "comment": "Unable to retrieve card payment accept result error message",
-            "value": "An error occurred when processing the payment. Please try again later. Reference Code: CCR004"
+            "value": "The payment couldn’t be completed. Please try again or try with a different card."
         },
         "cookieConsentRequiredMessage": {
             "comment": "Localized text for cookie consent required message",

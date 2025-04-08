@@ -26,11 +26,12 @@ export const From: React.FC<IForm> = ({
     supportExternalGiftCard,
     showGiftCardPinInput,
     showGiftCardExpInput,
-    alertFieldLabel
+    alertFieldLabel,
+    paymentGatewayRadio
 }) => (
     <Node {...formProps}>
         {alert}
-        {supportExternalGiftCard ? (
+        {/* {supportExternalGiftCard ? (
             <Node {...inputProps}>
                 <Node {...inputNumProps}>
                     {label}
@@ -56,7 +57,8 @@ export const From: React.FC<IForm> = ({
                 {inputNumber}
             </>
         )}
-        {applyButton}
+        {applyButton} */}
+        {paymentGatewayRadio}
     </Node>
 );
 
@@ -78,7 +80,7 @@ export const GiftCardList: React.FC<IList> = ({ listProps, list }) => (
 export const AddResource: React.FC<IAddResource> = ({ form, list }) => (
     <>
         {form && <From {...form} />}
-        {list && <GiftCardList {...list} />}
+        {/* {list && <GiftCardList {...list} />} */}
     </>
 );
 
@@ -89,14 +91,18 @@ export const ShowResource: React.FC<IShowResource> = ({ title, list }) => (
     </>
 );
 
-const CheckoutGiftCardView: React.FC<ICheckoutGiftCardViewProps> = props => {
-    const { checkoutGiftCardProps, checkoutErrorRef, showGiftCard, addGiftCard } = props;
+const checkoutPaymentGatewayView: React.FC<ICheckoutGiftCardViewProps> = props => {
+    const {
+        checkoutGiftCardProps,
+        checkoutErrorRef, // showGiftCard,
+        addGiftCard
+    } = props;
     return (
         <Module {...checkoutGiftCardProps} ref={checkoutErrorRef}>
-            {showGiftCard && <ShowResource {...showGiftCard} />}
+            {/* {showGiftCard && <ShowResource {...showGiftCard} />} */}
             {addGiftCard && <AddResource {...addGiftCard} />}
         </Module>
     );
 };
 
-export default CheckoutGiftCardView;
+export default checkoutPaymentGatewayView;

@@ -39,6 +39,12 @@
             "description": "Enabling this property will cause the module to load its Javascript chunk and render on the client based on the user view port. This property is recommended for modules which are generally hidden below the users view port (lower on the page) to increase page load performance.",
             "type": "boolean",
             "default": false
+        },
+        "paymentGatewayTitle": {
+            "friendlyName": "Payment gateway title",
+            "description": "Title to be displayed for Payment gateway option.",
+            "type": "string",
+            "default": "Credit/Debit Card/Apple Pay"
         }
     },
     "resources": {
@@ -117,6 +123,10 @@
         "giftCardAvailableBalanceLabel": {
             "comment": "Label about gift card entered with balance and giftCardIssueAmount",
             "value": "Available balance"
+        },
+        "paymentGatewayTitle": {
+            "comment": "Title to be displayed for Payment gateway option",
+            "value": "Credit/Debit Card/Apple Pay"
         }
     }
 }

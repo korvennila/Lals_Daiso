@@ -18,6 +18,7 @@ export interface ICheckoutStoreGiftCardConfig extends Msdyn365.IModuleConfig {
     shouldBeEnabledForGuest?: boolean;
     className?: string;
     clientRender?: boolean;
+    paymentGatewayTitle?: string;
 }
 
 export interface ICheckoutStoreGiftCardResources {
@@ -40,6 +41,7 @@ export interface ICheckoutStoreGiftCardResources {
     removeGiftCardButton: string;
     enteredGiftCardLabel: string;
     giftCardAvailableBalanceLabel: string;
+    paymentGatewayTitle: string;
 }
 
 export interface ICheckoutStoreGiftCardProps<T> extends Msdyn365.IModule<T> {

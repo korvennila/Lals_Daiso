@@ -31,6 +31,7 @@ import { getForm, IForm } from './components/get-form';
 import { getList, IList } from './components/get-list';
 import TitleCompoent from './components/title';
 import { focusOnCheckoutError } from '@msdyn365-commerce-modules/checkout';
+import CodPaymentService from '../../shared/CodPaymentService';
 
 export * from './components/get-form';
 export * from './components/get-item';
@@ -42,6 +43,7 @@ interface ICheckoutGiftCardState {
     giftCardNumber: string;
     giftCardPin: string;
     giftCardExp: string;
+    isPaymentGatewayEnabled: boolean; // New state for the radio button
 }
 
 enum SupportedGiftCardType {
@@ -49,6 +51,9 @@ enum SupportedGiftCardType {
     External = 'external',
     Both = 'both'
 }
+
+// Initialize CodPaymentService instance
+const codPaymentService = CodPaymentService.getInstance();
 
 export interface ICheckoutGiftCardModuleProps extends ICheckoutStoreGiftCardProps<ICheckoutStoreGiftCardData>, IModuleStateProps {}
 
@@ -84,17 +89,18 @@ export interface ICheckoutGiftCardViewProps extends ICheckoutStoreGiftCardProps<
 
 /**
  *
- * CheckoutGiftCard component.
+ * checkoutPaymentGateway component.
  * @extends {React.Component<ICheckoutStoreGiftCardProps<ICheckoutStoreGiftCardData>, ICheckoutGiftCardState>}
  */
 @observer
-export class CheckoutGiftCard extends React.Component<ICheckoutGiftCardModuleProps, ICheckoutGiftCardState> {
+export class checkoutPaymentGateway extends React.Component<ICheckoutGiftCardModuleProps, ICheckoutGiftCardState> {
     public state: ICheckoutGiftCardState = {
         isFetchingGiftCard: false,
         errorMessage: '',
         giftCardNumber: '',
         giftCardPin: '',
-        giftCardExp: ''
+        giftCardExp: '',
+        isPaymentGatewayEnabled: false
     };
 
     private readonly inputRef: React.RefObject<HTMLInputElement> = React.createRef();
@@ -168,6 +174,9 @@ export class CheckoutGiftCard extends React.Component<ICheckoutGiftCardModulePro
             }
         );
 
+        // Add listener for payment method changes from CodPaymentService
+        codPaymentService.addListener(this.handlePaymentMethodChange);
+
         if (this.props.data.checkout.result?.shouldEnableCheckoutErrorDisplayMessaging) {
             reaction(
                 () => this.props.data.checkout.result?.checkoutError,
@@ -189,6 +198,11 @@ export class CheckoutGiftCard extends React.Component<ICheckoutGiftCardModulePro
         }
     }
 
+    public componentWillUnmount(): void {
+        // Remove the listener when the component unmounts
+        codPaymentService.removeListener(this.handlePaymentMethodChange);
+    }
+
     public shouldComponentUpdate(nextProps: ICheckoutGiftCardModuleProps, nextState: ICheckoutGiftCardState): boolean {
         if (this.state === nextState && this.props.data === nextProps.data) {
             return false;
@@ -200,7 +214,7 @@ export class CheckoutGiftCard extends React.Component<ICheckoutGiftCardModulePro
         const {
             moduleState: { isReady },
             data: { checkout },
-            config: { className, showAdditionalFields },
+            config: { className, showAdditionalFields, paymentGatewayTitle },
             resources
         } = this.props;
         const { errorMessage, giftCardNumber, giftCardPin, giftCardExp } = this.state;
@@ -268,7 +282,10 @@ export class CheckoutGiftCard extends React.Component<ICheckoutGiftCardModulePro
                           onApplyGiftCard: this.applyGiftCard,
                           supportExternalGiftCard,
                           additionalFields,
-                          disableAddGiftCard: this.disableAddGiftCard
+                          disableAddGiftCard: this.disableAddGiftCard,
+                          isPaymentGatewayEnabled: this.state.isPaymentGatewayEnabled, // Pass the new state
+                          onTogglePaymentGateway: this.onTogglePaymentGateway,
+                          paymentGatewayLabel: paymentGatewayTitle
                       }),
                       list: getList({
                           canRemove: true,
@@ -283,6 +300,32 @@ export class CheckoutGiftCard extends React.Component<ICheckoutGiftCardModulePro
 
         return this.props.renderView(viewProps) as React.ReactElement;
     }
+
+    // New method to handle payment method changes from CodPaymentService
+    private handlePaymentMethodChange = (selectedOption: string, amount: number, isCODSelected: boolean, codOrderFailure: string): void => {
+        if (selectedOption === 'COD' && this.state.isPaymentGatewayEnabled) {
+            this.setState({ isPaymentGatewayEnabled: false });
+            // codPaymentService.setSelectedOption(selectedOption);
+            this.props.context.telemetry.information('Payment Gateway unchecked due to COD selection');
+        }
+    };
+
+    private readonly onTogglePaymentGateway = (): void => {
+        this.setState({ isPaymentGatewayEnabled: !this.state.isPaymentGatewayEnabled }, async () => {
+            const checkoutState = this.props.data.checkout.result;
+            if (!checkoutState) {
+                this.props.context.telemetry.error('checkout state not found');
+                return;
+            }
+            if (this.state.isPaymentGatewayEnabled) {
+                codPaymentService.setSelectedOption('PG');
+                this.props.context.telemetry.information('Payment Gateway enabled');
+            } else {
+                codPaymentService.setSelectedOption('');
+                this.props.context.telemetry.information('Payment Gateway disabled');
+            }
+        });
+    };
 
     private readonly init = (): void => {
         this.props.moduleState.init({
@@ -596,4 +639,4 @@ export class CheckoutGiftCard extends React.Component<ICheckoutGiftCardModulePro
     };
 }
 
-export default withModuleState(CheckoutGiftCard);
+export default withModuleState(checkoutPaymentGateway);

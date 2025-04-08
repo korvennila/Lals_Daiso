@@ -114,7 +114,7 @@ export const ShowResource: React.FC<IShowResource> = ({ title, list }) => (
     </>
 );
 
-const CheckoutGiftCardView: React.FC<ICheckoutGiftCardViewProps> = props => {
+const checkoutCODOptionView: React.FC<ICheckoutGiftCardViewProps> = props => {
     const {
         checkoutGiftCardProps,
         checkoutErrorRef,
@@ -147,4 +147,4 @@ const CheckoutGiftCardView: React.FC<ICheckoutGiftCardViewProps> = props => {
     );
 };
 
-export default CheckoutGiftCardView;
+export default checkoutCODOptionView;
