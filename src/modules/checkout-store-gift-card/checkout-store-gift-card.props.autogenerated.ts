@@ -19,6 +19,8 @@ export interface ICheckoutStoreGiftCardConfig extends Msdyn365.IModuleConfig {
     className?: string;
     clientRender?: boolean;
     paymentGatewayTitle?: string;
+    paymenTenderType?: string;
+    isPrimaryPayment?: boolean;
 }
 
 export interface ICheckoutStoreGiftCardResources {

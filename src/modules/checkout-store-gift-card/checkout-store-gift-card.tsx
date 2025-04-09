@@ -44,6 +44,7 @@ interface ICheckoutGiftCardState {
     giftCardPin: string;
     giftCardExp: string;
     isPaymentGatewayEnabled: boolean; // New state for the radio button
+    // isPaymentGatewayDisabled: boolean; // New property
 }
 
 enum SupportedGiftCardType {
@@ -87,6 +88,8 @@ export interface ICheckoutGiftCardViewProps extends ICheckoutStoreGiftCardProps<
     applyGiftCard?(): void;
 }
 
+const zeroAmount = 0;
+
 /**
  *
  * checkoutPaymentGateway component.
@@ -100,7 +103,8 @@ export class checkoutPaymentGateway extends React.Component<ICheckoutGiftCardMod
         giftCardNumber: '',
         giftCardPin: '',
         giftCardExp: '',
-        isPaymentGatewayEnabled: false
+        isPaymentGatewayEnabled: true
+        // isPaymentGatewayDisabled: false // Initialize as false
     };
 
     private readonly inputRef: React.RefObject<HTMLInputElement> = React.createRef();
@@ -166,11 +170,63 @@ export class checkoutPaymentGateway extends React.Component<ICheckoutGiftCardMod
         return !!giftCards && giftCards.length > 0;
     }
 
+    @computed public get amountDue(): number {
+        const {
+            data: { checkout }
+        } = this.props;
+        if (!checkout.result) {
+            return 0;
+        }
+
+        const checkoutResult = checkout.result;
+        const cart = checkoutResult.checkoutCart.cart;
+        if (!cart || !cart.CartLines || cart.CartLines.length === 0) {
+            return 0;
+        }
+
+        // Use the card for payment after all other payment methods
+        return (cart.TotalAmount || zeroAmount) - this.getGiftCardTotalAmount - this.getLoyaltyAmount - this.getCustomerAccountAmount;
+    }
+
+    @computed get shouldPaidByCard(): boolean {
+        const {
+            data: { checkout },
+            config
+        } = this.props;
+        if (!checkout.result) {
+            return false;
+        }
+
+        const checkoutResult = checkout.result;
+
+        const { paymentTenderType, tokenizedPaymentCard, isExpressAddressApplied } = checkoutResult;
+        const isPaidByOtherPaymentSource =
+            config.paymenTenderType?.toLocaleLowerCase() !== paymentTenderType?.toLocaleLowerCase() &&
+            (tokenizedPaymentCard || isExpressAddressApplied);
+
+        return this.amountDue > zeroAmount && !isPaidByOtherPaymentSource;
+    }
+
+    @computed get isPaymentGatewayRadioDisabled(): boolean {
+        return this.shouldPaidByCard || this.amountDue <= 0;
+    }
+
     public componentDidMount(): void {
         when(
             () => this.isDataReady,
             () => {
                 this.init();
+            }
+        );
+
+        // Add reaction to update disabled state when shouldPaidByCard or amountDue changes
+        reaction(
+            () => this.shouldPaidByCard, // Observable or computed value
+            shouldPaidByCard => {
+                if (!shouldPaidByCard) {
+                    this.setState({ isPaymentGatewayEnabled: false });
+                    codPaymentService.selectPaymentMethod('');
+                }
             }
         );
 
@@ -234,7 +290,7 @@ export class checkoutPaymentGateway extends React.Component<ICheckoutGiftCardMod
 
         const supportExternalGiftCard = supportedGiftCardType !== SupportedGiftCardType.Internal;
 
-        const moduleClassName = classname('ms-checkout-gift-card', className, isReady ? 'show' : 'add');
+        const moduleClassName = classname('ms-checkout-credit-debit-card', className, isReady ? 'show' : 'add');
 
         const viewProps: ICheckoutGiftCardViewProps = {
             ...this.props,
@@ -303,14 +359,22 @@ export class checkoutPaymentGateway extends React.Component<ICheckoutGiftCardMod
 
     // New method to handle payment method changes from CodPaymentService
     private handlePaymentMethodChange = (selectedOption: string, amount: number, isCODSelected: boolean, codOrderFailure: string): void => {
-        if (selectedOption === 'COD' && this.state.isPaymentGatewayEnabled) {
+        if (!this.shouldPaidByCard) {
+            return;
+        }
+
+        if (isCODSelected && this.state.isPaymentGatewayEnabled) {
             this.setState({ isPaymentGatewayEnabled: false });
-            // codPaymentService.setSelectedOption(selectedOption);
             this.props.context.telemetry.information('Payment Gateway unchecked due to COD selection');
         }
     };
 
     private readonly onTogglePaymentGateway = (): void => {
+        if (!this.shouldPaidByCard) {
+            this.props.context.telemetry.information('Payment Gateway toggle prevented due to conditions');
+            return;
+        }
+
         this.setState({ isPaymentGatewayEnabled: !this.state.isPaymentGatewayEnabled }, async () => {
             const checkoutState = this.props.data.checkout.result;
             if (!checkoutState) {
@@ -318,10 +382,10 @@ export class checkoutPaymentGateway extends React.Component<ICheckoutGiftCardMod
                 return;
             }
             if (this.state.isPaymentGatewayEnabled) {
-                codPaymentService.setSelectedOption('PG');
+                codPaymentService.selectPaymentMethod('PG');
                 this.props.context.telemetry.information('Payment Gateway enabled');
             } else {
-                codPaymentService.setSelectedOption('');
+                codPaymentService.selectPaymentMethod('');
                 this.props.context.telemetry.information('Payment Gateway disabled');
             }
         });

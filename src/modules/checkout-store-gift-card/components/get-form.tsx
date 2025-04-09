@@ -250,13 +250,13 @@ export const getForm = (options: IGetFormInput): IForm => {
         <div className='ms-checkout-customer-account__payment-gateway'>
             <input
                 type='radio'
-                id='enablePaymentGateway'
-                name='paymentGateway'
+                id='PaymentGateway'
+                name='paymentMethod'
                 value={CustomPaymentMethod.PaymentGateway}
                 checked={isPaymentGatewayEnabled}
                 onChange={onTogglePaymentGateway}
             />
-            <label htmlFor='enablePaymentGateway'>
+            <label htmlFor='PaymentGateway'>
                 {paymentGatewayLabel === '' ? paymentGatewayTitle : paymentGatewayLabel || paymentGatewayTitle}
             </label>
         </div>

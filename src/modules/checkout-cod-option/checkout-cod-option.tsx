@@ -144,19 +144,20 @@ export class checkoutCODOption extends React.Component<ICheckoutGiftCardModulePr
 
     private handleCODOptionChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         const selectedOption = event.target.value;
-        this.handleCODSelectedOption(selectedOption);
-
-        if (this.props.context.request.user.isAuthenticated && !this.state.isOTPVerified) {
-            this.setCodSelected();
-            this.handleCODButtonCheck(true);
-            this.handleCodClick();
+        if (selectedOption === 'COD') {
+            codPaymentService.selectPaymentMethod('COD', this.state.codChargeAmount);
+            this.setState({ isRadioButtonChecked: true, isCodSelected: true });
+            if (this.props.context.request.user.isAuthenticated && !this.state.isOTPVerified) {
+                this.handleCodClick();
+            }
+        } else {
+            // codPaymentService.selectPaymentMethod('PG');
+            this.setState({ isRadioButtonChecked: false, isCodSelected: false });
         }
     };
 
-    private handleCODSelectedOption = async (selectedOption: string) => {
-        // await this.korApplyCODChargesRequest();
-        codPaymentService.setSelectedOption(selectedOption);
-        codPaymentService.setCODAmount(this.state.codChargeAmount);
+    private handleCODSelectedOption = (selectedOption: string) => {
+        codPaymentService.selectPaymentMethod(selectedOption as 'COD' | 'PG', selectedOption === 'COD' ? this.state.codChargeAmount : 0);
     };
 
     @computed get isDataReady(): boolean {
@@ -288,11 +289,12 @@ export class checkoutCODOption extends React.Component<ICheckoutGiftCardModulePr
         reaction(
             () => this.isOtherPaymentsEnabled, // Observable or computed value
             otherPaymentEnabled => {
-                if (this.state.isOTPVerified || this.state.isRadioButtonChecked || this.props.context.request.user.isAuthenticated) {
-                    if (otherPaymentEnabled || this.hasElectronicDelivery) {
-                        this.setState({ isRadioButtonChecked: false, isCodSelected: false });
-                        codPaymentService.setSelectedOption('');
-                    }
+                if (
+                    (this.state.isOTPVerified || this.state.isRadioButtonChecked || this.props.context.request.user.isAuthenticated) &&
+                    (otherPaymentEnabled || this.hasElectronicDelivery)
+                ) {
+                    this.setState({ isRadioButtonChecked: false, isCodSelected: false });
+                    codPaymentService.selectPaymentMethod('');
                 }
             }
         );
@@ -428,7 +430,7 @@ export class checkoutCODOption extends React.Component<ICheckoutGiftCardModulePr
             } else if (!this.props.context.request.user.isAuthenticated && this.state.isOTPVerified) {
                 this.handleCODOptionChange({ target: radioButton } as React.ChangeEvent<HTMLInputElement>);
                 this.handleCODButtonCheck(true);
-                this.setCodSelected();
+                // this.setCodSelected();
             } else {
                 this.setState({ isRadioButtonChecked: radioButton.checked });
                 this.handleCODOptionChange({ target: radioButton } as React.ChangeEvent<HTMLInputElement>);
@@ -456,7 +458,7 @@ export class checkoutCODOption extends React.Component<ICheckoutGiftCardModulePr
     };
 
     private setCodSelected = () => {
-        codPaymentService.setCODSelected(!this.state.isCodSelected);
+        // codPaymentService.setCODSelected(!this.state.isCodSelected);
         this.setState({ isCodSelected: !this.state.isCodSelected });
     };
 

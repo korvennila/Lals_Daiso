@@ -68,6 +68,7 @@ export interface ICheckoutResources {
     cookieConsentRequiredMessage: string;
     backToShopping: string;
     placeOrderText: string;
+    payAndPlaceOrderText: string;
     confirmPaymentText: string;
     discountStringText: string;
     discountOffStringText: string;

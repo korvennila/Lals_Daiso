@@ -45,6 +45,21 @@
             "description": "Title to be displayed for Payment gateway option.",
             "type": "string",
             "default": "Credit/Debit Card/Apple Pay"
+        },
+        "paymenTenderType": {
+            "friendlyName": "Supported tender types",
+            "description": "Input the supported tender types as defined in the payment connector in HQ. This field is required only if multiple payment connectors are configured, otherwise leave it as blank",
+            "type": "string",
+            "required": false,
+            "scope": "module"
+        },
+        "isPrimaryPayment": {
+            "friendlyName": "Is primary payment",
+            "description": "If multiple payment connectors are configured, this helps denote which one should be treated as primary during error handling and other cases",
+            "type": "boolean",
+            "default": true,
+            "required": false,
+            "scope": "module"
         }
     },
     "resources": {

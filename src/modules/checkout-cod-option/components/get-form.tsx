@@ -211,13 +211,13 @@ export const getForm = (options: IGetFormInput): IForm => {
                 ref={radioButtonRef}
                 type='radio'
                 name='paymentMethod'
-                id='cod'
+                id='COD'
                 className='ms-checkout-cod__input-radio'
                 onChange={handleCODOptionChange}
                 value={CustomPaymentMethod.COD}
                 checked={isRadioButtonChecked}
             />
-            <label htmlFor='cod' className='ms-checkout-cod__label'>
+            <label htmlFor='COD' className='ms-checkout-cod__label'>
                 {giftCardNumberLabel}
             </label>
         </div>

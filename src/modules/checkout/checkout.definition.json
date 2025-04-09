@@ -287,6 +287,10 @@
             "comment": "Text for the checkout button to place the order",
             "value": "Place order"
         },
+        "payAndPlaceOrderText": {
+            "comment": "Text for the checkout button to pay and place the order",
+            "value": "Pay & Place order"
+        },
         "confirmPaymentText": {
             "comment": "Text for the checkout button to confirm payment for invoices",
             "value": "Confirm payment"
