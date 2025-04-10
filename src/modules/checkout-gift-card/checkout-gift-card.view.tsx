@@ -34,9 +34,9 @@ export const From: React.FC<IForm> = ({
                 <Node {...inputNumProps}>
                     <Node className='msc-gift-card-titleContainer'>
                         {label}
-                        {/* <span className='msc-gift-card-accordion-toggle'>
+                        <span className='msc-gift-card-accordion-toggle'>
                             <i className='msc-toggle-icon'></i>
-                        </span> */}
+                        </span>
                     </Node>
                     <Node className='msc-gift-card-container'>
                         {inputNumber}
@@ -62,9 +62,9 @@ export const From: React.FC<IForm> = ({
             <>
                 <Node className='msc-gift-card-titleContainer'>
                     {label}
-                    {/* <span className='msc-gift-card-accordion-toggle'>
+                    <span className='msc-gift-card-accordion-toggle'>
                         <i className='msc-toggle-icon'></i>
-                    </span> */}
+                    </span>
                 </Node>
                 <Node className='msc-gift-card-container'>
                     {inputNumber}

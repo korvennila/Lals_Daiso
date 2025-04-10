@@ -61,6 +61,7 @@ export interface IForm {
     showGiftCardExpInput: boolean | undefined;
     alertFieldLabel: React.ReactNode;
     paymentGatewayRadio: React.ReactNode;
+    error?: string;
 }
 
 /**

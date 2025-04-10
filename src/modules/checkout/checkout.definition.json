@@ -369,7 +369,7 @@
         },
         "subTotalLabel": {
             "comment": "Items with count label",
-            "value": "Subtotal"
+            "value": "Net Amount"
         },
         "shippingLabel": {
             "comment": "Label of shipping",

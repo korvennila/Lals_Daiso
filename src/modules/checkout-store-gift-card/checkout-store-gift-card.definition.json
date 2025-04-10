@@ -60,6 +60,12 @@
             "default": true,
             "required": false,
             "scope": "module"
+        },
+        "paymentGatewayIsNotApplicableMessage": {
+            "friendlyName": "Payment Gateway Is Not Applicable Message",
+            "description": "Message to be displayed while chosing payment gateway method with any other methods",
+            "type": "string",
+            "default": "Payment gateway is not applicable, Other payment method(s) applied"
         }
     },
     "resources": {
@@ -142,6 +148,10 @@
         "paymentGatewayTitle": {
             "comment": "Title to be displayed for Payment gateway option",
             "value": "Credit/Debit Card/Apple Pay"
+        },
+        "paymentGatewayIsNotApplicableMessage": {
+            "comment": "Title to be displayed for Payment gateway option",
+            "value": "Payment gateway is not applicable, Other payment method(s) applied"
         }
     }
 }

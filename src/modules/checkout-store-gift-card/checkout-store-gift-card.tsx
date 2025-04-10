@@ -66,6 +66,7 @@ export interface IShowResource {
 export interface IAddResource {
     form: IForm;
     list?: IList;
+    error?: string;
 }
 
 export interface ICheckoutGiftCardViewProps extends ICheckoutStoreGiftCardProps<{}>, ICheckoutGiftCardState {
@@ -207,10 +208,6 @@ export class checkoutPaymentGateway extends React.Component<ICheckoutGiftCardMod
         return this.amountDue > zeroAmount && !isPaidByOtherPaymentSource;
     }
 
-    @computed get isPaymentGatewayRadioDisabled(): boolean {
-        return this.shouldPaidByCard || this.amountDue <= 0;
-    }
-
     public componentDidMount(): void {
         when(
             () => this.isDataReady,
@@ -226,6 +223,10 @@ export class checkoutPaymentGateway extends React.Component<ICheckoutGiftCardMod
                 if (!shouldPaidByCard) {
                     this.setState({ isPaymentGatewayEnabled: false });
                     codPaymentService.selectPaymentMethod('');
+                } else {
+                    this.setState({ isPaymentGatewayEnabled: true });
+                    codPaymentService.selectPaymentMethod('PG');
+                    this.clearError();
                 }
             }
         );
@@ -370,7 +371,11 @@ export class checkoutPaymentGateway extends React.Component<ICheckoutGiftCardMod
     };
 
     private readonly onTogglePaymentGateway = (): void => {
+        this.clearError();
         if (!this.shouldPaidByCard) {
+            this.setError(
+                this.props.config.paymentGatewayIsNotApplicableMessage || this.props.resources.paymentGatewayIsNotApplicableMessage
+            );
             this.props.context.telemetry.information('Payment Gateway toggle prevented due to conditions');
             return;
         }

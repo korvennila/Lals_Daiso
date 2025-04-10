@@ -299,6 +299,19 @@ export class checkoutCODOption extends React.Component<ICheckoutGiftCardModulePr
             }
         );
 
+        // Add reaction for OTP verification
+        reaction(
+            () => this.state.isOTPVerified,
+            async isVerified => {
+                if (isVerified && this.isOtherPaymentsEnabled) {
+                    // Remove other payment methods when OTP is verified and COD is selected
+                    await this.removeCustomerPayment();
+                    await this.removeGiftCards();
+                    this.props.context.telemetry.information('Other payment methods removed due to OTP verification for COD');
+                }
+            }
+        );
+
         if (this.props.data.checkout.result?.shouldEnableCheckoutErrorDisplayMessaging) {
             reaction(
                 () => this.props.data.checkout.result?.checkoutError,
@@ -415,12 +428,12 @@ export class checkoutCODOption extends React.Component<ICheckoutGiftCardModulePr
             this.setError('');
         }
 
-        if (this.isOtherPaymentsEnabled) {
+        if (this.isOtherPaymentsEnabled && this.state.isOTPVerified) {
             await this.removeCustomerPayment();
             await this.removeGiftCards();
         }
 
-        if (radioButton && isEmpty(this.state.errorMessage) && !this.isOtherPaymentsEnabled && !this.hasElectronicDelivery) {
+        if (radioButton && isEmpty(this.state.errorMessage) && !this.hasElectronicDelivery) {
             if (!this.props.context.request.user.isAuthenticated && !this.state.isOTPVerified) {
                 event.preventDefault();
                 this.setState({ isMobileModalOpen: true, isRadioButtonChecked: false });
@@ -458,7 +471,6 @@ export class checkoutCODOption extends React.Component<ICheckoutGiftCardModulePr
     };
 
     private setCodSelected = () => {
-        // codPaymentService.setCODSelected(!this.state.isCodSelected);
         this.setState({ isCodSelected: !this.state.isCodSelected });
     };
 
@@ -540,7 +552,7 @@ export class checkoutCODOption extends React.Component<ICheckoutGiftCardModulePr
         const {
             moduleState: { isReady },
             data: { checkout },
-            config: { className, showAdditionalFields },
+            config: { className, showAdditionalFields, disableCashOnDelivery },
             resources
         } = this.props;
         const { errorMessage, giftCardNumber, giftCardPin, giftCardExp } = this.state;
@@ -550,7 +562,7 @@ export class checkoutCODOption extends React.Component<ICheckoutGiftCardModulePr
         const codMobileNumber = checkout.result?.shippingAddress?.Phone ? checkout.result?.shippingAddress?.Phone : '';
         const cAuthenticated = this.props.context.request.user.isAuthenticated ? this.props.context.request.user.isAuthenticated : false;
 
-        if (!this.isEnabled() || (!this.shouldPayGiftCard && !isReady)) {
+        if (!this.isEnabled() || (!this.shouldPayGiftCard && !isReady) || disableCashOnDelivery) {
             this.props.context.telemetry.error('Checkout giftcard content is empty, module wont render');
             return null;
         }

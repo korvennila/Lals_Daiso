@@ -21,6 +21,7 @@ export interface ICheckoutStoreGiftCardConfig extends Msdyn365.IModuleConfig {
     paymentGatewayTitle?: string;
     paymenTenderType?: string;
     isPrimaryPayment?: boolean;
+    paymentGatewayIsNotApplicableMessage?: string;
 }
 
 export interface ICheckoutStoreGiftCardResources {
@@ -44,6 +45,7 @@ export interface ICheckoutStoreGiftCardResources {
     enteredGiftCardLabel: string;
     giftCardAvailableBalanceLabel: string;
     paymentGatewayTitle: string;
+    paymentGatewayIsNotApplicableMessage: string;
 }
 
 export interface ICheckoutStoreGiftCardProps<T> extends Msdyn365.IModule<T> {

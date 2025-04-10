@@ -27,7 +27,8 @@ export const From: React.FC<IForm> = ({
     showGiftCardPinInput,
     showGiftCardExpInput,
     alertFieldLabel,
-    paymentGatewayRadio
+    paymentGatewayRadio,
+    error
 }) => (
     <Node {...formProps}>
         {alert}
@@ -77,9 +78,9 @@ export const GiftCardList: React.FC<IList> = ({ listProps, list }) => (
     </Node>
 );
 
-export const AddResource: React.FC<IAddResource> = ({ form, list }) => (
+export const AddResource: React.FC<IAddResource> = ({ form, list, error }) => (
     <>
-        {form && <From {...form} />}
+        {form && <From {...form} error={error} />}
         {/* {list && <GiftCardList {...list} />} */}
     </>
 );
@@ -95,12 +96,13 @@ const checkoutPaymentGatewayView: React.FC<ICheckoutGiftCardViewProps> = props =
     const {
         checkoutGiftCardProps,
         checkoutErrorRef, // showGiftCard,
-        addGiftCard
+        addGiftCard,
+        errorMessage
     } = props;
     return (
         <Module {...checkoutGiftCardProps} ref={checkoutErrorRef}>
             {/* {showGiftCard && <ShowResource {...showGiftCard} />} */}
-            {addGiftCard && <AddResource {...addGiftCard} />}
+            {addGiftCard && <AddResource {...addGiftCard} error={errorMessage} />}
         </Module>
     );
 };
