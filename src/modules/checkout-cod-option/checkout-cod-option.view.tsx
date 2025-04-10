@@ -57,12 +57,12 @@ export const From: React.FC<IForm> = ({
             </Node>
         ) : ( */}
         <>
-            <Node className='msc-cod-titleContainer'>
+            {/* <Node className='msc-cod-titleContainer'>
                 {label}
                 <span className='msc-cod-accordion-toggle'>
                     <i className='msc-toggle-icon'></i>
                 </span>
-            </Node>
+            </Node> */}
             <Node className={`msc-cod-charges-container`}>
                 <Node className={`msc-cod-charges-mainSection ${!isEmpty(error!) ? 'disabled' : ''}`}>
                     <Node className={`msc-cod-charges-radioSection`}>

@@ -10,7 +10,7 @@ import React from 'react';
 interface ICheckoutCODPlaceOrderButtonProps {
     disableCashOnDelivery?: boolean;
     resources: {
-        placeOrderText: string;
+        cashOnDeliveryPlaceOrderText: string;
     };
     handlePreCheckout(): Promise<any>;
     isCodSelected: boolean;
@@ -36,7 +36,7 @@ const onApplyHandler = (handlePreCheckout: () => Promise<void>) => async (event:
 
 const CheckoutCODPlaceOrderButton: React.FC<ICheckoutCODPlaceOrderButtonProps> = ({
     disableCashOnDelivery,
-    resources: { placeOrderText },
+    resources: { cashOnDeliveryPlaceOrderText },
     handlePreCheckout,
     isCodSelected,
     isPlaceOrderLoading
@@ -45,10 +45,10 @@ const CheckoutCODPlaceOrderButton: React.FC<ICheckoutCODPlaceOrderButtonProps> =
         <Button
             className={`ms-checkout__btn-place-order ${isPlaceOrderLoading ? 'is-busy' : ''}`}
             onClick={onApplyHandler(handlePreCheckout)}
-            aria-label={placeOrderText}
+            aria-label={cashOnDeliveryPlaceOrderText}
             disabled={disableCashOnDelivery || !isCodSelected || isPlaceOrderLoading}
         >
-            {placeOrderText}
+            {cashOnDeliveryPlaceOrderText}
         </Button>
     );
 };

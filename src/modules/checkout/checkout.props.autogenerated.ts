@@ -69,6 +69,7 @@ export interface ICheckoutResources {
     backToShopping: string;
     placeOrderText: string;
     payAndPlaceOrderText: string;
+    cashOnDeliveryPlaceOrderText: string;
     confirmPaymentText: string;
     discountStringText: string;
     discountOffStringText: string;

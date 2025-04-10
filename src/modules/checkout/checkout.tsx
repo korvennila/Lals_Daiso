@@ -80,6 +80,7 @@ interface ICheckoutState {
     isPaymentOptionSelected?: string;
     codChargeAmount?: number;
     isCODSelected?: boolean;
+    checkoutBtnText?: string;
 }
 
 export interface ICustomOrderSummary {
@@ -405,6 +406,29 @@ class Checkout extends React.PureComponent<ICheckoutModuleProps> {
         return this.getLoyaltyAmount + this.customerAccountAmount + this.getGiftCardTotalAmount > 0;
     }
 
+    @computed get getCustomerAccountAmount(): number {
+        const checkoutState = this.props.data.checkout.result;
+        return checkoutState && checkoutState.customerAccountAmount ? checkoutState.customerAccountAmount : 0;
+    }
+
+    @computed public get amountDue(): number {
+        const {
+            data: { checkout }
+        } = this.props;
+        if (!checkout.result) {
+            return 0;
+        }
+
+        const checkoutResult = checkout.result;
+        const cart = checkoutResult.checkoutCart.cart;
+        if (!cart || !cart.CartLines || cart.CartLines.length === 0) {
+            return 0;
+        }
+
+        // Use the card for payment after all other payment methods
+        return (cart.TotalAmount || 0) - this.getGiftCardTotalAmount - this.getLoyaltyAmount - this.getCustomerAccountAmount;
+    }
+
     public state: ICheckoutState = {
         errorMessage: '',
         isValidationPassed: false,
@@ -412,7 +436,8 @@ class Checkout extends React.PureComponent<ICheckoutModuleProps> {
         isPlaceOrderClicked: false,
         isPaymentOptionSelected: '',
         codChargeAmount: 0,
-        isCODSelected: false
+        isCODSelected: false,
+        checkoutBtnText: ''
     };
 
     private readonly telemetryContent: ITelemetryContent = getTelemetryObject(
@@ -634,6 +659,20 @@ class Checkout extends React.PureComponent<ICheckoutModuleProps> {
                 }
             }
         );
+
+        // Update reaction to watch AmountDue instead of totalAmount
+        reaction(
+            () => ({
+                amountDue: this.amountDue,
+                hasInvoiceLine: this.props.data.checkout?.result?.checkoutCart.hasInvoiceLine
+            }),
+            () => {
+                const newButtonText = this.getCheckoutButtonText();
+                this.setState({ checkoutBtnText: newButtonText });
+                this.props.telemetry.information(`Checkout button text updated to: ${newButtonText}`);
+            },
+            { fireImmediately: true }
+        );
     }
 
     public componentDidUpdate(): void {
@@ -649,6 +688,19 @@ class Checkout extends React.PureComponent<ICheckoutModuleProps> {
     public componentWillUnmount(): void {
         // Remove the listener when the component unmounts to prevent memory leaks
         codPaymentService.removeListener(this.handleRadioButtonChange);
+    }
+
+    private getCheckoutButtonText(): string {
+        const { resources } = this.props;
+        const { placeOrderText, payAndPlaceOrderText, confirmPaymentText } = resources;
+        const hasInvoiceLine = this.props.data.checkout && this.props.data.checkout.result?.checkoutCart.hasInvoiceLine;
+        const amountDue = this.amountDue || 0;
+
+        if (hasInvoiceLine) {
+            return confirmPaymentText;
+        }
+
+        return amountDue > 0 ? payAndPlaceOrderText : placeOrderText;
     }
 
     private handleRadioButtonChange = (option: string, amount: number, codSelected: boolean, codOrderFailure: string): void => {
@@ -672,7 +724,14 @@ class Checkout extends React.PureComponent<ICheckoutModuleProps> {
             }
         } = this.props;
         const { errorMessage } = this.state;
-        const { backToShopping, placeOrderText, confirmPaymentText, cookieConsentRequiredMessage, genericErrorMessage } = resources;
+        const {
+            backToShopping,
+            placeOrderText,
+            // confirmPaymentText,
+            cookieConsentRequiredMessage,
+            genericErrorMessage
+            // payAndPlaceOrderText
+        } = resources;
         const checkoutClass = classnames('ms-checkout', className);
         const allCheckoutInformation = this.getSlotItems('checkoutInformation');
         //const currencyCode = get(this.props, 'context.request.channel.Currency');
@@ -704,7 +763,9 @@ class Checkout extends React.PureComponent<ICheckoutModuleProps> {
         const backToShoppingAttributes = getTelemetryAttributes(this.telemetryContent, payLoad);
 
         const hasInvoiceLine = this.props.data.checkout && this.props.data.checkout.result?.checkoutCart.hasInvoiceLine;
-        const checkoutBtnText = hasInvoiceLine ? confirmPaymentText : placeOrderText;
+
+        // const amountDue = (this.props.data.checkout && this.props.data.checkout.result?.checkoutCart.cart.AmountDue) || 0;
+        // const checkoutBtnText = hasInvoiceLine ? confirmPaymentText : amountDue > 0 ? payAndPlaceOrderText : placeOrderText;
 
         // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition -- Explicitly check for null/undefined.
         const shouldEnableSinglePaymentAuthorizationCheckout =
@@ -908,7 +969,7 @@ class Checkout extends React.PureComponent<ICheckoutModuleProps> {
                 placeOrderButton: (
                     <PlaceOrderButtonComponent
                         {...{
-                            checkoutBtnText,
+                            checkoutBtnText: this.state.checkoutBtnText || placeOrderText,
                             placeOrder:
                                 !isExpressCheckoutApplied && shouldEnableSinglePaymentAuthorizationCheckout
                                     ? this.triggerPaymentWithPlaceOrder
