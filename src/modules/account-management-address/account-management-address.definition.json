@@ -110,11 +110,11 @@
         },
         "addressAddButtonText": {
             "comment": "Add button text",
-            "value": "Add address"
+            "value": "Add Address"
         },
         "addressAddButtonAriaLabel": {
             "comment": "Add button aria label",
-            "value": "Add address"
+            "value": "Add Address"
         },
         "addressPrimaryButtonText": {
             "comment": "Primay button text",
@@ -226,7 +226,7 @@
         },
         "addressStreetLabel": {
             "comment": "Label for the Street field",
-            "value": "Street *"
+            "value": "Buiding Name / Apartment No / Street *"
         },
         "addressStreetRequiredErrorMessage": {
             "comment": "Error message to display when street is not provided",
@@ -262,11 +262,11 @@
         },
         "addressPostboxLabel": {
             "comment": "Label for the post box field",
-            "value": "Post box"
+            "value": "Post Box"
         },
         "addressPostboxRequiredErrorMessage": {
             "comment": "Error message to display when post box is not provided",
-            "value": "Post box is required"
+            "value": "Post Box is required"
         },
         "addressHouseRULabel": {
             "comment": "Label for the house field",

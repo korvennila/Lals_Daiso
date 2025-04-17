@@ -249,7 +249,7 @@
 		},
 		"orderSummaryItemsTotalLabel": {
 			"comment": "Order summary items total label",
-			"value": "Subtotal"
+			"value": "Subtotal (Inc VAT)"
 		},
 		"orderSummaryShippingFeeLabel": {
 			"comment": "Order summary shipping fee label",

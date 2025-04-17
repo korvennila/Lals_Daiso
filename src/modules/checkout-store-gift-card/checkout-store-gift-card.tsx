@@ -44,7 +44,6 @@ interface ICheckoutGiftCardState {
     giftCardPin: string;
     giftCardExp: string;
     isPaymentGatewayEnabled: boolean; // New state for the radio button
-    // isPaymentGatewayDisabled: boolean; // New property
 }
 
 enum SupportedGiftCardType {
@@ -105,7 +104,6 @@ export class checkoutPaymentGateway extends React.Component<ICheckoutGiftCardMod
         giftCardPin: '',
         giftCardExp: '',
         isPaymentGatewayEnabled: true
-        // isPaymentGatewayDisabled: false // Initialize as false
     };
 
     private readonly inputRef: React.RefObject<HTMLInputElement> = React.createRef();
@@ -279,7 +277,7 @@ export class checkoutPaymentGateway extends React.Component<ICheckoutGiftCardMod
         const additionalFields = showAdditionalFields;
         const supportedGiftCardType = this.props.context.app.config.giftCardSupported;
 
-        if (!this.isEnabled() || (!this.shouldPayGiftCard && !isReady)) {
+        if (!this.isEnabled() && !this.shouldPaidByCard && !isReady) {
             this.props.context.telemetry.error('Checkout giftcard content is empty, module wont render');
             return null;
         }

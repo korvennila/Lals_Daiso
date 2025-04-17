@@ -23,6 +23,7 @@ const CheckoutPaymentInstrumentView: React.FC<ICheckoutPaymentInstrumentViewProp
     paymentInformation,
     addPaymentForm,
     overlayModal,
+    paymentGatewayRadio,
     ...restProps
 }) => (
     <Module {...checkoutPaymentInstrument} ref={checkoutErrorRef}>
@@ -30,6 +31,7 @@ const CheckoutPaymentInstrumentView: React.FC<ICheckoutPaymentInstrumentViewProp
         {alert}
         {paymentInformation}
         {addPaymentForm}
+        {paymentGatewayRadio}
         {overlayModal && <OverlayModal {...overlayModal} />}
     </Module>
 );

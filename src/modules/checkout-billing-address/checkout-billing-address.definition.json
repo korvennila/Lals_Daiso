@@ -266,11 +266,11 @@
         },
         "addressPostboxLabel": {
             "comment": "Label for the post box field",
-            "value": "Post box"
+            "value": "Post Box"
         },
         "addressPostboxRequiredErrorMessage": {
             "comment": "Error message to display when post box is not provided",
-            "value": "Post box is required"
+            "value": "Post Box is required"
         },
         "addressHouseRULabel": {
             "comment": "Label for the house field",

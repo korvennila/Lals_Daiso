@@ -692,8 +692,8 @@ const ProductCard: React.FC<IProductComponentProps> = ({
                                 className='msc-product'
                                 {...attribute}
                             >
-                                <button className='ms-selectVarient__button' title='Select Variant'>
-                                    Select Variant
+                                <button className='ms-selectVarient__button' title='Select Option'>
+                                    Select Option
                                 </button>
                             </a>
                         </div>

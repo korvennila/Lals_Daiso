@@ -526,7 +526,8 @@ export class CheckoutCustomerAccountPayment extends React.Component<
 
         this.setState({
             paymentAmount: 0,
-            voucherId: ''
+            voucherId: '',
+            creditBalance: 0
         });
 
         this.onChangePaymentAmount('', NaN, '0');

@@ -151,7 +151,6 @@ export class checkoutCODOption extends React.Component<ICheckoutGiftCardModulePr
                 this.handleCodClick();
             }
         } else {
-            // codPaymentService.selectPaymentMethod('PG');
             this.setState({ isRadioButtonChecked: false, isCodSelected: false });
         }
     };
@@ -303,11 +302,13 @@ export class checkoutCODOption extends React.Component<ICheckoutGiftCardModulePr
         reaction(
             () => this.state.isOTPVerified,
             async isVerified => {
-                if (isVerified && this.isOtherPaymentsEnabled) {
+                if (
+                    (isVerified || (!this.isShippingPhoneNew && this.props.context.request.user.isAuthenticated)) &&
+                    this.isOtherPaymentsEnabled
+                ) {
                     // Remove other payment methods when OTP is verified and COD is selected
                     await this.removeCustomerPayment();
                     await this.removeGiftCards();
-                    this.props.context.telemetry.information('Other payment methods removed due to OTP verification for COD');
                 }
             }
         );
@@ -428,24 +429,40 @@ export class checkoutCODOption extends React.Component<ICheckoutGiftCardModulePr
             this.setError('');
         }
 
-        if (this.isOtherPaymentsEnabled && this.state.isOTPVerified) {
+        if (
+            this.isOtherPaymentsEnabled &&
+            (this.state.isOTPVerified || (!this.isShippingPhoneNew && this.props.context.request.user.isAuthenticated))
+        ) {
             await this.removeCustomerPayment();
             await this.removeGiftCards();
         }
 
+        // if (radioButton && isEmpty(this.state.errorMessage) && !this.hasElectronicDelivery) {
+        //     if (!this.props.context.request.user.isAuthenticated && !this.state.isOTPVerified) {
+        //         event.preventDefault();
+        //         this.setState({ isMobileModalOpen: true, isRadioButtonChecked: false });
+        //     } else if (this.props.context.request.user.isAuthenticated && this.isShippingPhoneNew && !this.state.isOTPVerified) {
+        //         event.preventDefault();
+        //         this.setState({ isMobileModalOpen: true, isRadioButtonChecked: false });
+        //     } else if (!this.props.context.request.user.isAuthenticated && this.state.isOTPVerified) {
+        //         this.handleCODOptionChange({ target: radioButton } as React.ChangeEvent<HTMLInputElement>);
+        //         // this.handleCODButtonCheck(true);
+        //         // this.setCodSelected();
+        //     } else {
+        //         // this.setState({ isRadioButtonChecked: radioButton.checked });
+        //         this.handleCODOptionChange({ target: radioButton } as React.ChangeEvent<HTMLInputElement>);
+        //     }
+        // }
+
         if (radioButton && isEmpty(this.state.errorMessage) && !this.hasElectronicDelivery) {
-            if (!this.props.context.request.user.isAuthenticated && !this.state.isOTPVerified) {
+            const { isAuthenticated } = this.props.context.request.user;
+            const { isOTPVerified } = this.state;
+            const cNeedsOTP = (!isAuthenticated || (isAuthenticated && this.isShippingPhoneNew)) && !isOTPVerified;
+
+            if (cNeedsOTP) {
                 event.preventDefault();
                 this.setState({ isMobileModalOpen: true, isRadioButtonChecked: false });
-            } else if (this.props.context.request.user.isAuthenticated && this.isShippingPhoneNew && !this.state.isOTPVerified) {
-                event.preventDefault();
-                this.setState({ isMobileModalOpen: true, isRadioButtonChecked: false });
-            } else if (!this.props.context.request.user.isAuthenticated && this.state.isOTPVerified) {
-                this.handleCODOptionChange({ target: radioButton } as React.ChangeEvent<HTMLInputElement>);
-                this.handleCODButtonCheck(true);
-                // this.setCodSelected();
             } else {
-                this.setState({ isRadioButtonChecked: radioButton.checked });
                 this.handleCODOptionChange({ target: radioButton } as React.ChangeEvent<HTMLInputElement>);
             }
         }

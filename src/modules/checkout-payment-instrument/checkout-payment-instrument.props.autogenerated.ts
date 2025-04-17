@@ -18,6 +18,9 @@ export interface ICheckoutPaymentInstrumentConfig extends Msdyn365.IModuleConfig
     shouldPassLocaleToiFrame?: boolean;
     className?: string;
     clientRender?: boolean;
+    paymentGatewayTitle?: string;
+    paymentGatewayIsNotApplicableMessage?: string;
+    isEnablePaymentRadioOption?: boolean;
 }
 
 export interface ICheckoutPaymentInstrumentResources {
@@ -36,6 +39,8 @@ export interface ICheckoutPaymentInstrumentResources {
     iframeAriaLabel: string;
     loadingMessage: string;
     addressTitle: string;
+    paymentGatewayTitle: string;
+    paymentGatewayIsNotApplicableMessage: string;
 }
 
 export const enum HeadingTag {

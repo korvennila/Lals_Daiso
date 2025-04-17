@@ -261,7 +261,7 @@
         },
         "unableToAuthorizePaymentErrorMessage": {
             "comment": "Unable to authorize payment error message",
-            "value": "The payment could not be authorized. Please try again with a different card or payment method. Reference Code: CCR002"
+            "value": "The payment couldn’t be completed. Please try again or try with a different card."
         },
         "unableToCancelPaymentErrorMessage": {
             "comment": "Unable to cancel payment error message",
@@ -369,7 +369,7 @@
         },
         "subTotalLabel": {
             "comment": "Items with count label",
-            "value": "Net Amount"
+            "value": "Subtotal (Inc VAT)"
         },
         "shippingLabel": {
             "comment": "Label of shipping",

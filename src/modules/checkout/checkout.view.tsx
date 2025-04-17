@@ -214,7 +214,9 @@ const CheckoutView: React.FC<ICheckoutViewProps> = props => {
         <Module {...checkoutProps} ref={checkoutErrorRef}>
             {!hasSalesOrder && !checkoutExpressPaymentContainer && <Node {...headerProps}>{title}</Node>}
             {!hasSalesOrder && isPaymentVerificationRedirection && shouldEnableSinglePaymentAuthorizationCheckout && !alert && !loading && (
-                <Waiting className='msc-waiting-circular msc-waiting-lg' />
+                <div className='ms-checkout__page-loader' aria-busy='true'>
+                    <Waiting className='msc-waiting-circular msc-waiting-lg' />
+                </div>
             )}
             {!hasSalesOrder && (
                 <Node {...bodyProps}>
