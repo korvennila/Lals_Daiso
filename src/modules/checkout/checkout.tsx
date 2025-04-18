@@ -565,10 +565,10 @@ class Checkout extends React.PureComponent<ICheckoutModuleProps> {
 
                     await this.onPlaceOrder();
 
-                    // // If 3D authentication redirection, don't update isPlaceOrderLoading
-                    // if (!this.props.data.checkout.result.isPaymentVerificationRequired) {
-                    //     this.setState({ isPlaceOrderLoading: false });
-                    // }
+                    // If 3D authentication redirection, don't update isPlaceOrderLoading
+                    if (!this.props.data.checkout.result.isPaymentVerificationRequired) {
+                        this.setState({ isPlaceOrderLoading: false });
+                    }
                 }
             }
         );
@@ -723,7 +723,7 @@ class Checkout extends React.PureComponent<ICheckoutModuleProps> {
                 }
             }
         } = this.props;
-        const { errorMessage, isPlaceOrderLoading } = this.state;
+        const { errorMessage } = this.state;
         const {
             backToShopping,
             placeOrderText,
@@ -918,20 +918,7 @@ class Checkout extends React.PureComponent<ICheckoutModuleProps> {
             // isPlaceOrderForCustOrderSummary: false
         };
 
-        // Add full-page loader when isPlaceOrderLoading is true
-        if (isPlaceOrderLoading) {
-            viewProps = {
-                ...viewProps,
-                loading: (
-                    <div className='ms-checkout__page-loader' aria-busy='true'>
-                        <Waiting className='msc-waiting-circular msc-waiting-lg' />
-                        <div className='ms-checkout__loader-message'>
-                            Please wait while your transaction is being processed. Don’t refresh or press the back button.
-                        </div>
-                    </div>
-                )
-            };
-        } else if (!isConsentGiven && isAuthenticated) {
+        if (!isConsentGiven && isAuthenticated) {
             viewProps = {
                 ...viewProps,
                 alert: <AlertComponent {...{ message: cookieConsentRequiredMessage }} />
@@ -1120,24 +1107,19 @@ class Checkout extends React.PureComponent<ICheckoutModuleProps> {
         } = this.props;
 
         this.props.telemetry.information('Checkout onPlaceOrder is called.');
-        this.setState({ isPlaceOrderClicked: true, isPlaceOrderLoading: true });
+        this.setState({ isPlaceOrderClicked: true });
 
-        try {
-            // If hasInvoiceLine is true, no inventory check
-            if (
-                !this.props.data.checkout.result?.checkoutCart.hasInvoiceLine &&
-                enableStockCheck &&
-                (await this.isOverMaxQuantity((await checkout).checkoutCart.cart, await products))
-            ) {
-                this.setState({
-                    errorMessage: checkoutOutOfStockErrorMessage,
-                    isPlaceOrderLoading: false
-                });
-
-                this.props.context.telemetry.error(checkoutOutOfStockErrorMessage);
-                return;
-            }
-
+        // If hasInvoiceLine is true, no inventory check
+        if (
+            !this.props.data.checkout.result?.checkoutCart.hasInvoiceLine &&
+            enableStockCheck &&
+            (await this.isOverMaxQuantity((await checkout).checkoutCart.cart, await products))
+        ) {
+            this.setState({
+                errorMessage: checkoutOutOfStockErrorMessage
+            });
+            this.props.context.telemetry.error(checkoutOutOfStockErrorMessage);
+        } else {
             const hasOrderConfirmation = orderConfirmation && orderConfirmation.length > 0;
 
             const customActionContext: Msdyn365.IActionContext = actionContext;
@@ -1213,8 +1195,6 @@ class Checkout extends React.PureComponent<ICheckoutModuleProps> {
                     console.log('Cart update result:', updateAttributeValues, updateExtensionProperties);
                 } catch (error) {
                     console.error('Error updating cart:', error);
-                    this.handleCheckoutError(error);
-                    return;
                 }
             }
 
@@ -1227,20 +1207,11 @@ class Checkout extends React.PureComponent<ICheckoutModuleProps> {
                 !hasOrderConfirmation,
                 updatedCartVersion,
                 this.props.data.checkout.result?.isPaymentVerificationRedirection
-            );
-            // .catch(error => {
-            //     this.handleCheckoutError(error);
-            // });
+            ).catch(error => {
+                this.handleCheckoutError(error);
+            });
 
             await checkout.result?.updateIsPaymentSectionContainerReady({ newIsPaymentSectionContainerReady: false });
-        } catch (error) {
-            this.handleCheckoutError(error);
-            return;
-        } finally {
-            // Only reset isPlaceOrderLoading if not in payment verification redirection
-            if (!this.props.data.checkout.result?.isPaymentVerificationRedirection) {
-                this.setState({ isPlaceOrderLoading: false });
-            }
         }
     };
 
@@ -1593,42 +1564,47 @@ class Checkout extends React.PureComponent<ICheckoutModuleProps> {
         } = this.props;
         const checkoutResult = this.props.data.checkout.result;
         const apiError = error && error.message;
-
-        // Initialize state update object
-        const newState: Partial<ICheckoutState> = {
-            isPlaceOrderLoading: false,
-            isPlaceOrderClicked: false
-        };
-
         if (error?.statusCode === 500) {
-            newState.errorMessage = checkoutApiFailureErrorMessage;
-        } else if (checkoutResult && checkoutResult.shouldEnableCheckoutErrorDisplayMessaging) {
+            const errorMessage = checkoutApiFailureErrorMessage;
+            this.setState({
+                errorMessage
+            });
+            this.props.telemetry.exception(error);
+            this.setState({ isPlaceOrderLoading: false });
+            return;
+        }
+        if (checkoutResult && checkoutResult.shouldEnableCheckoutErrorDisplayMessaging) {
             const errorCode = error && error.name ? error.name : '';
             // apiError message will be used if errorcode resource/enums is unavailable
             setCheckoutErrors(errorCode, this.props.resources, !!checkoutResult.isExpressCheckoutApplied, actionContext, apiError);
         } else {
-            newState.errorMessage =
-                error?.name === 'Microsoft_Dynamics_Commerce_Runtime_InvalidCartVersion'
-                    ? invalidCartVersionErrorMessage
-                    : error?.name === 'Microsoft_Dynamics_Commerce_Runtime_MissingRequiredCartTenderLines'
-                    ? missingRequiredCartTenderLinesErrorMessage
-                    : error?.name === 'Microsoft_Dynamics_Commerce_Runtime_ExclusiveCouponCannotBeAppliedWithOtherCoupons'
-                    ? apiError || genericErrorMessage
-                    : genericErrorMessage;
+            let errorMessage = genericErrorMessage;
+            this.setState({ isPlaceOrderClicked: false });
+
+            if (error && error.name === 'Microsoft_Dynamics_Commerce_Runtime_InvalidCartVersion') {
+                errorMessage = invalidCartVersionErrorMessage;
+                // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access -- unknown error type.
+            } else if (error && error.name === 'Microsoft_Dynamics_Commerce_Runtime_MissingRequiredCartTenderLines') {
+                errorMessage = missingRequiredCartTenderLinesErrorMessage;
+            } else if (error && error.name === 'Microsoft_Dynamics_Commerce_Runtime_ExclusiveCouponCannotBeAppliedWithOtherCoupons') {
+                // If api error is not available show generic message
+                errorMessage = apiError || genericErrorMessage;
+            }
+
+            // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access -- unknown error type.
+            if (
+                this.props.data.checkout.result?.shouldEnableSinglePaymentAuthorizationCheckout &&
+                error.data?.AdditionalContext &&
+                !this.props.data.checkout.result?.isPaymentVerificationRedirection
+            ) {
+                return;
+            }
+
+            this.setState({
+                errorMessage
+            });
+            this.props.telemetry.exception(error);
         }
-
-        // Skip state update for specific single payment authorization cases
-
-        if (
-            checkoutResult?.shouldEnableSinglePaymentAuthorizationCheckout &&
-            error.data?.AdditionalContext &&
-            !checkoutResult?.isPaymentVerificationRedirection
-        ) {
-            return;
-        }
-
-        this.setState(newState);
-        this.props.telemetry.exception(error);
     };
 }
 
