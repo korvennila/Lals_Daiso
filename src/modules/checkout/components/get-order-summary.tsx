@@ -27,6 +27,7 @@ export const getOrderSummary = (input: ICheckoutProps<ICheckoutData>): IOrderSum
             shippingLabel,
             taxLabel,
             orderTotalLabel,
+            orderTotalWithOutVATLabel,
             loyaltyLabel,
             giftcardLabel,
             totalDiscountsLabel,
@@ -51,6 +52,7 @@ export const getOrderSummary = (input: ICheckoutProps<ICheckoutData>): IOrderSum
         ?.IsEnabled;
     // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access -- app configs are of generic type
     const isShowOrHideTaxEnabled = context.request.app.config.isEnableShowOrHideSalesTaxECommerceEnabled === true;
+    const cTotalLabel = isShowOrHideTaxEnabled ? orderTotalWithOutVATLabel : orderTotalLabel;
 
     const handleOrderSummaryHeadingChange = (event: Msdyn365.ContentEditableEvent) => {
         const {
@@ -79,7 +81,7 @@ export const getOrderSummary = (input: ICheckoutProps<ICheckoutData>): IOrderSum
                   subTotalLabel,
                   shippingLabel,
                   taxLabel,
-                  orderTotalLabel,
+                  // orderTotalLabel,
                   loyaltyLabel,
                   giftcardLabel,
                   totalDiscountsLabel,
@@ -96,6 +98,7 @@ export const getOrderSummary = (input: ICheckoutProps<ICheckoutData>): IOrderSum
                   // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access -- existing property.
                   isTaxIncludedInPrice: cart.IsTaxIncludedInPrice,
                   isShowTaxBreakup: isShowOrHideTaxEnabled,
+                  orderTotalLabel: cTotalLabel,
                   customerAccountLabel
               })
             : undefined

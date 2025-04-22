@@ -778,8 +778,8 @@ const BuyboxView: React.FC<IBuyboxViewProps & IBuyboxExtentionProps<IBuyboxData>
     };
 
     const [isPopoverOpen, setIsPopoverOpen] = React.useState(false);
-    const [isExpanded, setIsExpanded] = React.useState(false);
-    const [isProductSpecExpanded, setIsProductSpecExpanded] = React.useState(true);
+    const [isExpanded, setIsExpanded] = React.useState(true);
+    const [isProductSpecExpanded, setIsProductSpecExpanded] = React.useState(false);
 
     const handleShareClick: React.MouseEventHandler<HTMLButtonElement> = () => {
         setIsPopoverOpen(true);

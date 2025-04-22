@@ -86,6 +86,10 @@ export enum OrderHistorySteps {
     Delivered = 'Delivered'
 }
 
+export interface ICustomGetOrderSummaryInput extends IGetOrderSummaryInput {
+    orderSummaryGrandTotalWithVATLabel: string;
+}
+
 /**
  *
  * OrderDetails component.
@@ -167,7 +171,7 @@ class OrderDetails extends React.PureComponent<IOrderDetailsProps<IOrderDetailsD
         return 0;
     }
 
-    @computed get orderSummaryProps(): IGetOrderSummaryInput | undefined {
+    @computed get orderSummaryProps(): ICustomGetOrderSummaryInput | undefined {
         if (!this.order) {
             return;
         }
@@ -207,6 +211,7 @@ class OrderDetails extends React.PureComponent<IOrderDetailsProps<IOrderDetailsD
                 orderSummaryShippingFeeLabel,
                 orderSummaryTaxLabel,
                 orderSummaryGrandTotalLabel,
+                orderSummaryGrandTotalWithVATLabel,
                 pointsEarnedLabel
             }
         } = this.props;
@@ -224,7 +229,8 @@ class OrderDetails extends React.PureComponent<IOrderDetailsProps<IOrderDetailsD
             },
             canShip,
             isTaxIncludedInPrice: this.order.IsTaxIncludedInPrice,
-            isShowTaxBreakUp: isShowOrHideTaxEnabled
+            isShowTaxBreakUp: isShowOrHideTaxEnabled,
+            orderSummaryGrandTotalWithVATLabel: orderSummaryGrandTotalWithVATLabel
         };
     }
 
@@ -498,9 +504,10 @@ class OrderDetails extends React.PureComponent<IOrderDetailsProps<IOrderDetailsD
             orderSummary: this._renderOrderSummary(),
             payment: this._renderOrderPayment(),
             help: this._renderOrderHelp(),
-            orderProgressTracker: this._orderDetailsProgress ? (
-                <OrderProgressTracker steps={steps} currentStep={this._orderDetailsProgress} />
-            ) : null
+            orderProgressTracker:
+                this.isCurrentChannel && this._orderDetailsProgress ? (
+                    <OrderProgressTracker steps={steps} currentStep={this._orderDetailsProgress} />
+                ) : null
         };
 
         return this.props.renderView(viewProps) as React.ReactElement;

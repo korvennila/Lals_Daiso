@@ -59,6 +59,7 @@ export interface IOrderDetailsResources {
     orderSummaryShippingFeeLabel: string;
     orderSummaryTaxLabel: string;
     orderSummaryGrandTotalLabel: string;
+    orderSummaryGrandTotalWithVATLabel: string;
     salesLineQuantityText: string;
     processingLabel: string;
     needHelpLabel: string;

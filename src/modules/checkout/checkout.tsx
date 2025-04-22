@@ -275,6 +275,15 @@ class Checkout extends React.PureComponent<ICheckoutModuleProps> {
         if (!cart || !cart.SubtotalAmount) {
             return 0;
         }
+        // return cart.SubtotalAmount - (this.taxAmount || 0);
+        return cart.SubtotalAmount;
+    }
+
+    @computed get subTotalwithOutVAT(): number | undefined {
+        const cart = this.props.data.checkout?.result?.checkoutCart?.cart;
+        if (!cart || !cart.SubtotalAmount) {
+            return 0;
+        }
         return cart.SubtotalAmount - (this.taxAmount || 0);
     }
 
@@ -797,6 +806,7 @@ class Checkout extends React.PureComponent<ICheckoutModuleProps> {
         const shouldFocusOnCheckoutError = this.props.data.checkout?.result?.shouldFocusOnCheckoutError;
 
         let hasExpressPaymentContainer = false;
+        const isShowOrHideTaxEnabled = this.props.context.request.app.config.isEnableShowOrHideSalesTaxECommerceEnabled === true;
 
         if (
             typeof window !== 'undefined' &&
@@ -845,17 +855,21 @@ class Checkout extends React.PureComponent<ICheckoutModuleProps> {
                     ? {
                           subtotal: (
                               <div className='msc-order-summary-subTotal'>
-                                  <span>{`${resources.subTotalLabel}:`}</span> <span>{`AED ${this.subTotal?.toFixed(2)}`}</span>
+                                  <span>{`${resources.subTotalLabel}:`}</span>{' '}
+                                  <span>{`AED ${
+                                      !isShowOrHideTaxEnabled ? this.subTotal?.toFixed(2) : this.subTotalwithOutVAT?.toFixed(2)
+                                  }`}</span>
                               </div>
                           ),
-                          tax: this.taxAmount ? (
-                              <div className='msc-order-summary-tax'>
-                                  <span>{`${resources.taxLabel}:`} </span>
-                                  <span>{`AED ${this.taxAmount?.toFixed(2)}`}</span>
-                              </div>
-                          ) : (
-                              undefined
-                          ),
+                          tax:
+                              this.taxAmount && isShowOrHideTaxEnabled ? (
+                                  <div className='msc-order-summary-tax'>
+                                      <span>{`${resources.taxLabel}:`} </span>
+                                      <span>{`AED ${this.taxAmount?.toFixed(2)}`}</span>
+                                  </div>
+                              ) : (
+                                  undefined
+                              ),
                           totalDiscounts: this.totalDiscount ? (
                               <div className='msc-order-summary-totalDiscount'>
                                   <span>{`${resources.totalDiscountsLabel}:`}</span>{' '}
@@ -910,7 +924,10 @@ class Checkout extends React.PureComponent<ICheckoutModuleProps> {
                           ),
                           orderTotal: (
                               <div className='msc-order-summary-orderTotal'>
-                                  <span>{`${resources.orderTotalLabel}:`}</span> <span>{` AED ${this.totalAmount?.toFixed(2)}`}</span>
+                                  <span>{`${
+                                      !isShowOrHideTaxEnabled ? resources.orderTotalLabel : resources.orderTotalWithOutVATLabel
+                                  }:`}</span>{' '}
+                                  <span>{` AED ${this.totalAmount?.toFixed(2)}`}</span>
                               </div>
                           )
                       }

@@ -80,11 +80,11 @@
 	"resources": {
 		"searchtext": {
 			"comment": "Search label text",
-			"value": "Search"
+			"value": "Looking for"
 		},
 		"searchLabelArialLabel": {
 			"comment": "Text for search label aria label",
-			"value": "Search"
+			"value": "Looking for"
 		},
 		"cancelBtnAriaLabel": {
 			"comment": "Text for cancel button aria label",

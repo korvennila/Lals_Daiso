@@ -369,11 +369,15 @@
         },
         "subTotalLabel": {
             "comment": "Items with count label",
-            "value": "Subtotal (Inc VAT)"
+            "value": "Subtotal"
+        },
+        "subTotalWithOutVATLabel": {
+            "comment": "Items with count label",
+            "value": "Subtotal"
         },
         "shippingLabel": {
             "comment": "Label of shipping",
-            "value": "Shipping"
+            "value": "Shipping Fee"
         },
         "otherCharges": {
             "comment": "String associated with other charge line display text",
@@ -381,7 +385,7 @@
         },
         "codCharges": {
             "comment": "Label of COD Charges",
-            "value": "COD Charges"
+            "value": "Cash On Delivery Fee"
         },
         "shippingCharges": {
             "comment": "String associated with shipping charges line display text",
@@ -417,7 +421,11 @@
         },
         "orderTotalLabel": {
             "comment": "Label for total order amount",
-            "value": "Amount Due"
+            "value": "Total (VAT Inclusive)"
+        },
+        "orderTotalWithOutVATLabel": {
+            "comment": "Label for total order amount",
+            "value": "Total"
         },
         "totalDiscountsLabel": {
             "comment": "Label of total discounts",

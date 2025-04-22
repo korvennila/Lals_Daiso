@@ -7,7 +7,8 @@
 import { PriceComponent } from '@msdyn365-commerce/components';
 import * as React from 'react';
 
-import { IGetOrderSummaryInput, IOrderSummary, IPriceContext } from '@msdyn365-commerce-modules/order-management';
+import { IOrderSummary, IPriceContext } from '@msdyn365-commerce-modules/order-management';
+import { ICustomGetOrderSummaryInput } from '../order-details';
 
 interface ISummaryLineProps {
     priceContext?: IPriceContext;
@@ -47,8 +48,9 @@ export const getOrderDetailsOrderSummary = ({
     },
     canShip,
     isTaxIncludedInPrice,
-    isShowTaxBreakUp
-}: IGetOrderSummaryInput): IOrderSummary => {
+    isShowTaxBreakUp,
+    orderSummaryGrandTotalWithVATLabel
+}: ICustomGetOrderSummaryInput): IOrderSummary => {
     const subTotal = isTaxIncludedInPrice && isShowTaxBreakUp ? order.SubtotalAmountWithoutTax : order.SubtotalAmount;
     const taxOnShippingCharge = order.TaxOnShippingCharge !== undefined ? order.TaxOnShippingCharge : 0;
     const shippingChargeAmount = order.ShippingChargeAmount !== undefined ? order.ShippingChargeAmount : 0;
@@ -96,7 +98,7 @@ export const getOrderDetailsOrderSummary = ({
         totalAmount: (
             <OrderSummaryLine
                 name='total-amount'
-                label={orderSummaryGrandTotalLabel}
+                label={isShowTaxBreakUp ? orderSummaryGrandTotalLabel : orderSummaryGrandTotalWithVATLabel}
                 value={order.TotalAmount}
                 priceContext={priceContext}
                 priceCurrency={order.CurrencyCode}

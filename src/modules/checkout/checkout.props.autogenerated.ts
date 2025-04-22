@@ -89,6 +89,7 @@ export interface ICheckoutResources {
     editCartText: string;
     configString: string;
     subTotalLabel: string;
+    subTotalWithOutVATLabel: string;
     shippingLabel: string;
     otherCharges: string;
     codCharges: string;
@@ -101,6 +102,7 @@ export interface ICheckoutResources {
     totalAmountLabel: string;
     totalSavingsLabel: string;
     orderTotalLabel: string;
+    orderTotalWithOutVATLabel: string;
     totalDiscountsLabel: string;
     toBeCalculatedText: string;
     inputQuantityAriaLabel: string;
