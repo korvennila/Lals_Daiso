@@ -607,7 +607,7 @@ const cartLineItemFunctions = {
 // eslint-disable-next-line no-redeclare
 const CartLine: React.FC<ICartLineProps> = (props: ICartLineProps) => {
     const { isSalesLine, productUrl, resources } = props;
-    const { product, cartLine } = props.data;
+    const { product, cartLine, cartState } = props.data;
     const defaultMaxQuantity: number = 10;
     const singleQuantity: number = 1;
 
@@ -863,7 +863,7 @@ const CartLine: React.FC<ICartLineProps> = (props: ICartLineProps) => {
         }
     };
 
-    const capitalizeWords = (string: string | undefined): string => {
+    /** const capitalizeWords = (string: string | undefined): string => {
         if (!string) {
             return '';
         }
@@ -875,13 +875,15 @@ const CartLine: React.FC<ICartLineProps> = (props: ICartLineProps) => {
             .map(word => word.charAt(0).toUpperCase() + word.slice(1))
             .join(' ');
         return finalString;
-    };
+    }; */
 
     React.useEffect(() => {
         if (props.currentQuantity !== undefined && props.maxQuantity !== undefined && props.maxQuantity !== 0) {
             setMaxLimitReached(props.currentQuantity >= (props.maxQuantity ?? defaultMaxQuantity));
         }
     }, [props.currentQuantity, props.maxQuantity]);
+
+    const hasNonGiftCards = cartState?.cart.CartLines?.some(cartLine => cartLine.IsGiftCardLine === false);
 
     return (
         <div className='msc-cart-line'>
@@ -904,7 +906,8 @@ const CartLine: React.FC<ICartLineProps> = (props: ICartLineProps) => {
                     <CatalogLabelComponent {...props} />
                     {MsDyn365.isBrowser ? (
                         <a className='msc-cart-line__product-title' href={productUrl} {...productAttribute}>
-                            {capitalizeWords(productName)}
+                            {/* {capitalizeWords(productName)} */}
+                            {productName}
                         </a>
                     ) : null}
                     {ArrayExtensions.hasElements(productDimensions) ? (
@@ -940,7 +943,7 @@ const CartLine: React.FC<ICartLineProps> = (props: ICartLineProps) => {
                     </div>
                     {renderInventoryLabel}
                     {renderDiscountLines}
-                    {generateErrorMessage()}
+                    {!product?.IsGiftCard && !hasNonGiftCards && generateErrorMessage()}
                     {!props.errorMessage && generateMaxErrorMessage()}
                     {props.showShippingChargesForLineItems && <div className='msc-cart-line__freight'>{renderShippingLabel}</div>}
                     {renderOtherCharges}

@@ -555,7 +555,7 @@ const renderOrderSummaryCheckout = (props: ICartViewProps): JSX.Element | undefi
                 ) : null}
             </Node>
             {props.createTemplateFromCartButton}
-            {props.giftcardErrorContent}
+            {/* {props.giftcardErrorContent} */}
         </Node>
     );
 };
@@ -591,6 +591,7 @@ const CartView: React.FC<ICartViewProps & ICartExtensionProps<{}>> = (props: ICa
     );
     return (
         <>
+            {props.orderSummaryHeading && <div className='msc-cart-giftcardErrorContent'>{props.giftcardErrorContent}</div>}
             <div className={props.className} id={props.id} {...props.renderModuleAttributes(props)}>
                 {props.checkoutBlockedDueToUnavailableFunds}
                 {updatedTitle}

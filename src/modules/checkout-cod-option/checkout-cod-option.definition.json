@@ -217,7 +217,7 @@
         },
         "codChargesLabel": {
             "comment": "Label for COD Charges",
-            "value": "COD Charges: AED"
+            "value": "AED"
         },
         "codChargeAmountErrorMessage": {
             "comment": "Generic error message for COD Charge Amount API",

@@ -67,14 +67,14 @@ export const From: React.FC<IForm> = ({
                 <Node className={`msc-cod-charges-mainSection ${!isEmpty(error!) ? 'disabled' : ''}`}>
                     <Node className={`msc-cod-charges-radioSection`}>
                         {inputNumber}
-                        {codChargeAmount && codChargeAmount > 0 ? (
-                            <Node className='msc-cod-charges-label'>
-                                {`${resources?.codChargesLabel} `}
-                                {codChargeAmount?.toFixed(2)}
-                            </Node>
-                        ) : (
-                            undefined
-                        )}
+                        {/* {codChargeAmount && codChargeAmount > 0 ? (
+                                    <Node className='msc-cod-charges-label'>
+                                        {`${resources?.codChargesLabel} `}
+                                        {codChargeAmount?.toFixed(2)}
+                                    </Node>
+                                ) : (
+                                    undefined
+                                )} */}
                     </Node>
                     {alert}
                 </Node>

@@ -649,7 +649,8 @@ export class checkoutCODOption extends React.Component<ICheckoutGiftCardModulePr
                           handleCODOptionChange: this.handleCODOptionChange,
                           radioButtonRef: this.radioButtonRef,
                           isRadioButtonChecked: this.state.isRadioButtonChecked,
-                          isPlaceOrderLoading: this.state.isPlaceOrderLoading
+                          isPlaceOrderLoading: this.state.isPlaceOrderLoading,
+                          codChargeAmount: this.state.codChargeAmount
                       }),
                       list: getList({
                           canRemove: true,

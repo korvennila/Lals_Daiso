@@ -149,7 +149,7 @@ const _renderAriaLabel = (props: IWishlistItemProps): string => {
     return `${Name} ${formattedPrice} ${(dimensions && dimensions.join('')) || ''}`;
 };
 
-const capitalizeWords = (string: string | undefined): string => {
+/** const capitalizeWords = (string: string | undefined): string => {
     if (!string) {
         return '';
     }
@@ -161,7 +161,7 @@ const capitalizeWords = (string: string | undefined): string => {
         .map(word => word.charAt(0).toUpperCase() + word.slice(1))
         .join(' ');
     return finalString;
-};
+}; */
 
 /**
  * Renders a link to a product based on the given props.
@@ -183,7 +183,8 @@ const renderProductLink = (input: IWishlistItemProps, productUrl: string) => {
                 {...productAttributes}
                 aria-label={_renderAriaLabel(input)}
             >
-                {capitalizeWords(productName)}
+                {/* {capitalizeWords(productName)} */}
+                {productName}
             </a>
         )
     );

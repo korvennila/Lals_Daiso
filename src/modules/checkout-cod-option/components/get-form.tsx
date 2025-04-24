@@ -32,6 +32,7 @@ export interface IGetFormInput {
         giftCardAlertLabel: string;
         giftCardPinPlaceholderText: string;
         giftCardExpPlaceholderText: string;
+        codChargesLabel: string;
     };
     onEnterGiftCardNumber(giftCardNumber: string): void;
     onEnterGiftCardPin(giftCardPin: string): void;
@@ -46,6 +47,7 @@ export interface IGetFormInput {
     handleCODOptionChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
     isRadioButtonChecked: boolean;
     isPlaceOrderLoading?: boolean;
+    codChargeAmount?: number;
 }
 
 export interface IForm {
@@ -134,14 +136,16 @@ export const getForm = (options: IGetFormInput): IForm => {
             giftCardExpLabel,
             giftCardAlertLabel,
             giftCardPinPlaceholderText,
-            giftCardExpPlaceholderText
+            giftCardExpPlaceholderText,
+            codChargesLabel
         },
         handlePreCheckout,
         isCodSelected,
         radioButtonRef,
         handleCODOptionChange,
         isRadioButtonChecked,
-        isPlaceOrderLoading
+        isPlaceOrderLoading,
+        codChargeAmount
     } = options;
 
     const formProps = {
@@ -218,7 +222,8 @@ export const getForm = (options: IGetFormInput): IForm => {
                 checked={isRadioButtonChecked}
             />
             <label htmlFor='COD' className='ms-checkout-cod__label'>
-                {giftCardNumberLabel}
+                {giftCardNumberLabel}{' '}
+                {`${codChargeAmount && codChargeAmount > 0 ? `(${codChargesLabel} ${codChargeAmount?.toFixed(2)})` : ''}`}
             </label>
         </div>
     );
