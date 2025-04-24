@@ -157,6 +157,12 @@
             "description": "This allows user to see the text of order placed",
             "type": "string",
             "default": "Delivered"
+        },
+        "cancelledText": {
+            "friendlyName": "Cancelled Text",
+            "description": "This allows user to see the text of order placed",
+            "type": "string",
+            "default": "Cancelled"
         }
     },
     "resources": {

@@ -31,6 +31,7 @@ export interface IOrderDetailsConfig extends Msdyn365.IModuleConfig {
     shippedText?: string;
     outForDeliveryText?: string;
     deliveredText?: string;
+    cancelledText?: string;
 }
 
 export interface IOrderDetailsResources {

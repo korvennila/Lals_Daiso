@@ -83,7 +83,8 @@ export enum OrderHistorySteps {
     ReadyToShip = 'Ready to Ship',
     Shipped = 'Shipped',
     OutForDelivery = 'Out for Delivery',
-    Delivered = 'Delivered'
+    Delivered = 'Delivered',
+    Cancelled = 'Cancelled'
 }
 
 export interface ICustomGetOrderSummaryInput extends IGetOrderSummaryInput {
@@ -386,7 +387,8 @@ class OrderDetails extends React.PureComponent<IOrderDetailsProps<IOrderDetailsD
                 readyToShipText,
                 shippedText,
                 outForDeliveryText,
-                deliveredText
+                deliveredText,
+                cancelledText
             }
         } = this.props;
 
@@ -415,6 +417,14 @@ class OrderDetails extends React.PureComponent<IOrderDetailsProps<IOrderDetailsD
             outForDeliveryText || OrderHistorySteps.OutForDelivery,
             deliveredText || OrderHistorySteps.Delivered
         ];
+
+        const stepsCancelled = [orderPlacedText || OrderHistorySteps.OrderPlaced, cancelledText || OrderHistorySteps.Cancelled];
+
+        const stepsGiftcard = [orderPlacedText || OrderHistorySteps.OrderPlaced, deliveredText || OrderHistorySteps.Delivered];
+        const emailDeliveryModeCode =
+            this.props.context.request &&
+            this.props.context.request.channel &&
+            this.props.context.request.channel.EmailDeliveryModeCode?.toLocaleLowerCase();
 
         const orderInformationInput =
             this.order &&
@@ -506,7 +516,25 @@ class OrderDetails extends React.PureComponent<IOrderDetailsProps<IOrderDetailsD
             help: this._renderOrderHelp(),
             orderProgressTracker:
                 this.isCurrentChannel && this._orderDetailsProgress ? (
-                    <OrderProgressTracker steps={steps} currentStep={this._orderDetailsProgress} />
+                    // <OrderProgressTracker steps={steps} currentStep={this._orderDetailsProgress} />
+                    <OrderProgressTracker
+                        steps={
+                            this.order.DeliveryMode?.toLocaleLowerCase() === emailDeliveryModeCode &&
+                            !(this.order.DetailedOrderStatusValue === 3)
+                                ? stepsGiftcard
+                                : this.order.DetailedOrderStatusValue === 3
+                                ? stepsCancelled
+                                : steps
+                        }
+                        currentStep={
+                            this.order.DeliveryMode?.toLocaleLowerCase() === emailDeliveryModeCode &&
+                            !(this.order.DetailedOrderStatusValue === 3)
+                                ? OrderHistorySteps.Delivered
+                                : this.order.DetailedOrderStatusValue === 3
+                                ? OrderHistorySteps.Cancelled
+                                : this._orderDetailsProgress
+                        }
+                    />
                 ) : null
         };
 
