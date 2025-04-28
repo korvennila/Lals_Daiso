@@ -9,6 +9,7 @@ import {
     IHeader,
     IOrderDetailsData,
     IOrderDetailsProps,
+    IOrderDetailsResources,
     IOrderHistory,
     IOrderHistoryResources,
     IOrderHistoryViewProps
@@ -18,7 +19,7 @@ import * as React from 'react';
 
 import OrderHistoryView from '../views/order-history.view';
 
-const mockConfigResources = {
+const mockConfigResources: IOrderDetailsResources = {
     orderSummaryHeading: 'Order summary',
     receiptEmailMessage: 'Confirmation email sent to ',
     receiptIdLabel: 'Receipt#',
@@ -100,8 +101,7 @@ const mockConfigResources = {
     orderDetailsSelectAllRadioAriaLabelText: 'orderDetailsSelectAllRadioAriaLabelText',
     orderDetailsSelectRadioAriaLabelText: 'orderDetailsSelectRadioAriaLabelText',
     orderDetailsBuySelectedAddingToCartErrorNotificationTitle: 'orderDetailsBuySelectedAddingToCartErrorNotificationTitle',
-    orderDetailsBuySelectedAddingToCartErrorNotificationCloseAriaLabel:
-        'orderDetailsBuySelectedAddingToCartErrorNotificationCloseAriaLabel',
+    orderDetailsBuySelectedAddingToCartErrorNotificationCloseAriaLabel: 'orderDetailsBuySelectedAddingToCartErrorNotificationCloseAriaLabel',
     orderDetailsBuyItAgainButtonText: 'orderDetailsBuyItAgainButtonText',
     orderDetailsBuyItAgainButtonAriaLabel: 'orderDetailsBuyItAgainButtonAriaLabel',
     orderDetailsDisableSelectionButtonText: 'orderDetailsDisableSelectionButtonText',
@@ -128,7 +128,14 @@ const mockConfigResources = {
     orderOnBehalfOfText: 'orderOnBehalfOfText',
     orderPlacedByYouText: 'orderPlacedByYouText',
     orderDetailsConfirmedShipDateText: 'orderDetailsConfirmedShipDateText',
-    orderDetailsConfirmedShipDateTextForTableHeader: 'orderDetailsConfirmedShipDateTextForTableHeader'
+    orderDetailsConfirmedShipDateTextForTableHeader: 'orderDetailsConfirmedShipDateTextForTableHeader',
+    noteLabel: '',
+    orderDetailsRequestDeliveryDateText: '',
+    orderDetailsRequestDeliveryDateTextForTableHeader: '',
+    orderDetailsAddressText: '',
+    orderDetailsAddressTextForTableHeader: '',
+    viewTrackingButtonLabel: '',
+    trackingOkButtonLabel: ''
 };
 
 const mockProducts: SimpleProduct[] = [
