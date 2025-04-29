@@ -502,7 +502,9 @@ const BuyboxView: React.FC<IBuyboxViewProps & IBuyboxExtentionProps<IBuyboxData>
         ProductSpecification,
         ProductSpecificationTableProps,
         ProductSpecificationTableBodyProps,
-        productSpecificationResult
+        productSpecificationResult,
+        productSpecDescriptionResult,
+        enableProdSpecDescription
     } = props;
 
     let skuText: string = props.resources.skuText;
@@ -841,7 +843,11 @@ const BuyboxView: React.FC<IBuyboxViewProps & IBuyboxExtentionProps<IBuyboxData>
                                 <span></span>
                             </Button>
                         </Node>
-                        {isExpanded && <Node className='msc-buybox__description-content'>{description}</Node>}
+                        {isExpanded && (
+                            <Node className='msc-buybox__description-content'>
+                                {enableProdSpecDescription && productSpecDescriptionResult ? productSpecDescriptionResult : description}
+                            </Node>
+                        )}
                     </Node>
                     {rowdata && ArrayExtensions.hasElements(rowdata) ? (
                         <Module {...ProductSpecification}>

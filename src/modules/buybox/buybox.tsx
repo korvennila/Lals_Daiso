@@ -141,6 +141,8 @@ export interface IBuyboxViewProps extends IBuyboxProps<IBuyboxData> {
     productSpecificationTitle?: React.ReactNode;
     isAccrodion?: boolean;
     handleText?(event: Msdyn365.ContentEditableEvent): void;
+    productSpecDescriptionResult?: JSX.Element | null;
+    enableProdSpecDescription?: boolean;
 }
 
 /**
@@ -298,7 +300,7 @@ class Buybox extends React.PureComponent<IBuyboxProps<IBuyboxData>, IBuyboxCusto
             data: {
                 product: { result: product }
             },
-            config: { className = '', classNameForProductSpec = '', headingProductSpec }
+            config: { className = '', classNameForProductSpec = '', headingProductSpec, enableProductSpecDescription }
         } = this.props;
 
         const { min, max } = this.state;
@@ -450,7 +452,9 @@ class Buybox extends React.PureComponent<IBuyboxProps<IBuyboxData>, IBuyboxCusto
                 />
             ),
             productSpecificationResult:
-                productSpecificationData.result && (isAccrodion ? this._createDrawerBody(data) : this._createTableBody(data))
+                productSpecificationData.result && (isAccrodion ? this._createDrawerBody(data) : this._createTableBody(data)),
+            productSpecDescriptionResult: productSpecificationData.result && this._createDescriptionElement(data),
+            enableProdSpecDescription: enableProductSpecDescription
         };
 
         return this.props.renderView(viewProps) as React.ReactElement;
@@ -1019,36 +1023,38 @@ class Buybox extends React.PureComponent<IBuyboxProps<IBuyboxData>, IBuyboxCusto
             className: 'ms-product-specification-title'
         };
 
-        const drawers = content.productSpecificationData.result!.map(product => {
-            const cellData: JSX.Element | null = this._renderProductCell(product);
-            const { hideEmptyProductSpec } = this.props.config;
+        const drawers = content.productSpecificationData
+            .result!.filter(product => product.Name?.toLowerCase() !== 'description')
+            .map(product => {
+                const cellData: JSX.Element | null = this._renderProductCell(product);
+                const { hideEmptyProductSpec } = this.props.config;
 
-            if (hideEmptyProductSpec && this.isJSXElementEmpty(cellData)) {
-                return null;
-            } else if (!hideEmptyProductSpec && !cellData) {
-                return null;
-            }
+                if (hideEmptyProductSpec && this.isJSXElementEmpty(cellData)) {
+                    return null;
+                } else if (!hideEmptyProductSpec && !cellData) {
+                    return null;
+                }
 
-            return (
-                <Module {...accordionItemContainer} key={product.RecordId}>
-                    <Drawer
-                        key={product.RecordId}
-                        collapseProps={{
-                            timeout: 0,
-                            isOpen: this.state.isDrawerOpen && this.state.drawerListId === product.RecordId
-                        }}
-                        className='ms-product-specification__drawer'
-                        openGlyph='ms-product-specification__drawer-open'
-                        closeGlyph='ms-product-specification__drawer-close'
-                        glyphPlacement='end'
-                        toggleButtonText={product.Name ?? ''}
-                        onToggle={this._toggle(product.RecordId)}
-                    >
-                        <div className='ms-product-details'>{cellData}</div>
-                    </Drawer>
-                </Module>
-            );
-        });
+                return (
+                    <Module {...accordionItemContainer} key={product.RecordId}>
+                        <Drawer
+                            key={product.RecordId}
+                            collapseProps={{
+                                timeout: 0,
+                                isOpen: this.state.isDrawerOpen && this.state.drawerListId === product.RecordId
+                            }}
+                            className='ms-product-specification__drawer'
+                            openGlyph='ms-product-specification__drawer-open'
+                            closeGlyph='ms-product-specification__drawer-close'
+                            glyphPlacement='end'
+                            toggleButtonText={product.Name ?? ''}
+                            onToggle={this._toggle(product.RecordId)}
+                        >
+                            <div className='ms-product-details'>{cellData}</div>
+                        </Drawer>
+                    </Module>
+                );
+            });
 
         if (this.props.context.request.app?.config?.OmniChannelMedia && this.props.data.additionalMediaLocations.result?.length) {
             drawers.push(this._createAdditionalMediaDrawer());
@@ -1058,33 +1064,46 @@ class Buybox extends React.PureComponent<IBuyboxProps<IBuyboxData>, IBuyboxCusto
     }
 
     private _createTableBody(content: IBuyboxData): (JSX.Element | null)[] {
-        const tableRows = content.productSpecificationData.result!.map((product, index) => {
-            const cellData: JSX.Element | null = this._renderProductCell(product);
-            const { hideEmptyProductSpec } = this.props.config;
+        const tableRows = content.productSpecificationData
+            .result!.filter(product => product.Name?.toLowerCase() !== 'description')
+            .map((product, index) => {
+                const cellData: JSX.Element | null = this._renderProductCell(product);
+                const { hideEmptyProductSpec } = this.props.config;
 
-            if (hideEmptyProductSpec && this.isJSXElementEmpty(cellData)) {
-                return null;
-            } else if (!hideEmptyProductSpec && !cellData) {
-                return null;
-            }
+                if (hideEmptyProductSpec && this.isJSXElementEmpty(cellData)) {
+                    return null;
+                } else if (!hideEmptyProductSpec && !cellData) {
+                    return null;
+                }
 
-            return (
-                <>
-                    <ProductSpecificationTableRow
-                        className='ms-product-specification__table-row'
-                        key={index}
-                        productName={product.Name}
-                        cellData={cellData}
-                    />
-                </>
-            );
-        });
+                return (
+                    <>
+                        <ProductSpecificationTableRow
+                            className='ms-product-specification__table-row'
+                            key={index}
+                            productName={product.Name}
+                            cellData={cellData}
+                        />
+                    </>
+                );
+            });
 
         if (this.props.context.request.app?.config?.OmniChannelMedia && this.props.data.additionalMediaLocations.result?.length) {
             tableRows.push(this._createAdditionalMediaDrawer());
         }
 
         return tableRows;
+    }
+
+    private _createDescriptionElement(content: IBuyboxData): JSX.Element | null {
+        const description = content.productSpecificationData.result!.find(product => product.Name?.toLowerCase() === 'description');
+        if (description) {
+            const cellData: JSX.Element | null = this._renderProductCell(description);
+            if (cellData) {
+                return <div className='ms-buybox__product-description'>{cellData}</div>;
+            }
+        }
+        return null;
     }
 
     public handleHeadingChange = (event: Msdyn365.ContentEditableEvent): void => {

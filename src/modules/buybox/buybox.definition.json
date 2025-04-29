@@ -173,6 +173,12 @@
             "description": "Provide the estimated delivery date for Products",
             "type": "string",
             "default": ""
+        },
+        "enableProductSpecDescription": {
+            "friendlyName": "Render Product Specification Description",
+            "description": "Enabling this property will cause the module to render product specification description.",
+            "type": "boolean",
+            "default": true
         }
     },
     "slots": {

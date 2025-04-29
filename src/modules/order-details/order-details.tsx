@@ -420,7 +420,8 @@ class OrderDetails extends React.PureComponent<IOrderDetailsProps<IOrderDetailsD
 
         const stepsCancelled = [orderPlacedText || OrderHistorySteps.OrderPlaced, cancelledText || OrderHistorySteps.Cancelled];
 
-        const stepsGiftcard = [orderPlacedText || OrderHistorySteps.OrderPlaced, deliveredText || OrderHistorySteps.Delivered];
+        const stepsGiftcard = [orderPlacedText || OrderHistorySteps.OrderPlaced, orderConfirmedText || OrderHistorySteps.OrderConfirmed];
+
         const emailDeliveryModeCode =
             this.props.context.request &&
             this.props.context.request.channel &&
@@ -529,7 +530,7 @@ class OrderDetails extends React.PureComponent<IOrderDetailsProps<IOrderDetailsD
                         currentStep={
                             this.order.DeliveryMode?.toLocaleLowerCase() === emailDeliveryModeCode &&
                             !(this.order.DetailedOrderStatusValue === 3)
-                                ? OrderHistorySteps.Delivered
+                                ? OrderHistorySteps.OrderConfirmed
                                 : this.order.DetailedOrderStatusValue === 3
                                 ? OrderHistorySteps.Cancelled
                                 : this._orderDetailsProgress

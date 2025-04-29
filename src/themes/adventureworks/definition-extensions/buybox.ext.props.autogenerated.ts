@@ -38,6 +38,7 @@ export interface IBuyboxConfig extends Msdyn365.IModuleConfig {
     classNameForProductSpec?: string;
     clientRenderForProductSpec?: boolean;
     estimatedDeliveryDate?: string;
+    enableProductSpecDescription?: boolean;
     displayStockAvailability?: boolean;
     enableWishlist?: boolean;
 }
