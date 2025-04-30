@@ -1,0 +1,17 @@
+{
+	"id": "CheckoutGuestProfile_1",
+	"config": {},
+	"data": {
+		"CheckoutState": {
+			"cardPrefix": "Debit",
+			"guestCheckoutEmail": "v-saushe@microsoft.com",
+			"shippingAddress": [
+				{
+					"Name": "Saurabh Shekhar",
+					"FullAddress": "Noida"
+				}
+			]
+		}
+	},
+	"typeName": "checkout-guest-profile"
+}

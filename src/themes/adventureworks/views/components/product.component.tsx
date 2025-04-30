@@ -593,7 +593,7 @@ const ProductCard: React.FC<IProductComponentProps> = ({
     const hasSwatches = hasProductSwatches(product.AttributeValues);
 
     return (
-        <>
+        <div className='msc-product-customContainer-list'>
             {isEnabledProductDescription ? (
                 <a
                     href={productPageUrl}
@@ -725,7 +725,7 @@ const ProductCard: React.FC<IProductComponentProps> = ({
             {renderProductAvailability(inventoryLabel)}
             {quickViewButton && renderQuickView(quickViewButton, product.RecordId)}
             {productComparisonButton && renderProductComparisonButton(productComparisonButton, product, getCatalogId(context.request))}
-        </>
+        </div>
     );
 };
 

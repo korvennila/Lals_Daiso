@@ -298,8 +298,8 @@ export class checkoutCODOption extends React.Component<ICheckoutGiftCardModulePr
             }
         );
 
-        // Add reaction for OTP verification
-        reaction(
+        // Add reaction for OTP verification when other payment enabled
+        /* reaction(
             () => this.state.isOTPVerified,
             async isVerified => {
                 if (
@@ -311,7 +311,7 @@ export class checkoutCODOption extends React.Component<ICheckoutGiftCardModulePr
                     await this.removeGiftCards();
                 }
             }
-        );
+        ); */
 
         if (this.props.data.checkout.result?.shouldEnableCheckoutErrorDisplayMessaging) {
             reaction(
@@ -384,7 +384,8 @@ export class checkoutCODOption extends React.Component<ICheckoutGiftCardModulePr
         }
     };
 
-    private readonly removeCustomerPayment = async (): Promise<void> => {
+    // remove store credits payment
+    /* private readonly removeCustomerPayment = async (): Promise<void> => {
         const checkoutState = this.props.data.checkout.result;
 
         if (!checkoutState) {
@@ -394,9 +395,10 @@ export class checkoutCODOption extends React.Component<ICheckoutGiftCardModulePr
 
         await checkoutState.updateCustomerAccountAmount({ newAmount: 0 });
         this.props.context.telemetry.information('customer account payment removed');
-    };
+    }; */
 
-    private readonly removeGiftCards = async (): Promise<void> => {
+    // remove gift cards payment
+    /* private readonly removeGiftCards = async (): Promise<void> => {
         this.props.telemetry.information('Payment section gift card remove is called for all gift cards.');
 
         const checkoutState = this.props.data.checkout.result;
@@ -418,43 +420,29 @@ export class checkoutCODOption extends React.Component<ICheckoutGiftCardModulePr
         } catch (error) {
             this.props.telemetry.error('Error removing gift cards:', error);
         }
-    };
+    }; */
 
     private handleClick = async (event: Event) => {
         const radioButton = this.radioButtonRef.current;
-        // if (this.isOtherPaymentsEnabled || this.hasElectronicDelivery) {
-        if (this.hasElectronicDelivery) {
+
+        // if (this.hasElectronicDelivery) {
+        if (this.isOtherPaymentsEnabled || this.hasElectronicDelivery) {
             this.setError(this.props.config.codIsNotApplicableMessage || this.props.resources.codIsNotApplicableMessage);
         } else {
             this.setError('');
         }
 
-        if (
+        // Clear other payments methods while selecting COD
+        /* if (
             this.isOtherPaymentsEnabled &&
             (this.state.isOTPVerified || (!this.isShippingPhoneNew && this.props.context.request.user.isAuthenticated))
         ) {
             await this.removeCustomerPayment();
             await this.removeGiftCards();
-        }
+        } */
 
         // if (radioButton && isEmpty(this.state.errorMessage) && !this.hasElectronicDelivery) {
-        //     if (!this.props.context.request.user.isAuthenticated && !this.state.isOTPVerified) {
-        //         event.preventDefault();
-        //         this.setState({ isMobileModalOpen: true, isRadioButtonChecked: false });
-        //     } else if (this.props.context.request.user.isAuthenticated && this.isShippingPhoneNew && !this.state.isOTPVerified) {
-        //         event.preventDefault();
-        //         this.setState({ isMobileModalOpen: true, isRadioButtonChecked: false });
-        //     } else if (!this.props.context.request.user.isAuthenticated && this.state.isOTPVerified) {
-        //         this.handleCODOptionChange({ target: radioButton } as React.ChangeEvent<HTMLInputElement>);
-        //         // this.handleCODButtonCheck(true);
-        //         // this.setCodSelected();
-        //     } else {
-        //         // this.setState({ isRadioButtonChecked: radioButton.checked });
-        //         this.handleCODOptionChange({ target: radioButton } as React.ChangeEvent<HTMLInputElement>);
-        //     }
-        // }
-
-        if (radioButton && isEmpty(this.state.errorMessage) && !this.hasElectronicDelivery) {
+        if (radioButton && isEmpty(this.state.errorMessage) && !this.hasElectronicDelivery && !this.isOtherPaymentsEnabled) {
             const { isAuthenticated } = this.props.context.request.user;
             const { isOTPVerified } = this.state;
             const cNeedsOTP = (!isAuthenticated || (isAuthenticated && this.isShippingPhoneNew)) && !isOTPVerified;

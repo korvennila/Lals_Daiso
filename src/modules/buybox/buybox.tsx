@@ -300,7 +300,12 @@ class Buybox extends React.PureComponent<IBuyboxProps<IBuyboxData>, IBuyboxCusto
             data: {
                 product: { result: product }
             },
-            config: { className = '', classNameForProductSpec = '', headingProductSpec, enableProductSpecDescription }
+            config: {
+                className = '',
+                classNameForProductSpec = '',
+                headingProductSpec
+                // enableProductSpecDescription
+            }
         } = this.props;
 
         const { min, max } = this.state;
@@ -454,7 +459,8 @@ class Buybox extends React.PureComponent<IBuyboxProps<IBuyboxData>, IBuyboxCusto
             productSpecificationResult:
                 productSpecificationData.result && (isAccrodion ? this._createDrawerBody(data) : this._createTableBody(data)),
             productSpecDescriptionResult: productSpecificationData.result && this._createDescriptionElement(data),
-            enableProdSpecDescription: enableProductSpecDescription
+            // enableProdSpecDescription: enableProductSpecDescription
+            enableProdSpecDescription: false
         };
 
         return this.props.renderView(viewProps) as React.ReactElement;

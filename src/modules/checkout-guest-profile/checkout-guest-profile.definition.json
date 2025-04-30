@@ -1,0 +1,116 @@
+{
+    "$type": "contentModule",
+    "friendlyName": "Contact information (COPY)",
+    "name": "checkout-guest-profile",
+    "description": "Contact information allows the user to provide contact information for the order",
+    "categories": ["Purchase", "Payment", "checkout_checkoutInformation", "checkoutSectionContainer_primary"],
+    "attributes": {
+        "private": true
+    },
+    "dataActions": {
+        "checkout": {
+            "path": "@msdyn365-commerce/global-state/dist/lib/data-actions/checkout-state-data-action",
+            "runOn": "client"
+        },
+        "cart": {
+            "path": "@msdyn365-commerce/global-state/dist/lib/data-actions/cart-state-data-action",
+            "runOn": "client"
+        },
+        "accountInformation": {
+            "path": "@msdyn365-commerce-modules/retail-actions/dist/lib/get-customer"
+        }
+    },
+    "config": {
+        "heading": {
+            "friendlyName": "Heading",
+            "description": "Module heading",
+            "$ref": "@msdyn365-commerce-modules/definitions/dist/src/Heading.json#/definitions/heading"
+        },
+        "className": {
+            "friendlyName": "Custom CSS class name",
+            "description": "Provide a custom css class name defined in the theme pack to target the CSS for this module",
+            "type": "string",
+            "default": ""
+        },
+        "enableCustomerReference": {
+            "friendlyName": "Enable customer reference",
+            "description": "Switch to enable customer reference to get displayed in the checkout page",
+            "type": "boolean",
+            "default": false
+        },
+        "enableCustomerRequisition": {
+            "friendlyName": "Enable customer requisition",
+            "description": "Switch to enable customer requisition to get displayed in the checkout page",
+            "type": "boolean",
+            "default": false
+        },
+        "enableCartNote": {
+            "friendlyName": "Enable cart note",
+            "description": "Switch to enable customer order note to get displayed in the checkout page",
+            "type": "boolean",
+            "default": false
+        },
+        "defaultNoteTitle": {
+            "friendlyName": "Default Note Title",
+            "description": "Default title for the note field in the checkout page",
+            "type": "string",
+            "default": "Note added by customer"
+        },
+        "clientRender": {
+            "friendlyName": "Render module client side",
+            "description": "Enabling this property will cause the module to load its Javascript chunk and render on the client based on the user view port. This property is recommended for modules which are generally hidden below the users view port (lower on the page) to increase page load performance.",
+            "type": "boolean",
+            "default": false
+        }
+    },
+    "resources": {
+        "emailLabel": {
+            "comment": "Email label",
+            "value": "Email address"
+        },
+        "customerRefLabel": {
+            "comment": "Customer Reference label",
+            "value": "Reference Information (Optional)"
+        },
+        "purchaseOrderLabel": {
+            "comment": "Purchase Order label",
+            "value": "Purchase order number (Optional)"
+        },
+        "noteLabel": {
+            "comment": "Note label",
+            "value": "Add Note (Optional)"
+        },
+        "emailErrortext": {
+            "comment": "Email error text",
+            "value": "Please enter a valid email"
+        },
+        "customerRefErrortext": {
+            "comment": "Customer Reference Error Text label",
+            "value": "Reference Information (Optional)"
+        },
+        "purchaseOrderErrortext": {
+            "comment": "Purchase Order Error Text label",
+            "value": "Purchase order number (Optional)"
+        },
+        "noteErrortext": {
+            "comment": "Note Error Text label",
+            "value": "Add Note (Optional)"
+        },
+        "saveBtnLabel": {
+            "comment": "Save button label",
+            "value": "Save"
+        },
+        "editBtnLabel": {
+            "comment": "Edit button label",
+            "value": "Change"
+        },
+        "cancelBtnLabel": {
+            "comment": "Cancel button label",
+            "value": "Cancel"
+        },
+        "errorMessageTitle": {
+            "comment": "Localized text for error message title",
+            "value": "Error message"
+        }
+    }
+}
