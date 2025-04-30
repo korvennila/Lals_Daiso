@@ -308,7 +308,7 @@ class Checkout extends React.PureComponent<ICheckoutModuleProps> {
         if (!cart || !cart.ShippingChargeAmount) {
             return 0;
         }
-        return cart.ShippingChargeAmount;
+        return cart.ShippingChargeAmount + (cart.TaxOnShippingCharge || 0);
     }
 
     public get expressPaymentDetailsFromCartPage(): IExpressPaymentDetails | null {
