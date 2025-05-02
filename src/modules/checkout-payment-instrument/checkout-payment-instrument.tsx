@@ -59,7 +59,7 @@ interface ICheckoutPaymentInstrumentState {
     isExpressCheckoutApplied?: boolean;
     errorPaymentConnectorId?: string;
     isPaymentGatewayEnabled: boolean; // New state for the radio button
-    // paymentGatewayErrorMessage: string;
+    paymentGatewayErrorMessage: string;
 }
 
 export interface ICheckoutPaymentOverlayModal {
@@ -216,8 +216,8 @@ export class CheckoutPaymentInstrument extends React.PureComponent<ICheckoutPaym
 
     public state: ICheckoutPaymentInstrumentState = {
         isFetchingPaymentConnector: true,
-        isPaymentGatewayEnabled: true
-        // paymentGatewayErrorMessage: ''
+        isPaymentGatewayEnabled: true,
+        paymentGatewayErrorMessage: ''
     };
 
     private readonly moduleClassName: string = 'ms-checkout-payment-instrument';
@@ -282,7 +282,7 @@ export class CheckoutPaymentInstrument extends React.PureComponent<ICheckoutPaym
                 } else {
                     this.setState({ isPaymentGatewayEnabled: true });
                     codPaymentService.selectPaymentMethod('PG');
-                    this.clearError();
+                    this.clearPaymentGatewayError();
                 }
             }
         );
@@ -374,13 +374,14 @@ export class CheckoutPaymentInstrument extends React.PureComponent<ICheckoutPaym
     // eslint-disable-next-line complexity -- from existing code.
     public render(): JSX.Element | null {
         const {
-            errorMessage,
+            // errorMessage,
             isFetchingPaymentConnector,
             paymentConnectorHeight,
             isPaymentVerificationRequried,
             isPaymentProcessing,
             isOverlayModal,
-            isExpressCheckoutApplied
+            isExpressCheckoutApplied,
+            paymentGatewayErrorMessage
         } = this.state;
         const {
             moduleState: { isReady, hasError, hasInitialized, isPending, hasExternalSubmitGroup },
@@ -443,7 +444,10 @@ export class CheckoutPaymentInstrument extends React.PureComponent<ICheckoutPaym
                 (this.asyncResultStatus === AsyncResultStatusCode.LOADING || isFetchingPaymentConnector || isPending) && (
                     <WaitingComponent {...{ message: resources.loadingMessage }} />
                 ),
-            alert: hasError && errorMessage && <ErrorComponent {...{ title: resources.errorMessageTitle, message: errorMessage }} />,
+            // alert: hasError && errorMessage && <ErrorComponent {...{ title: resources.errorMessageTitle, message: errorMessage }} />,
+            alert: hasError && paymentGatewayErrorMessage && (
+                <ErrorComponent {...{ title: resources.errorMessageTitle, message: paymentGatewayErrorMessage }} />
+            ),
             paymentInformation: (isExpressCheckoutApplied ||
                 (isReady && !isSinglePayment && !isPaymentVerificationRequried && !isPaymentProcessing)) && (
                 <PaymentInformationComponent
@@ -517,11 +521,13 @@ export class CheckoutPaymentInstrument extends React.PureComponent<ICheckoutPaym
     };
 
     private readonly onTogglePaymentGateway = (): void => {
-        this.clearError();
+        this.clearPaymentGatewayError();
         if (!this.shouldPaidByCard) {
-            this.setErrorMessage(
-                this.props.config.paymentGatewayIsNotApplicableMessage || this.props.resources.paymentGatewayIsNotApplicableMessage
-            );
+            this.setState({
+                paymentGatewayErrorMessage:
+                    this.props.config.paymentGatewayIsNotApplicableMessage || this.props.resources.paymentGatewayIsNotApplicableMessage
+            });
+            this.props.moduleState.setHasError(true);
             this.props.context.telemetry.information('Payment Gateway toggle prevented due to conditions');
             return;
         }
@@ -542,10 +548,10 @@ export class CheckoutPaymentInstrument extends React.PureComponent<ICheckoutPaym
         });
     };
 
-    private readonly clearError = (): void => {
+    private readonly clearPaymentGatewayError = (): void => {
         this.props.moduleState.setHasError(false);
         this.setState({
-            errorMessage: ''
+            paymentGatewayErrorMessage: ''
         });
     };
 
