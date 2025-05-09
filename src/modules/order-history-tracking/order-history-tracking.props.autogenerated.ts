@@ -25,6 +25,8 @@ export interface IOrderHistoryTrackingConfig extends Msdyn365.IModuleConfig {
     shippedText?: string;
     outForDeliveryText?: string;
     deliveredText?: string;
+    cancelledText?: string;
+    giftCardText?: string;
 }
 
 export interface IOrderHistoryTrackingResources {

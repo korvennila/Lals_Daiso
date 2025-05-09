@@ -130,37 +130,37 @@
         },
         "orderConfirmedText": {
             "friendlyName": "Order Confirmed Text",
-            "description": "This allows user to see the text of order placed",
+            "description": "This allows user to see the text of order confirmed",
             "type": "string",
             "default": "Confirmed"
         },
         "readyToShipText": {
             "friendlyName": "Ready to Ship Text",
-            "description": "This allows user to see the text of order placed",
+            "description": "This allows user to see the text of order ready to ship",
             "type": "string",
             "default": "Ready to Ship"
         },
         "shippedText": {
             "friendlyName": "Shipped Text",
-            "description": "This allows user to see the text of order placed",
+            "description": "This allows user to see the text of order shipped",
             "type": "string",
             "default": "Shipped"
         },
         "outForDeliveryText": {
             "friendlyName": "Out for Delivery Text",
-            "description": "This allows user to see the text of order placed",
+            "description": "This allows user to see the text of order out for delivery",
             "type": "string",
             "default": "Out for Delivery"
         },
         "deliveredText": {
             "friendlyName": "Delivered Text",
-            "description": "This allows user to see the text of order placed",
+            "description": "This allows user to see the text of order delivered",
             "type": "string",
             "default": "Delivered"
         },
         "cancelledText": {
             "friendlyName": "Cancelled Text",
-            "description": "This allows user to see the text of order placed",
+            "description": "This allows user to see the text of order cancelled",
             "type": "string",
             "default": "Cancelled"
         }

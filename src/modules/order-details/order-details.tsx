@@ -530,9 +530,9 @@ class OrderDetails extends React.PureComponent<IOrderDetailsProps<IOrderDetailsD
                         currentStep={
                             this.order.DeliveryMode?.toLocaleLowerCase() === emailDeliveryModeCode &&
                             !(this.order.DetailedOrderStatusValue === 3)
-                                ? OrderHistorySteps.OrderConfirmed
+                                ? orderConfirmedText || OrderHistorySteps.OrderConfirmed
                                 : this.order.DetailedOrderStatusValue === 3
-                                ? OrderHistorySteps.Cancelled
+                                ? cancelledText || OrderHistorySteps.Cancelled
                                 : this._orderDetailsProgress
                         }
                     />

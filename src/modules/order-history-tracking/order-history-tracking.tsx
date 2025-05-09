@@ -18,7 +18,9 @@ export enum OrderHistorySteps {
     ReadyToShip = 'Ready to Ship',
     Shipped = 'Shipped',
     OutForDelivery = 'Out for Delivery',
-    Delivered = 'Delivered'
+    Delivered = 'Delivered',
+    Cancelled = 'Cancelled',
+    Giftcard = 'Invoiced'
 }
 
 /**
@@ -88,14 +90,31 @@ class OrderHistoryTracking extends React.PureComponent<IOrderHistoryTrackingProp
 
     public render(): JSX.Element | null {
         const { config } = this.props;
+        const {
+            orderConfirmedText,
+            orderPlacedText,
+            readyToShipText,
+            shippedText,
+            outForDeliveryText,
+            deliveredText,
+            cancelledText,
+            giftCardText
+        } = config;
         const steps = [
-            config.orderPlacedText || OrderHistorySteps.OrderPlaced,
-            config.orderConfirmedText || OrderHistorySteps.OrderConfirmed,
-            config.readyToShipText || OrderHistorySteps.ReadyToShip,
-            config.shippedText || OrderHistorySteps.Shipped,
-            config.outForDeliveryText || OrderHistorySteps.OutForDelivery,
-            config.deliveredText || OrderHistorySteps.Delivered
+            orderPlacedText || OrderHistorySteps.OrderPlaced,
+            orderConfirmedText || OrderHistorySteps.OrderConfirmed,
+            readyToShipText || OrderHistorySteps.ReadyToShip,
+            shippedText || OrderHistorySteps.Shipped,
+            outForDeliveryText || OrderHistorySteps.OutForDelivery,
+            deliveredText || OrderHistorySteps.Delivered
         ];
+
+        const stepsCancelled = [orderPlacedText || OrderHistorySteps.OrderPlaced, cancelledText || OrderHistorySteps.Cancelled];
+
+        const stepsGiftcard = [orderPlacedText || OrderHistorySteps.OrderPlaced, orderConfirmedText || OrderHistorySteps.OrderConfirmed];
+
+        const currentStepGiftcard = giftCardText || OrderHistorySteps.Giftcard;
+        const currentStepCancelled = cancelledText || OrderHistorySteps.Cancelled;
 
         const viewProps: IOrderHistoryTrackingViewProps = {
             ...this.props,
@@ -103,7 +122,24 @@ class OrderHistoryTracking extends React.PureComponent<IOrderHistoryTrackingProp
             handleTrackOrder: this.handleTrackOrder,
             orderIdInputRef: this.orderIdInputRef,
             errorMessage: this.state.errorMessage,
-            progressTracker: this.state.orderHistory ? <ProgressTracker steps={steps} currentStep={this.state.orderHistory} /> : null
+            progressTracker: this.state.orderHistory ? (
+                <ProgressTracker
+                    steps={
+                        this.state.orderHistory.toLowerCase() === currentStepGiftcard.toLowerCase()
+                            ? stepsGiftcard
+                            : this.state.orderHistory.toLowerCase() === currentStepCancelled.toLowerCase()
+                            ? stepsCancelled
+                            : steps
+                    }
+                    currentStep={
+                        this.state.orderHistory.toLowerCase() === currentStepGiftcard.toLowerCase()
+                            ? orderConfirmedText || OrderHistorySteps.OrderConfirmed
+                            : this.state.orderHistory.toLowerCase() === currentStepCancelled.toLowerCase()
+                            ? cancelledText || OrderHistorySteps.Cancelled
+                            : this.state.orderHistory
+                    }
+                />
+            ) : null
         };
 
         return this.props.renderView(viewProps);

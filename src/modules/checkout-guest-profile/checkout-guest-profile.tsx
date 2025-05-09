@@ -74,6 +74,10 @@ class CheckoutGuestProfile extends React.Component<ICheckoutGuestProfileModulePr
                 this.props.context.request.user &&
                 this.props.context.request.user.isAuthenticated &&
                 this.props.context.request.user.emailAddress) ||
+            (this.props.data &&
+                this.props.data.accountInformation &&
+                this.props.data.accountInformation.result &&
+                this.props.data.accountInformation.result.Email) ||
             ''
     };
 
