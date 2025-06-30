@@ -389,18 +389,17 @@ export const getLineItems = (input: ICheckoutProps<ICheckoutData>, telemetryCont
     };
 
     const _filterItemsByMultiplePickupMode = (): CartLine[][] => {
-        const cart = get(input, 'data.checkout.result.checkoutCart.cart');
-        const getGroupByStorePickup = (items: CartLine[]) => groupBy(items, item => item.FulfillmentStoreId);
-        const getGroupByDelivery = (items: CartLine[]) => groupBy(items, item => item.DeliveryMode);
+        const cart = get(input, 'data.checkout.result.checkoutCart.cart') as { CartLines: CartLine[] };
+        const getGroupByStorePickup = (items: CartLine[]) => groupBy(items, (item: CartLine) => item.FulfillmentStoreId);
+        const getGroupByDelivery = (items: CartLine[]) => groupBy(items, (item: CartLine) => item.DeliveryMode);
         const groupDelivery = getGroupByDelivery(cart.CartLines);
         const cartLinesGroup: CartLine[] = [];
         const cartLinesGrp: CartLine[][] = [];
 
         // 1) Group by store and pick up mode
         Object.entries(groupDelivery).forEach(([deliveryMode, groupByDeliveryType]) => {
-            // @ts-expect-error
-            groupDelivery[deliveryMode] = getGroupByStorePickup(groupByDeliveryType);
-            cartLinesGroup.push(getGroupByStorePickup(groupByDeliveryType));
+            groupDelivery[deliveryMode] = getGroupByStorePickup(groupByDeliveryType as CartLine[]);
+            cartLinesGroup.push(getGroupByStorePickup(groupByDeliveryType as CartLine[]));
         });
 
         Object.keys(cartLinesGroup).forEach(key => {

@@ -20,16 +20,15 @@ const _assembleGroupCartlines = (
         return null;
     }
 
-    const getGroupByStorePickup = (items: CartLine[]) => groupBy(items, item => item.FulfillmentStoreId);
-    const getGroupByDelivery = (items: CartLine[]) => groupBy(items, item => item.DeliveryMode);
+    const getGroupByStorePickup = (items: CartLine[]) => groupBy(items, (item: CartLine) => item.FulfillmentStoreId);
+    const getGroupByDelivery = (items: CartLine[]) => groupBy(items, (item: CartLine) => item.DeliveryMode);
     const groupDelivery = getGroupByDelivery(cartlines);
     const cartLinesGroup: CartLine[] = [];
 
     // 1) Group by store and pick up mode
     Object.entries(groupDelivery).forEach(([deliveryType, groupByDeliveryType]) => {
-        // @ts-expect-error
-        groupDelivery[deliveryType] = getGroupByStorePickup(groupByDeliveryType);
-        cartLinesGroup.push(getGroupByStorePickup(groupByDeliveryType));
+        groupDelivery[deliveryType] = getGroupByStorePickup(groupByDeliveryType as CartLine[]);
+        cartLinesGroup.push(getGroupByStorePickup(groupByDeliveryType as CartLine[]));
     });
 
     // 2) Create cartlines group
